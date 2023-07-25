@@ -1,9 +1,9 @@
 {
-  "name": "@durkinza/aws-networkfirewall-l2",
+  "name": "@durkinza/cdk-networkfirewall-l2",
   "description": "Experimental L2 constructs for the aws-networkfirewall",
   "repository": {
     "type": "git",
-    "url": "https://github.com/durkinza/aws-networkfirewall-l2.git"
+    "url": "https://github.com/durkinza/cdk-networkfirewall-l2.git"
   },
   "scripts": {
     "build": "npx projen build",
@@ -68,6 +68,7 @@
   },
   "keywords": [
     "aws",
+    "aws-cdk",
     "awscdk",
     "cdk",
     "networkfirewall"
@@ -121,8 +122,8 @@
     "outdir": "dist",
     "targets": {
       "python": {
-        "distName": "cdk.aws-networkfirewall-l2",
-        "module": "cdk.aws_networkfirewall_l2"
+        "distName": "durkinza.cdk-networkfirewall-l2",
+        "module": "durkinza.cdk_networkfirewall_l2"
       }
     },
     "tsc": {

@@ -5,20 +5,21 @@ const project = new awscdk.AwsCdkConstructLibrary({
   cdkVersion: '2.79.0',
   defaultReleaseBranch: 'main',
   jsiiVersion: '~5.0.0',
-  name: '@durkinza/aws-networkfirewall-l2',
-  packageName: '@durkinza/aws-networkfirewall-l2', /* The "name" in package.json. */
+  name: '@durkinza/cdk-networkfirewall-l2',
+  packageName: '@durkinza/cdk-networkfirewall-l2', /* The "name" in package.json. */
   license: 'Apache-2.0',
   projenrcTs: true,
-  repositoryUrl: 'https://github.com/durkinza/aws-networkfirewall-l2.git',
+  repositoryUrl: 'https://github.com/durkinza/cdk-networkfirewall-l2.git',
   keywords: [
     'cdk',
+    'aws-cdk',
     'networkfirewall',
     'aws',
     'awscdk',
   ],
   publishToPypi: {
-    distName: 'cdk.aws-networkfirewall-l2',
-    module: 'cdk.aws_networkfirewall_l2',
+    distName: 'durkinza.cdk-networkfirewall-l2',
+    module: 'durkinza.cdk_networkfirewall_l2',
   },
   stability: 'experimental',
   deps: ['aws-cdk-lib'], /* Runtime dependencies of this module. */

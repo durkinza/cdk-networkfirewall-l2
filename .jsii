@@ -3490,10 +3490,11 @@
   "docs": {
     "stability": "experimental"
   },
-  "homepage": "https://github.com/durkinza/aws-networkfirewall-l2.git",
+  "homepage": "https://github.com/durkinza/cdk-networkfirewall-l2.git",
   "jsiiVersion": "5.0.18 (build b2ca4a6)",
   "keywords": [
     "aws",
+    "aws-cdk",
     "awscdk",
     "cdk",
     "networkfirewall"
@@ -3507,33 +3508,33 @@
     },
     "tscRootDir": "src"
   },
-  "name": "@durkinza/aws-networkfirewall-l2",
+  "name": "@durkinza/cdk-networkfirewall-l2",
   "readme": {
     "markdown": "<div align=\"center\">\n    <h1> AWS CDK Network Firewall L2 </h1>\nThis repo holds some experimental L2 constructs for the\n\n[AWS-CDK](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_networkfirewall-readme.html)\n<br/>\n<br/>\n\n</div>\n\n---\n\n"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/durkinza/aws-networkfirewall-l2.git"
+    "url": "https://github.com/durkinza/cdk-networkfirewall-l2.git"
   },
   "schema": "jsii/0.10.0",
   "targets": {
     "js": {
-      "npm": "@durkinza/aws-networkfirewall-l2"
+      "npm": "@durkinza/cdk-networkfirewall-l2"
     },
     "python": {
-      "distName": "cdk.aws-networkfirewall-l2",
-      "module": "cdk.aws_networkfirewall_l2"
+      "distName": "durkinza.cdk-networkfirewall-l2",
+      "module": "durkinza.cdk_networkfirewall_l2"
     }
   },
   "types": {
-    "@durkinza/aws-networkfirewall-l2.CloudWatchLogLocation": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
-      "base": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+    "@durkinza/cdk-networkfirewall-l2.CloudWatchLogLocation": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
+      "base": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
       "docs": {
         "stability": "experimental",
         "summary": "Defines a Cloud Watch Log Group Logging Configuration."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.CloudWatchLogLocation",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.CloudWatchLogLocation",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -3546,7 +3547,7 @@
           {
             "name": "props",
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.CloudWatchLogLocationProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.CloudWatchLogLocationProps"
             }
           }
         ]
@@ -3569,7 +3570,7 @@
             "line": 186
           },
           "name": "logDestination",
-          "overrides": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
           "type": {
             "collection": {
               "elementtype": {
@@ -3590,7 +3591,7 @@
             "line": 185
           },
           "name": "logDestinationType",
-          "overrides": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
           "type": {
             "primitive": "string"
           }
@@ -3606,7 +3607,7 @@
             "line": 184
           },
           "name": "logType",
-          "overrides": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
           "type": {
             "primitive": "string"
           }
@@ -3614,16 +3615,16 @@
       ],
       "symbolId": "src/lib/logging:CloudWatchLogLocation"
     },
-    "@durkinza/aws-networkfirewall-l2.CloudWatchLogLocationProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.CloudWatchLogLocationProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "Defines a Cloud Watch Log Group Logging Option."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.CloudWatchLogLocationProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.CloudWatchLogLocationProps",
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.LogLocationProps"
+        "@durkinza/cdk-networkfirewall-l2.LogLocationProps"
       ],
       "kind": "interface",
       "locationInModule": {
@@ -3651,8 +3652,8 @@
       ],
       "symbolId": "src/lib/logging:CloudWatchLogLocationProps"
     },
-    "@durkinza/aws-networkfirewall-l2.Firewall": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.Firewall": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "base": "aws-cdk-lib.Resource",
       "docs": {
         "custom": {
@@ -3661,7 +3662,7 @@
         "stability": "experimental",
         "summary": "Defines a Network Firewall in the Stack."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.Firewall",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.Firewall",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -3686,13 +3687,13 @@
           {
             "name": "props",
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.FirewallProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.FirewallProps"
             }
           }
         ]
       },
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.IFirewall"
+        "@durkinza/cdk-networkfirewall-l2.IFirewall"
       ],
       "kind": "class",
       "locationInModule": {
@@ -3732,7 +3733,7 @@
           ],
           "returns": {
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.IFirewall"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.IFirewall"
             }
           },
           "static": true
@@ -3769,7 +3770,7 @@
           ],
           "returns": {
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.IFirewall"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.IFirewall"
             }
           },
           "static": true
@@ -3803,7 +3804,7 @@
               "type": {
                 "collection": {
                   "elementtype": {
-                    "fqn": "@durkinza/aws-networkfirewall-l2.ILogLocation"
+                    "fqn": "@durkinza/cdk-networkfirewall-l2.ILogLocation"
                   },
                   "kind": "array"
                 }
@@ -3812,7 +3813,7 @@
           ],
           "returns": {
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.LoggingConfiguration"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.LoggingConfiguration"
             }
           }
         }
@@ -3857,7 +3858,7 @@
             "line": 195
           },
           "name": "firewallArn",
-          "overrides": "@durkinza/aws-networkfirewall-l2.IFirewall",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.IFirewall",
           "type": {
             "primitive": "string"
           }
@@ -3876,7 +3877,7 @@
             "line": 202
           },
           "name": "firewallId",
-          "overrides": "@durkinza/aws-networkfirewall-l2.IFirewall",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.IFirewall",
           "type": {
             "primitive": "string"
           }
@@ -3896,7 +3897,7 @@
           },
           "name": "policy",
           "type": {
-            "fqn": "@durkinza/aws-networkfirewall-l2.IFirewallPolicy"
+            "fqn": "@durkinza/cdk-networkfirewall-l2.IFirewallPolicy"
           }
         },
         {
@@ -3915,7 +3916,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.CloudWatchLogLocationProps"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.CloudWatchLogLocationProps"
               },
               "kind": "array"
             }
@@ -3934,7 +3935,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.ILoggingConfiguration"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration"
               },
               "kind": "array"
             }
@@ -3956,7 +3957,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.KinesisDataFirehoseLogLocationProps"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.KinesisDataFirehoseLogLocationProps"
               },
               "kind": "array"
             }
@@ -3978,7 +3979,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.S3LogLocationProps"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.S3LogLocationProps"
               },
               "kind": "array"
             }
@@ -3987,8 +3988,8 @@
       ],
       "symbolId": "src/lib/firewall:Firewall"
     },
-    "@durkinza/aws-networkfirewall-l2.FirewallPolicy": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.FirewallPolicy": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "base": "aws-cdk-lib.Resource",
       "docs": {
         "custom": {
@@ -3997,7 +3998,7 @@
         "stability": "experimental",
         "summary": "Defines a Firewall Policy in the stack."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.FirewallPolicy",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.FirewallPolicy",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -4022,13 +4023,13 @@
           {
             "name": "props",
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.FirewallPolicyProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps"
             }
           }
         ]
       },
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.IFirewallPolicy"
+        "@durkinza/cdk-networkfirewall-l2.IFirewallPolicy"
       ],
       "kind": "class",
       "locationInModule": {
@@ -4071,7 +4072,7 @@
           ],
           "returns": {
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.IFirewallPolicy"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.IFirewallPolicy"
             }
           },
           "static": true
@@ -4111,7 +4112,7 @@
           ],
           "returns": {
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.IFirewallPolicy"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.IFirewallPolicy"
             }
           },
           "static": true
@@ -4133,7 +4134,7 @@
               },
               "name": "ruleGroup",
               "type": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.StatefulRuleGroupList"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList"
               }
             }
           ]
@@ -4155,7 +4156,7 @@
               },
               "name": "ruleGroup",
               "type": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRuleGroupList"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupList"
               }
             }
           ]
@@ -4174,7 +4175,7 @@
             "line": 174
           },
           "name": "firewallPolicyArn",
-          "overrides": "@durkinza/aws-networkfirewall-l2.IFirewallPolicy",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.IFirewallPolicy",
           "type": {
             "primitive": "string"
           }
@@ -4190,7 +4191,7 @@
             "line": 175
           },
           "name": "firewallPolicyId",
-          "overrides": "@durkinza/aws-networkfirewall-l2.IFirewallPolicy",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.IFirewallPolicy",
           "type": {
             "primitive": "string"
           }
@@ -4229,7 +4230,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.StatefulRuleGroupList"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList"
               },
               "kind": "array"
             }
@@ -4289,7 +4290,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRuleGroupList"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupList"
               },
               "kind": "array"
             }
@@ -4298,14 +4299,14 @@
       ],
       "symbolId": "src/lib/policy:FirewallPolicy"
     },
-    "@durkinza/aws-networkfirewall-l2.FirewallPolicyProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "The Properties for defining a Firewall policy."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.FirewallPolicyProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/policy.ts",
@@ -4452,7 +4453,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.StatefulRuleGroupList"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList"
               },
               "kind": "array"
             }
@@ -4498,7 +4499,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRuleGroupList"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupList"
               },
               "kind": "array"
             }
@@ -4507,14 +4508,14 @@
       ],
       "symbolId": "src/lib/policy:FirewallPolicyProps"
     },
-    "@durkinza/aws-networkfirewall-l2.FirewallProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.FirewallProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "The Properties for defining a Firewall Resource."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.FirewallProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.FirewallProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/firewall.ts",
@@ -4535,7 +4536,7 @@
           },
           "name": "policy",
           "type": {
-            "fqn": "@durkinza/aws-networkfirewall-l2.IFirewallPolicy"
+            "fqn": "@durkinza/cdk-networkfirewall-l2.IFirewallPolicy"
           }
         },
         {
@@ -4647,7 +4648,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.CloudWatchLogLocationProps"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.CloudWatchLogLocationProps"
               },
               "kind": "array"
             }
@@ -4670,7 +4671,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.KinesisDataFirehoseLogLocationProps"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.KinesisDataFirehoseLogLocationProps"
               },
               "kind": "array"
             }
@@ -4693,7 +4694,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.S3LogLocationProps"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.S3LogLocationProps"
               },
               "kind": "array"
             }
@@ -4763,13 +4764,13 @@
       ],
       "symbolId": "src/lib/firewall:FirewallProps"
     },
-    "@durkinza/aws-networkfirewall-l2.IFirewall": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.IFirewall": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "Defines a Network Firewall in the stack."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.IFirewall",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.IFirewall",
       "interfaces": [
         "aws-cdk-lib.IResource"
       ],
@@ -4821,13 +4822,13 @@
       ],
       "symbolId": "src/lib/firewall:IFirewall"
     },
-    "@durkinza/aws-networkfirewall-l2.IFirewallPolicy": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.IFirewallPolicy": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "Defines a Network Firewall Policy in the stack."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.IFirewallPolicy",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.IFirewallPolicy",
       "interfaces": [
         "aws-cdk-lib.IResource"
       ],
@@ -4879,13 +4880,13 @@
       ],
       "symbolId": "src/lib/policy:IFirewallPolicy"
     },
-    "@durkinza/aws-networkfirewall-l2.ILogLocation": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.ILogLocation": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "Defines a Log Location in the Stack."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.ILogLocation",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.ILogLocation",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/logging.ts",
@@ -4949,13 +4950,13 @@
       ],
       "symbolId": "src/lib/logging:ILogLocation"
     },
-    "@durkinza/aws-networkfirewall-l2.ILoggingConfiguration": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "Defines a Network Firewall Logging Configuration in the stack."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.ILoggingConfiguration",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration",
       "interfaces": [
         "aws-cdk-lib.IResource"
       ],
@@ -4989,13 +4990,13 @@
       ],
       "symbolId": "src/lib/logging:ILoggingConfiguration"
     },
-    "@durkinza/aws-networkfirewall-l2.IStatefulRule": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.IStatefulRule": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "The interface that represents the shared values of the StatefulRules."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.IStatefulRule",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.IStatefulRule",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/rule.ts",
@@ -5004,13 +5005,13 @@
       "name": "IStatefulRule",
       "symbolId": "src/lib/rule:IStatefulRule"
     },
-    "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "The Interface that represents a Stateful Rule Group."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup",
       "interfaces": [
         "aws-cdk-lib.IResource"
       ],
@@ -5062,13 +5063,13 @@
       ],
       "symbolId": "src/lib/rule-group:IStatefulRuleGroup"
     },
-    "@durkinza/aws-networkfirewall-l2.IStatelessRule": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.IStatelessRule": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "The interface that represents the values of a StatelessRule."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.IStatelessRule",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.IStatelessRule",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/rule.ts",
@@ -5077,13 +5078,13 @@
       "name": "IStatelessRule",
       "symbolId": "src/lib/rule:IStatelessRule"
     },
-    "@durkinza/aws-networkfirewall-l2.IStatelessRuleGroup": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "Defines a Stateless rule Group in the stack."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.IStatelessRuleGroup",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup",
       "interfaces": [
         "aws-cdk-lib.IResource"
       ],
@@ -5135,14 +5136,14 @@
       ],
       "symbolId": "src/lib/rule-group:IStatelessRuleGroup"
     },
-    "@durkinza/aws-networkfirewall-l2.KinesisDataFirehoseLogLocation": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
-      "base": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+    "@durkinza/cdk-networkfirewall-l2.KinesisDataFirehoseLogLocation": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
+      "base": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
       "docs": {
         "stability": "experimental",
         "summary": "Defines a Kinesis Delivery Stream Logging Configuration."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.KinesisDataFirehoseLogLocation",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.KinesisDataFirehoseLogLocation",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -5155,7 +5156,7 @@
           {
             "name": "props",
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.KinesisDataFirehoseLogLocationProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.KinesisDataFirehoseLogLocationProps"
             }
           }
         ]
@@ -5178,7 +5179,7 @@
             "line": 148
           },
           "name": "logDestination",
-          "overrides": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
           "type": {
             "collection": {
               "elementtype": {
@@ -5199,7 +5200,7 @@
             "line": 147
           },
           "name": "logDestinationType",
-          "overrides": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
           "type": {
             "primitive": "string"
           }
@@ -5215,7 +5216,7 @@
             "line": 146
           },
           "name": "logType",
-          "overrides": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
           "type": {
             "primitive": "string"
           }
@@ -5223,16 +5224,16 @@
       ],
       "symbolId": "src/lib/logging:KinesisDataFirehoseLogLocation"
     },
-    "@durkinza/aws-networkfirewall-l2.KinesisDataFirehoseLogLocationProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.KinesisDataFirehoseLogLocationProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "Defines a Kinesis Delivery Stream Logging Option."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.KinesisDataFirehoseLogLocationProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.KinesisDataFirehoseLogLocationProps",
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.LogLocationProps"
+        "@durkinza/cdk-networkfirewall-l2.LogLocationProps"
       ],
       "kind": "interface",
       "locationInModule": {
@@ -5260,13 +5261,13 @@
       ],
       "symbolId": "src/lib/logging:KinesisDataFirehoseLogLocationProps"
     },
-    "@durkinza/aws-networkfirewall-l2.LogDestinationType": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.LogDestinationType": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "The type of storage destination to send these logs to."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.LogDestinationType",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.LogDestinationType",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/lib/logging.ts",
@@ -5298,14 +5299,14 @@
       "name": "LogDestinationType",
       "symbolId": "src/lib/logging:LogDestinationType"
     },
-    "@durkinza/aws-networkfirewall-l2.LogLocationBase": {
+    "@durkinza/cdk-networkfirewall-l2.LogLocationBase": {
       "abstract": true,
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "Base Log Location class."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -5321,19 +5322,19 @@
             },
             "name": "logDestinationType",
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.LogDestinationType"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.LogDestinationType"
             }
           },
           {
             "name": "props",
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.LogLocationProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.LogLocationProps"
             }
           }
         ]
       },
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.ILogLocation"
+        "@durkinza/cdk-networkfirewall-l2.ILogLocation"
       ],
       "kind": "class",
       "locationInModule": {
@@ -5354,7 +5355,7 @@
             "line": 77
           },
           "name": "logDestination",
-          "overrides": "@durkinza/aws-networkfirewall-l2.ILogLocation",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.ILogLocation",
           "type": {
             "collection": {
               "elementtype": {
@@ -5375,7 +5376,7 @@
             "line": 76
           },
           "name": "logDestinationType",
-          "overrides": "@durkinza/aws-networkfirewall-l2.ILogLocation",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.ILogLocation",
           "type": {
             "primitive": "string"
           }
@@ -5391,7 +5392,7 @@
             "line": 75
           },
           "name": "logType",
-          "overrides": "@durkinza/aws-networkfirewall-l2.ILogLocation",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.ILogLocation",
           "type": {
             "primitive": "string"
           }
@@ -5399,14 +5400,14 @@
       ],
       "symbolId": "src/lib/logging:LogLocationBase"
     },
-    "@durkinza/aws-networkfirewall-l2.LogLocationProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.LogLocationProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "Base Log Location structure."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.LogLocationProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.LogLocationProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/logging.ts",
@@ -5433,13 +5434,13 @@
       ],
       "symbolId": "src/lib/logging:LogLocationProps"
     },
-    "@durkinza/aws-networkfirewall-l2.LogType": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.LogType": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "The type of log to send."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.LogType",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.LogType",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/lib/logging.ts",
@@ -5464,8 +5465,8 @@
       "name": "LogType",
       "symbolId": "src/lib/logging:LogType"
     },
-    "@durkinza/aws-networkfirewall-l2.LoggingConfiguration": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.LoggingConfiguration": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "base": "aws-cdk-lib.Resource",
       "docs": {
         "custom": {
@@ -5474,7 +5475,7 @@
         "stability": "experimental",
         "summary": "Defines a Logging Configuration in the Stack."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.LoggingConfiguration",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.LoggingConfiguration",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -5499,13 +5500,13 @@
           {
             "name": "props",
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.LoggingConfigurationProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps"
             }
           }
         ]
       },
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.ILoggingConfiguration"
+        "@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration"
       ],
       "kind": "class",
       "locationInModule": {
@@ -5533,7 +5534,7 @@
               "type": {
                 "collection": {
                   "elementtype": {
-                    "fqn": "@durkinza/aws-networkfirewall-l2.ILogLocation"
+                    "fqn": "@durkinza/cdk-networkfirewall-l2.ILogLocation"
                   },
                   "kind": "array"
                 }
@@ -5568,7 +5569,7 @@
             "line": 262
           },
           "name": "firewallRef",
-          "overrides": "@durkinza/aws-networkfirewall-l2.ILoggingConfiguration",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration",
           "type": {
             "primitive": "string"
           }
@@ -5605,7 +5606,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.ILogLocation"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.ILogLocation"
               },
               "kind": "array"
             }
@@ -5614,14 +5615,14 @@
       ],
       "symbolId": "src/lib/logging:LoggingConfiguration"
     },
-    "@durkinza/aws-networkfirewall-l2.LoggingConfigurationProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "The Properties for defining a Logging Configuration."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.LoggingConfigurationProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/logging.ts",
@@ -5700,7 +5701,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.ILogLocation"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.ILogLocation"
               },
               "kind": "array"
             }
@@ -5709,14 +5710,14 @@
       ],
       "symbolId": "src/lib/logging:LoggingConfigurationProps"
     },
-    "@durkinza/aws-networkfirewall-l2.S3LogLocation": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
-      "base": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+    "@durkinza/cdk-networkfirewall-l2.S3LogLocation": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
+      "base": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
       "docs": {
         "stability": "experimental",
         "summary": "Defines a S3 Bucket Logging configuration."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.S3LogLocation",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.S3LogLocation",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -5729,7 +5730,7 @@
           {
             "name": "props",
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.S3LogLocationProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.S3LogLocationProps"
             }
           }
         ]
@@ -5752,7 +5753,7 @@
             "line": 107
           },
           "name": "logDestination",
-          "overrides": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
           "type": {
             "collection": {
               "elementtype": {
@@ -5773,7 +5774,7 @@
             "line": 106
           },
           "name": "logDestinationType",
-          "overrides": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
           "type": {
             "primitive": "string"
           }
@@ -5789,7 +5790,7 @@
             "line": 105
           },
           "name": "logType",
-          "overrides": "@durkinza/aws-networkfirewall-l2.LogLocationBase",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.LogLocationBase",
           "type": {
             "primitive": "string"
           }
@@ -5797,16 +5798,16 @@
       ],
       "symbolId": "src/lib/logging:S3LogLocation"
     },
-    "@durkinza/aws-networkfirewall-l2.S3LogLocationProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.S3LogLocationProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "Defines a S3 Bucket Logging Option."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.S3LogLocationProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.S3LogLocationProps",
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.LogLocationProps"
+        "@durkinza/cdk-networkfirewall-l2.LogLocationProps"
       ],
       "kind": "interface",
       "locationInModule": {
@@ -5852,13 +5853,13 @@
       ],
       "symbolId": "src/lib/logging:S3LogLocationProps"
     },
-    "@durkinza/aws-networkfirewall-l2.Stateful5TupleDirection": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.Stateful5TupleDirection": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "The direction of traffic flow to inspect."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.Stateful5TupleDirection",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.Stateful5TupleDirection",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/lib/rule.ts",
@@ -5883,14 +5884,14 @@
       "name": "Stateful5TupleDirection",
       "symbolId": "src/lib/rule:Stateful5TupleDirection"
     },
-    "@durkinza/aws-networkfirewall-l2.Stateful5TupleRule": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
-      "base": "@durkinza/aws-networkfirewall-l2.StatefulRuleBase",
+    "@durkinza/cdk-networkfirewall-l2.Stateful5TupleRule": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
+      "base": "@durkinza/cdk-networkfirewall-l2.StatefulRuleBase",
       "docs": {
         "stability": "experimental",
         "summary": "Generates a Stateful Rule from a 5 Tuple."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.Stateful5TupleRule",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.Stateful5TupleRule",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -5903,7 +5904,7 @@
           {
             "name": "props",
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.Stateful5TupleRuleProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleProps"
             }
           }
         ]
@@ -5935,8 +5936,8 @@
       ],
       "symbolId": "src/lib/rule:Stateful5TupleRule"
     },
-    "@durkinza/aws-networkfirewall-l2.Stateful5TupleRuleGroup": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "base": "aws-cdk-lib.Resource",
       "docs": {
         "custom": {
@@ -5945,7 +5946,7 @@
         "stability": "experimental",
         "summary": "A Stateful Rule group that holds 5Tuple Rules."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.Stateful5TupleRuleGroup",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -5971,13 +5972,13 @@
             "name": "props",
             "optional": true,
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.Stateful5TupleRuleGroupProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps"
             }
           }
         ]
       },
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup"
+        "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup"
       ],
       "kind": "class",
       "locationInModule": {
@@ -6017,7 +6018,7 @@
           ],
           "returns": {
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup"
             }
           },
           "static": true
@@ -6036,7 +6037,7 @@
             "line": 466
           },
           "name": "ruleGroupArn",
-          "overrides": "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup",
           "type": {
             "primitive": "string"
           }
@@ -6052,7 +6053,7 @@
             "line": 467
           },
           "name": "ruleGroupId",
-          "overrides": "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup",
           "type": {
             "primitive": "string"
           }
@@ -6060,8 +6061,8 @@
       ],
       "symbolId": "src/lib/rule-group:Stateful5TupleRuleGroup"
     },
-    "@durkinza/aws-networkfirewall-l2.Stateful5TupleRuleGroupProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "custom": {
@@ -6070,7 +6071,7 @@
         "stability": "experimental",
         "summary": "Properties for defining a Stateful 5 Tuple Rule Group."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.Stateful5TupleRuleGroupProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/rule-group.ts",
@@ -6148,7 +6149,7 @@
           "name": "ruleOrder",
           "optional": true,
           "type": {
-            "fqn": "@durkinza/aws-networkfirewall-l2.StatefulRuleOptions"
+            "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions"
           }
         },
         {
@@ -6168,7 +6169,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.Stateful5TupleRule"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.Stateful5TupleRule"
               },
               "kind": "array"
             }
@@ -6195,16 +6196,16 @@
       ],
       "symbolId": "src/lib/rule-group:Stateful5TupleRuleGroupProps"
     },
-    "@durkinza/aws-networkfirewall-l2.Stateful5TupleRuleProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "Properties for defining a 5 Tuple rule."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.Stateful5TupleRuleProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleProps",
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.StatefulRuleBaseProps"
+        "@durkinza/cdk-networkfirewall-l2.StatefulRuleBaseProps"
       ],
       "kind": "interface",
       "locationInModule": {
@@ -6367,14 +6368,14 @@
       ],
       "symbolId": "src/lib/rule:Stateful5TupleRuleProps"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulDomainListRule": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
-      "base": "@durkinza/aws-networkfirewall-l2.StatefulRuleBase",
+    "@durkinza/cdk-networkfirewall-l2.StatefulDomainListRule": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
+      "base": "@durkinza/cdk-networkfirewall-l2.StatefulRuleBase",
       "docs": {
         "stability": "experimental",
         "summary": "Generates a Statful Rule from a Domain List."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulDomainListRule",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulDomainListRule",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -6387,7 +6388,7 @@
           {
             "name": "props",
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.StatefulDomainListRuleProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleProps"
             }
           }
         ]
@@ -6419,8 +6420,8 @@
       ],
       "symbolId": "src/lib/rule:StatefulDomainListRule"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulDomainListRuleGroup": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "base": "aws-cdk-lib.Resource",
       "docs": {
         "custom": {
@@ -6429,7 +6430,7 @@
         "stability": "experimental",
         "summary": "A Stateful Rule group that holds Domain List Rules."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulDomainListRuleGroup",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -6455,13 +6456,13 @@
             "name": "props",
             "optional": true,
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.StatefulDomainListRuleGroupProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps"
             }
           }
         ]
       },
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup"
+        "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup"
       ],
       "kind": "class",
       "locationInModule": {
@@ -6501,7 +6502,7 @@
           ],
           "returns": {
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup"
             }
           },
           "static": true
@@ -6520,7 +6521,7 @@
             "line": 534
           },
           "name": "ruleGroupArn",
-          "overrides": "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup",
           "type": {
             "primitive": "string"
           }
@@ -6536,7 +6537,7 @@
             "line": 535
           },
           "name": "ruleGroupId",
-          "overrides": "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup",
           "type": {
             "primitive": "string"
           }
@@ -6544,8 +6545,8 @@
       ],
       "symbolId": "src/lib/rule-group:StatefulDomainListRuleGroup"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulDomainListRuleGroupProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "custom": {
@@ -6554,7 +6555,7 @@
         "stability": "experimental",
         "summary": "Defines a Stateful Domain List Rule group in the stack."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulDomainListRuleGroupProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/rule-group.ts",
@@ -6614,7 +6615,7 @@
           "name": "rule",
           "optional": true,
           "type": {
-            "fqn": "@durkinza/aws-networkfirewall-l2.StatefulDomainListRule"
+            "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulDomainListRule"
           }
         },
         {
@@ -6650,7 +6651,7 @@
           "name": "ruleOrder",
           "optional": true,
           "type": {
-            "fqn": "@durkinza/aws-networkfirewall-l2.StatefulRuleOptions"
+            "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions"
           }
         },
         {
@@ -6674,16 +6675,16 @@
       ],
       "symbolId": "src/lib/rule-group:StatefulDomainListRuleGroupProps"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulDomainListRuleProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "The properties for defining a Stateful Domain List Rule."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulDomainListRuleProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleProps",
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.StatefulRuleBaseProps"
+        "@durkinza/cdk-networkfirewall-l2.StatefulRuleBaseProps"
       ],
       "kind": "interface",
       "locationInModule": {
@@ -6753,14 +6754,14 @@
       ],
       "symbolId": "src/lib/rule:StatefulDomainListRuleProps"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulDomainListTargetType": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatefulDomainListTargetType": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "remarks": "You can inspect HTTP or HTTPS protocols, or both.",
         "stability": "experimental",
         "summary": "The types of targets to inspect for."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulDomainListTargetType",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulDomainListTargetType",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/lib/rule.ts",
@@ -6785,13 +6786,13 @@
       "name": "StatefulDomainListTargetType",
       "symbolId": "src/lib/rule:StatefulDomainListTargetType"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulDomainListType": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatefulDomainListType": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "The type of domain list to generate."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulDomainListType",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulDomainListType",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/lib/rule.ts",
@@ -6816,21 +6817,21 @@
       "name": "StatefulDomainListType",
       "symbolId": "src/lib/rule:StatefulDomainListType"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulRuleBase": {
+    "@durkinza/cdk-networkfirewall-l2.StatefulRuleBase": {
       "abstract": true,
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "The shared base class of stateful rules."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulRuleBase",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulRuleBase",
       "initializer": {
         "docs": {
           "stability": "experimental"
         }
       },
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.IStatefulRule"
+        "@durkinza/cdk-networkfirewall-l2.IStatefulRule"
       ],
       "kind": "class",
       "locationInModule": {
@@ -6840,14 +6841,14 @@
       "name": "StatefulRuleBase",
       "symbolId": "src/lib/rule:StatefulRuleBase"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulRuleBaseProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatefulRuleBaseProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "The properties for defining a generic Stateful Rule."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulRuleBaseProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulRuleBaseProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/rule.ts",
@@ -6856,14 +6857,14 @@
       "name": "StatefulRuleBaseProps",
       "symbolId": "src/lib/rule:StatefulRuleBaseProps"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulRuleGroupList": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "Maps a priority to a stateful rule group item."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulRuleGroupList",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/policy.ts",
@@ -6884,7 +6885,7 @@
           },
           "name": "ruleGroup",
           "type": {
-            "fqn": "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup"
+            "fqn": "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup"
           }
         },
         {
@@ -6908,13 +6909,13 @@
       ],
       "symbolId": "src/lib/policy:StatefulRuleGroupList"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulRuleOptions": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "Indicates how to manage the order of the rule evaluation for the rule group."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulRuleOptions",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/lib/rule-group.ts",
@@ -6939,13 +6940,13 @@
       "name": "StatefulRuleOptions",
       "symbolId": "src/lib/rule-group:StatefulRuleOptions"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulStandardAction": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatefulStandardAction": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "Defines what Network Firewall should do with the packets in a traffic flow when the flow matches the stateful rule criteria."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulStandardAction",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulStandardAction",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/lib/actions.ts",
@@ -6977,13 +6978,13 @@
       "name": "StatefulStandardAction",
       "symbolId": "src/lib/actions:StatefulStandardAction"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulStrictAction": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatefulStrictAction": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "The default actions to take on a packet that doesn't match any stateful rules."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulStrictAction",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulStrictAction",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/lib/actions.ts",
@@ -7025,8 +7026,8 @@
       "name": "StatefulStrictAction",
       "symbolId": "src/lib/actions:StatefulStrictAction"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulSuricataRuleGroup": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "base": "aws-cdk-lib.Resource",
       "docs": {
         "custom": {
@@ -7035,7 +7036,7 @@
         "stability": "experimental",
         "summary": "A Stateful Rule group that holds Suricata Rules."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulSuricataRuleGroup",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -7061,13 +7062,13 @@
             "name": "props",
             "optional": true,
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.StatefulSuricataRuleGroupProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps"
             }
           }
         ]
       },
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup"
+        "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup"
       ],
       "kind": "class",
       "locationInModule": {
@@ -7107,7 +7108,7 @@
           ],
           "returns": {
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup"
             }
           },
           "static": true
@@ -7126,7 +7127,7 @@
             "line": 402
           },
           "name": "ruleGroupArn",
-          "overrides": "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup",
           "type": {
             "primitive": "string"
           }
@@ -7142,7 +7143,7 @@
             "line": 403
           },
           "name": "ruleGroupId",
-          "overrides": "@durkinza/aws-networkfirewall-l2.IStatefulRuleGroup",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup",
           "type": {
             "primitive": "string"
           }
@@ -7150,8 +7151,8 @@
       ],
       "symbolId": "src/lib/rule-group:StatefulSuricataRuleGroup"
     },
-    "@durkinza/aws-networkfirewall-l2.StatefulSuricataRuleGroupProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "custom": {
@@ -7160,7 +7161,7 @@
         "stability": "experimental",
         "summary": "Properties for defining a Stateful Suricata Rule Group."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatefulSuricataRuleGroupProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/rule-group.ts",
@@ -7238,7 +7239,7 @@
           "name": "ruleOrder",
           "optional": true,
           "type": {
-            "fqn": "@durkinza/aws-networkfirewall-l2.StatefulRuleOptions"
+            "fqn": "@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions"
           }
         },
         {
@@ -7280,13 +7281,13 @@
       ],
       "symbolId": "src/lib/rule-group:StatefulSuricataRuleGroupProps"
     },
-    "@durkinza/aws-networkfirewall-l2.StatelessRule": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatelessRule": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "Defines a Network Firewall Stateless Rule."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRule",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRule",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -7299,13 +7300,13 @@
           {
             "name": "props",
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRuleProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRuleProps"
             }
           }
         ]
       },
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.IStatelessRule"
+        "@durkinza/cdk-networkfirewall-l2.IStatelessRule"
       ],
       "kind": "class",
       "locationInModule": {
@@ -7353,8 +7354,8 @@
       ],
       "symbolId": "src/lib/rule:StatelessRule"
     },
-    "@durkinza/aws-networkfirewall-l2.StatelessRuleGroup": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "base": "aws-cdk-lib.Resource",
       "docs": {
         "custom": {
@@ -7363,7 +7364,7 @@
         "stability": "experimental",
         "summary": "A Stateless Rule group that holds Stateless Rules."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRuleGroup",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup",
       "initializer": {
         "docs": {
           "stability": "experimental"
@@ -7389,13 +7390,13 @@
             "name": "props",
             "optional": true,
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRuleGroupProps"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps"
             }
           }
         ]
       },
       "interfaces": [
-        "@durkinza/aws-networkfirewall-l2.IStatelessRuleGroup"
+        "@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup"
       ],
       "kind": "class",
       "locationInModule": {
@@ -7435,7 +7436,7 @@
           ],
           "returns": {
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.IStatelessRuleGroup"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup"
             }
           },
           "static": true
@@ -7472,7 +7473,7 @@
           ],
           "returns": {
             "type": {
-              "fqn": "@durkinza/aws-networkfirewall-l2.IStatelessRuleGroup"
+              "fqn": "@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup"
             }
           },
           "static": true
@@ -7507,7 +7508,7 @@
             "line": 143
           },
           "name": "ruleGroupArn",
-          "overrides": "@durkinza/aws-networkfirewall-l2.IStatelessRuleGroup",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup",
           "type": {
             "primitive": "string"
           }
@@ -7523,7 +7524,7 @@
             "line": 142
           },
           "name": "ruleGroupId",
-          "overrides": "@durkinza/aws-networkfirewall-l2.IStatelessRuleGroup",
+          "overrides": "@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup",
           "type": {
             "primitive": "string"
           }
@@ -7531,14 +7532,14 @@
       ],
       "symbolId": "src/lib/rule-group:StatelessRuleGroup"
     },
-    "@durkinza/aws-networkfirewall-l2.StatelessRuleGroupList": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupList": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "Maps a priority to a stateless rule group item."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRuleGroupList",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupList",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/policy.ts",
@@ -7575,20 +7576,20 @@
           },
           "name": "ruleGroup",
           "type": {
-            "fqn": "@durkinza/aws-networkfirewall-l2.IStatelessRuleGroup"
+            "fqn": "@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup"
           }
         }
       ],
       "symbolId": "src/lib/policy:StatelessRuleGroupList"
     },
-    "@durkinza/aws-networkfirewall-l2.StatelessRuleGroupProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "The properties for defining a Stateless Rule Group."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRuleGroupProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/rule-group.ts",
@@ -7690,7 +7691,7 @@
           "type": {
             "collection": {
               "elementtype": {
-                "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRuleList"
+                "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRuleList"
               },
               "kind": "array"
             }
@@ -7717,14 +7718,14 @@
       ],
       "symbolId": "src/lib/rule-group:StatelessRuleGroupProps"
     },
-    "@durkinza/aws-networkfirewall-l2.StatelessRuleList": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatelessRuleList": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "Maps a priority to a stateless rule."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRuleList",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRuleList",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/rule-group.ts",
@@ -7761,20 +7762,20 @@
           },
           "name": "rule",
           "type": {
-            "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRule"
+            "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRule"
           }
         }
       ],
       "symbolId": "src/lib/rule-group:StatelessRuleList"
     },
-    "@durkinza/aws-networkfirewall-l2.StatelessRuleProps": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatelessRuleProps": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "datatype": true,
       "docs": {
         "stability": "experimental",
         "summary": "Properties for defining a stateless rule."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatelessRuleProps",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessRuleProps",
       "kind": "interface",
       "locationInModule": {
         "filename": "src/lib/rule.ts",
@@ -7946,13 +7947,13 @@
       ],
       "symbolId": "src/lib/rule:StatelessRuleProps"
     },
-    "@durkinza/aws-networkfirewall-l2.StatelessStandardAction": {
-      "assembly": "@durkinza/aws-networkfirewall-l2",
+    "@durkinza/cdk-networkfirewall-l2.StatelessStandardAction": {
+      "assembly": "@durkinza/cdk-networkfirewall-l2",
       "docs": {
         "stability": "experimental",
         "summary": "The actions to take on a packet that matches one of the stateless rule definition's match attributes."
       },
-      "fqn": "@durkinza/aws-networkfirewall-l2.StatelessStandardAction",
+      "fqn": "@durkinza/cdk-networkfirewall-l2.StatelessStandardAction",
       "kind": "enum",
       "locationInModule": {
         "filename": "src/lib/actions.ts",
@@ -7986,5 +7987,5 @@
     }
   },
   "version": "0.0.0",
-  "fingerprint": "mJUbOOefsAXoDVlKldxTa6DeFpu7rmWnSkw5pebRoLw="
+  "fingerprint": "4H9+C24bq7Utq2Qa1yWH0RrajdHzh8+FUS1QVEFuZUc="
 }
