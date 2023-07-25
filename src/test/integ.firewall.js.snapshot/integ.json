@@ -1,0 +1,12 @@
+{
+  "version": "30.1.0",
+  "testCases": {
+    "AllBasicTest/DefaultTest": {
+      "stacks": [
+        "network-firewall-integ-stack"
+      ],
+      "assertionStack": "AllBasicTest/DefaultTest/DeployAssert",
+      "assertionStackName": "AllBasicTestDefaultTestDeployAssertB887792C"
+    }
+  }
+}
