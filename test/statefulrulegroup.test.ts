@@ -1,7 +1,7 @@
 //import { Template, Match } from 'aws-cdk-lib/assertions';
 import { Template } from 'aws-cdk-lib/assertions';
 import * as cdk from 'aws-cdk-lib/core';
-import * as NetFW from '../lib';
+import * as NetFW from '../src/lib';
 
 /**
  * Tests for 5 Tuple Stateful rule groups
@@ -244,5 +244,43 @@ test('Given properties on Suricata Rule Group', () => {
         RuleOrder: 'STRICT_ORDER',
       },
     },
+  });
+});
+
+test('Can get statelesss rule group by name', () => {
+  // GIVEN
+  const stack = new cdk.Stack();
+
+  const statefulDomainListRuleGroup = NetFW.StatefulDomainListRuleGroup.fromRuleGroupArn(stack, 'MyImportedDomainListRuleGroup', 'arn:aws:networkfirewall:statefulrulegroup');
+  const statefulSuricataRuleGroup = NetFW.StatefulSuricataRuleGroup.fromRuleGroupArn(stack, 'MyImportedSuricataRuleGroup', 'arn:aws:networkfirewall:statefulrulegroup');
+  const stateful5TupleRuleGroup = NetFW.Stateful5TupleRuleGroup.fromRuleGroupArn(stack, 'MyImportedStateful5TupleRuleGroup', 'arn:aws:networkfirewall:statefulrulegroup');
+  // WHEN
+  new cdk.CfnResource(stack, 'Res1', {
+    type: 'Test::Resource',
+    properties: {
+      statefulDomainListRuleGroupArn: statefulDomainListRuleGroup.ruleGroupArn,
+    },
+  });
+  new cdk.CfnResource(stack, 'Res2', {
+    type: 'Test::Resource',
+    properties: {
+      statefulSuricataRuleGroupArn: statefulSuricataRuleGroup.ruleGroupArn,
+    },
+  });
+  new cdk.CfnResource(stack, 'Res3', {
+    type: 'Test::Resource',
+    properties: {
+      stateful5TupleRuleGroupArn: stateful5TupleRuleGroup.ruleGroupArn,
+    },
+  });
+  // THEN
+  Template.fromStack(stack).hasResourceProperties('Test::Resource', {
+    statefulDomainListRuleGroupArn: 'arn:aws:networkfirewall:statefulrulegroup',
+  });
+  Template.fromStack(stack).hasResourceProperties('Test::Resource', {
+    statefulSuricataRuleGroupArn: 'arn:aws:networkfirewall:statefulrulegroup',
+  });
+  Template.fromStack(stack).hasResourceProperties('Test::Resource', {
+    stateful5TupleRuleGroupArn: 'arn:aws:networkfirewall:statefulrulegroup',
   });
 });

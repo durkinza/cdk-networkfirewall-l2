@@ -302,42 +302,43 @@ export class Firewall extends FirewallBase {
     this.loggingS3Buckets = props.loggingS3Buckets || [];
     this.loggingKinesisDataStreams = props.loggingKinesisDataStreams || [];
 
-    let logLocations: ILogLocation[] = [];
+    // let logLocations: ILogLocation[] = [];
 
     if (props.loggingCloudWatchLogGroups) {
-      //let cloudWatchLogGroups: ILogLocation[] = [];
+      let cloudWatchLogGroups: ILogLocation[] = [];
       let cloudWatchLogGroup:CloudWatchLogLocationProps;
       for (cloudWatchLogGroup of props.loggingCloudWatchLogGroups) {
         const logLocation:ILogLocation = new CloudWatchLogLocation(cloudWatchLogGroup);
-        //cloudWatchLogGroups.push(logLocation);
-        logLocations.push(logLocation);
+        cloudWatchLogGroups.push(logLocation);
+        // logLocations.push(logLocation);
       }
-      //this.loggingConfigurations.push(this.addLoggingConfigurations(`${id}-logging-CloudWatch`, cloudWatchLogGroups));
+      this.loggingConfigurations.push(this.addLoggingConfigurations(`${id}-logging-CloudWatch`, cloudWatchLogGroups));
     }
 
     if (props.loggingS3Buckets) {
-      //let s3LogGroups: ILogLocation[] = [];
+      let s3LogGroups: ILogLocation[] = [];
       let s3LogGroup:S3LogLocationProps;
       for (s3LogGroup of props.loggingS3Buckets) {
         const logLocation:ILogLocation = new S3LogLocation(s3LogGroup);
-        //s3LogGroups.push(logLocation);
-        logLocations.push(logLocation);
+        s3LogGroups.push(logLocation);
+        // logLocations.push(logLocation);
       }
-      //this.loggingConfigurations.push(this.addLoggingConfigurations(`${id}-logging-S3Buckets`, s3LogGroups));
+      this.loggingConfigurations.push(this.addLoggingConfigurations(`${id}-logging-S3Buckets`, s3LogGroups));
     }
 
     if (props.loggingKinesisDataStreams) {
-      //let kinesisLogGroups: ILogLocation[] = [];
+      let kinesisLogGroups: ILogLocation[] = [];
       let kinesisLogGroup: KinesisDataFirehoseLogLocationProps;
       for (kinesisLogGroup of props.loggingKinesisDataStreams) {
         const logLocation:ILogLocation = new KinesisDataFirehoseLogLocation(kinesisLogGroup);
-        //kinesisLogGroups.push(logLocation);
-        logLocations.push(logLocation);
+        kinesisLogGroups.push(logLocation);
+        // logLocations.push(logLocation);
       }
-      //this.loggingConfigurations.push(this.addLoggingConfigurations(`${id}-logging-KinesisDataFirehose`, kinesisLogGroups));
+      this.loggingConfigurations.push(this.addLoggingConfigurations(`${id}-logging-KinesisDataFirehose`, kinesisLogGroups));
     }
-
-    this.loggingConfigurations.push(this.addLoggingConfigurations(`${id}-firewall-logging`, logLocations));
+    // if (logLocations.length > 0) {
+    //   this.loggingConfigurations.push(this.addLoggingConfigurations(`${id}-firewall-logging`, logLocations));
+    // }
   }
 
   /**

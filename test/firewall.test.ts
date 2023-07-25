@@ -1,7 +1,7 @@
 import { Template } from 'aws-cdk-lib/assertions';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as cdk from 'aws-cdk-lib/core';
-import * as NetFW from '../lib';
+import * as NetFW from '../src/lib';
 
 test('Default property', () => {
   // GIVEN
@@ -65,7 +65,7 @@ test('Can get firewall name', () => {
   // THEN
   Template.fromStack(stack).hasResourceProperties('Test::Resource', {
     FirewallName: {
-      Ref: 'MyNetworkFirewall02A8AE68',
+      Ref: 'MyNetworkFirewall2812E69EF',
     },
   });
 });

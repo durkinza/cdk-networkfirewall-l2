@@ -1,7 +1,7 @@
 //import { Template, Match } from 'aws-cdk-lib/assertions';
 import { Template } from 'aws-cdk-lib/assertions';
 import * as cdk from 'aws-cdk-lib/core';
-import * as NetFW from '../lib';
+import * as NetFW from '../src/lib';
 
 test('Default property', () => {
   // GIVEN
@@ -283,4 +283,23 @@ test('Calculate Capacity validation', () => {
       ],
     });
   }).toThrow('Capacity must be a positive value less than 30,000, got: \'40000\'');
+});
+
+test('Can get statelesss rule group by name', () => {
+  // GIVEN
+  const stack = new cdk.Stack();
+  const statelessRuleGroup = NetFW.StatelessRuleGroup.fromStatelessRuleGroupName(stack, 'MyImportedStatelessRuleGroup', 'MyStatelessRuleGroup');
+
+  // WHEN
+  new cdk.CfnResource(stack, 'Res', {
+    type: 'Test::Resource',
+    properties: {
+      statelessRuleGroup: statelessRuleGroup.ruleGroupId,
+    },
+  });
+
+  // THEN
+  Template.fromStack(stack).hasResourceProperties('Test::Resource', {
+    statelessRuleGroup: 'MyStatelessRuleGroup',
+  });
 });

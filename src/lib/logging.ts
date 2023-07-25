@@ -115,7 +115,7 @@ export class S3LogLocation extends LogLocationBase {
     Bucket.validateBucketName(props.bucketName);
     if (props.prefix) {
       if (!/^[a-zA-Z0-9_.!*'()-]{1,}$/.test(props.prefix)) {
-        throw new Error(`'prefix' must have only letters, numbers, hyphens, dots (.), underscores, parantheses, stars(*), and explaination points (!). Got: ${props.prefix}`);
+        throw new Error(`Bucket Name prefix must have only letters, numbers, hyphens, dots (.), underscores, parantheses, stars(*), and explaination points (!). Got: ${props.prefix}`);
       }
       this.logDestination = {
         bucketName: props.bucketName,
@@ -157,7 +157,7 @@ export class KinesisDataFirehoseLogLocation extends LogLocationBase {
     if ( !core.Token.isUnresolved(props.deliveryStream)) {
       if (!/^[a-zA-Z0-9_.-]{1,64}$/.test(props.deliveryStream)) {
         // Throws and error if logGroup is invalid format.
-        throw new Error(`'LogGroup' must have 1-64 characters of only letters, numbers, hyphens, dots (.), and underscores. Got: ${props.deliveryStream}`);
+        throw new Error(`Kinesis deliveryStream must have 1-64 characters of only letters, numbers, hyphens, dots (.), and underscores. Got: ${props.deliveryStream}`);
       }
     }
 
@@ -194,7 +194,7 @@ export class CloudWatchLogLocation extends LogLocationBase {
     if ( !core.Token.isUnresolved(props.logGroup)) {
       if (!/^[a-zA-Z-_0-9/.#]{1,512}$/.test(props.logGroup)) {
         // Throws and error if logGroup is invalid format.
-        throw new Error(`'LogGroup' must have 1-512 characters of only letters, numbers, hyphens, underscores, and pounds (#). Got: ${props.logGroup} `);
+        throw new Error(`Cloudwatch LogGroup must have 1-512 characters of only letters, numbers, hyphens, underscores, and pounds (#). Got: ${props.logGroup}`);
       }
     }
 
@@ -301,7 +301,7 @@ export class LoggingConfiguration extends core.Resource implements ILoggingConfi
       loggingConfiguration: loggingConfigurationProperty,
       firewallName: props.firewallName,
     };
-    const resource:CfnLoggingConfiguration = new CfnLoggingConfiguration(scope, `${id}`, resourceProps);
+    const resource:CfnLoggingConfiguration = new CfnLoggingConfiguration(scope, `Cfn${id}`, resourceProps);
 
     this.firewallRef = resource.firewallArn;
   }

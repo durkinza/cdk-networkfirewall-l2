@@ -2,7 +2,7 @@
 import { Template } from 'aws-cdk-lib/assertions';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as cdk from 'aws-cdk-lib/core';
-import * as NetFW from '../lib';
+import * as NetFW from '../src/lib';
 
 test('Default property', () => {
   // GIVEN
@@ -261,7 +261,7 @@ test('Can add new groups to policy', () => {
     statelessRuleGroups: statelessRuleGroupList,
     statefulRuleGroups: statefulRuleGroupList,
   });
-  new NetFW.Firewall(stack, 'MyNetworkFirewall20', {
+  new NetFW.Firewall(stack, 'MyNetworkFirewall', {
     vpc: vpc,
     policy: policy,
   });

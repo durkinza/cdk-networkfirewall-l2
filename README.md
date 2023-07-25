@@ -1,27 +1,12 @@
-# AWS::NetworkFirewall Construct Library
+<div align="center">
+    <h1> AWS CDK Network Firewall L2 </h1>
+This repo holds some experimental L2 constructs for the
 
+[AWS-CDK](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_networkfirewall-readme.html)
+<br/>
+<br/>
 
-This module is part of the [AWS Cloud Development Kit](https://github.com/aws/aws-cdk) project.
+</div>
 
-```ts nofixture
-import * as networkfirewall from 'aws-cdk-lib/aws-networkfirewall';
-```
+---
 
-<!--BEGIN CFNONLY DISCLAIMER-->
-
-There are no official hand-written ([L2](https://docs.aws.amazon.com/cdk/latest/guide/constructs.html#constructs_lib)) constructs for this service yet. Here are some suggestions on how to proceed:
-
-- Search [Construct Hub for NetworkFirewall construct libraries](https://constructs.dev/search?q=networkfirewall)
-- Use the automatically generated [L1](https://docs.aws.amazon.com/cdk/latest/guide/constructs.html#constructs_l1_using) constructs, in the same way you would use [the CloudFormation AWS::NetworkFirewall resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_NetworkFirewall.html) directly.
-
-
-<!--BEGIN CFNONLY DISCLAIMER-->
-
-There are no hand-written ([L2](https://docs.aws.amazon.com/cdk/latest/guide/constructs.html#constructs_lib)) constructs for this service yet. 
-However, you can still use the automatically generated [L1](https://docs.aws.amazon.com/cdk/latest/guide/constructs.html#constructs_l1_using) constructs, and use this service exactly as you would using CloudFormation directly.
-
-For more information on the resources and properties available for this service, see the [CloudFormation documentation for AWS::NetworkFirewall](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_NetworkFirewall.html).
-
-(Read the [CDK Contributing Guide](https://github.com/aws/aws-cdk/blob/main/CONTRIBUTING.md) and submit an RFC if you are interested in contributing to this construct library.)
-
-<!--END CFNONLY DISCLAIMER-->
