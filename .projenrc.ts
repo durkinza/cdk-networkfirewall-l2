@@ -52,7 +52,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'typescript',
   ], /* Build dependencies for this module. */
 });
-project.gitignore.include('.jsii');
 project.gitignore.exclude('test/**/*.js');
 project.gitignore.exclude('test/**/*.d.ts');
 

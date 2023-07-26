@@ -48,8 +48,8 @@ junit.xml
 /lib
 /dist/
 !/.eslintrc.json
+.jsii
 tsconfig.json
 !/API.md
-!.jsii
 test/**/*.js
 test/**/*.d.ts
