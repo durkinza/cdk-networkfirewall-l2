@@ -74,7 +74,6 @@
     },
     {
       "name": "npm-check-updates",
-      "version": "^16",
       "type": "build"
     },
     {
