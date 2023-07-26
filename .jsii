@@ -3490,7 +3490,7 @@
   "docs": {
     "stability": "experimental"
   },
-  "homepage": "https://github.com/durkinza/cdk-networkfirewall-l2.git",
+  "homepage": "https://github.com/durkinza/cdk-networkfirewall-l2#readme",
   "jsiiVersion": "5.0.18 (build b2ca4a6)",
   "keywords": [
     "aws",
@@ -7987,5 +7987,5 @@
     }
   },
   "version": "0.0.0",
-  "fingerprint": "4H9+C24bq7Utq2Qa1yWH0RrajdHzh8+FUS1QVEFuZUc="
+  "fingerprint": "GRXa/3BHQSj/uEJAZaJCKNc3FHmYU6BHk85ORtayLNU="
 }

@@ -1,4 +1,4 @@
-import { awscdk } from 'projen';
+import { awscdk, javascript } from 'projen';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'durkinza',
   authorAddress: '8985088+durkinza@users.noreply.github.com',
@@ -7,6 +7,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
   jsiiVersion: '~5.0.0',
   name: '@durkinza/cdk-networkfirewall-l2',
   packageName: '@durkinza/cdk-networkfirewall-l2', /* The "name" in package.json. */
+  homepage: 'https://github.com/durkinza/cdk-networkfirewall-l2#readme',
+  bugsUrl: 'https://github.com/durkinza/cdk-networkfirewall-l2/issues',
+  npmAccess: javascript.NpmAccess.PUBLIC,
   license: 'Apache-2.0',
   projenrcTs: true,
   repositoryUrl: 'https://github.com/durkinza/cdk-networkfirewall-l2.git',

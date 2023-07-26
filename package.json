@@ -75,7 +75,14 @@
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
+  "homepage": "https://github.com/durkinza/cdk-networkfirewall-l2#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.0.0",
+  "bugs": {
+    "url": "https://github.com/durkinza/cdk-networkfirewall-l2/issues"
+  },
   "jest": {
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.ts?(x)",
