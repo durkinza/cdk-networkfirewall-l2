@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs';
 import { CfnRuleGroup, CfnRuleGroupProps } from 'aws-cdk-lib/aws-networkfirewall';
 import * as core from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
@@ -393,11 +394,44 @@ export interface StatefulSuricataRuleGroupProps extends StatefulRuleGroupProps {
 }
 
 /**
+ * Properties for defining a Stateful Suricata Rule Group from a file.
+ *
+ * @resource AWS::NetworkFIrewall::RuleGroup
+ */
+export interface StatefulSuricataRuleGroupFromFileProps extends StatefulRuleGroupProps {
+  /**
+   * The suricata rules file location
+   *
+   */
+  readonly path: string;
+
+  /**
+   * The encoding to use for the file
+   *
+   * @default - uft-8
+   */
+  readonly encoding?: BufferEncoding;
+}
+
+/**
  * A Stateful Rule group that holds Suricata Rules
  *
  * @resource AWS::NetworkFirewall::RuleGroup
  */
 export class StatefulSuricataRuleGroup extends StatefulRuleGroup {
+
+  /**
+   * Reference Suricata rules from a file,
+   *
+   * @resource AWS::NetworkFirewall::RuleGroup
+   */
+  public static fromFile(scope:Construct, id:string, props:StatefulSuricataRuleGroupFromFileProps):StatefulSuricataRuleGroup {
+    const contents = readFileSync(props.path, props.encoding || 'utf-8').toString();
+    return new StatefulSuricataRuleGroup(scope, id, {
+      rules: contents,
+      ...props,
+    });
+  }
 
   public readonly ruleGroupArn: string;
   public readonly ruleGroupId: string;

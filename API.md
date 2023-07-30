@@ -1813,6 +1813,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isOwnedResource">isOwnedResource</a></code> | Returns true if the construct was created by CDK, and false otherwise. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isResource">isResource</a></code> | Check whether the given construct is a Resource. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.fromFile">fromFile</a></code> | Reference Suricata rules from a file,. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.fromRuleGroupArn">fromRuleGroupArn</a></code> | Reference existing Rule Group. |
 
 ---
@@ -1864,6 +1865,34 @@ Check whether the given construct is a Resource.
 ###### `construct`<sup>Required</sup> <a name="construct" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isResource.parameter.construct"></a>
 
 - *Type:* constructs.IConstruct
+
+---
+
+##### `fromFile` <a name="fromFile" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.fromFile"></a>
+
+```typescript
+import { StatefulSuricataRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
+
+StatefulSuricataRuleGroup.fromFile(scope: Construct, id: string, props: StatefulSuricataRuleGroupFromFileProps)
+```
+
+Reference Suricata rules from a file,.
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.fromFile.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.fromFile.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `props`<sup>Required</sup> <a name="props" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.fromFile.parameter.props"></a>
+
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps">StatefulSuricataRuleGroupFromFileProps</a>
 
 ---
 
@@ -3334,6 +3363,125 @@ public readonly priority: number;
 - *Default:* Priority is only used when Strict order is set.
 
 The priority of the rule group in the policy.
+
+---
+
+### StatefulSuricataRuleGroupFromFileProps <a name="StatefulSuricataRuleGroupFromFileProps" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps"></a>
+
+Properties for defining a Stateful Suricata Rule Group from a file.
+
+#### Initializer <a name="Initializer" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.Initializer"></a>
+
+```typescript
+import { StatefulSuricataRuleGroupFromFileProps } from '@durkinza/cdk-networkfirewall-l2'
+
+const statefulSuricataRuleGroupFromFileProps: StatefulSuricataRuleGroupFromFileProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.path">path</a></code> | <code>string</code> | The suricata rules file location. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.capacity">capacity</a></code> | <code>number</code> | The maximum operating resources that this rule group can use. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.encoding">encoding</a></code> | <code>string</code> | The encoding to use for the file. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
+
+---
+
+##### `path`<sup>Required</sup> <a name="path" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.path"></a>
+
+```typescript
+public readonly path: string;
+```
+
+- *Type:* string
+
+The suricata rules file location.
+
+---
+
+##### `capacity`<sup>Optional</sup> <a name="capacity" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.capacity"></a>
+
+```typescript
+public readonly capacity: number;
+```
+
+- *Type:* number
+- *Default:* 200
+
+The maximum operating resources that this rule group can use.
+
+Estimate a stateful rule group's capacity as the number of rules that you expect to have in it during its lifetime.
+You can't change this setting after you create the rule group
+
+---
+
+##### `description`<sup>Optional</sup> <a name="description" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* string
+- *Default:* undefined
+
+Description of the rule group.
+
+---
+
+##### `encoding`<sup>Optional</sup> <a name="encoding" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.encoding"></a>
+
+```typescript
+public readonly encoding: string;
+```
+
+- *Type:* string
+- *Default:* uft-8
+
+The encoding to use for the file.
+
+---
+
+##### `ruleGroupName`<sup>Optional</sup> <a name="ruleGroupName" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleGroupName"></a>
+
+```typescript
+public readonly ruleGroupName: string;
+```
+
+- *Type:* string
+- *Default:* CloudFormation-generated name
+
+The descriptive name of the stateful rule group.
+
+---
+
+##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleOrder"></a>
+
+```typescript
+public readonly ruleOrder: StatefulRuleOptions;
+```
+
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
+- *Default:* DEFAULT_RULE_ACTION_ORDER
+
+Rule Order.
+
+---
+
+##### `variables`<sup>Optional</sup> <a name="variables" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.variables"></a>
+
+```typescript
+public readonly variables: RuleVariablesProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty
+- *Default:* undefined
+
+Settings that are available for use in the rules.
 
 ---
 
