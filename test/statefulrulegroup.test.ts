@@ -284,3 +284,47 @@ test('Can get statelesss rule group by name', () => {
     stateful5TupleRuleGroupArn: 'arn:aws:networkfirewall:statefulrulegroup',
   });
 });
+
+test('Can get statelesss rule group from file', () => {
+  // GIVEN
+  const stack = new cdk.Stack();
+  // WHEN
+  NetFW.StatefulSuricataRuleGroup.fromFile(stack, 'MyStatefulSuricataRuleGroup', {
+    path: './test/suricata.rules',
+    capacity: 100,
+    ruleGroupName: 'MyStatefulRuleGroup',
+    variables: {
+      ipSets: {
+        ipSetsKey: { definition: ['10.0.0.0/16', '10.10.0.0/16'] },
+      },
+      portSets: {
+        portSetsKey: { definition: ['443', '80'] },
+      },
+    },
+    ruleOrder: NetFW.StatefulRuleOptions.STRICT_ORDER,
+  });
+  // THEN
+  Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::RuleGroup', {
+    Capacity: 100,
+    RuleGroupName: 'MyStatefulRuleGroup',
+    Type: 'STATEFUL',
+    RuleGroup: {
+      RuleVariables: {
+        IPSets: {
+          ipSetsKey: {
+            Definition: ['10.0.0.0/16', '10.10.0.0/16'],
+          },
+        },
+        PortSets: {
+          portSetsKey: { Definition: ['443', '80'] },
+        },
+      },
+      RulesSource: {
+        RulesString: 'drop tcp $HOME_NET any -> $EXTERNAL_NET any (msg:\"ET TROJAN Likely Bot Nick in IRC (USA +..)\"; flow:established,to_server; flowbits:isset,is_proto_irc; content:\"NICK \"; pcre:\"/NICK .*USA.*[0-9]{3,}/i\"; reference:url,doc.emergingthreats.net/2008124; classtype:trojan-activity; sid:2008124; rev:2;)',
+      },
+      StatefulRuleOptions: {
+        RuleOrder: 'STRICT_ORDER',
+      },
+    },
+  });
+});
