@@ -1,14 +1,11 @@
-//import { Template, Match } from 'aws-cdk-lib/assertions';
-//import { Template } from 'aws-cdk-lib/assertions';
-//import * as cdk from 'aws-cdk-lib/core';
 import * as NetFW from '../src/lib';
 
 test('Default properties', () => {
-  // GIVEN
   // WHEN
   const statelessrule = new NetFW.StatelessRule({
     actions: [NetFW.StatelessStandardAction.DROP],
   });
+
   // THEN
   expect(statelessrule.resource).toStrictEqual({
     matchAttributes: {
@@ -25,7 +22,6 @@ test('Default properties', () => {
 });
 
 test('Given properties', () => {
-  // GIVEN
   // WHEN
   const statelessrule = new NetFW.StatelessRule({
     actions: [NetFW.StatelessStandardAction.DROP, 'customAction'],
@@ -48,6 +44,7 @@ test('Given properties', () => {
     protocols: [10, 11],
     tcpFlags: [{ flags: ['ECE', 'SYN'], masks: ['SYN', 'ECE'] }],
   });
+
   // THEN
   expect(statelessrule.resource).toStrictEqual({
     matchAttributes: {
