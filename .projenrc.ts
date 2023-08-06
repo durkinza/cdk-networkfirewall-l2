@@ -3,7 +3,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   author: 'durkinza',
   authorAddress: '8985088+durkinza@users.noreply.github.com',
   bugsUrl: 'https://github.com/durkinza/cdk-networkfirewall-l2/issues',
-  cdkVersion: '2.79.0',
+  cdkVersion: '2.90.0',
   defaultReleaseBranch: 'main',
   dependabot: true,
   deps: ['aws-cdk-lib'], /* Runtime dependencies of this module. */

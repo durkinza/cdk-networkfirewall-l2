@@ -1,6 +1,3 @@
-//import { Template, Match } from 'aws-cdk-lib/assertions';
-//import { Template } from 'aws-cdk-lib/assertions';
-//import * as cdk from 'aws-cdk-lib/core';
 import * as NetFW from '../src/lib';
 
 test('Default properties 5Tuple Rule', () => {
