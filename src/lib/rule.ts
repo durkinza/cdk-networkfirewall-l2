@@ -27,42 +27,36 @@ export interface StatelessRuleProps {
    * The destination port to inspect for.
    * You can specify an individual port, for example 1994 and you can specify a port range, for example 1990:1994.
    * To match with any port, specify ANY.
-   *
    * @default - ANY
    */
   readonly destinationPorts?: CfnRuleGroup.PortRangeProperty[];
 
   /**
    * Specify an array of IP address or a block of IP addresses in Classless Inter-Domain Routing (CIDR) notation.
-   *
    * @default - ANY
    */
   readonly destinations?: string[];
 
   /**
    * The protocols to inspect for, specified using each protocol's assigned internet protocol number (IANA).
-   *
    * @default - ANY
    */
   readonly protocols?: number[];
 
   /**
    * The source ports to inspect for.
-   *
    * @default - ANY
    */
   readonly sourcePorts?: CfnRuleGroup.PortRangeProperty[];
 
   /**
    * Specify an array of IP address or a block of IP addresses in Classless Inter-Domain Routing (CIDR) notation.
-   *
    * @default - ANY
    */
   readonly sources?: string[];
 
   /**
    * TCP flags and masks to inspect packets for.
-   *
    * @default - undefined
    */
   readonly tcpFlags?: CfnRuleGroup.TCPFlagFieldProperty[];
@@ -83,6 +77,10 @@ export class StatelessRule extends StatelessRuleBase {
    * @attribute
    */
   public resource: CfnRuleGroup.RuleDefinitionProperty;
+  /**
+   *
+   * @param props
+   */
   constructor( props: StatelessRuleProps) {
     super();
 
@@ -104,7 +102,7 @@ export class StatelessRule extends StatelessRuleBase {
     }
 
     /**
-     * Saving to object for furture capacity calculations.
+     * Saving to object for future capacity calculations.
      * Capacity can't be calculated yes since props can be updated
      */
     this.destinations = props.destinations || [];
@@ -136,6 +134,7 @@ export class StatelessRule extends StatelessRuleBase {
 
   /**
    * Calculate the address capacity requirements by number of address ranges.
+   * @param locations
    */
   private calculateAddressCapacity(locations:string[]|undefined):number {
     var capacity:number = 0;
@@ -150,7 +149,7 @@ export class StatelessRule extends StatelessRuleBase {
   }
 
   /**
-   * Calculate Rule Capacity Reqirements.
+   * Calculate Rule Capacity Requirements.
    * https://docs.aws.amazon.com/network-firewall/latest/developerguide/rule-group-managing.html#nwfw-rule-group-capacity
    */
   public calculateCapacity():number {
@@ -208,14 +207,12 @@ export interface Stateful5TupleRuleProps extends StatefulRuleBaseProps {
    * The destination port to inspect for.
    * You can specify an individual port, for example 1994 and you can specify a port range, for example 1990:1994 .
    * To match with any port, specify ANY
-   *
    * @default - ANY
    */
   readonly destinationPort?: string;
 
   /**
    * Specify an array of IP address or a block of IP addresses in Classless Inter-Domain Routing (CIDR) notation.
-   *
    * @default = ANY
    */
   readonly destination?: string;
@@ -223,7 +220,6 @@ export interface Stateful5TupleRuleProps extends StatefulRuleBaseProps {
   /**
    * The protocol to inspect for.
    * To specify all, you can use IP , because all traffic on AWS and on the internet is IP.
-   *
    * @default - IP
    */
   readonly protocol?: string;
@@ -231,21 +227,18 @@ export interface Stateful5TupleRuleProps extends StatefulRuleBaseProps {
   /**
    * The source IP address or address range to inspect for, in CIDR notation.
    * To match with any address, specify ANY.
-   *
    * @default - ANY
    */
   readonly sourcePort?: string;
 
   /**
    * Specify an array of IP address or a block of IP addresses in Classless Inter-Domain Routing (CIDR) notation.
-   *
    * @default = ANY
    */
   readonly source?: string;
 
   /**
-   * Additional settings for a stateful rule, provided as keywords and setttings.
-   *
+   * Additional settings for a stateful rule, provided as keywords and settings.
    * @default - undefined
    */
   readonly ruleOptions?: CfnRuleGroup.RuleOptionProperty[];
@@ -254,7 +247,6 @@ export interface Stateful5TupleRuleProps extends StatefulRuleBaseProps {
    * The direction of traffic flow to inspect.
    * If set to ANY, the inspection matches bidirectional traffic, both from the source to the destination and from the destination to the source.
    * If set to FORWARD , the inspection only matches traffic going from the source to the destination.
-   *
    * @default - ANY
    */
   readonly direction?: Stateful5TupleDirection | string;
@@ -270,6 +262,10 @@ export class Stateful5TupleRule extends StatefulRuleBase {
    */
   public resource:CfnRuleGroup.StatefulRuleProperty;
 
+  /**
+   *
+   * @param props
+   */
   constructor(props:Stateful5TupleRuleProps) {
     super();
     const protocol:string = props.protocol || 'IP';
@@ -352,7 +348,7 @@ export interface StatefulDomainListRuleProps extends StatefulRuleBaseProps {
 }
 
 /**
- * Generates a Statful Rule from a Domain List
+ * Generates a Stateful Rule from a Domain List
  */
 export class StatefulDomainListRule extends StatefulRuleBase {
   /**
@@ -360,6 +356,10 @@ export class StatefulDomainListRule extends StatefulRuleBase {
    * @attribute
    */
   public resource:CfnRuleGroup.RulesSourceListProperty;
+  /**
+   *
+   * @param props
+   */
   constructor(props:StatefulDomainListRuleProps) {
     super();
     const resource:CfnRuleGroup.RulesSourceListProperty = {

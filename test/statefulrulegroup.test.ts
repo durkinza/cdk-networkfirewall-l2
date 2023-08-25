@@ -10,8 +10,8 @@ describe('Testing Logging Features', ()=>{
   });
 
   /**
- * Tests for 5 Tuple Stateful rule groups
- */
+   * Tests for 5 Tuple Stateful rule groups
+   */
   test('Default properties on 5Tuple Group', () => {
     // WHEN
     new NetFW.Stateful5TupleRuleGroup(stack, 'MyStateful5TupleRuleGroup');
@@ -186,8 +186,8 @@ describe('Testing Logging Features', ()=>{
   });
 
   /**
- * Tests for Suricata rule groups
- */
+   * Tests for Suricata rule groups
+   */
 
   test('Default properties on Suricata Rule Group', () => {
     // WHEN
@@ -250,7 +250,7 @@ describe('Testing Logging Features', ()=>{
     });
   });
 
-  test('Can get statelesss rule group by name', () => {
+  test('Can get stateless rule group by name', () => {
     // GIVEN
     const statefulDomainListRuleGroup = NetFW.StatefulDomainListRuleGroup.fromRuleGroupArn(stack, 'MyImportedDomainListRuleGroup', 'arn:aws:networkfirewall:statefulrulegroup');
     const statefulSuricataRuleGroup = NetFW.StatefulSuricataRuleGroup.fromRuleGroupArn(stack, 'MyImportedSuricataRuleGroup', 'arn:aws:networkfirewall:statefulrulegroup');
@@ -288,7 +288,7 @@ describe('Testing Logging Features', ()=>{
     });
   });
 
-  test('Can get statelesss rule group from file', () => {
+  test('Can get stateless rule group from file', () => {
     // WHEN
     NetFW.StatefulSuricataRuleGroup.fromFile(stack, 'MyStatefulSuricataRuleGroup', {
       path: './test/suricata.rules',

@@ -1,3 +1,4 @@
+import { CSpell, Husky, Commitlint } from '@mountainpass/cool-bits-for-projen';
 import { awscdk, javascript, ProjectType } from 'projen';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'durkinza',
@@ -9,6 +10,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   deps: ['aws-cdk-lib'], /* Runtime dependencies of this module. */
   description: 'Experimental L2 constructs for the aws-networkfirewall', /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: [
+    '@mountainpass/cool-bits-for-projen',
     '@types/jest',
     '@types/node',
     '@typescript-eslint/eslint-plugin',
@@ -58,5 +60,14 @@ const project = new awscdk.AwsCdkConstructLibrary({
 });
 project.gitignore.exclude('test/**/*.js');
 project.gitignore.exclude('test/**/*.d.ts');
+
+new CSpell(project, {
+  cSpellOptions: {
+    language: 'en-US',
+    ignorePaths: ['./API.md'],
+  },
+});
+new Husky(project);
+new Commitlint(project);
 
 project.synth();
