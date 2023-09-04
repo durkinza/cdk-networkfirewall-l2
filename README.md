@@ -22,8 +22,8 @@ The goal of these constructs is to provide a way to decouple the creation of fir
 The ideal examples shown below provide only the parameters required to create a resource. 
 Wherever possible, optional parameters are available to give the same level of customization as the L1 API.
 
-#### Defaults
-To keep the constructs unopionionated, default actions are required for deployment of new resources.
+### Defaults
+To keep the constructs unopinionated, default actions are required for deployment of new resources.
 It may be possible to reduce boilerplate code more if default actions were to be defined. 
 Some examples of possible opinionated approaches:
 
@@ -32,14 +32,14 @@ An unobtrusive logging approach, to promote implementation of network firewalls 
 > After implementing a network firewall with logging defaults in a testing environment, a user can define a standard of "normal traffic" for their environment and implement firewall rules and default actions to restrict traffic.
 
 A more obtrusive, but higher security approach could be:
-> When a parameter in an L2 construct is optional, where it would normally be required for an L1 construct, a default drop rule would be implied. This ensures traffic that is not specifically allowed is blocked, a user would need to define rules to allow the traffic that is expect in their environment.
+> When a parameter in an L2 construct is optional, where it would normally be required for an L1 construct, a default drop rule would be implied. This ensures traffic that is not specifically allowed is blocked, a user would need to define rules to allow the traffic that is expected in their environment.
 
 For new policies, it would also be possible to mirror the defaults set for security groups, where a default action of drop is set, with a single stateless rule being set to allow all outbound traffic. This approach would require generating an entire set of Policy, Stateless group, and stateless rule.
 
 In any case a user can overwrite the default action(s) and create their own policies and rules as they see fit. 
-Given the relatively small amount of code required to define the resources with default actions, I would opt to leave the code unopionionated for the first revision, as defaults can be specified in a later revision if needed.
+Given the relatively small amount of code required to define the resources with default actions, I would opt to leave the code unopinionated for the first revision, as defaults can be specified in a later revision if needed.
 
-#### Firewalls
+### Firewalls
 An ideal implementation would allow users to create firewall with minimal boiler plate.
 ```ts
 const policy = NetFW.FirewallPolicy.fromFirewallPolicyName(stack, 'MyNetworkFirewallPolicy', 'MyFirewallPolicy');
@@ -53,7 +53,7 @@ Where the firewall would be created in the provided vpc with the given firewall 
 In this example, `policy` is defined only to meet the requirement that a firewall must have a firewall policy attached. 
 As explained in the Defaults section above, it may be possible to generate a default policy when one is not provided.
 
-#### Firewall Policies
+### Firewall Policies
 Firewall policy definitions can be done by referencing an existing name/ARN as shown in the last example, or by generating a new policy.
 Since a policy does not require rule groups to be attached, it will only need a few requirements to get started.
 ```ts
@@ -95,7 +95,7 @@ const policy = new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy', {
 });
 ```
 
-#### Stateless Rule Groups
+### Stateless Rule Groups
 Stateless firewall rule groups can be defined by referencing an existing name/ARN, or by generating a new group. 
 New groups don't require any rules to be defined, so their implementation can be fairly quick.
 ```ts
@@ -138,7 +138,7 @@ new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
 });
 ```
 
-#### Stateful Rule Groups
+### Stateful Rule Groups
 Stateful firewall rules are split into 3 categories (5Tuple, Suricata, Domain List).
 The console requires the category of rules to be defined when creating the rule group. 
 However, from my understanding, the L1 constructs reduced all 3 down into Suricata rules. So a single stateful rule group could hold a mix of all 3 types of rules.
@@ -214,5 +214,46 @@ Suricata rules are just strings, so they don't have a class type, they are defin
 new NetFW.StatefulSuricataRuleGroup(stack, 'MyStatefulSuricataRuleGroup', {
   rules: 'drop tls $HOME_NET any -> $EXTERNAL_NET any (tls.sni; content:"evil.com"; startswith; nocase; endswith; msg:"matching TLS denylisted FQDNs"; priority:1; flow:to_server, established; sid:1; rev:1;)
           drop http $HOME_NET any -> $EXTERNAL_NET any (http.host; content:"evil.com"; startswith; endswith; msg:"matching HTTP denylisted FQDNs"; priority:1; flow:to_server, established; sid:2; rev:1;)'
+});
+```
+
+
+### Firewall Logs
+
+Logging can be done using 3 AWS services, Cloud Watch trails, S3 buckets, and Kinesis Data Firehose streams.
+
+The logging locations are configured with a Logging type, either Flow or Alert logs.
+In the case of Alert logs, it is up to the firewall policy to decide when a log should be generated.
+
+Logs can be configured to be sent to multiple locations simultaneously.
+
+```ts
+new NetFW.Firewall(stack, 'MyNetworkFirewall', {
+  vpc: vpc,
+  policy: policy,
+  loggingCloudWatchLogGroups: [
+    {
+      logGroup: logGroup.logGroupName,
+      logType: NetFW.LogType.ALERT,
+    },
+  ],
+  loggingS3Buckets: [
+    {
+      bucketName: s3LoggingBucket.bucketName,
+      logType: NetFW.LogType.ALERT,
+      prefix: 'alerts',
+    },
+    {
+      bucketName: s3LoggingBucket.bucketName,
+      logType: NetFW.LogType.FLOW,
+      prefix: 'flow',
+    },
+  ],
+  loggingKinesisDataStreams: [
+    {
+      deliveryStream: kinesisStream.streamName,
+      logType: NetFW.LogType.ALERT,
+    }
+  ],
 });
 ```

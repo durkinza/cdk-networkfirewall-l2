@@ -23,8 +23,8 @@ export enum LogType{
  */
 export enum LogDestinationType {
   /**
-  * Store logs to CloudWatch log group.
-  */
+   * Store logs to CloudWatch log group.
+   */
   CLOUDWATCH = 'CloudWatchLogs',
 
   /**
@@ -75,6 +75,11 @@ export abstract class LogLocationBase implements ILogLocation {
   public readonly logType : LogType | string;
   public readonly logDestinationType: LogDestinationType | string;
   public abstract readonly logDestination: { [key: string]: string };
+  /**
+   *
+   * @param logDestinationType
+   * @param props
+   */
   constructor(logDestinationType:LogDestinationType, props:LogLocationProps) {
     this.logType=props.logType;
     this.logDestinationType = logDestinationType;
@@ -92,7 +97,6 @@ export interface S3LogLocationProps extends LogLocationProps{
 
   /**
    * The location prefix to use
-   *
    * @default - no prefix is used.
    */
   readonly prefix?: string;
@@ -106,6 +110,10 @@ export class S3LogLocation extends LogLocationBase {
   public readonly logDestinationType : LogDestinationType | string;
   public readonly logDestination: { [key: string]: string };
 
+  /**
+   *
+   * @param props
+   */
   constructor(props:S3LogLocationProps) {
     super(LogDestinationType.S3, props);
     this.logDestinationType = LogDestinationType.S3;
@@ -114,8 +122,8 @@ export class S3LogLocation extends LogLocationBase {
     // Throws and error if bucketName is invalid format.
     Bucket.validateBucketName(props.bucketName);
     if (props.prefix) {
-      if (!/^[a-zA-Z0-9_.!*'()-]{1,}$/.test(props.prefix)) {
-        throw new Error(`Bucket Name prefix must have only letters, numbers, hyphens, dots (.), underscores, parantheses, stars(*), and explaination points (!). Got: ${props.prefix}`);
+      if (!/^[\w!'()*.-]+$/.test(props.prefix)) {
+        throw new Error(`Bucket Name prefix must have only letters, numbers, hyphens, dots (.), underscores, parentheses, stars(*), and exclamation points (!). Got: ${props.prefix}`);
       }
       this.logDestination = {
         bucketName: props.bucketName,
@@ -147,6 +155,10 @@ export class KinesisDataFirehoseLogLocation extends LogLocationBase {
   public readonly logDestinationType : LogDestinationType | string;
   public readonly logDestination: { [key: string]: string };
 
+  /**
+   *
+   * @param props
+   */
   constructor(props:KinesisDataFirehoseLogLocationProps) {
     super(LogDestinationType.KINESISDATAFIREHOSE, props);
     this.logDestinationType = LogDestinationType.KINESISDATAFIREHOSE;
@@ -154,11 +166,9 @@ export class KinesisDataFirehoseLogLocation extends LogLocationBase {
 
     // Throws and error if deliveryStream is invalid format.
     // skip validation for late-bound values.
-    if ( !core.Token.isUnresolved(props.deliveryStream)) {
-      if (!/^[a-zA-Z0-9_.-]{1,64}$/.test(props.deliveryStream)) {
-        // Throws and error if logGroup is invalid format.
-        throw new Error(`Kinesis deliveryStream must have 1-64 characters of only letters, numbers, hyphens, dots (.), and underscores. Got: ${props.deliveryStream}`);
-      }
+    if ( !core.Token.isUnresolved(props.deliveryStream) && !/^[\w.-]{1,64}$/.test(props.deliveryStream)) {
+      // Throws and error if logGroup is invalid format.
+      throw new Error(`Kinesis deliveryStream must have 1-64 characters of only letters, numbers, hyphens, dots (.), and underscores. Got: ${props.deliveryStream}`);
     }
 
     this.logDestination = {
@@ -185,17 +195,19 @@ export class CloudWatchLogLocation extends LogLocationBase {
   public readonly logDestinationType : LogDestinationType | string;
   public readonly logDestination: { [key: string]: string };
 
+  /**
+   *
+   * @param props
+   */
   constructor(props:CloudWatchLogLocationProps) {
     super(LogDestinationType.CLOUDWATCH, props);
     this.logDestinationType = LogDestinationType.CLOUDWATCH;
     this.logType = props.logType;
 
     // skip validation for late-bound values.
-    if ( !core.Token.isUnresolved(props.logGroup)) {
-      if (!/^[a-zA-Z-_0-9/.#]{1,512}$/.test(props.logGroup)) {
-        // Throws and error if logGroup is invalid format.
-        throw new Error(`Cloudwatch LogGroup must have 1-512 characters of only letters, numbers, hyphens, underscores, and pounds (#). Got: ${props.logGroup}`);
-      }
+    if ( !core.Token.isUnresolved(props.logGroup) && !/^[\w#./-]{1,512}$/.test(props.logGroup)) {
+      // Throws and error if logGroup is invalid format.
+      throw new Error(`Cloudwatch LogGroup must have 1-512 characters of only letters, numbers, hyphens, underscores, and pounds (#). Got: ${props.logGroup}`);
     }
 
     this.logDestination = {
@@ -205,13 +217,12 @@ export class CloudWatchLogLocation extends LogLocationBase {
 };
 
 /**
-  * Defines a Network Firewall Logging Configuration in the stack
-  */
+ * Defines a Network Firewall Logging Configuration in the stack
+ */
 export interface ILoggingConfiguration extends core.IResource{
   /**
    * The Amazon Resource Name (ARN) of the Firewall that the logging configuration is associated with.
    * You can't change the firewall specification after you create the logging configuration.
-   *
    * @attribute
    */
   readonly firewallRef: string;
@@ -223,7 +234,6 @@ export interface ILoggingConfiguration extends core.IResource{
 export interface LoggingConfigurationProps {
   /**
    * The physical name of this logging configuration
-   *
    * @default - CloudFormation-generated name
    */
   readonly loggingConfigurationName?: string;
@@ -236,14 +246,12 @@ export interface LoggingConfigurationProps {
   /**
    * The name of the firewall that the logging configuration is associated with.
    * You can't change the firewall specification after you create the logging configuration.
-   *
    * @default - No firewall name is logged.
    */
   readonly firewallName?: string;
 
   /**
    * Defines how AWS Network Firewall performs logging for a Firewall.
-   *
    * @default - No logging locations are configured, no logs will be sent.
    */
   readonly loggingLocations?: ILogLocation[];
@@ -273,17 +281,21 @@ export class LoggingConfiguration extends core.Resource implements ILoggingConfi
    */
   public loggingLocations: ILogLocation[];
 
+  /**
+   *
+   * @param scope
+   * @param id
+   * @param props
+   */
   constructor(scope:Construct, id: string, props: LoggingConfigurationProps) {
     super(scope, id, {
       physicalName: props.loggingConfigurationName,
     });
 
     // skip validation for late-bound values.
-    if (props.firewallName && !core.Token.isUnresolved(props.firewallName)) {
-      if (!/^[a-zA-Z0-9-]{1,128}$/.test(props.firewallName)) {
-        // Throws and error if logGroup is invalid format.
-        throw new Error(`'FirewallName' must have 1-128 characters of only letters, numbers, and hyphens. Got: ${props.firewallName}`);
-      }
+    if (props.firewallName && !core.Token.isUnresolved(props.firewallName) && !/^[\dA-Za-z-]{1,128}$/.test(props.firewallName)) {
+      // Throws and error if logGroup is invalid format.
+      throw new Error(`'FirewallName' must have 1-128 characters of only letters, numbers, and hyphens. Got: ${props.firewallName}`);
     }
 
     this.firewallRef = props.firewallRef;

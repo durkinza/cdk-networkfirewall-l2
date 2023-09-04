@@ -126,7 +126,7 @@ describe('Testing Logging Features', ()=>{
     });
   });
 
-  test('Verifies rule Priorties', () => {
+  test('Verifies rule Priorities', () => {
     // GIVEN
     const statelessRule1 = new NetFW.StatelessRule({
       actions: [NetFW.StatelessStandardAction.DROP],
@@ -292,7 +292,7 @@ describe('Testing Logging Features', ()=>{
     }).toThrow('Capacity must be a positive value less than 30,000, got: \'40000\'');
   });
 
-  test('Can get statelesss rule group by name', () => {
+  test('Can get stateless rule group by name', () => {
     // GIVEN
     const statelessRuleGroup = NetFW.StatelessRuleGroup.fromStatelessRuleGroupName(stack, 'MyImportedStatelessRuleGroup', 'MyStatelessRuleGroup');
 

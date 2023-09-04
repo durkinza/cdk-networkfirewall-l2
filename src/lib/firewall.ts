@@ -21,14 +21,12 @@ import { IFirewallPolicy } from './policy';
 export interface IFirewall extends core.IResource{
   /**
    * The Arn of the Firewall.
-   *
    * @attribute
    */
   readonly firewallArn: string;
 
   /**
    * The physical name of the Firewall.
-   *
    * @attribute
    */
   readonly firewallId: string;
@@ -36,7 +34,6 @@ export interface IFirewall extends core.IResource{
   /**
    * The unique IDs of the firewall endpoints for all of the subnets that you attached to the firewall.
    * The subnets are not listed in any particular order.
-   *
    * @attribute
    */
   //readonly endpointIds: string[];
@@ -58,7 +55,6 @@ export interface FirewallProps {
   /**
    * The descriptive name of the firewall.
    * You can't change the name of a firewall after you create it.
-   *
    * @default - CloudFormation-generated name
    */
   readonly firewallName?: string;
@@ -77,14 +73,12 @@ export interface FirewallProps {
 
   /**
    * The public subnets that Network Firewall is using for the firewall. Each subnet must belong to a different Availability Zone.
-   *
    * @default - All public subnets of the VPC
    */
   readonly subnetMappings?: ec2.SubnetSelection;
 
   /**
-   * The descriptiong of the Firewall
-   *
+   * The description of the Firewall
    * @default - undefined
    */
   readonly description?: string;
@@ -92,7 +86,6 @@ export interface FirewallProps {
   /**
    * A flag indicating whether it is possible to delete the firewall.
    * A setting of TRUE indicates that the firewall is protected against deletion
-   *
    * @default - true
    */
   readonly deleteProtection?: boolean;
@@ -100,7 +93,6 @@ export interface FirewallProps {
   /**
    * A setting indicating whether the firewall is protected against a change to the firewall policy association.
    * Use this setting to protect against accidentally modifying the firewall policy for a firewall that is in use.
-   *
    * @default - true
    */
   readonly firewallPolicyChangeProtection?: boolean;
@@ -108,35 +100,30 @@ export interface FirewallProps {
   /**
    * A setting indicating whether the firewall is protected against changes to the subnet associations.
    * Use this setting to protect against accidentally modifying the subnet associations for a firewall that is in use.
-   *
    * @default - true
    */
   readonly subnetChangeProtection?: boolean;
 
   /**
    * Tags to be added to the firewall.
-   *
    * @default - No tags applied
    */
   readonly tags?: core.Tag[];
 
   /**
    * A list of CloudWatch LogGroups to send logs to.
-   *
    * @default - Logs will not be sent to a cloudwatch group.
    */
   readonly loggingCloudWatchLogGroups?: CloudWatchLogLocationProps[];
 
   /**
    * A list of S3 Buckets to send logs to.
-   *
    * @default - Logs will not be sent to an S3 bucket.
    */
   readonly loggingS3Buckets?: S3LogLocationProps[];
 
   /**
    * A list of S3 Buckets to send logs to.
-   *
    * @default - Logs will not be sent to an S3 bucket.
    */
   readonly loggingKinesisDataStreams?: KinesisDataFirehoseLogLocationProps[];
@@ -151,12 +138,18 @@ export class Firewall extends FirewallBase {
   /**
    * Reference an existing Network Firewall,
    * defined outside of the CDK code, by name.
+   * @param scope
+   * @param id
+   * @param firewallName
    */
   public static fromFirewallName(scope: Construct, id: string, firewallName: string): IFirewall {
     if (core.Token.isUnresolved(firewallName)) {
       throw new Error('All arguments to Firewall.fromFirewallName must be concrete (no Tokens)');
     }
 
+    /**
+     * An ADHOC class for the imported firewall.
+     */
     class Import extends FirewallBase {
       public readonly firewallId = firewallName;
       // Since we have the name, we can generate the ARN,
@@ -174,11 +167,17 @@ export class Firewall extends FirewallBase {
   /**
    * Reference an existing Network Firewall,
    * defined outside of the CDK code, by arn.
+   * @param scope
+   * @param id
+   * @param firewallArn
    */
   public static fromFirewallArn(scope: Construct, id: string, firewallArn: string): IFirewall {
     if (core.Token.isUnresolved(firewallArn)) {
       throw new Error('All arguments to Firewall.fromFirewallArn must be concrete (no Tokens)');
     }
+    /**
+     * An ADHOC class for the imported Firewall.
+     */
     class Import extends FirewallBase {
       public readonly firewallId = core.Fn.select(1, core.Fn.split('/', firewallArn));
       public readonly firewallArn = firewallArn;
@@ -189,14 +188,12 @@ export class Firewall extends FirewallBase {
 
   /**
    * The Arn of the Firewall.
-   *
    * @attribute
    */
   public readonly firewallArn: string;
 
   /**
    * The physical name of the Firewall.
-   *
    * @attribute
    */
   public readonly firewallId: string;
@@ -204,7 +201,6 @@ export class Firewall extends FirewallBase {
   /**
    * The unique IDs of the firewall endpoints for all of the subnets that you attached to the firewall.
    * The subnets are not listed in any particular order.
-   *
    * @attribute
    */
   public readonly endpointIds: string[];
@@ -234,10 +230,16 @@ export class Firewall extends FirewallBase {
   public loggingKinesisDataStreams: KinesisDataFirehoseLogLocationProps[];
 
   /**
-  * The list of references to the generated logging configurations.
-  */
+   * The list of references to the generated logging configurations.
+   */
   public loggingConfigurations: ILoggingConfiguration[];
 
+  /**
+   *
+   * @param scope
+   * @param id
+   * @param props
+   */
   constructor(scope:Construct, id: string, props: FirewallProps) {
     super(scope, id, {
       physicalName: props.firewallName,
@@ -249,7 +251,7 @@ export class Firewall extends FirewallBase {
      * Validate firewallName
      */
     if (props.firewallName !== undefined &&
-				!/^[a-zA-Z0-9-]{1,128}$/.test(props.firewallName)) {
+				!/^[\dA-Za-z-]{1,128}$/.test(props.firewallName)) {
       throw new Error('firewallName must be non-empty and contain only letters, numbers, and dashes, ' +
 				`got: '${props.firewallName}'`);
     }
@@ -258,19 +260,19 @@ export class Firewall extends FirewallBase {
     //const firewallPolicy:IfirewallPolicy = props.policy ||
     //		new policy(scope, id, {
     //				statelessDefaultActions: [StatelessStandardAction.FORWARD]
-    //				statelessFragementDefaultActions: [StatelessStandardAction.FORWARD]
+    //				statelessFragmentDefaultActions: [StatelessStandardAction.FORWARD]
     //			}
     //		);
 
-    // Auto pick subnetMappings from VPC if not provieded
+    // Auto pick subnetMappings from VPC if not provided
     let subnets:CfnFirewall.SubnetMappingProperty[]=[];
-    if (props.subnetMappings !== undefined) {
-      subnets = this.castSubnetMapping(props.subnetMappings);
-    } else {
+    if (props.subnetMappings === undefined) {
       let subnetMapping:ec2.SubnetSelection = props.vpc.selectSubnets({
         subnetType: ec2.SubnetType.PUBLIC,
       });
       subnets = this.castSubnetMapping(subnetMapping);
+    } else {
+      subnets = this.castSubnetMapping(props.subnetMappings);
     }
 
     const resourceProps:CfnFirewallProps = {
@@ -357,7 +359,8 @@ export class Firewall extends FirewallBase {
   }
 
   /**
-   * Cast SubnetSelection to a list ofsubnetMappingProperty
+   * Cast SubnetSelection to a list of subnetMappingProperty
+   * @param subnetSelection
    */
   private castSubnetMapping(subnetSelection:ec2.SubnetSelection|undefined):CfnFirewall.SubnetMappingProperty[] {
     let subnets:CfnFirewall.SubnetMappingProperty[]=[];

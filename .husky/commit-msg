@@ -1,0 +1,3 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+npx --no -- cspell lint --show-suggestions "${1}"

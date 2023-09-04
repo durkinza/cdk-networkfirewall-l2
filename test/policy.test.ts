@@ -104,7 +104,7 @@ describe('Testing Logging Features', ()=>{
         statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP, NetFW.StatelessStandardAction.PASS],
       });
       // THEN
-    }).toThrow('Only one standard action can be provided for the StatelessFragementDefaultAction, all other actions must be custom');
+    }).toThrow('Only one standard action can be provided for the StatelessFragmentDefaultAction, all other actions must be custom');
   });
 
   test('Stateful strict actions must only have one non-custom action', () => {
@@ -158,7 +158,7 @@ describe('Testing Logging Features', ()=>{
         statelessRuleGroups: statelessRuleGroupList,
       });
       // THEN
-    }).toThrow('Priority must be unique, recieved duplicate priority on stateless group');
+    }).toThrow('Priority must be unique, received duplicate priority on stateless group');
   });
 
   test('verifies unique group priority on stateful groups', () => {
@@ -188,7 +188,7 @@ describe('Testing Logging Features', ()=>{
         statefulRuleGroups: statefulRuleGroupList,
       });
       // THEN
-    }).toThrow('Priority must be unique, recieved duplicate priority on stateful group');
+    }).toThrow('Priority must be unique, received duplicate priority on stateful group');
   });
 
   test('Can add new groups to policy', () => {

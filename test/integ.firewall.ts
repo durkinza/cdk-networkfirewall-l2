@@ -4,9 +4,19 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as cdk from 'aws-cdk-lib/core';
 import * as NetFW from '../src/lib';
 
+/**
+ * An integration test using the Firewall L2
+ *
+ */
 class TestStack extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
+  /**
+   *
+   * @param scope - The CDK Stack SCope
+   * @param id - The name for this stack.
+   * @param properties - Optional additional stack properties
+   */
+  constructor(scope: cdk.App, id: string, properties?: cdk.StackProps) {
+    super(scope, id, properties);
     const vpc = new ec2.Vpc(this, 'MyTestVpc', {
       ipAddresses: ec2.IpAddresses.cidr('10.0.0.0/16'),
     });

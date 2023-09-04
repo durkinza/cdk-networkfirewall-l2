@@ -1,4 +1,4 @@
-FROM jsii/superchain:1-buster-slim
+FROM jsii/superchain:1-buster-slim-node20
 
 USER root
 
@@ -15,5 +15,5 @@ RUN sudo apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && sudo rm -rf /var/lib/apt/lists/* \
     && sudo chsh -s $(which zsh) $(whoami)
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended \
-    # Required, otherwise shell is extermly slow due the size of the aws-cdk
+    # Required, otherwise shell is extremely slow due the size of the aws-cdk
     && sudo sh -c 'echo "[oh-my-zsh]\n        hide-dirty = 1" > /etc/gitconfig'

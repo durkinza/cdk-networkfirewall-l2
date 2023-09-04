@@ -145,7 +145,7 @@ describe('Testing Logging Features', ()=>{
         ],
       });
     // THEN
-    }).toThrow('Bucket Name prefix must have only letters, numbers, hyphens, dots (.), underscores, parantheses, stars(*), and explaination points (!). Got: #test&ing');
+    }).toThrow('Bucket Name prefix must have only letters, numbers, hyphens, dots (.), underscores, parentheses, stars(*), and exclamation points (!). Got: #test&ing');
   });
 
 

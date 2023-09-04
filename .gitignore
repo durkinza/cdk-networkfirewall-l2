@@ -53,3 +53,8 @@ tsconfig.json
 !/API.md
 test/**/*.js
 test/**/*.d.ts
+!/.cspell.json
+!/.husky/pre-commit
+!/.husky/commit-msg
+!/.husky/pre-push
+!/.commitlintrc.json

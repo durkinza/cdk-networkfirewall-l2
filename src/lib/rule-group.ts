@@ -26,13 +26,13 @@ export interface StatelessRuleList{
  */
 enum RuleGroupType {
   /**
-	 * For Stateless Rule Group Types
-	 */
+   * For Stateless Rule Group Types
+   */
   STATELESS = 'STATELESS',
 
   /**
-	 * For Stateful Rule Group Types
-	 */
+   * For Stateful Rule Group Types
+   */
   STATEFUL = 'STATEFUL',
 }
 
@@ -41,17 +41,15 @@ enum RuleGroupType {
  */
 export interface IStatelessRuleGroup extends core.IResource {
   /**
-	 * The Arn of the rule group
-	 *
-	 * @attribute
-	 */
+   * The Arn of the rule group
+   * @attribute
+   */
   readonly ruleGroupArn: string;
 
   /**
-	 * the physical name of the rule group
-	 *
-	 * @attribute
-	 */
+   * the physical name of the rule group
+   * @attribute
+   */
   readonly ruleGroupId: string;
 }
 
@@ -68,42 +66,36 @@ abstract class StatelessRuleGroupBase extends core.Resource implements IStateles
  */
 export interface StatelessRuleGroupProps {
   /**
-	 * The descriptive name of the stateless rule group
-	 *
-	 * @default - CloudFormation-generated name
-	 */
+   * The descriptive name of the stateless rule group
+   * @default - CloudFormation-generated name
+   */
   readonly ruleGroupName?: string;
   /**
-	 * The maximum operating resources that this rule group can use.
-	 *
-	 * @default - Capacity is Calculated from rule requirements.
-	 */
+   * The maximum operating resources that this rule group can use.
+   * @default - Capacity is Calculated from rule requirements.
+   */
   readonly capacity?: number;
 
   /**
-	 * The rule group rules
-	 *
-	 * @default = undefined
-	 */
+   * The rule group rules
+   * @default - undefined
+   */
   readonly rules?: StatelessRuleList[];
 
   /**
-	 * An optional Non-standard action to use
-	 *
-	 * @default - undefined
-	 */
+   * An optional Non-standard action to use
+   * @default - undefined
+   */
   readonly customActions?: CfnRuleGroup.CustomActionProperty[];
 
   /**
    * Settings that are available for use in the rules
-   *
    * @default - undefined
    */
   readonly variables?: CfnRuleGroup.RuleVariablesProperty;
 
   /**
    * Description of the rule group
-   *
    * @default - undefined
    */
   readonly description?: string;
@@ -115,9 +107,15 @@ export interface StatelessRuleGroupProps {
  */
 export class StatelessRuleGroup extends StatelessRuleGroupBase {
   /**
-   * Refernce existing Rule Group by Name
+   * Reference existing Rule Group by Name
+   * @param scope
+   * @param id
+   * @param statelessRuleGroupName
    */
   public static fromStatelessRuleGroupName(scope: Construct, id: string, statelessRuleGroupName: string): IStatelessRuleGroup {
+    /**
+     *
+     */
     class Import extends StatelessRuleGroupBase {
       public readonly ruleGroupId = statelessRuleGroupName;
       public readonly ruleGroupArn = core.Stack.of(scope).formatArn({
@@ -131,8 +129,14 @@ export class StatelessRuleGroup extends StatelessRuleGroupBase {
 
   /**
    * Reference existing Rule Group by Arn
+   * @param scope
+   * @param id
+   * @param statelessRuleGroupArn
    */
   public static fromStatelessRuleGroupArn(scope: Construct, id: string, statelessRuleGroupArn: string): IStatelessRuleGroup {
+    /**
+     *
+     */
     class Import extends StatelessRuleGroupBase {
       public readonly ruleGroupId = core.Fn.select(1, core.Fn.split('/', statelessRuleGroupArn));
       public readonly ruleGroupArn = statelessRuleGroupArn;
@@ -144,6 +148,12 @@ export class StatelessRuleGroup extends StatelessRuleGroupBase {
   public readonly ruleGroupArn: string;
   private rules:StatelessRuleList[];
 
+  /**
+   *
+   * @param scope
+   * @param id
+   * @param props
+   */
   constructor(scope: Construct, id:string, props?: StatelessRuleGroupProps) {
     if (props === undefined) {props = {};}
     super(scope, id, {
@@ -156,7 +166,7 @@ export class StatelessRuleGroup extends StatelessRuleGroupBase {
      * Validate ruleGroupId
      */
     if (props.ruleGroupName !== undefined &&
-				!/^[a-zA-Z0-9-]+$/.test(props.ruleGroupName)) {
+				!/^[\dA-Za-z-]+$/.test(props.ruleGroupName)) {
       throw new Error('ruleGroupName must be non-empty and contain only letters, numbers, and dashes, ' +
 				`got: '${props.ruleGroupName}'`);
     }
@@ -171,7 +181,7 @@ export class StatelessRuleGroup extends StatelessRuleGroupBase {
      */
     const capacity:number = props.capacity || this.calculateCapacity();
     if (!Number.isInteger(capacity)) {
-      throw new Error('Capacity must be an integer value, '+
+      throw new TypeError('Capacity must be an integer value, '+
 				`got: '${capacity}'`);
     }
     if (capacity < 0 || capacity > 30000) {
@@ -269,14 +279,12 @@ export class StatelessRuleGroup extends StatelessRuleGroupBase {
 export interface IStatefulRuleGroup extends core.IResource {
   /**
    * The Arn of the rule group
-   *
    * @attribute
    */
   readonly ruleGroupArn: string;
 
   /**
    * the physical name of the rule group
-   *
    * @attribute
    */
   readonly ruleGroupId: string;
@@ -304,7 +312,6 @@ export enum StatefulRuleOptions {
 interface StatefulRuleGroupProps {
   /**
    * The descriptive name of the stateful rule group
-   *
    * @default - CloudFormation-generated name
    */
   readonly ruleGroupName?: string;
@@ -318,21 +325,18 @@ interface StatefulRuleGroupProps {
 
   /**
    * Settings that are available for use in the rules
-   *
    * @default - undefined
    */
   readonly variables?: CfnRuleGroup.RuleVariablesProperty;
 
   /**
    * Rule Order
-   *
    * @default - DEFAULT_RULE_ACTION_ORDER
    */
   readonly ruleOrder?: StatefulRuleOptions;
 
   /**
    * Description of the rule group
-   *
    * @default - undefined
    */
   readonly description?: string;
@@ -345,8 +349,14 @@ abstract class StatefulRuleGroup extends core.Resource implements IStatefulRuleG
 
   /**
    * Reference existing Rule Group
+   * @param scope
+   * @param id
+   * @param ruleGroupArn
    */
   public static fromRuleGroupArn(scope: Construct, id: string, ruleGroupArn: string): IStatefulRuleGroup {
+    /**
+     *
+     */
     class Import extends StatelessRuleGroupBase {
       public readonly ruleGroupId = core.Fn.select(1, core.Fn.split('/', ruleGroupArn));
       public readonly ruleGroupArn = ruleGroupArn;
@@ -357,6 +367,12 @@ abstract class StatefulRuleGroup extends core.Resource implements IStatefulRuleG
   public abstract readonly ruleGroupArn: string;
   public abstract readonly ruleGroupId: string;
 
+  /**
+   *
+   * @param scope
+   * @param id
+   * @param props
+   */
   constructor(scope:Construct, id:string, props?:StatefulRuleGroupProps) {
     if (props === undefined) {props = {};}
     super(scope, id, {
@@ -369,7 +385,7 @@ abstract class StatefulRuleGroup extends core.Resource implements IStatefulRuleG
     // default capacity to 200
     const capacity:number = props.capacity || 200;
     if (!Number.isInteger(capacity)) {
-      throw new Error('capacity must be an integer value, '+
+      throw new TypeError('capacity must be an integer value, '+
 				`got: '${capacity}'`);
     }
     if (capacity < 0 || capacity > 30000) {
@@ -381,13 +397,11 @@ abstract class StatefulRuleGroup extends core.Resource implements IStatefulRuleG
 
 /**
  * Properties for defining a Stateful Suricata Rule Group
- *
  * @resource AWS::NetworkFIrewall::RuleGroup
  */
 export interface StatefulSuricataRuleGroupProps extends StatefulRuleGroupProps {
   /**
    * The suricata rules
-   *
    * @default - undefined
    */
   readonly rules?: string;
@@ -395,7 +409,6 @@ export interface StatefulSuricataRuleGroupProps extends StatefulRuleGroupProps {
 
 /**
  * Properties for defining a Stateful Suricata Rule Group from a file.
- *
  * @resource AWS::NetworkFIrewall::RuleGroup
  */
 export interface StatefulSuricataRuleGroupFromFileProps extends StatefulRuleGroupProps {
@@ -407,7 +420,6 @@ export interface StatefulSuricataRuleGroupFromFileProps extends StatefulRuleGrou
 
   /**
    * The encoding to use for the file
-   *
    * @default - uft-8
    */
   readonly encoding?: BufferEncoding;
@@ -415,14 +427,15 @@ export interface StatefulSuricataRuleGroupFromFileProps extends StatefulRuleGrou
 
 /**
  * A Stateful Rule group that holds Suricata Rules
- *
  * @resource AWS::NetworkFirewall::RuleGroup
  */
 export class StatefulSuricataRuleGroup extends StatefulRuleGroup {
 
   /**
    * Reference Suricata rules from a file,
-   *
+   * @param scope
+   * @param id
+   * @param props
    * @resource AWS::NetworkFirewall::RuleGroup
    */
   public static fromFile(scope:Construct, id:string, props:StatefulSuricataRuleGroupFromFileProps):StatefulSuricataRuleGroup {
@@ -436,6 +449,12 @@ export class StatefulSuricataRuleGroup extends StatefulRuleGroup {
   public readonly ruleGroupArn: string;
   public readonly ruleGroupId: string;
 
+  /**
+   *
+   * @param scope
+   * @param id
+   * @param props
+   */
   constructor(scope:Construct, id:string, props?:StatefulSuricataRuleGroupProps) {
     if (props === undefined) {props = {};}
     super(scope, id, props);
@@ -479,13 +498,11 @@ export class StatefulSuricataRuleGroup extends StatefulRuleGroup {
 
 /**
  * Properties for defining a Stateful 5 Tuple Rule Group
- *
  * @resource AWS::NetworkFIrewall::RuleGroup
  */
 export interface Stateful5TupleRuleGroupProps extends StatefulRuleGroupProps {
   /**
    * The rule group rules
-   *
    * @default - undefined
    */
   readonly rules?: Stateful5TupleRule[];
@@ -500,6 +517,12 @@ export class Stateful5TupleRuleGroup extends StatefulRuleGroup {
   public readonly ruleGroupArn: string;
   public readonly ruleGroupId: string;
 
+  /**
+   *
+   * @param scope
+   * @param id
+   * @param props
+   */
   constructor(scope:Construct, id:string, props?:Stateful5TupleRuleGroupProps) {
     if (props === undefined) {props = {};}
     super(scope, id, props);
@@ -548,7 +571,6 @@ export class Stateful5TupleRuleGroup extends StatefulRuleGroup {
 
 /**
  * Defines a Stateful Domain List Rule group in the stack
- *
  * @resource AWS::NetworkFIrewall::RuleGroup
  */
 export interface StatefulDomainListRuleGroupProps extends StatefulRuleGroupProps {
@@ -568,12 +590,18 @@ export class StatefulDomainListRuleGroup extends StatefulRuleGroup {
   public readonly ruleGroupArn: string;
   public readonly ruleGroupId: string;
 
+  /**
+   *
+   * @param scope
+   * @param id
+   * @param props
+   */
   constructor(scope:Construct, id:string, props?:StatefulDomainListRuleGroupProps) {
     if (props === undefined) {props = {};}
     super(scope, id, props);
 
-    const resourceSourceProperty:CfnRuleGroup.RulesSourceProperty=(props.rule !== undefined)?
-      { rulesSourceList: props.rule.resource }:{};
+    const resourceSourceProperty:CfnRuleGroup.RulesSourceProperty=(props.rule === undefined)?
+      {}:{ rulesSourceList: props.rule.resource };
 
     const resourceRuleOptions:CfnRuleGroup.StatefulRuleOptionsProperty = {
       ruleOrder: props.ruleOrder || StatefulRuleOptions.DEFAULT_ACTION_ORDER,

@@ -200,6 +200,15 @@
       "name": "pre-compile",
       "description": "Prepare the project for compilation"
     },
+    "prepare": {
+      "name": "prepare",
+      "description": "installs husky",
+      "steps": [
+        {
+          "exec": "husky install"
+        }
+      ]
+    },
     "release": {
       "name": "release",
       "description": "Prepare a release from \"main\" branch",
@@ -224,16 +233,28 @@
         }
       ]
     },
+    "spellcheck": {
+      "name": "spellcheck",
+      "description": "check all the files for spelling errors",
+      "steps": [
+        {
+          "exec": "cspell lint --gitignore --dot --show-suggestions -e \".git/**\" \"**\""
+        }
+      ]
+    },
     "test": {
       "name": "test",
       "description": "Run tests",
       "steps": [
         {
-          "exec": "jest --passWithNoTests --updateSnapshot",
+          "exec": "jest --passWithNoTests --coverageProvider=v8 --updateSnapshot",
           "receiveArgs": true
         },
         {
           "spawn": "eslint"
+        },
+        {
+          "spawn": "spellcheck"
         }
       ]
     },
