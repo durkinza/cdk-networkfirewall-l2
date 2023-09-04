@@ -5,6 +5,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: '8985088+durkinza@users.noreply.github.com',
   bugsUrl: 'https://github.com/durkinza/cdk-networkfirewall-l2/issues',
   cdkVersion: '2.90.0',
+  minNodeVersion: '16.0.0',
+  workflowNodeVersion: 'latest',
   defaultReleaseBranch: 'main',
   dependabot: true,
   deps: ['aws-cdk-lib'], /* Runtime dependencies of this module. */
