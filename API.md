@@ -223,8 +223,8 @@ const ruleGroup:NetFW.StatefulSuricataRuleGroup = NetFW.StatefulSuricataRuleGrou
       path: './suricata.rules'
 });
 ```
-All other arguments for creating a Suricata Rule Group are also supported here with an exception of the rules `rules` parameter.
-The `rules` property will be filled in with the contents from the file path, so anything supplied will be ignored.
+All other arguments for creating a Suricata Rule Group are also supported here with an exception of the `rules` property.
+The `rules` property will be filled in with the contents from the file path, anything supplied will be ignored.
 
 ### Firewall Logs
 
