@@ -17,6 +17,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@types/node',
     '@typescript-eslint/eslint-plugin',
     '@typescript-eslint/parser',
+    'aws-cdk-lib',
     'constructs',
     'eslint',
     'eslint-import-resolver-node',

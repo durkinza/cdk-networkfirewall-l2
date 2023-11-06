@@ -217,6 +217,14 @@ new NetFW.StatefulSuricataRuleGroup(stack, 'MyStatefulSuricataRuleGroup', {
 });
 ```
 
+Suricata rule groups can also be imported from a file.
+```ts
+const ruleGroup:NetFW.StatefulSuricataRuleGroup = NetFW.StatefulSuricataRuleGroup.fromFile(stack, 'MyStatefulSuricataRuleGroup', {
+      path: './suricata.rules'
+});
+```
+All other arguments for creating a Suricata Rule Group are also supported here with an exception of the `rules` property.
+The `rules` property will be filled in with the contents from the file path, anything supplied will be ignored.
 
 ### Firewall Logs
 
