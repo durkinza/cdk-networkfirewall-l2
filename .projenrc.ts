@@ -10,7 +10,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   defaultReleaseBranch: 'main',
   dependabot: true,
   deps: ['aws-cdk-lib'], /* Runtime dependencies of this module. */
-  description: 'Experimental L2 constructs for the aws-networkfirewall', /* The description is just a string that helps people understand the purpose of the package. */
+  description: 'AWS CDK L2 constructs for the AWS Network Firewall (AWS::NetworkFirewall)', /* The description is just a string that helps people understand the purpose of the package. */
   devDeps: [
     '@mountainpass/cool-bits-for-projen',
     '@types/jest',
@@ -45,6 +45,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'networkfirewall',
     'aws',
     'awscdk',
+    'L2',
+    'Network',
+    'Firewall',
+    'Logging',
+    'Security',
   ],
   license: 'Apache-2.0',
   name: '@durkinza/cdk-networkfirewall-l2',
