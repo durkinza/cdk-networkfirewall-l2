@@ -5197,16 +5197,16 @@ jsii-rosetta@^1.91.0:
     yargs "^16.2.0"
 
 jsii-rosetta@~5.0.0:
-  version "5.0.23"
-  resolved "https://registry.yarnpkg.com/jsii-rosetta/-/jsii-rosetta-5.0.23.tgz#80b404768401a9f847de44b4fa81f36ca2824003"
-  integrity sha512-ZeJx3hkP69GXrr0cKxw7cUzXI/heR3rQv4DTPRKCzNIMCKqSlfKklHHtBLEyvK8lQylIlDwwVn9P3q/XiJL75Q==
+  version "5.0.24"
+  resolved "https://registry.yarnpkg.com/jsii-rosetta/-/jsii-rosetta-5.0.24.tgz#a288ff16886741cab8dfe6f83986603a8e840d9e"
+  integrity sha512-DLXNFOS+bnfJHfj7+pmRDTccmfxgZarhjADmyVAdtgosJHlfOfeWGDbFwXH9KlvUYEy2VW+ZoX/gHyf6ELcOGQ==
   dependencies:
     "@jsii/check-node" "1.91.0"
     "@jsii/spec" "^1.91.0"
     "@xmldom/xmldom" "^0.8.10"
     chalk "^4"
     commonmark "^0.30.0"
-    fast-glob "^3.3.1"
+    fast-glob "^3.3.2"
     jsii "~5.0.5"
     semver "^7.5.4"
     semver-intersect "^1.4.0"
