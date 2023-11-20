@@ -1426,10 +1426,25 @@
     chalk "^4.1.2"
     semver "^7.5.4"
 
-"@jsii/spec@1.91.0", "@jsii/spec@^1.88.0", "@jsii/spec@^1.89.0", "@jsii/spec@^1.91.0":
+"@jsii/check-node@1.92.0":
+  version "1.92.0"
+  resolved "https://registry.yarnpkg.com/@jsii/check-node/-/check-node-1.92.0.tgz#e05908d2c0875a728db14d73bb30459a73bd008e"
+  integrity sha512-MQnFvDIn/VOz4FzchobZ4dfrl6qfuZIlYviNbGXhPMSeJ92BVB2F+NEyem9Sg/Csy2ehhtO1FGaUj4mO9/7Ntg==
+  dependencies:
+    chalk "^4.1.2"
+    semver "^7.5.4"
+
+"@jsii/spec@1.91.0":
   version "1.91.0"
   resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.91.0.tgz#91d624357a66148ab9a2d8b5fb26331fc7b01932"
   integrity sha512-Ir01bk5CwIFAApRJjRC+JG/f9db5dACEYFSxsHyvXRMu+J/LIANdwD4OPSelWrhbRiQdY6U16BKsRO63uaNRqg==
+  dependencies:
+    ajv "^8.12.0"
+
+"@jsii/spec@^1.88.0", "@jsii/spec@^1.89.0", "@jsii/spec@^1.91.0", "@jsii/spec@^1.92.0":
+  version "1.92.0"
+  resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.92.0.tgz#8fcd72a0ced63e83e72a010a499518d603f00198"
+  integrity sha512-6jbwQ2uCVOUq6eddKQG/cPzuUsdJwaszQstTZtruhhjWNuoC4CjT5eHlzjeBqtxQZpGiKkRRwPHb1bCEGgffxA==
   dependencies:
     ajv "^8.12.0"
 
@@ -5197,16 +5212,16 @@ jsii-rosetta@^1.91.0:
     yargs "^16.2.0"
 
 jsii-rosetta@~5.0.0:
-  version "5.0.23"
-  resolved "https://registry.yarnpkg.com/jsii-rosetta/-/jsii-rosetta-5.0.23.tgz#80b404768401a9f847de44b4fa81f36ca2824003"
-  integrity sha512-ZeJx3hkP69GXrr0cKxw7cUzXI/heR3rQv4DTPRKCzNIMCKqSlfKklHHtBLEyvK8lQylIlDwwVn9P3q/XiJL75Q==
+  version "5.0.25"
+  resolved "https://registry.yarnpkg.com/jsii-rosetta/-/jsii-rosetta-5.0.25.tgz#2aa11ffc12009326e4f56f7fbde9faf15b92d5ed"
+  integrity sha512-GPXPAeIDn/PKrKl14hw8/dAGnq15thzXKJD+04JTeuuT5p/td7ujxSuFHqUffdbo8EUH6rxk+DBE3SnSwJ1brg==
   dependencies:
-    "@jsii/check-node" "1.91.0"
-    "@jsii/spec" "^1.91.0"
+    "@jsii/check-node" "1.92.0"
+    "@jsii/spec" "^1.92.0"
     "@xmldom/xmldom" "^0.8.10"
     chalk "^4"
     commonmark "^0.30.0"
-    fast-glob "^3.3.1"
+    fast-glob "^3.3.2"
     jsii "~5.0.5"
     semver "^7.5.4"
     semver-intersect "^1.4.0"
