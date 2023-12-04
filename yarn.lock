@@ -1426,10 +1426,25 @@
     chalk "^4.1.2"
     semver "^7.5.4"
 
-"@jsii/spec@1.91.0", "@jsii/spec@^1.88.0", "@jsii/spec@^1.89.0", "@jsii/spec@^1.91.0":
+"@jsii/check-node@1.92.0":
+  version "1.92.0"
+  resolved "https://registry.yarnpkg.com/@jsii/check-node/-/check-node-1.92.0.tgz#e05908d2c0875a728db14d73bb30459a73bd008e"
+  integrity sha512-MQnFvDIn/VOz4FzchobZ4dfrl6qfuZIlYviNbGXhPMSeJ92BVB2F+NEyem9Sg/Csy2ehhtO1FGaUj4mO9/7Ntg==
+  dependencies:
+    chalk "^4.1.2"
+    semver "^7.5.4"
+
+"@jsii/spec@1.91.0":
   version "1.91.0"
   resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.91.0.tgz#91d624357a66148ab9a2d8b5fb26331fc7b01932"
   integrity sha512-Ir01bk5CwIFAApRJjRC+JG/f9db5dACEYFSxsHyvXRMu+J/LIANdwD4OPSelWrhbRiQdY6U16BKsRO63uaNRqg==
+  dependencies:
+    ajv "^8.12.0"
+
+"@jsii/spec@^1.88.0", "@jsii/spec@^1.89.0", "@jsii/spec@^1.91.0", "@jsii/spec@^1.92.0":
+  version "1.92.0"
+  resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.92.0.tgz#8fcd72a0ced63e83e72a010a499518d603f00198"
+  integrity sha512-6jbwQ2uCVOUq6eddKQG/cPzuUsdJwaszQstTZtruhhjWNuoC4CjT5eHlzjeBqtxQZpGiKkRRwPHb1bCEGgffxA==
   dependencies:
     ajv "^8.12.0"
 
@@ -5197,19 +5212,19 @@ jsii-rosetta@^1.91.0:
     yargs "^16.2.0"
 
 jsii-rosetta@~5.0.0:
-  version "5.0.23"
-  resolved "https://registry.yarnpkg.com/jsii-rosetta/-/jsii-rosetta-5.0.23.tgz#80b404768401a9f847de44b4fa81f36ca2824003"
-  integrity sha512-ZeJx3hkP69GXrr0cKxw7cUzXI/heR3rQv4DTPRKCzNIMCKqSlfKklHHtBLEyvK8lQylIlDwwVn9P3q/XiJL75Q==
+  version "5.0.27"
+  resolved "https://registry.yarnpkg.com/jsii-rosetta/-/jsii-rosetta-5.0.27.tgz#84cba414127d1c364ab72e943cc369f6ad041ffd"
+  integrity sha512-rnvj7n9IS2RkftTDRcgkJLn4P5JvhRTIwNgGVPPbVjd3F1RD2ElGsaOOdP3G/jHaJxLYOF8S6Q+n5/vJMmIMmA==
   dependencies:
-    "@jsii/check-node" "1.91.0"
-    "@jsii/spec" "^1.91.0"
+    "@jsii/check-node" "1.92.0"
+    "@jsii/spec" "^1.92.0"
     "@xmldom/xmldom" "^0.8.10"
     chalk "^4"
     commonmark "^0.30.0"
-    fast-glob "^3.3.1"
+    fast-glob "^3.3.2"
     jsii "~5.0.5"
     semver "^7.5.4"
-    semver-intersect "^1.4.0"
+    semver-intersect "^1.5.0"
     stream-json "^1.8.0"
     typescript "~5.0.4"
     workerpool "^6.5.1"
@@ -6759,19 +6774,19 @@ semver-diff@^4.0.0:
   dependencies:
     semver "^7.3.5"
 
-semver-intersect@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/semver-intersect/-/semver-intersect-1.4.0.tgz#bdd9c06bedcdd2fedb8cd352c3c43ee8c61321f3"
-  integrity sha512-d8fvGg5ycKAq0+I6nfWeCx6ffaWJCsBYU0H2Rq56+/zFePYfT8mXkB3tWBSjR5BerkHNZ5eTPIk1/LBYas35xQ==
+semver-intersect@^1.4.0, semver-intersect@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/semver-intersect/-/semver-intersect-1.5.0.tgz#bb3aa0ea504935410d34cf15f49818d56906bd48"
+  integrity sha512-BDjWX7yCC0haX4W/zrnV2JaMpVirwaEkGOBmgRQtH++F1N3xl9v7k9H44xfTqwl+yLNNSbMKosoVSTIiJVQ2Pw==
   dependencies:
-    semver "^5.0.0"
+    semver "^6.3.0"
 
 semver-utils@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/semver-utils/-/semver-utils-1.1.4.tgz#cf0405e669a57488913909fc1c3f29bf2a4871e2"
   integrity sha512-EjnoLE5OGmDAVV/8YDoN5KiajNadjzIp9BAHOhYeQHt7j0UWxjmgsx4YD48wp4Ue1Qogq38F1GNUJNqF1kKKxA==
 
-"semver@2 || 3 || 4 || 5", semver@^5.0.0:
+"semver@2 || 3 || 4 || 5":
   version "5.7.2"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.2.tgz#48d55db737c3287cd4835e17fa13feace1c41ef8"
   integrity sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==
