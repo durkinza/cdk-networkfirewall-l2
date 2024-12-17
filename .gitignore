@@ -30,7 +30,6 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
-!/.projenrc.js
 /test-reports/
 junit.xml
 /coverage/
@@ -41,7 +40,6 @@ junit.xml
 !/.mergify.yml
 !/.github/dependabot.yml
 !/.github/pull_request_template.md
-!/.npmrc
 !/test/
 !/tsconfig.dev.json
 !/src/
@@ -53,6 +51,7 @@ tsconfig.json
 !/API.md
 test/**/*.js
 test/**/*.d.ts
+!/.projenrc.ts
 !/.cspell.json
 !/.husky/pre-commit
 !/.husky/commit-msg
