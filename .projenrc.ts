@@ -1,5 +1,5 @@
 import { CSpell, Husky, Commitlint } from '@mountainpass/cool-bits-for-projen';
-import { awscdk, javascript, ProjectType } from 'projen';
+import { awscdk, javascript } from 'projen';
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'durkinza',
   authorAddress: '8985088+durkinza@users.noreply.github.com',
@@ -38,7 +38,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'typescript',
   ], /* Build dependencies for this module. */
   homepage: 'https://github.com/durkinza/cdk-networkfirewall-l2#readme',
-  jsiiVersion: '~5.0.0',
+  jsiiVersion: '~5.7.0',
   keywords: [
     'cdk',
     'aws-cdk',
@@ -57,7 +57,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   npmignore: ['.devcontainer'],
   packageName: '@durkinza/cdk-networkfirewall-l2', /* The "name" in package.json. */
   peerDeps: ['aws-cdk-lib'],
-  projectType: ProjectType.LIB,
   projenrcTs: true,
   publishToPypi: {
     distName: 'durkinza.cdk-networkfirewall-l2',
