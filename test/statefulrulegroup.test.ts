@@ -23,7 +23,7 @@ describe('Testing Logging Features', ()=>{
       RuleGroup: {
         RulesSource: {},
         StatefulRuleOptions: {
-          RuleOrder: 'DEFAULT_ACTION_ORDER',
+          RuleOrder: 'STRICT_ORDER',
         },
       },
     });
@@ -121,7 +121,7 @@ describe('Testing Logging Features', ()=>{
       RuleGroup: {
         RulesSource: {},
         StatefulRuleOptions: {
-          RuleOrder: 'DEFAULT_ACTION_ORDER',
+          RuleOrder: 'STRICT_ORDER',
         },
       },
     });
@@ -201,7 +201,7 @@ describe('Testing Logging Features', ()=>{
       RuleGroup: {
         RulesSource: {},
         StatefulRuleOptions: {
-          RuleOrder: 'DEFAULT_ACTION_ORDER',
+          RuleOrder: 'STRICT_ORDER',
         },
       },
     });

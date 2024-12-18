@@ -173,7 +173,5 @@ class TestStack extends cdk.Stack {
 
 const app = new cdk.App();
 new TestStack(app, 'network-firewall-integ-stack');
-// new IntegTest(app, 'AllBasicTest', {
-//   testCases: [new TestStack(app, 'network-firewall-integ-stack')],
-// });
+
 app.synth();

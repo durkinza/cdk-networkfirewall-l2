@@ -445,7 +445,7 @@
       ]
      },
      "StatefulRuleOptions": {
-      "RuleOrder": "DEFAULT_ACTION_ORDER"
+      "RuleOrder": "STRICT_ORDER"
      }
     }
    }
@@ -472,7 +472,7 @@
       }
      },
      "StatefulRuleOptions": {
-      "RuleOrder": "DEFAULT_ACTION_ORDER"
+      "RuleOrder": "STRICT_ORDER"
      }
     }
    }
@@ -505,7 +505,7 @@
       "RulesString": "alert tcp $EXTERNAL_NET any -> $HTTP_SERVERS $HTTP_PORTS (msg:\".htpasswd access attempt\"; flow:to_server,established; content:\".htpasswd\"; nocase; sid:210503; rev:1;)"
      },
      "StatefulRuleOptions": {
-      "RuleOrder": "DEFAULT_ACTION_ORDER"
+      "RuleOrder": "STRICT_ORDER"
      }
     }
    }

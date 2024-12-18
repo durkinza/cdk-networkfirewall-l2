@@ -715,7 +715,7 @@
                         }
                       },
                       "statefulRuleOptions": {
-                        "ruleOrder": "DEFAULT_ACTION_ORDER"
+                        "ruleOrder": "STRICT_ORDER"
                       }
                     }
                   }
@@ -760,7 +760,7 @@
                       },
                       "ruleVariables": {},
                       "statefulRuleOptions": {
-                        "ruleOrder": "DEFAULT_ACTION_ORDER"
+                        "ruleOrder": "STRICT_ORDER"
                       }
                     }
                   }
@@ -811,7 +811,7 @@
                         }
                       },
                       "statefulRuleOptions": {
-                        "ruleOrder": "DEFAULT_ACTION_ORDER"
+                        "ruleOrder": "STRICT_ORDER"
                       }
                     }
                   }

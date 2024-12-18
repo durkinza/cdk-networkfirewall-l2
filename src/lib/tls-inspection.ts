@@ -38,12 +38,12 @@ export interface TLSInspectionConfigurationProps {
    * You can't change the name of a TLS inspection configuration after you create it.
    * @default - CloudFormation-generated name
    */
-  readonly configurationName: string;
+  readonly configurationName?: string;
 
   /**
    * The TLS Server Certificate Configuration Property
    */
-  readonly serverCertificateConfigurations?: CfnTLSInspectionConfiguration.ServerCertificateConfigurationProperty[];
+  readonly serverCertificateConfigurations: CfnTLSInspectionConfiguration.ServerCertificateConfigurationProperty[];
 
   /**
    * The Description of the TLS Inspection Configuration
@@ -148,6 +148,10 @@ export class TLSInspectionConfiguration extends TLSInspectionConfigurationBase {
 
     this.description = props.description;
     this.tags = props.tags;
+
+    if (props.serverCertificateConfigurations.length < 1) {
+      throw new Error('You must associate at least one certificate configuration to this TLS inspection configuration.');
+    }
 
     const resourceProps:CfnTLSInspectionConfigurationProps = {
       tlsInspectionConfigurationName: props.configurationName||id,
