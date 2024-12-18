@@ -2,6 +2,7 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { CfnFirewall, CfnFirewallProps } from 'aws-cdk-lib/aws-networkfirewall';
 import * as core from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
+import { EncryptionConfiguration } from './encryption-configuration';
 import {
   ILogLocation,
   S3LogLocationProps,
@@ -91,6 +92,14 @@ export interface FirewallProps {
   readonly deleteProtection?: boolean;
 
   /**
+   * Not yet supported in Cloudformation at time of writing.
+   * You can use a customer managed key in AWS Key Management Service (KMS) to encrypt your data at rest.
+   * If you don’t configure a customer managed key, Network Firewall encrypts your data using an AWS managed key.
+   * @default - AWS managed key is used
+   */
+  readonly encryptionConfiguration?: EncryptionConfiguration;
+
+  /**
    * A setting indicating whether the firewall is protected against a change to the firewall policy association.
    * Use this setting to protect against accidentally modifying the firewall policy for a firewall that is in use.
    * @default - true
@@ -123,8 +132,8 @@ export interface FirewallProps {
   readonly loggingS3Buckets?: S3LogLocationProps[];
 
   /**
-   * A list of S3 Buckets to send logs to.
-   * @default - Logs will not be sent to an S3 bucket.
+   * A list of Kinesis Data Firehose to send logs to.
+   * @default - Logs will not be sent to a Kinesis DataFirehose.
    */
   readonly loggingKinesisDataStreams?: KinesisDataFirehoseLogLocationProps[];
 }
@@ -276,23 +285,24 @@ export class Firewall extends FirewallBase {
     }
 
     const resourceProps:CfnFirewallProps = {
+      deleteProtection: props.deleteProtection,
+      description: props.description,
+      // encryptionConfiguration: props.encryptionConfiguration, // Not supported by cloudformation yet.
       firewallName: props.firewallName||id,
       firewallPolicyArn: props.policy.firewallPolicyArn,
-      subnetMappings: subnets,
-      vpcId: props.vpc.vpcId,
-      description: props.description,
-      deleteProtection: props.deleteProtection,
       firewallPolicyChangeProtection: props.firewallPolicyChangeProtection,
       subnetChangeProtection: props.subnetChangeProtection,
+      subnetMappings: subnets,
       tags: props.tags || [],
+      vpcId: props.vpc.vpcId,
     };
 
     const resource:CfnFirewall = new CfnFirewall(this, id, resourceProps);
 
     this.firewallId = this.getResourceNameAttribute(resource.ref);
     this.firewallArn = this.getResourceArnAttribute(resource.attrFirewallArn, {
-      service: 'NetworkFirewall',
-      resource: 'Firewall',
+      service: 'network-firewall',
+      resource: 'firewall',
       resourceName: this.firewallId,
     });
 

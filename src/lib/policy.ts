@@ -3,6 +3,7 @@ import * as core from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
 import { StatelessStandardAction, StatefulStrictAction } from './actions';
 import { IStatefulRuleGroup, IStatelessRuleGroup } from './rule-group';
+import { ITLSInspectionConfiguration } from './tls-inspection';
 
 /**
  *  Maps a priority to a stateful rule group item
@@ -118,16 +119,30 @@ export interface FirewallPolicyProps {
   readonly statelessCustomActions?: CfnFirewallPolicy.CustomActionProperty[];
 
   /**
-   *References to the stateless rule groups that are used in the policy.
+   * References to the stateless rule groups that are used in the policy.
    * @default - undefined
    */
   readonly statelessRuleGroups?: StatelessRuleGroupList[];
+
+  /**
+   * AWS Network Firewall uses a TLS inspection configuration to decrypt traffic.
+   * Network Firewall re-encrypts the traffic before sending it to its destination.
+   *
+   * @default - No TLS Inspection performed.
+   */
+  readonly tlsInspectionConfiguration?: ITLSInspectionConfiguration;
 
   /**
    * The description of the policy.
    * @default - undefined
    */
   readonly description?: string;
+
+  /**
+   * Tags to be added to the policy.
+   * @default - No tags applied
+   */
+  readonly tags?: core.Tag[];
 }
 
 /**
@@ -202,6 +217,16 @@ export class FirewallPolicy extends FirewallPolicyBase {
   public readonly statefulRuleGroups: StatefulRuleGroupList[] = [];
 
   /**
+   * The TLS Inspection Configuration
+   */
+  public readonly tlsInspectionConfiguration?: ITLSInspectionConfiguration;
+
+  /**
+   * Tags to be added to the policy.
+   */
+  public readonly tags: core.Tag[];
+
+  /**
    *
    * @param scope
    * @param id
@@ -218,6 +243,8 @@ export class FirewallPolicy extends FirewallPolicyBase {
 
     this.statelessRuleGroups = props.statelessRuleGroups || [];
     this.statefulRuleGroups = props.statefulRuleGroups || [];
+    this.tlsInspectionConfiguration = props.tlsInspectionConfiguration;
+    this.tags = props.tags || [];
 
     // Adding Validations
 
@@ -312,13 +339,14 @@ export class FirewallPolicy extends FirewallPolicyBase {
       statefulRuleGroupReferences: core.Lazy.any({ produce: () => this.buildStatefulRuleGroupReferences() }),
       statelessCustomActions: props.statelessCustomActions,
       statelessRuleGroupReferences: core.Lazy.any({ produce: () => this.buildStatelessRuleGroupReferences() }),
+      tlsInspectionConfigurationArn: props.tlsInspectionConfiguration?.tlsInspectionConfigurationArn,
     };
 
     const resourceProps:CfnFirewallPolicyProps = {
       firewallPolicy: resourcePolicyProperty,
       firewallPolicyName: props.firewallPolicyName || id,
       description: props.description,
-      //TODO tags
+      tags: props.tags,
     };
 
     const resource:CfnFirewallPolicy = new CfnFirewallPolicy(this, props.firewallPolicyName || id, resourceProps);
@@ -326,8 +354,8 @@ export class FirewallPolicy extends FirewallPolicyBase {
     this.firewallPolicyId = this.getResourceNameAttribute(resource.ref);
 
     this.firewallPolicyArn = this.getResourceArnAttribute(resource.attrFirewallPolicyArn, {
-      service: 'NetworkFirewall',
-      resource: 'FirewallPolicy',
+      service: 'network-firewall',
+      resource: 'firewall-policy',
       resourceName: this.firewallPolicyId,
     });
 
