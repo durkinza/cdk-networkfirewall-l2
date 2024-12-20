@@ -79,12 +79,16 @@
       "type": "build"
     },
     {
+      "name": "jsii",
+      "type": "build"
+    },
+    {
       "name": "jsii-diff",
       "type": "build"
     },
     {
       "name": "jsii-docgen",
-      "version": "^10.5.0",
+      "version": "*",
       "type": "build"
     },
     {
@@ -93,12 +97,6 @@
     },
     {
       "name": "jsii-rosetta",
-      "version": "~5.7.1",
-      "type": "build"
-    },
-    {
-      "name": "jsii",
-      "version": "~5.7.3",
       "type": "build"
     },
     {

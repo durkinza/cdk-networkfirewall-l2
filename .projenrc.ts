@@ -38,7 +38,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'typescript',
   ], /* Build dependencies for this module. */
   homepage: 'https://github.com/durkinza/cdk-networkfirewall-l2#readme',
-  jsiiVersion: '~5.7.3',
+  jsiiVersion: '*',
   keywords: [
     'cdk',
     'aws-cdk',

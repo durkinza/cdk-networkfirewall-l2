@@ -118,7 +118,7 @@ An array of Log Locations.
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.Firewall.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.Firewall.isConstruct"></a>
 
 ```typescript
 import { Firewall } from '@durkinza/cdk-networkfirewall-l2'
@@ -127,20 +127,6 @@ Firewall.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
-
-Use this method instead of `instanceof` to properly detect `Construct`
-instances, even when the construct library is symlinked.
-
-Explanation: in JavaScript, multiple copies of the `constructs` library on
-disk are seen as independent, completely different libraries. As a
-consequence, the class `Construct` in each copy of the `constructs` library
-is seen as a different class, and an instance of one class will not test as
-`instanceof` the other class. `npm install` will not create installations
-like this, but users may manually symlink construct libraries together or
-use a monorepo tool: in those cases, multiple copies of the `constructs`
-library can be accidentally installed, and `instanceof` will behave
-unpredictably. It is safest to avoid using `instanceof`, and using
-this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.Firewall.isConstruct.parameter.x"></a>
 
@@ -523,7 +509,7 @@ The stateless rule group to add to the policy.
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.isConstruct"></a>
 
 ```typescript
 import { FirewallPolicy } from '@durkinza/cdk-networkfirewall-l2'
@@ -532,20 +518,6 @@ FirewallPolicy.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
-
-Use this method instead of `instanceof` to properly detect `Construct`
-instances, even when the construct library is symlinked.
-
-Explanation: in JavaScript, multiple copies of the `constructs` library on
-disk are seen as independent, completely different libraries. As a
-consequence, the class `Construct` in each copy of the `constructs` library
-is seen as a different class, and an instance of one class will not test as
-`instanceof` the other class. `npm install` will not create installations
-like this, but users may manually symlink construct libraries together or
-use a monorepo tool: in those cases, multiple copies of the `constructs`
-library can be accidentally installed, and `instanceof` will behave
-unpredictably. It is safest to avoid using `instanceof`, and using
-this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.isConstruct.parameter.x"></a>
 
@@ -924,7 +896,7 @@ An array of assorted Log Locations.
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.isConstruct"></a>
 
 ```typescript
 import { LoggingConfiguration } from '@durkinza/cdk-networkfirewall-l2'
@@ -933,20 +905,6 @@ LoggingConfiguration.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
-
-Use this method instead of `instanceof` to properly detect `Construct`
-instances, even when the construct library is symlinked.
-
-Explanation: in JavaScript, multiple copies of the `constructs` library on
-disk are seen as independent, completely different libraries. As a
-consequence, the class `Construct` in each copy of the `constructs` library
-is seen as a different class, and an instance of one class will not test as
-`instanceof` the other class. `npm install` will not create installations
-like this, but users may manually symlink construct libraries together or
-use a monorepo tool: in those cases, multiple copies of the `constructs`
-library can be accidentally installed, and `instanceof` will behave
-unpredictably. It is safest to avoid using `instanceof`, and using
-this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.isConstruct.parameter.x"></a>
 
@@ -1171,7 +1129,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.isConstruct"></a>
 
 ```typescript
 import { Stateful5TupleRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
@@ -1180,20 +1138,6 @@ Stateful5TupleRuleGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
-
-Use this method instead of `instanceof` to properly detect `Construct`
-instances, even when the construct library is symlinked.
-
-Explanation: in JavaScript, multiple copies of the `constructs` library on
-disk are seen as independent, completely different libraries. As a
-consequence, the class `Construct` in each copy of the `constructs` library
-is seen as a different class, and an instance of one class will not test as
-`instanceof` the other class. `npm install` will not create installations
-like this, but users may manually symlink construct libraries together or
-use a monorepo tool: in those cases, multiple copies of the `constructs`
-library can be accidentally installed, and `instanceof` will behave
-unpredictably. It is safest to avoid using `instanceof`, and using
-this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.isConstruct.parameter.x"></a>
 
@@ -1433,7 +1377,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.isConstruct"></a>
 
 ```typescript
 import { StatefulDomainListRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
@@ -1442,20 +1386,6 @@ StatefulDomainListRuleGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
-
-Use this method instead of `instanceof` to properly detect `Construct`
-instances, even when the construct library is symlinked.
-
-Explanation: in JavaScript, multiple copies of the `constructs` library on
-disk are seen as independent, completely different libraries. As a
-consequence, the class `Construct` in each copy of the `constructs` library
-is seen as a different class, and an instance of one class will not test as
-`instanceof` the other class. `npm install` will not create installations
-like this, but users may manually symlink construct libraries together or
-use a monorepo tool: in those cases, multiple copies of the `constructs`
-library can be accidentally installed, and `instanceof` will behave
-unpredictably. It is safest to avoid using `instanceof`, and using
-this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.isConstruct.parameter.x"></a>
 
@@ -1696,7 +1626,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isConstruct"></a>
 
 ```typescript
 import { StatefulSuricataRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
@@ -1705,20 +1635,6 @@ StatefulSuricataRuleGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
-
-Use this method instead of `instanceof` to properly detect `Construct`
-instances, even when the construct library is symlinked.
-
-Explanation: in JavaScript, multiple copies of the `constructs` library on
-disk are seen as independent, completely different libraries. As a
-consequence, the class `Construct` in each copy of the `constructs` library
-is seen as a different class, and an instance of one class will not test as
-`instanceof` the other class. `npm install` will not create installations
-like this, but users may manually symlink construct libraries together or
-use a monorepo tool: in those cases, multiple copies of the `constructs`
-library can be accidentally installed, and `instanceof` will behave
-unpredictably. It is safest to avoid using `instanceof`, and using
-this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isConstruct.parameter.x"></a>
 
@@ -1996,7 +1912,7 @@ Calculates the expected capacity required for all applied stateful rules.
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.isConstruct"></a>
 
 ```typescript
 import { StatelessRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
@@ -2005,20 +1921,6 @@ StatelessRuleGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
-
-Use this method instead of `instanceof` to properly detect `Construct`
-instances, even when the construct library is symlinked.
-
-Explanation: in JavaScript, multiple copies of the `constructs` library on
-disk are seen as independent, completely different libraries. As a
-consequence, the class `Construct` in each copy of the `constructs` library
-is seen as a different class, and an instance of one class will not test as
-`instanceof` the other class. `npm install` will not create installations
-like this, but users may manually symlink construct libraries together or
-use a monorepo tool: in those cases, multiple copies of the `constructs`
-library can be accidentally installed, and `instanceof` will behave
-unpredictably. It is safest to avoid using `instanceof`, and using
-this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.isConstruct.parameter.x"></a>
 
@@ -2287,7 +2189,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
-##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isConstruct"></a>
 
 ```typescript
 import { TLSInspectionConfiguration } from '@durkinza/cdk-networkfirewall-l2'
@@ -2296,20 +2198,6 @@ TLSInspectionConfiguration.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
-
-Use this method instead of `instanceof` to properly detect `Construct`
-instances, even when the construct library is symlinked.
-
-Explanation: in JavaScript, multiple copies of the `constructs` library on
-disk are seen as independent, completely different libraries. As a
-consequence, the class `Construct` in each copy of the `constructs` library
-is seen as a different class, and an instance of one class will not test as
-`instanceof` the other class. `npm install` will not create installations
-like this, but users may manually symlink construct libraries together or
-use a monorepo tool: in those cases, multiple copies of the `constructs`
-library can be accidentally installed, and `instanceof` will behave
-unpredictably. It is safest to avoid using `instanceof`, and using
-this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isConstruct.parameter.x"></a>
 
@@ -2759,7 +2647,6 @@ const firewallProps: FirewallProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | The unique identifier of the VPC where the firewall is in use. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.deleteProtection">deleteProtection</a></code> | <code>boolean</code> | A flag indicating whether it is possible to delete the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.description">description</a></code> | <code>string</code> | The description of the Firewall. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.encryptionConfiguration">encryptionConfiguration</a></code> | <code>any</code> | Not yet supported in Cloudformation at time of writing. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.firewallName">firewallName</a></code> | <code>string</code> | The descriptive name of the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.firewallPolicyChangeProtection">firewallPolicyChangeProtection</a></code> | <code>boolean</code> | A setting indicating whether the firewall is protected against a change to the firewall policy association. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.loggingCloudWatchLogGroups">loggingCloudWatchLogGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.CloudWatchLogLocationProps">CloudWatchLogLocationProps</a>[]</code> | A list of CloudWatch LogGroups to send logs to. |
@@ -2822,22 +2709,6 @@ public readonly description: string;
 - *Default:* undefined
 
 The description of the Firewall.
-
----
-
-##### `encryptionConfiguration`<sup>Optional</sup> <a name="encryptionConfiguration" id="@durkinza/cdk-networkfirewall-l2.FirewallProps.property.encryptionConfiguration"></a>
-
-```typescript
-public readonly encryptionConfiguration: any;
-```
-
-- *Type:* any
-- *Default:* AWS managed key is used
-
-Not yet supported in Cloudformation at time of writing.
-
-You can use a customer managed key in AWS Key Management Service (KMS) to encrypt your data at rest.
-If you don’t configure a customer managed key, Network Firewall encrypts your data using an AWS managed key.
 
 ---
 
