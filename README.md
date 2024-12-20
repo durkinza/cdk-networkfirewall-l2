@@ -19,10 +19,19 @@ These L2 Constructs can be used to create managed network firewalls with statefu
 
 The goal of these constructs is to provide a way to decouple the creation of firewall rules from their rule groups and reduce the amount of boilerplate code required to define a network firewall.
 
+
+### Quick Start Examples
+For new environments an example that matches the default Security Group rules [can be found here.](docs/example-only-outbound.md)
+
+If you're adding a firewall to an existing environment that does not have an expectation of normal traffic, try the  [non-obtrusive approach here](docs/example-non-obtrusive.md).  
+This example passively monitors packets to build a baseline of "normal" traffic that can then be used as a reference to build appropriate firewall rules. 
+
+
+### Defaults 
+
 The ideal examples shown below provide only the parameters required to create a resource. 
 Wherever possible, optional parameters are available to give the same level of customization as the L1 API.
 
-### Defaults
 To keep the constructs unopinionated, default actions are required for deployment of new resources.
 It may be possible to reduce boilerplate code more if default actions were to be defined. 
 Some examples of possible opinionated approaches:

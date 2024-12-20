@@ -4,7 +4,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   author: 'durkinza',
   authorAddress: '8985088+durkinza@users.noreply.github.com',
   bugsUrl: 'https://github.com/durkinza/cdk-networkfirewall-l2/issues',
-  cdkVersion: '2.90.0',
+  cdkVersion: '2.173.2',
   minNodeVersion: '16.0.0',
   workflowNodeVersion: 'latest',
   defaultReleaseBranch: 'main',
@@ -38,11 +38,13 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'typescript',
   ], /* Build dependencies for this module. */
   homepage: 'https://github.com/durkinza/cdk-networkfirewall-l2#readme',
-  jsiiVersion: '~5.7.0',
+  jsiiVersion: '*',
   keywords: [
     'cdk',
     'aws-cdk',
     'networkfirewall',
+    'aws-networkfirewall',
+    'AWS::NetworkFirewall',
     'aws',
     'awscdk',
     'L2',
@@ -52,6 +54,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'Security',
   ],
   license: 'Apache-2.0',
+  //majorVersion: 0,
   name: '@durkinza/cdk-networkfirewall-l2',
   npmAccess: javascript.NpmAccess.PUBLIC,
   npmignore: ['.devcontainer'],
@@ -72,6 +75,10 @@ new CSpell(project, {
   cSpellOptions: {
     language: 'en-US',
     ignorePaths: ['./API.md'],
+    words: [
+      'projenrc',
+      'ITLS',
+    ],
   },
 });
 new Husky(project);

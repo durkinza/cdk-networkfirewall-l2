@@ -120,7 +120,7 @@ export class StatelessRuleGroup extends StatelessRuleGroupBase {
       public readonly ruleGroupId = statelessRuleGroupName;
       public readonly ruleGroupArn = core.Stack.of(scope).formatArn({
         service: 'network-firewall',
-        resource: 'stateful-rulegroup',
+        resource: 'stateless-rulegroup',
         resourceName: statelessRuleGroupName,
       });
     }
@@ -229,8 +229,8 @@ export class StatelessRuleGroup extends StatelessRuleGroupBase {
     const resource:CfnRuleGroup = new CfnRuleGroup(this, id, resourceProps);
     this.ruleGroupId = this.getResourceNameAttribute(resource.ref);
     this.ruleGroupArn = this.getResourceArnAttribute(resource.attrRuleGroupArn, {
-      service: 'NetworkFirewall',
-      resource: 'RuleGroup',
+      service: 'network-firewall',
+      resource: 'stateless-rulegroup',
       resourceName: this.ruleGroupId,
     });
   }
@@ -295,13 +295,20 @@ export interface IStatefulRuleGroup extends core.IResource {
  */
 export enum StatefulRuleOptions {
   /**
-   * This is the default action
-   * Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on certain settings
+   * Rules with a pass action are processed first, followed by drop, reject, and alert actions.
+   * This option was previously named Default Acton Order.
    */
-  DEFAULT_ACTION_ORDER='DEFAULT_ACTION_ORDER',
+  ACTION_ORDER='DEFAULT_ACTION_ORDER',
+
+  /**
+   * Rules with a pass action are processed first, followed by drop, reject, and alert actions.
+   * @deprecated Please use ACTION_ORDER instead.
+   */
+  // DEFAULT_ACTION_ORDER='DEFAULT_ACTION_ORDER',
 
   /**
    * With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined.
+   * Recommended Order
    */
   STRICT_ORDER='STRICT_ORDER'
 }
@@ -331,7 +338,7 @@ interface StatefulRuleGroupProps {
 
   /**
    * Rule Order
-   * @default - DEFAULT_RULE_ACTION_ORDER
+   * @default - STRICT_ORDER
    */
   readonly ruleOrder?: StatefulRuleOptions;
 
@@ -469,7 +476,7 @@ export class StatefulSuricataRuleGroup extends StatefulRuleGroup {
     };
 
     const resourceRuleOptions:CfnRuleGroup.StatefulRuleOptionsProperty = {
-      ruleOrder: props.ruleOrder || StatefulRuleOptions.DEFAULT_ACTION_ORDER,
+      ruleOrder: props.ruleOrder || StatefulRuleOptions.STRICT_ORDER,
     };
     const resourceRuleGroupProperty:CfnRuleGroup.RuleGroupProperty = {
       rulesSource: resourceSourceProperty,
@@ -488,8 +495,8 @@ export class StatefulSuricataRuleGroup extends StatefulRuleGroup {
     const resource:CfnRuleGroup = new CfnRuleGroup(this, id, resourceProps);
     this.ruleGroupId = this.getResourceNameAttribute(resource.ref);
     this.ruleGroupArn = this.getResourceArnAttribute(resource.attrRuleGroupArn, {
-      service: 'NetworkFirewall',
-      resource: 'RuleGroup',
+      service: 'network-firewall',
+      resource: 'stateful-rulegroup',
       resourceName: this.ruleGroupId,
     });
   }
@@ -540,7 +547,7 @@ export class Stateful5TupleRuleGroup extends StatefulRuleGroup {
     };
 
     const resourceRuleOptions:CfnRuleGroup.StatefulRuleOptionsProperty = {
-      ruleOrder: props.ruleOrder || StatefulRuleOptions.DEFAULT_ACTION_ORDER,
+      ruleOrder: props.ruleOrder || StatefulRuleOptions.STRICT_ORDER,
     };
 
     const resourceRuleGroupProperty:CfnRuleGroup.RuleGroupProperty = {
@@ -562,8 +569,8 @@ export class Stateful5TupleRuleGroup extends StatefulRuleGroup {
 
     this.ruleGroupId = this.getResourceNameAttribute(resource.ref);
     this.ruleGroupArn = this.getResourceArnAttribute(resource.attrRuleGroupArn, {
-      service: 'NetworkFirewall',
-      resource: 'RuleGroup',
+      service: 'network-firewall',
+      resource: 'stateful-rulegroup',
       resourceName: this.ruleGroupId,
     });
   }
@@ -604,7 +611,7 @@ export class StatefulDomainListRuleGroup extends StatefulRuleGroup {
       {}:{ rulesSourceList: props.rule.resource };
 
     const resourceRuleOptions:CfnRuleGroup.StatefulRuleOptionsProperty = {
-      ruleOrder: props.ruleOrder || StatefulRuleOptions.DEFAULT_ACTION_ORDER,
+      ruleOrder: props.ruleOrder || StatefulRuleOptions.STRICT_ORDER,
     };
 
     const resourceRuleGroupProperty:CfnRuleGroup.RuleGroupProperty = {
@@ -625,8 +632,8 @@ export class StatefulDomainListRuleGroup extends StatefulRuleGroup {
     const resource:CfnRuleGroup = new CfnRuleGroup(this, id, resourceProps);
     this.ruleGroupId = this.getResourceNameAttribute(resource.ref);
     this.ruleGroupArn = this.getResourceArnAttribute(resource.attrRuleGroupArn, {
-      service: 'NetworkFirewall',
-      resource: 'RuleGroup',
+      service: 'network-firewall',
+      resource: 'stateful-rulegroup',
       resourceName: this.ruleGroupId,
     });
   }

@@ -633,6 +633,8 @@ The name of the existing firewall policy.
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.statelessDefaultActions">statelessDefaultActions</a></code> | <code>string[]</code> | The Default actions for packets that don't match a stateless rule. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.statelessFragmentDefaultActions">statelessFragmentDefaultActions</a></code> | <code>string[]</code> | The Default actions for fragment packets that don't match a stateless rule. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.statelessRuleGroups">statelessRuleGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupList">StatelessRuleGroupList</a>[]</code> | The stateless rule groups in this policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.tlsInspectionConfiguration">tlsInspectionConfiguration</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration">ITLSInspectionConfiguration</a></code> | The TLS Inspection Configuration. |
 
 ---
 
@@ -760,6 +762,30 @@ public readonly statelessRuleGroups: StatelessRuleGroupList[];
 - *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupList">StatelessRuleGroupList</a>[]
 
 The stateless rule groups in this policy.
+
+---
+
+##### `tags`<sup>Required</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+
+Tags to be added to the policy.
+
+---
+
+##### `tlsInspectionConfiguration`<sup>Optional</sup> <a name="tlsInspectionConfiguration" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.tlsInspectionConfiguration"></a>
+
+```typescript
+public readonly tlsInspectionConfiguration: ITLSInspectionConfiguration;
+```
+
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration">ITLSInspectionConfiguration</a>
+
+The TLS Inspection Configuration.
 
 ---
 
@@ -2072,6 +2098,309 @@ the physical name of the rule group.
 ---
 
 
+### TLSInspectionConfiguration <a name="TLSInspectionConfiguration" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration"></a>
+
+- *Implements:* <a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration">ITLSInspectionConfiguration</a>
+
+Defines a Network Firewall TLS Inspection Configuration in the Stack.
+
+#### Initializers <a name="Initializers" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.Initializer"></a>
+
+```typescript
+import { TLSInspectionConfiguration } from '@durkinza/cdk-networkfirewall-l2'
+
+new TLSInspectionConfiguration(scope: Construct, id: string, props: TLSInspectionConfigurationProps)
+```
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.Initializer.parameter.props">props</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps">TLSInspectionConfigurationProps</a></code> | *No description.* |
+
+---
+
+##### `scope`<sup>Required</sup> <a name="scope" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.Initializer.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+##### `id`<sup>Required</sup> <a name="id" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.Initializer.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+##### `props`<sup>Required</sup> <a name="props" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.Initializer.parameter.props"></a>
+
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps">TLSInspectionConfigurationProps</a>
+
+---
+
+#### Methods <a name="Methods" id="Methods"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
+
+---
+
+##### `toString` <a name="toString" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.toString"></a>
+
+```typescript
+public toString(): string
+```
+
+Returns a string representation of this construct.
+
+##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.applyRemovalPolicy"></a>
+
+```typescript
+public applyRemovalPolicy(policy: RemovalPolicy): void
+```
+
+Apply the given removal policy to this resource.
+
+The Removal Policy controls what happens to this resource when it stops
+being managed by CloudFormation, either because you've removed it from the
+CDK application or because you've made a change that requires the resource
+to be replaced.
+
+The resource can be deleted (`RemovalPolicy.DESTROY`), or left in your AWS
+account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
+
+###### `policy`<sup>Required</sup> <a name="policy" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.applyRemovalPolicy.parameter.policy"></a>
+
+- *Type:* aws-cdk-lib.RemovalPolicy
+
+---
+
+#### Static Functions <a name="Static Functions" id="Static Functions"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isOwnedResource">isOwnedResource</a></code> | Returns true if the construct was created by CDK, and false otherwise. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isResource">isResource</a></code> | Check whether the given construct is a Resource. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.fromConfigurationArn">fromConfigurationArn</a></code> | Reference an existing TLS Inspection Configuration, defined outside of the CDK code, by arn. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.fromConfigurationName">fromConfigurationName</a></code> | Reference an existing TLS Inspection Configuration, defined outside of the CDK code, by name. |
+
+---
+
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isConstruct"></a>
+
+```typescript
+import { TLSInspectionConfiguration } from '@durkinza/cdk-networkfirewall-l2'
+
+TLSInspectionConfiguration.isConstruct(x: any)
+```
+
+Checks if `x` is a construct.
+
+###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isConstruct.parameter.x"></a>
+
+- *Type:* any
+
+Any object.
+
+---
+
+##### `isOwnedResource` <a name="isOwnedResource" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isOwnedResource"></a>
+
+```typescript
+import { TLSInspectionConfiguration } from '@durkinza/cdk-networkfirewall-l2'
+
+TLSInspectionConfiguration.isOwnedResource(construct: IConstruct)
+```
+
+Returns true if the construct was created by CDK, and false otherwise.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isOwnedResource.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+---
+
+##### `isResource` <a name="isResource" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isResource"></a>
+
+```typescript
+import { TLSInspectionConfiguration } from '@durkinza/cdk-networkfirewall-l2'
+
+TLSInspectionConfiguration.isResource(construct: IConstruct)
+```
+
+Check whether the given construct is a Resource.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isResource.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+---
+
+##### `fromConfigurationArn` <a name="fromConfigurationArn" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.fromConfigurationArn"></a>
+
+```typescript
+import { TLSInspectionConfiguration } from '@durkinza/cdk-networkfirewall-l2'
+
+TLSInspectionConfiguration.fromConfigurationArn(scope: Construct, id: string, configurationArn: string)
+```
+
+Reference an existing TLS Inspection Configuration, defined outside of the CDK code, by arn.
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.fromConfigurationArn.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.fromConfigurationArn.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `configurationArn`<sup>Required</sup> <a name="configurationArn" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.fromConfigurationArn.parameter.configurationArn"></a>
+
+- *Type:* string
+
+---
+
+##### `fromConfigurationName` <a name="fromConfigurationName" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.fromConfigurationName"></a>
+
+```typescript
+import { TLSInspectionConfiguration } from '@durkinza/cdk-networkfirewall-l2'
+
+TLSInspectionConfiguration.fromConfigurationName(scope: Construct, id: string, TLSInspectionConfigurationName: string)
+```
+
+Reference an existing TLS Inspection Configuration, defined outside of the CDK code, by name.
+
+###### `scope`<sup>Required</sup> <a name="scope" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.fromConfigurationName.parameter.scope"></a>
+
+- *Type:* constructs.Construct
+
+---
+
+###### `id`<sup>Required</sup> <a name="id" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.fromConfigurationName.parameter.id"></a>
+
+- *Type:* string
+
+---
+
+###### `TLSInspectionConfigurationName`<sup>Required</sup> <a name="TLSInspectionConfigurationName" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.fromConfigurationName.parameter.TLSInspectionConfigurationName"></a>
+
+- *Type:* string
+
+---
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.tlsInspectionConfigurationArn">tlsInspectionConfigurationArn</a></code> | <code>string</code> | The Arn of the TLS Inspection Configuration. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.tlsInspectionConfigurationId">tlsInspectionConfigurationId</a></code> | <code>string</code> | The physical name of the TLS Inspection Configuration. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.description">description</a></code> | <code>string</code> | The Description of the TLS Inspection Configuration. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the TLS Inspection Configuration. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `env`<sup>Required</sup> <a name="env" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.env"></a>
+
+```typescript
+public readonly env: ResourceEnvironment;
+```
+
+- *Type:* aws-cdk-lib.ResourceEnvironment
+
+The environment this resource belongs to.
+
+For resources that are created and managed by the CDK
+(generally, those created by creating new class instances like Role, Bucket, etc.),
+this is always the same as the environment of the stack they belong to;
+however, for imported resources
+(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
+that might be different than the stack they were imported into.
+
+---
+
+##### `stack`<sup>Required</sup> <a name="stack" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.stack"></a>
+
+```typescript
+public readonly stack: Stack;
+```
+
+- *Type:* aws-cdk-lib.Stack
+
+The stack in which this resource is defined.
+
+---
+
+##### `tlsInspectionConfigurationArn`<sup>Required</sup> <a name="tlsInspectionConfigurationArn" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.tlsInspectionConfigurationArn"></a>
+
+```typescript
+public readonly tlsInspectionConfigurationArn: string;
+```
+
+- *Type:* string
+
+The Arn of the TLS Inspection Configuration.
+
+---
+
+##### `tlsInspectionConfigurationId`<sup>Required</sup> <a name="tlsInspectionConfigurationId" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.tlsInspectionConfigurationId"></a>
+
+```typescript
+public readonly tlsInspectionConfigurationId: string;
+```
+
+- *Type:* string
+
+The physical name of the TLS Inspection Configuration.
+
+---
+
+##### `description`<sup>Optional</sup> <a name="description" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* string
+
+The Description of the TLS Inspection Configuration.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+
+Tags to be added to the TLS Inspection Configuration.
+
+---
+
+
 ## Structs <a name="Structs" id="Structs"></a>
 
 ### CloudWatchLogLocationProps <a name="CloudWatchLogLocationProps" id="@durkinza/cdk-networkfirewall-l2.CloudWatchLogLocationProps"></a>
@@ -2144,6 +2473,8 @@ const firewallPolicyProps: FirewallPolicyProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statefulRuleGroups">statefulRuleGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList">StatefulRuleGroupList</a>[]</code> | The stateful rule groups that are used in the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statelessCustomActions">statelessCustomActions</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.CustomActionProperty[]</code> | The custom action definitions that are available for use in the firewall policy's statelessDefaultActions setting. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statelessRuleGroups">statelessRuleGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupList">StatelessRuleGroupList</a>[]</code> | References to the stateless rule groups that are used in the policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.tlsInspectionConfiguration">tlsInspectionConfiguration</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration">ITLSInspectionConfiguration</a></code> | AWS Network Firewall uses a TLS inspection configuration to decrypt traffic. |
 
 ---
 
@@ -2268,6 +2599,34 @@ References to the stateless rule groups that are used in the policy.
 
 ---
 
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+- *Default:* No tags applied
+
+Tags to be added to the policy.
+
+---
+
+##### `tlsInspectionConfiguration`<sup>Optional</sup> <a name="tlsInspectionConfiguration" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.tlsInspectionConfiguration"></a>
+
+```typescript
+public readonly tlsInspectionConfiguration: ITLSInspectionConfiguration;
+```
+
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration">ITLSInspectionConfiguration</a>
+- *Default:* No TLS Inspection performed.
+
+AWS Network Firewall uses a TLS inspection configuration to decrypt traffic.
+
+Network Firewall re-encrypts the traffic before sending it to its destination.
+
+---
+
 ### FirewallProps <a name="FirewallProps" id="@durkinza/cdk-networkfirewall-l2.FirewallProps"></a>
 
 The Properties for defining a Firewall Resource.
@@ -2291,7 +2650,7 @@ const firewallProps: FirewallProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.firewallName">firewallName</a></code> | <code>string</code> | The descriptive name of the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.firewallPolicyChangeProtection">firewallPolicyChangeProtection</a></code> | <code>boolean</code> | A setting indicating whether the firewall is protected against a change to the firewall policy association. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.loggingCloudWatchLogGroups">loggingCloudWatchLogGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.CloudWatchLogLocationProps">CloudWatchLogLocationProps</a>[]</code> | A list of CloudWatch LogGroups to send logs to. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.loggingKinesisDataStreams">loggingKinesisDataStreams</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.KinesisDataFirehoseLogLocationProps">KinesisDataFirehoseLogLocationProps</a>[]</code> | A list of S3 Buckets to send logs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.loggingKinesisDataStreams">loggingKinesisDataStreams</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.KinesisDataFirehoseLogLocationProps">KinesisDataFirehoseLogLocationProps</a>[]</code> | A list of Kinesis Data Firehose to send logs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.loggingS3Buckets">loggingS3Buckets</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.S3LogLocationProps">S3LogLocationProps</a>[]</code> | A list of S3 Buckets to send logs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.subnetChangeProtection">subnetChangeProtection</a></code> | <code>boolean</code> | A setting indicating whether the firewall is protected against changes to the subnet associations. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.subnetMappings">subnetMappings</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | The public subnets that Network Firewall is using for the firewall. |
@@ -2403,9 +2762,9 @@ public readonly loggingKinesisDataStreams: KinesisDataFirehoseLogLocationProps[]
 ```
 
 - *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.KinesisDataFirehoseLogLocationProps">KinesisDataFirehoseLogLocationProps</a>[]
-- *Default:* Logs will not be sent to an S3 bucket.
+- *Default:* Logs will not be sent to a Kinesis DataFirehose.
 
-A list of S3 Buckets to send logs to.
+A list of Kinesis Data Firehose to send logs to.
 
 ---
 
@@ -2753,7 +3112,7 @@ public readonly ruleOrder: StatefulRuleOptions;
 ```
 
 - *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
-- *Default:* DEFAULT_RULE_ACTION_ORDER
+- *Default:* STRICT_ORDER
 
 Rule Order.
 
@@ -3012,7 +3371,7 @@ public readonly ruleOrder: StatefulRuleOptions;
 ```
 
 - *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
-- *Default:* DEFAULT_RULE_ACTION_ORDER
+- *Default:* STRICT_ORDER
 
 Rule Order.
 
@@ -3248,7 +3607,7 @@ public readonly ruleOrder: StatefulRuleOptions;
 ```
 
 - *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
-- *Default:* DEFAULT_RULE_ACTION_ORDER
+- *Default:* STRICT_ORDER
 
 Rule Order.
 
@@ -3341,7 +3700,7 @@ public readonly ruleOrder: StatefulRuleOptions;
 ```
 
 - *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
-- *Default:* DEFAULT_RULE_ACTION_ORDER
+- *Default:* STRICT_ORDER
 
 Rule Order.
 
@@ -3684,6 +4043,82 @@ public readonly tcpFlags: TCPFlagFieldProperty[];
 - *Default:* undefined
 
 TCP flags and masks to inspect packets for.
+
+---
+
+### TLSInspectionConfigurationProps <a name="TLSInspectionConfigurationProps" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps"></a>
+
+The Properties for defining a Firewall TLS Inspection Configuration.
+
+#### Initializer <a name="Initializer" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.Initializer"></a>
+
+```typescript
+import { TLSInspectionConfigurationProps } from '@durkinza/cdk-networkfirewall-l2'
+
+const tLSInspectionConfigurationProps: TLSInspectionConfigurationProps = { ... }
+```
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.serverCertificateConfigurations">serverCertificateConfigurations</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnTLSInspectionConfiguration.ServerCertificateConfigurationProperty[]</code> | The TLS Server Certificate Configuration Property. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.configurationName">configurationName</a></code> | <code>string</code> | The descriptive name of the TLS inspection configuration. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.description">description</a></code> | <code>string</code> | The Description of the TLS Inspection Configuration. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the configuration. |
+
+---
+
+##### `serverCertificateConfigurations`<sup>Required</sup> <a name="serverCertificateConfigurations" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.serverCertificateConfigurations"></a>
+
+```typescript
+public readonly serverCertificateConfigurations: ServerCertificateConfigurationProperty[];
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnTLSInspectionConfiguration.ServerCertificateConfigurationProperty[]
+
+The TLS Server Certificate Configuration Property.
+
+---
+
+##### `configurationName`<sup>Optional</sup> <a name="configurationName" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.configurationName"></a>
+
+```typescript
+public readonly configurationName: string;
+```
+
+- *Type:* string
+- *Default:* CloudFormation-generated name
+
+The descriptive name of the TLS inspection configuration.
+
+You can't change the name of a TLS inspection configuration after you create it.
+
+---
+
+##### `description`<sup>Optional</sup> <a name="description" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.description"></a>
+
+```typescript
+public readonly description: string;
+```
+
+- *Type:* string
+- *Default:* No Description
+
+The Description of the TLS Inspection Configuration.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+- *Default:* No tags applied
+
+Tags to be added to the configuration.
 
 ---
 
@@ -4675,6 +5110,94 @@ the physical name of the rule group.
 
 ---
 
+### ITLSInspectionConfiguration <a name="ITLSInspectionConfiguration" id="@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration"></a>
+
+- *Extends:* aws-cdk-lib.IResource
+
+- *Implemented By:* <a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration">TLSInspectionConfiguration</a>, <a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration">ITLSInspectionConfiguration</a>
+
+Defines a TLS Inspection Configuration Resource in the stack.
+
+
+#### Properties <a name="Properties" id="Properties"></a>
+
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.tlsInspectionConfigurationArn">tlsInspectionConfigurationArn</a></code> | <code>string</code> | The Arn of the TLS Inspection Configuration. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.tlsInspectionConfigurationId">tlsInspectionConfigurationId</a></code> | <code>string</code> | The name of the TLS Inspection Configuration. |
+
+---
+
+##### `node`<sup>Required</sup> <a name="node" id="@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.node"></a>
+
+```typescript
+public readonly node: Node;
+```
+
+- *Type:* constructs.Node
+
+The tree node.
+
+---
+
+##### `env`<sup>Required</sup> <a name="env" id="@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.env"></a>
+
+```typescript
+public readonly env: ResourceEnvironment;
+```
+
+- *Type:* aws-cdk-lib.ResourceEnvironment
+
+The environment this resource belongs to.
+
+For resources that are created and managed by the CDK
+(generally, those created by creating new class instances like Role, Bucket, etc.),
+this is always the same as the environment of the stack they belong to;
+however, for imported resources
+(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
+that might be different than the stack they were imported into.
+
+---
+
+##### `stack`<sup>Required</sup> <a name="stack" id="@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.stack"></a>
+
+```typescript
+public readonly stack: Stack;
+```
+
+- *Type:* aws-cdk-lib.Stack
+
+The stack in which this resource is defined.
+
+---
+
+##### `tlsInspectionConfigurationArn`<sup>Required</sup> <a name="tlsInspectionConfigurationArn" id="@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.tlsInspectionConfigurationArn"></a>
+
+```typescript
+public readonly tlsInspectionConfigurationArn: string;
+```
+
+- *Type:* string
+
+The Arn of the TLS Inspection Configuration.
+
+---
+
+##### `tlsInspectionConfigurationId`<sup>Required</sup> <a name="tlsInspectionConfigurationId" id="@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.tlsInspectionConfigurationId"></a>
+
+```typescript
+public readonly tlsInspectionConfigurationId: string;
+```
+
+- *Type:* string
+
+The name of the TLS Inspection Configuration.
+
+---
+
 ## Enums <a name="Enums" id="Enums"></a>
 
 ### LogDestinationType <a name="LogDestinationType" id="@durkinza/cdk-networkfirewall-l2.LogDestinationType"></a>
@@ -4830,14 +5353,16 @@ Indicates how to manage the order of the rule evaluation for the rule group.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.DEFAULT_ACTION_ORDER">DEFAULT_ACTION_ORDER</a></code> | This is the default action Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on certain settings. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.ACTION_ORDER">ACTION_ORDER</a></code> | Rules with a pass action are processed first, followed by drop, reject, and alert actions. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.STRICT_ORDER">STRICT_ORDER</a></code> | With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined. |
 
 ---
 
-##### `DEFAULT_ACTION_ORDER` <a name="DEFAULT_ACTION_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.DEFAULT_ACTION_ORDER"></a>
+##### `ACTION_ORDER` <a name="ACTION_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.ACTION_ORDER"></a>
 
-This is the default action Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on certain settings.
+Rules with a pass action are processed first, followed by drop, reject, and alert actions.
+
+This option was previously named Default Acton Order.
 
 ---
 
@@ -4845,6 +5370,8 @@ This is the default action Stateful rules are provided to the rule engine as Sur
 ##### `STRICT_ORDER` <a name="STRICT_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.STRICT_ORDER"></a>
 
 With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined.
+
+Recommended Order
 
 ---
 
