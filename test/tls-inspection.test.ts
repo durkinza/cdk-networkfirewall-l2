@@ -44,7 +44,6 @@ describe('Testing TLS Inspection Features', ()=>{
     });
 
 
-    console.log(Template.fromStack(stack).toJSON().Resources.MyTLSInspectionConfigurationDE9CA174.Properties);
     // THEN
     Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::TLSInspectionConfiguration', {
       TLSInspectionConfigurationName: 'MyTLSInspectionConfiguration',
