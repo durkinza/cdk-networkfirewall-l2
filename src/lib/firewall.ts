@@ -2,7 +2,6 @@ import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import { CfnFirewall, CfnFirewallProps } from 'aws-cdk-lib/aws-networkfirewall';
 import * as core from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
-import { EncryptionConfiguration } from './encryption-configuration';
 import {
   ILogLocation,
   S3LogLocationProps,
@@ -90,14 +89,6 @@ export interface FirewallProps {
    * @default - true
    */
   readonly deleteProtection?: boolean;
-
-  /**
-   * Not yet supported in Cloudformation at time of writing.
-   * You can use a customer managed key in AWS Key Management Service (KMS) to encrypt your data at rest.
-   * If you don’t configure a customer managed key, Network Firewall encrypts your data using an AWS managed key.
-   * @default - AWS managed key is used
-   */
-  readonly encryptionConfiguration?: EncryptionConfiguration;
 
   /**
    * A setting indicating whether the firewall is protected against a change to the firewall policy association.
