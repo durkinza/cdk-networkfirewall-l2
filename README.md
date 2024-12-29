@@ -160,19 +160,19 @@ Stateful rule groups can be defined with no actionable rules within them, so the
 new NetFW.Stateful5TupleRuleGroup(stack, 'MyStateful5TupleRuleGroup', {
   // Assumes the following
   // rules: None
-  // ruleOrder: NetFW.StatefulRuleOptions.DEFAULT_ACTION_ORDER,
+  // ruleOrder: NetFW.StatefulRuleOptions.STRICT_ORDER,
   // capacity: 100
 });
 new NetFW.StatefulDomainListRuleGroup(stack, 'MyStatefulDomainListRuleGroup', {
   // Assumes the following
   // rule: None
-  // ruleOrder: NetFW.StatefulRuleOptions.DEFAULT_ACTION_ORDER,
+  // ruleOrder: NetFW.StatefulRuleOptions.STRICT_ORDER,
   // capacity: 100
 });
 new NetFW.StatefulSuricataRuleGroup(stack, 'MyStatefulSuricataRuleGroup', {
   // Assumes the following
   // rules: ""
-  // ruleOrder: NetFW.StatefulRuleOptions.DEFAULT_ACTION_ORDER,
+  // ruleOrder: NetFW.StatefulRuleOptions.STRICT_ORDER,
   // capacity: 100
 });
 ```
