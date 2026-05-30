@@ -6,7 +6,7 @@ import { Construct } from 'constructs';
 /**
  * The type of log to send.
  */
-export enum LogType{
+export enum LogType {
   /**
    * Alert logs report traffic that matches a stateful rule with an action setting that sends an alert log message.
    */
@@ -72,7 +72,7 @@ export interface LogLocationProps {
  * Base Log Location class
  */
 export abstract class LogLocationBase implements ILogLocation {
-  public readonly logType : LogType | string;
+  public readonly logType: LogType | string;
   public readonly logDestinationType: LogDestinationType | string;
   public abstract readonly logDestination: { [key: string]: string };
   /**
@@ -89,7 +89,7 @@ export abstract class LogLocationBase implements ILogLocation {
 /**
  * Defines a S3 Bucket Logging Option.
  */
-export interface S3LogLocationProps extends LogLocationProps{
+export interface S3LogLocationProps extends LogLocationProps {
   /**
    * The name of the S3 bucket to send logs to.
    */
@@ -106,8 +106,8 @@ export interface S3LogLocationProps extends LogLocationProps{
  * Defines a S3 Bucket Logging configuration.
  */
 export class S3LogLocation extends LogLocationBase {
-  public readonly logType : LogType | string;
-  public readonly logDestinationType : LogDestinationType | string;
+  public readonly logType: LogType | string;
+  public readonly logDestinationType: LogDestinationType | string;
   public readonly logDestination: { [key: string]: string };
 
   /**
@@ -140,7 +140,7 @@ export class S3LogLocation extends LogLocationBase {
 /**
  * Defines a Kinesis Delivery Stream Logging Option.
  */
-export interface KinesisDataFirehoseLogLocationProps extends LogLocationProps{
+export interface KinesisDataFirehoseLogLocationProps extends LogLocationProps {
   /**
    * The name of the Kinesis Data Firehose delivery stream to send logs to.
    */
@@ -151,8 +151,8 @@ export interface KinesisDataFirehoseLogLocationProps extends LogLocationProps{
  * Defines a Kinesis Delivery Stream Logging Configuration.
  */
 export class KinesisDataFirehoseLogLocation extends LogLocationBase {
-  public readonly logType : LogType | string;
-  public readonly logDestinationType : LogDestinationType | string;
+  public readonly logType: LogType | string;
+  public readonly logDestinationType: LogDestinationType | string;
   public readonly logDestination: { [key: string]: string };
 
   /**
@@ -180,7 +180,7 @@ export class KinesisDataFirehoseLogLocation extends LogLocationBase {
 /**
  * Defines a Cloud Watch Log Group Logging Option.
  */
-export interface CloudWatchLogLocationProps extends LogLocationProps{
+export interface CloudWatchLogLocationProps extends LogLocationProps {
   /**
    * The name of the CloudWatch Log Group to send logs to.
    */
@@ -191,8 +191,8 @@ export interface CloudWatchLogLocationProps extends LogLocationProps{
  * Defines a Cloud Watch Log Group Logging Configuration.
  */
 export class CloudWatchLogLocation extends LogLocationBase {
-  public readonly logType : LogType | string;
-  public readonly logDestinationType : LogDestinationType | string;
+  public readonly logType: LogType | string;
+  public readonly logDestinationType: LogDestinationType | string;
   public readonly logDestination: { [key: string]: string };
 
   /**
@@ -219,7 +219,7 @@ export class CloudWatchLogLocation extends LogLocationBase {
 /**
  * Defines a Network Firewall Logging Configuration in the stack
  */
-export interface ILoggingConfiguration extends core.IResource{
+export interface ILoggingConfiguration extends core.IResource {
   /**
    * The Amazon Resource Name (ARN) of the Firewall that the logging configuration is associated with.
    * You can't change the firewall specification after you create the logging configuration.

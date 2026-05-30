@@ -6,7 +6,7 @@ import { Construct } from 'constructs';
 /**
  * Defines a TLS Inspection Configuration Resource in the stack
  */
-export interface ITLSInspectionConfiguration extends core.IResource{
+export interface ITLSInspectionConfiguration extends core.IResource {
   /**
    * The Arn of the TLS Inspection Configuration.
    * @attribute

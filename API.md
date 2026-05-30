@@ -47,6 +47,7 @@ new Firewall(scope: Construct, id: string, props: FirewallProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.addLoggingConfigurations">addLoggingConfigurations</a></code> | Add a Logging Configuration to the Firewall. |
 
@@ -59,6 +60,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.Firewall.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.Firewall.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.Firewall.applyRemovalPolicy"></a>
 
@@ -118,7 +138,7 @@ An array of Log Locations.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.Firewall.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.Firewall.isConstruct"></a>
 
 ```typescript
 import { Firewall } from '@durkinza/cdk-networkfirewall-l2'
@@ -127,6 +147,20 @@ Firewall.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.Firewall.isConstruct.parameter.x"></a>
 
@@ -229,7 +263,7 @@ Reference an existing Network Firewall, defined outside of the CDK code, by name
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.property.endpointIds">endpointIds</a></code> | <code>string[]</code> | The unique IDs of the firewall endpoints for all of the subnets that you attached to the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.property.firewallArn">firewallArn</a></code> | <code>string</code> | The Arn of the Firewall. |
@@ -260,16 +294,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -429,6 +464,7 @@ new FirewallPolicy(scope: Construct, id: string, props: FirewallPolicyProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.addStatefulRuleGroup">addStatefulRuleGroup</a></code> | Add a stateful rule group to the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.addStatelessRuleGroup">addStatelessRuleGroup</a></code> | Add a stateless rule group to the policy. |
@@ -442,6 +478,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.applyRemovalPolicy"></a>
 
@@ -509,7 +564,7 @@ The stateless rule group to add to the policy.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.isConstruct"></a>
 
 ```typescript
 import { FirewallPolicy } from '@durkinza/cdk-networkfirewall-l2'
@@ -518,6 +573,20 @@ FirewallPolicy.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.isConstruct.parameter.x"></a>
 
@@ -624,7 +693,7 @@ The name of the existing firewall policy.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.firewallPolicyArn">firewallPolicyArn</a></code> | <code>string</code> | The Arn of the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.firewallPolicyId">firewallPolicyId</a></code> | <code>string</code> | The physical name of the firewall policy. |
@@ -656,16 +725,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -835,6 +905,7 @@ new LoggingConfiguration(scope: Construct, id: string, props: LoggingConfigurati
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.iLogLocationsToLogDestinationConfigProperty">iLogLocationsToLogDestinationConfigProperty</a></code> | Convert ILogLocation array to L1 LogDestinationConfigProperty array. |
 
@@ -847,6 +918,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.applyRemovalPolicy"></a>
 
@@ -896,7 +986,7 @@ An array of assorted Log Locations.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.isConstruct"></a>
 
 ```typescript
 import { LoggingConfiguration } from '@durkinza/cdk-networkfirewall-l2'
@@ -905,6 +995,20 @@ LoggingConfiguration.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.isConstruct.parameter.x"></a>
 
@@ -951,7 +1055,7 @@ Check whether the given construct is a Resource.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.property.firewallRef">firewallRef</a></code> | <code>string</code> | The associated firewall Arn. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.property.firewallName">firewallName</a></code> | <code>string</code> | The associated firewall Name. |
@@ -977,16 +1081,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -1084,6 +1189,7 @@ new Stateful5TupleRuleGroup(scope: Construct, id: string, props?: Stateful5Tuple
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 
 ---
@@ -1095,6 +1201,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.applyRemovalPolicy"></a>
 
@@ -1129,7 +1254,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.isConstruct"></a>
 
 ```typescript
 import { Stateful5TupleRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
@@ -1138,6 +1263,20 @@ Stateful5TupleRuleGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.isConstruct.parameter.x"></a>
 
@@ -1212,7 +1351,7 @@ Reference existing Rule Group.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
@@ -1237,16 +1376,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -1332,6 +1472,7 @@ new StatefulDomainListRuleGroup(scope: Construct, id: string, props?: StatefulDo
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 
 ---
@@ -1343,6 +1484,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.applyRemovalPolicy"></a>
 
@@ -1377,7 +1537,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.isConstruct"></a>
 
 ```typescript
 import { StatefulDomainListRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
@@ -1386,6 +1546,20 @@ StatefulDomainListRuleGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.isConstruct.parameter.x"></a>
 
@@ -1460,7 +1634,7 @@ Reference existing Rule Group.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
@@ -1485,16 +1659,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -1580,6 +1755,7 @@ new StatefulSuricataRuleGroup(scope: Construct, id: string, props?: StatefulSuri
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 
 ---
@@ -1591,6 +1767,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.applyRemovalPolicy"></a>
 
@@ -1626,7 +1821,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isConstruct"></a>
 
 ```typescript
 import { StatefulSuricataRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
@@ -1635,6 +1830,20 @@ StatefulSuricataRuleGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isConstruct.parameter.x"></a>
 
@@ -1737,7 +1946,7 @@ Reference existing Rule Group.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
@@ -1762,16 +1971,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -1857,6 +2067,7 @@ new StatelessRuleGroup(scope: Construct, id: string, props?: StatelessRuleGroupP
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.calculateCapacity">calculateCapacity</a></code> | Calculates the expected capacity required for all applied stateful rules. |
 
@@ -1869,6 +2080,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.applyRemovalPolicy"></a>
 
@@ -1912,7 +2142,7 @@ Calculates the expected capacity required for all applied stateful rules.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.isConstruct"></a>
 
 ```typescript
 import { StatelessRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
@@ -1921,6 +2151,20 @@ StatelessRuleGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.isConstruct.parameter.x"></a>
 
@@ -2023,7 +2267,7 @@ Reference existing Rule Group by Name.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
@@ -2048,16 +2292,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -2143,6 +2388,7 @@ new TLSInspectionConfiguration(scope: Construct, id: string, props: TLSInspectio
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 
 ---
@@ -2154,6 +2400,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.applyRemovalPolicy"></a>
 
@@ -2189,7 +2454,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isConstruct"></a>
 
 ```typescript
 import { TLSInspectionConfiguration } from '@durkinza/cdk-networkfirewall-l2'
@@ -2198,6 +2463,20 @@ TLSInspectionConfiguration.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isConstruct.parameter.x"></a>
 
@@ -2300,7 +2579,7 @@ Reference an existing TLS Inspection Configuration, defined outside of the CDK c
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.tlsInspectionConfigurationArn">tlsInspectionConfigurationArn</a></code> | <code>string</code> | The Arn of the TLS Inspection Configuration. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.tlsInspectionConfigurationId">tlsInspectionConfigurationId</a></code> | <code>string</code> | The physical name of the TLS Inspection Configuration. |
@@ -2327,16 +2606,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -4682,7 +4962,7 @@ Defines a Network Firewall in the stack.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewall.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewall.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewall.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewall.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewall.property.firewallArn">firewallArn</a></code> | <code>string</code> | The Arn of the Firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewall.property.firewallId">firewallId</a></code> | <code>string</code> | The physical name of the Firewall. |
@@ -4707,16 +4987,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -4770,7 +5051,7 @@ Defines a Network Firewall Policy in the stack.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy.property.firewallPolicyArn">firewallPolicyArn</a></code> | <code>string</code> | The Arn of the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy.property.firewallPolicyId">firewallPolicyId</a></code> | <code>string</code> | The physical name of the firewall policy. |
@@ -4795,16 +5076,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -4858,7 +5140,7 @@ Defines a Network Firewall Logging Configuration in the stack.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration.property.firewallRef">firewallRef</a></code> | <code>string</code> | The Amazon Resource Name (ARN) of the Firewall that the logging configuration is associated with. |
 
@@ -4882,16 +5164,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -4996,7 +5279,7 @@ The Interface that represents a Stateful Rule Group.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
@@ -5021,16 +5304,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -5092,7 +5376,7 @@ Defines a Stateless rule Group in the stack.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
@@ -5117,16 +5401,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -5180,7 +5465,7 @@ Defines a TLS Inspection Configuration Resource in the stack.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.tlsInspectionConfigurationArn">tlsInspectionConfigurationArn</a></code> | <code>string</code> | The Arn of the TLS Inspection Configuration. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.tlsInspectionConfigurationId">tlsInspectionConfigurationId</a></code> | <code>string</code> | The name of the TLS Inspection Configuration. |
@@ -5205,16 +5490,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 

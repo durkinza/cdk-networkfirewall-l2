@@ -19,7 +19,7 @@ import { IFirewallPolicy } from './policy';
 /**
  * Defines a Network Firewall in the stack
  */
-export interface IFirewall extends core.IResource{
+export interface IFirewall extends core.IResource {
   /**
    * The Arn of the Firewall.
    * @attribute

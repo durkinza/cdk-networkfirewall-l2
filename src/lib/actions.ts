@@ -65,5 +65,5 @@ export enum StatefulStrictAction {
    * Logs an ALERT message on only the packets that are in established connections.
    * This does not drop packets, but alerts you to what would be dropped if you were to choose Drop established.
    */
-  ALERT_ESTABLISHED = 'aws:alert_established'
+  ALERT_ESTABLISHED = 'aws:alert_established',
 }

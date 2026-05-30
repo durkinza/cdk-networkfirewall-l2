@@ -5,7 +5,7 @@ import { castAddressProperty } from './private/rules-common';
 /**
  * The interface that represents the values of a StatelessRule
  */
-export interface IStatelessRule{}
+export interface IStatelessRule {}
 
 /**
  * The base class of Stateless Rules
@@ -260,7 +260,7 @@ export class Stateful5TupleRule extends StatefulRuleBase {
    * The L1 Stateful Rule Property
    * @attribute
    */
-  public resource:CfnRuleGroup.StatefulRuleProperty;
+  public resource: CfnRuleGroup.StatefulRuleProperty;
 
   /**
    *
@@ -298,7 +298,7 @@ export class Stateful5TupleRule extends StatefulRuleBase {
 /**
  * The type of domain list to generate
  */
-export enum StatefulDomainListType{
+export enum StatefulDomainListType {
   /**
    * Deny domain(s) through
    */
@@ -314,7 +314,7 @@ export enum StatefulDomainListType{
  * The types of targets to inspect for.
  *  You can inspect HTTP or HTTPS protocols, or both.
  */
-export enum StatefulDomainListTargetType{
+export enum StatefulDomainListTargetType {
   /**
    * Target HTTPS traffic
    * For HTTPS traffic, Network Firewall uses the Server Name Indication (SNI) extension in the TLS handshake to determine the hostname, or domain name, that the client is trying to connect to
@@ -355,7 +355,7 @@ export class StatefulDomainListRule extends StatefulRuleBase {
    * The L1 Stateful Rule Property
    * @attribute
    */
-  public resource:CfnRuleGroup.RulesSourceListProperty;
+  public resource: CfnRuleGroup.RulesSourceListProperty;
   /**
    *
    * @param props

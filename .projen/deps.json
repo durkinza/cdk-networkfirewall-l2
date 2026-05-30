@@ -75,7 +75,7 @@
     },
     {
       "name": "jest-junit",
-      "version": "^15",
+      "version": "^17",
       "type": "build"
     },
     {
@@ -93,12 +93,12 @@
     },
     {
       "name": "jsii-rosetta",
-      "version": "~5.7.0",
+      "version": "~5.9.0",
       "type": "build"
     },
     {
       "name": "jsii",
-      "version": "~5.7.0",
+      "version": "~5.9.0",
       "type": "build"
     },
     {
@@ -107,6 +107,10 @@
     },
     {
       "name": "projen",
+      "type": "build"
+    },
+    {
+      "name": "rimraf",
       "type": "build"
     },
     {
@@ -127,12 +131,12 @@
     },
     {
       "name": "aws-cdk-lib",
-      "version": "^2.173.1",
+      "version": "^2.257.0",
       "type": "peer"
     },
     {
       "name": "constructs",
-      "version": "^10.0.5",
+      "version": "^10.5.1",
       "type": "peer"
     },
     {

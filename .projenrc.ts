@@ -4,7 +4,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   author: 'durkinza',
   authorAddress: '8985088+durkinza@users.noreply.github.com',
   bugsUrl: 'https://github.com/durkinza/cdk-networkfirewall-l2/issues',
-  cdkVersion: '2.173.1',
+  cdkVersion: '2.257.0',
   minNodeVersion: '16.0.0',
   workflowNodeVersion: 'latest',
   defaultReleaseBranch: 'main',
@@ -36,9 +36,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'ts-jest',
     'ts-node',
     'typescript',
+    'rimraf',
   ], /* Build dependencies for this module. */
+  packageManager: javascript.NodePackageManager.YARN_CLASSIC,
   homepage: 'https://github.com/durkinza/cdk-networkfirewall-l2#readme',
-  jsiiVersion: '~5.7.0',
+  jsiiVersion: '~5.9.0',
   keywords: [
     'cdk',
     'aws-cdk',
@@ -54,10 +56,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
     'Security',
   ],
   license: 'Apache-2.0',
-  //majorVersion: 0,
+  majorVersion: 1,
   name: '@durkinza/cdk-networkfirewall-l2',
   npmAccess: javascript.NpmAccess.PUBLIC,
-  npmignore: ['.devcontainer'],
+  npmignore: ['.devcontainer', '.github', '.husky', 'test', 'test-reports', 'coverage'],
   packageName: '@durkinza/cdk-networkfirewall-l2', /* The "name" in package.json. */
   peerDeps: ['aws-cdk-lib'],
   projenrcTs: true,
@@ -83,5 +85,8 @@ new CSpell(project, {
 });
 new Husky(project);
 new Commitlint(project);
+project.addTask('clean', {
+  exec: 'yarn exec rimraf dist lib coverage test-reports test-reports',
+});
 
 project.synth();

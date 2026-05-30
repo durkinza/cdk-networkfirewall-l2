@@ -29,6 +29,7 @@
     "jsii",
     "npm-check-updates",
     "projen",
+    "rimraf",
     "standard-version",
     "ts-jest",
     "ts-node",

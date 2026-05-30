@@ -9,7 +9,7 @@ import { StatelessRule, Stateful5TupleRule, StatefulDomainListRule } from './rul
 /**
  * Maps a priority to a stateless rule
  */
-export interface StatelessRuleList{
+export interface StatelessRuleList {
   /**
    * The priority of the rule in the rule group
    */
@@ -146,7 +146,7 @@ export class StatelessRuleGroup extends StatelessRuleGroupBase {
 
   public readonly ruleGroupId: string;
   public readonly ruleGroupArn: string;
-  private rules:StatelessRuleList[];
+  private rules: StatelessRuleList[];
 
   /**
    *
@@ -310,7 +310,7 @@ export enum StatefulRuleOptions {
    * With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined.
    * Recommended Order
    */
-  STRICT_ORDER='STRICT_ORDER'
+  STRICT_ORDER='STRICT_ORDER',
 }
 
 /**
