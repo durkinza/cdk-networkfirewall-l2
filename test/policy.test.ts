@@ -365,4 +365,267 @@ describe("Testing Logging Features", () => {
       },
     );
   });
+
+  test("Can add stateful rule group after construction", () => {
+    // GIVEN
+    const statefulRuleGroup = new NetFW.StatefulSuricataRuleGroup(
+      stack,
+      "StatefulRuleGroup1",
+      {
+        rules: "",
+      },
+    );
+
+    // WHEN
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+      statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+    });
+    policy.addStatefulRuleGroup({ priority: 10, ruleGroup: statefulRuleGroup });
+
+    // THEN
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::FirewallPolicy",
+      {
+        FirewallPolicy: {
+          StatefulRuleGroupReferences: [
+            {
+              Priority: 10,
+              ResourceArn: {
+                "Fn::GetAtt": ["StatefulRuleGroup185567ABC", "RuleGroupArn"],
+              },
+            },
+          ],
+        },
+      },
+    );
+  });
+
+  test("Adding stateful rule group without priority throws in STRICT_ORDER", () => {
+    // GIVEN
+    const statefulRuleGroup = new NetFW.StatefulSuricataRuleGroup(
+      stack,
+      "StatefulRuleGroup1",
+      {
+        rules: "",
+      },
+    );
+
+    // WHEN
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+      statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+    });
+
+    // THEN
+    expect(() => {
+      policy.addStatefulRuleGroup({ ruleGroup: statefulRuleGroup });
+    }).toThrow(
+      "All stateful rule groups must have a priority set when using STRICT_ORDER engine options",
+    );
+  });
+
+  test("Adding stateful rule group with duplicate priority throws", () => {
+    // GIVEN
+    const statefulRuleGroup1 = new NetFW.StatefulSuricataRuleGroup(
+      stack,
+      "StatefulRuleGroup1",
+      {
+        rules: "",
+      },
+    );
+    const statefulRuleGroup2 = new NetFW.StatefulSuricataRuleGroup(
+      stack,
+      "StatefulRuleGroup2",
+      {
+        rules: "",
+      },
+    );
+
+    // WHEN
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+      statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+    });
+    policy.addStatefulRuleGroup({
+      priority: 10,
+      ruleGroup: statefulRuleGroup1,
+    });
+
+    // THEN
+    expect(() => {
+      policy.addStatefulRuleGroup({
+        priority: 10,
+        ruleGroup: statefulRuleGroup2,
+      });
+    }).toThrow(
+      "Priority must be unique, received duplicate priority on stateful group",
+    );
+  });
+
+  test("Can add stateless rule group after construction", () => {
+    // GIVEN
+    const statelessRuleGroup = new NetFW.StatelessRuleGroup(
+      stack,
+      "StatelessRuleGroup1",
+      {
+        rules: [],
+      },
+    );
+
+    // WHEN
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+      statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+    });
+    policy.addStatelessRuleGroup({
+      priority: 10,
+      ruleGroup: statelessRuleGroup,
+    });
+
+    // THEN
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::FirewallPolicy",
+      {
+        FirewallPolicy: {
+          StatelessRuleGroupReferences: [
+            {
+              Priority: 10,
+              ResourceArn: {
+                "Fn::GetAtt": ["StatelessRuleGroup170E51540", "RuleGroupArn"],
+              },
+            },
+          ],
+        },
+      },
+    );
+  });
+
+  test("Adding stateless rule group with duplicate priority throws", () => {
+    // GIVEN
+    const statelessRuleGroup1 = new NetFW.StatelessRuleGroup(
+      stack,
+      "StatelessRuleGroup1",
+      {
+        rules: [],
+      },
+    );
+    const statelessRuleGroup2 = new NetFW.StatelessRuleGroup(
+      stack,
+      "StatelessRuleGroup2",
+      {
+        rules: [],
+      },
+    );
+
+    // WHEN
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+      statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+    });
+    policy.addStatelessRuleGroup({
+      priority: 10,
+      ruleGroup: statelessRuleGroup1,
+    });
+
+    // THEN
+    expect(() => {
+      policy.addStatelessRuleGroup({
+        priority: 10,
+        ruleGroup: statelessRuleGroup2,
+      });
+    }).toThrow(
+      "Priority must be unique, received duplicate priority on stateless group",
+    );
+  });
+
+  test("Policy uses ruleOrder convenience prop", () => {
+    // WHEN
+    new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+      statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      ruleOrder: NetFW.StatefulEngineOptionsRuleOrder.ACTION_ORDER,
+    });
+
+    // THEN
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::FirewallPolicy",
+      {
+        FirewallPolicy: {
+          StatefulEngineOptions: {
+            RuleOrder: "DEFAULT_ACTION_ORDER",
+          },
+        },
+      },
+    );
+  });
+
+  test("Policy uses streamExceptionPolicy convenience prop", () => {
+    // WHEN
+    new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+      statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      streamExceptionPolicy: NetFW.StreamExceptionPolicy.DROP,
+    });
+
+    // THEN
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::FirewallPolicy",
+      {
+        FirewallPolicy: {
+          StatefulEngineOptions: {
+            RuleOrder: "STRICT_ORDER",
+            StreamExceptionPolicy: "DROP",
+          },
+        },
+      },
+    );
+  });
+
+  test("Cannot mix statefulEngineOptions with convenience props", () => {
+    // THEN
+    expect(() => {
+      new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+        statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
+        statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+        statefulEngineOptions: { ruleOrder: "STRICT_ORDER" },
+        ruleOrder: NetFW.StatefulEngineOptionsRuleOrder.STRICT_ORDER,
+      });
+    }).toThrow(
+      "Cannot specify both statefulEngineOptions and individual ruleOrder/streamExceptionPolicy/flowTimeouts properties.",
+    );
+  });
+
+  test("enableTlsSessionHolding requires TLS inspection configuration", () => {
+    // THEN
+    expect(() => {
+      new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+        statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
+        statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+        enableTlsSessionHolding: true,
+      });
+    }).toThrow(
+      "enableTlsSessionHolding requires an associated TLS Inspection configuration",
+    );
+  });
+
+  test("Policy defaults to STRICT_ORDER engine options", () => {
+    // WHEN
+    new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+      statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+    });
+
+    // THEN
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::FirewallPolicy",
+      {
+        FirewallPolicy: {
+          StatefulEngineOptions: {
+            RuleOrder: "STRICT_ORDER",
+          },
+        },
+      },
+    );
+  });
 });

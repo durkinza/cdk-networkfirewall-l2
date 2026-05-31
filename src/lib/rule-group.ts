@@ -450,7 +450,7 @@ abstract class StatefulRuleGroup
     /**
      *
      */
-    class Import extends StatelessRuleGroupBase {
+    class Import extends core.Resource implements IStatefulRuleGroup {
       public readonly ruleGroupId = core.Fn.select(
         1,
         core.Fn.split("/", ruleGroupArn),

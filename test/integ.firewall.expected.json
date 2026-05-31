@@ -107,9 +107,7 @@
           "Ref": "MyTestVpcPublicSubnet1RouteTable88486E9C"
         }
       },
-      "DependsOn": [
-        "MyTestVpcVPCGWFCF9AAB8"
-      ],
+      "DependsOn": ["MyTestVpcVPCGWFCF9AAB8"],
       "Metadata": {
         "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet1/DefaultRoute"
       }
@@ -137,10 +135,7 @@
       "Type": "AWS::EC2::NatGateway",
       "Properties": {
         "AllocationId": {
-          "Fn::GetAtt": [
-            "MyTestVpcPublicSubnet1EIPE6793D52",
-            "AllocationId"
-          ]
+          "Fn::GetAtt": ["MyTestVpcPublicSubnet1EIPE6793D52", "AllocationId"]
         },
         "SubnetId": {
           "Ref": "MyTestVpcPublicSubnet1SubnetA7B59A2C"
@@ -249,9 +244,7 @@
           "Ref": "MyTestVpcPublicSubnet2RouteTableE0D83E2C"
         }
       },
-      "DependsOn": [
-        "MyTestVpcVPCGWFCF9AAB8"
-      ],
+      "DependsOn": ["MyTestVpcVPCGWFCF9AAB8"],
       "Metadata": {
         "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet2/DefaultRoute"
       }
@@ -279,10 +272,7 @@
       "Type": "AWS::EC2::NatGateway",
       "Properties": {
         "AllocationId": {
-          "Fn::GetAtt": [
-            "MyTestVpcPublicSubnet2EIP46C9597E",
-            "AllocationId"
-          ]
+          "Fn::GetAtt": ["MyTestVpcPublicSubnet2EIP46C9597E", "AllocationId"]
         },
         "SubnetId": {
           "Ref": "MyTestVpcPublicSubnet2SubnetBE93625D"
@@ -540,18 +530,12 @@
           "RuleVariables": {
             "IPSets": {
               "HOME_NET": {
-                "Definition": [
-                  "10.0.0.0/16",
-                  "10.10.0.0/16"
-                ]
+                "Definition": ["10.0.0.0/16", "10.10.0.0/16"]
               }
             },
             "PortSets": {
               "WEB_PORTS": {
-                "Definition": [
-                  "443",
-                  "80"
-                ]
+                "Definition": ["443", "80"]
               }
             }
           },
@@ -570,9 +554,7 @@
                 "RuleOptions": [
                   {
                     "Keyword": "sid",
-                    "Settings": [
-                      "1234"
-                    ]
+                    "Settings": ["1234"]
                   }
                 ]
               }
@@ -584,9 +566,7 @@
         },
         "RuleGroupName": "MyStateful5TupleRuleGroup",
         "SummaryConfiguration": {
-          "RuleOptions": [
-            "MSG"
-          ]
+          "RuleOptions": ["MSG"]
         },
         "Tags": [
           {
@@ -609,14 +589,8 @@
           "RulesSource": {
             "RulesSourceList": {
               "GeneratedRulesType": "DENYLIST",
-              "TargetTypes": [
-                "TLS_SNI",
-                "HTTP_HOST"
-              ],
-              "Targets": [
-                ".example.com",
-                "www.example.org"
-              ]
+              "TargetTypes": ["TLS_SNI", "HTTP_HOST"],
+              "Targets": [".example.com", "www.example.org"]
             }
           },
           "StatefulRuleOptions": {
@@ -644,17 +618,12 @@
           "RuleVariables": {
             "IPSets": {
               "HTTP_SERVERS": {
-                "Definition": [
-                  "10.0.0.0/16"
-                ]
+                "Definition": ["10.0.0.0/16"]
               }
             },
             "PortSets": {
               "HTTP_PORTS": {
-                "Definition": [
-                  "80",
-                  "8080"
-                ]
+                "Definition": ["80", "8080"]
               }
             }
           },
@@ -689,9 +658,7 @@
                 {
                   "Priority": 10,
                   "RuleDefinition": {
-                    "Actions": [
-                      "aws:drop"
-                    ],
+                    "Actions": ["aws:drop"],
                     "MatchAttributes": {
                       "DestinationPorts": [
                         {
@@ -708,9 +675,7 @@
                           "AddressDefinition": "10.0.0.0/16"
                         }
                       ],
-                      "Protocols": [
-                        6
-                      ],
+                      "Protocols": [6],
                       "SourcePorts": [
                         {
                           "FromPort": 0,
@@ -751,10 +716,11 @@
         "FirewallPolicy": {
           "StatefulDefaultActions": [],
           "StatefulEngineOptions": {
-            "RuleOrder": "DEFAULT_ACTION_ORDER"
+            "RuleOrder": "STRICT_ORDER"
           },
           "StatefulRuleGroupReferences": [
             {
+              "Priority": 10,
               "ResourceArn": {
                 "Fn::GetAtt": [
                   "MyStatefulDomainListRuleGroup481BB765",
@@ -763,6 +729,7 @@
               }
             },
             {
+              "Priority": 20,
               "ResourceArn": {
                 "Fn::GetAtt": [
                   "MyStateful5TupleRuleGroupE35C4D46",
@@ -771,6 +738,7 @@
               }
             },
             {
+              "Priority": 30,
               "ResourceArn": {
                 "Fn::GetAtt": [
                   "MyStatefulSuricataRuleGroupA19EA3D1",
@@ -779,20 +747,13 @@
               }
             }
           ],
-          "StatelessDefaultActions": [
-            "aws:drop"
-          ],
-          "StatelessFragmentDefaultActions": [
-            "aws:drop"
-          ],
+          "StatelessDefaultActions": ["aws:drop"],
+          "StatelessFragmentDefaultActions": ["aws:drop"],
           "StatelessRuleGroupReferences": [
             {
               "Priority": 10,
               "ResourceArn": {
-                "Fn::GetAtt": [
-                  "MyStatelessRuleGroup6BC16E93",
-                  "RuleGroupArn"
-                ]
+                "Fn::GetAtt": ["MyStatelessRuleGroup6BC16E93", "RuleGroupArn"]
               }
             }
           ]
@@ -812,16 +773,10 @@
     "networkFirewallFD69C121": {
       "Type": "AWS::NetworkFirewall::Firewall",
       "Properties": {
-        "EnabledAnalysisTypes": [
-          "TLS_SNI",
-          "HTTP_HOST"
-        ],
+        "EnabledAnalysisTypes": ["TLS_SNI", "HTTP_HOST"],
         "FirewallName": "my-network-firewall",
         "FirewallPolicyArn": {
-          "Fn::GetAtt": [
-            "MyNetworkfirewallPolicy783DD745",
-            "FirewallPolicyArn"
-          ]
+          "Fn::GetAtt": ["MyNetworkfirewallPolicy783DD745", "FirewallPolicyArn"]
         },
         "SubnetMappings": [
           {
@@ -849,15 +804,12 @@
         "aws:cdk:path": "network-firewall-integ-stack/networkFirewall/networkFirewall"
       }
     },
-    "networkFirewallCfnnetworkFirewallloggingS3Buckets896879CB": {
+    "networkFirewallnetworkFirewallloggingS3BucketsCfnnetworkFirewallloggingS3Buckets873C8F03": {
       "Type": "AWS::NetworkFirewall::LoggingConfiguration",
       "Properties": {
         "EnableMonitoringDashboard": false,
         "FirewallArn": {
-          "Fn::GetAtt": [
-            "networkFirewallFD69C121",
-            "FirewallArn"
-          ]
+          "Fn::GetAtt": ["networkFirewallFD69C121", "FirewallArn"]
         },
         "FirewallName": "my-network-firewall",
         "LoggingConfiguration": {
@@ -896,7 +848,7 @@
         }
       },
       "Metadata": {
-        "aws:cdk:path": "network-firewall-integ-stack/networkFirewall/CfnnetworkFirewall-logging-S3Buckets"
+        "aws:cdk:path": "network-firewall-integ-stack/networkFirewall/networkFirewall-logging-S3Buckets/CfnnetworkFirewall-logging-S3Buckets"
       }
     },
     "CDKMetadata": {
@@ -1191,13 +1143,7 @@
             "Fn::Not": [
               {
                 "Fn::Contains": [
-                  [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5"
-                  ],
+                  ["1", "2", "3", "4", "5"],
                   {
                     "Ref": "BootstrapVersion"
                   }

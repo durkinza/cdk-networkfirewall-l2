@@ -2755,18 +2755,8 @@ const encryptionConfiguration: EncryptionConfiguration = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration.property.keyId">keyId</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration.property.type">type</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfigurationTypes">EncryptionConfigurationTypes</a></code> | *No description.* |
-
----
-
-##### `keyId`<sup>Required</sup> <a name="keyId" id="@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration.property.keyId"></a>
-
-```typescript
-public readonly keyId: string;
-```
-
-- *Type:* string
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration.property.keyId">keyId</a></code> | <code>string</code> | The ID of the customer managed key. |
 
 ---
 
@@ -2777,6 +2767,20 @@ public readonly type: EncryptionConfigurationTypes;
 ```
 
 - *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfigurationTypes">EncryptionConfigurationTypes</a>
+
+---
+
+##### `keyId`<sup>Optional</sup> <a name="keyId" id="@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration.property.keyId"></a>
+
+```typescript
+public readonly keyId: string;
+```
+
+- *Type:* string
+
+The ID of the customer managed key.
+
+Required when type is CUSTOMER_KMS, not needed for AWS_OWNED_KMS_KEY.
 
 ---
 
@@ -4809,7 +4813,6 @@ public readonly configurationName: string;
 ```
 
 - *Type:* string
-- *Default:* CloudFormation-generated name
 
 The descriptive name of the TLS inspection configuration.
 

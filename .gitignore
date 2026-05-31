@@ -53,6 +53,7 @@ tsconfig.json
 !/API.md
 test/**/*.js
 test/**/*.d.ts
+cdk.out
 !/.projenrc.ts
 !/.cspell.json
 !/.husky/pre-commit

@@ -67,9 +67,20 @@ const project = new awscdk.AwsCdkConstructLibrary({
     ".devcontainer",
     ".github",
     ".husky",
+    ".vscode",
+    ".commitlintrc.json",
+    ".eslintrc.json",
+    ".prettierignore",
+    ".prettierrc.json",
+    ".mergify.yml",
+    ".projenrc.ts",
+    "CODEOWNERS",
+    "eslint.config.mjs",
+    "cdk.out",
+    "coverage",
+    "docs",
     "test",
     "test-reports",
-    "coverage",
   ],
   packageName:
     "@durkinza/cdk-networkfirewall-l2" /* The "name" in package.json. */,
@@ -89,18 +100,30 @@ const project = new awscdk.AwsCdkConstructLibrary({
 });
 project.gitignore.exclude("test/**/*.js");
 project.gitignore.exclude("test/**/*.d.ts");
+project.gitignore.exclude("cdk.out");
 
 new CSpell(project, {
   cSpellOptions: {
     language: "en-US",
     ignorePaths: ["./API.md", "./test/integ.*.expected.json"],
-    words: ["projenrc", "ITLS", "devdirs", "certificatemanager"],
+    words: [
+      "certificatemanager",
+      "commitlintrc",
+      "devdirs",
+      "ITLS",
+      "mergify",
+      "projenrc",
+    ],
   },
 });
 new Husky(project);
 new Commitlint(project);
 project.addTask("clean", {
-  exec: "yarn exec rimraf dist lib coverage test-reports test-reports",
+  exec: "yarn exec rimraf dist lib coverage test-reports",
+});
+
+project.addTask("format", {
+  exec: "yarn exec prettier -- --write src test docs .projenrc.ts",
 });
 
 project.synth();

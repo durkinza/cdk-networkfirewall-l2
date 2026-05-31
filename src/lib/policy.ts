@@ -354,8 +354,8 @@ export class FirewallPolicy extends FirewallPolicyBase {
       props.statelessFragmentDefaultActions || [];
     this.statefulDefaultActions = props.statefulDefaultActions || [];
 
-    this.statelessRuleGroups = props.statelessRuleGroups || [];
-    this.statefulRuleGroups = props.statefulRuleGroups || [];
+    this.statelessRuleGroups = [];
+    this.statefulRuleGroups = [];
     this.tlsInspectionConfiguration = props.tlsInspectionConfiguration;
     this.tags = props.tags || [];
 
@@ -456,53 +456,17 @@ export class FirewallPolicy extends FirewallPolicyBase {
     }
 
     /**
-     * validate unique stateless group priorities
+     * Add stateless rule groups via the add method (which validates unique priorities)
      */
-    if (
-      props.statelessRuleGroups !== undefined &&
-      !this.validateUniquePriority(props.statelessRuleGroups)
-    ) {
-      throw new Error(
-        "Priority must be unique, received duplicate priority on stateless group",
-      );
-    }
-    //this.statelessRuleGroupReferences = this.buildRuleGroupReferences(props.statelessRuleGroups);
     for (const ruleGroup of props.statelessRuleGroups || []) {
-      this.addStatelessRuleGroup.bind(ruleGroup);
+      this.addStatelessRuleGroup(ruleGroup);
     }
 
     /**
-     * Validate that if the policy uses strict order, all stateful rule groups match the rule order and have a priority set
+     * Add stateful rule groups via the add method (which validates priority and uniqueness)
      */
-    if (
-      this.statefulEngineOptions?.ruleOrder ===
-      StatefulEngineOptionsRuleOrder.STRICT_ORDER
-    ) {
-      if (props.statefulRuleGroups !== undefined) {
-        for (const ruleGroup of props.statefulRuleGroups) {
-          if (ruleGroup.priority === undefined) {
-            throw new Error(
-              "All stateful rule groups must have a priority set when using STRICT_ORDER engine options",
-            );
-          }
-        }
-      }
-    }
-
-    /**
-     * validate unique stateful group priorities
-     */
-    if (
-      props.statefulRuleGroups !== undefined &&
-      !this.validateUniquePriority(props.statefulRuleGroups)
-    ) {
-      throw new Error(
-        "Priority must be unique, received duplicate priority on stateful group",
-      );
-    }
-    //this.statefulRuleGroupReferences = this.buildRuleGroupReferences(props.statefulRuleGroups);
     for (const ruleGroup of props.statefulRuleGroups || []) {
-      this.addStatefulRuleGroup.bind(ruleGroup);
+      this.addStatefulRuleGroup(ruleGroup);
     }
 
     // Auto define stateless default actions?
@@ -570,6 +534,15 @@ export class FirewallPolicy extends FirewallPolicyBase {
    * @param ruleGroup The stateless rule group to add to the policy
    */
   public addStatelessRuleGroup(ruleGroup: StatelessRuleGroupList) {
+    // Check for unique priority
+    if (
+      ruleGroup.priority !== undefined &&
+      this.statelessRuleGroups.some((r) => r.priority === ruleGroup.priority)
+    ) {
+      throw new Error(
+        "Priority must be unique, received duplicate priority on stateless group",
+      );
+    }
     this.statelessRuleGroups.push(ruleGroup);
   }
 
@@ -585,6 +558,15 @@ export class FirewallPolicy extends FirewallPolicyBase {
     ) {
       throw new Error(
         "All stateful rule groups must have a priority set when using STRICT_ORDER engine options",
+      );
+    }
+    // Check for unique priority
+    if (
+      ruleGroup.priority !== undefined &&
+      this.statefulRuleGroups.some((r) => r.priority === ruleGroup.priority)
+    ) {
+      throw new Error(
+        "Priority must be unique, received duplicate priority on stateful group",
       );
     }
     this.statefulRuleGroups.push(ruleGroup);
@@ -641,27 +623,6 @@ export class FirewallPolicy extends FirewallPolicyBase {
     }
     return ruleGroupReferences;
   }*/
-
-  /**
-   * To validate a set of rule groups to ensure they have unique priorities
-   * @param ruleGroups
-   */
-  private validateUniquePriority(ruleGroups: any): boolean {
-    let priorities: (number | undefined)[] = [];
-    let ruleGroup: StatefulRuleGroupList;
-    for (ruleGroup of ruleGroups) {
-      // priorities are only required when using strict order evaluation.
-      // Don't check undefined priorities, as the priority can be
-      // determined implicitly.
-      if (ruleGroup.priority !== undefined) {
-        if (priorities.includes(ruleGroup.priority)) {
-          return false;
-        }
-        priorities.push(ruleGroup.priority);
-      }
-    }
-    return true;
-  }
 
   /**
    * Validates that only one occurrence of the enumeration is found in the values.

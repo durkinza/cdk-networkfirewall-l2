@@ -350,7 +350,7 @@ export class LoggingConfiguration
       enableMonitoringDashboard: props.enableMonitoringDashboard ?? false,
     };
     const resource: CfnLoggingConfiguration = new CfnLoggingConfiguration(
-      scope,
+      this,
       `Cfn${id}`,
       resourceProps,
     );

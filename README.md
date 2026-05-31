@@ -54,7 +54,8 @@ An ideal implementation would allow users to create firewall with minimal boiler
 const policy = NetFW.FirewallPolicy.fromFirewallPolicyName(stack, 'MyNetworkFirewallPolicy', 'MyFirewallPolicy');
 new NetFW.Firewall(stack, 'MyNetworkFirewall', {
   vpc: vpc,
-  policy: policy,});
+  policy: policy,
+});
 ```
 Where the firewall would be created in the provided vpc with the given firewall policy applied. 
 
@@ -143,13 +144,13 @@ const statelessRuleGroup = new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleG
       priority: 20,
     },
   ],
-  tags: [cdk.cfnTagToCloudFormation({ key: 'Environment', value: 'Production' })],
+  tags: [new cdk.Tag('Environment', 'Production')],
   summaryConfiguration: {
     ruleOptions: ['MSG'],
   },
 });
 
-Tags.of(statelessRuleGroup).add('key', 'value');
+cdk.Tags.of(statelessRuleGroup).add('key', 'value');
 ```
 
 ### Stateful Rule Groups

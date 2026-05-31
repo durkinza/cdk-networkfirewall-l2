@@ -40,7 +40,6 @@ export interface TLSInspectionConfigurationProps {
   /**
    * The descriptive name of the TLS inspection configuration.
    * You can't change the name of a TLS inspection configuration after you create it.
-   * @default - CloudFormation-generated name
    */
   readonly configurationName: string;
 
@@ -174,7 +173,7 @@ export class TLSInspectionConfiguration extends TLSInspectionConfigurationBase {
     this.tags = props.tags;
 
     const resourceProps: CfnTLSInspectionConfigurationProps = {
-      tlsInspectionConfigurationName: props.configurationName || id,
+      tlsInspectionConfigurationName: props.configurationName,
       tlsInspectionConfiguration: {
         serverCertificateConfigurations:
           props.serverCertificateConfigurations || [],

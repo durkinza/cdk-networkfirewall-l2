@@ -113,6 +113,7 @@ class TestStack extends cdk.Stack {
             HTTP_PORTS: { definition: ["80", "8080"] },
           },
         },
+
         // Rule order defaults to STRICT_ORDER, uncomment below to force ACTION_ORDER
         // ruleOrder: NetFW.StatefulRuleOptionsRuleOrder.ACTION_ORDER,
       },
@@ -236,6 +237,68 @@ class TestStack extends cdk.Stack {
       //   deliveryStream: kinesisStream.streamName,
       //   logType: NetFW.LogType.ALERT,
       // }],
+    });
+
+    // --- ACTION_ORDER Policy ---
+    // Add to policy with ACTION_ORDER.
+
+    const actionOrderStatefulRuleGroup = new NetFW.StatefulSuricataRuleGroup(
+      this,
+      "ActionOrderStatefulRuleGroup",
+      {
+        capacity: 100,
+        rules:
+          'pass tcp $EXTERNAL_NET any -> 10.0.0.0/16 443 (msg:"Allow inbound HTTPS from route53 for health checks to pass"; flow:to_server,established; sid:100001; rev:1;)',
+        ruleOrder: NetFW.StatefulRuleOptionsRuleOrder.ACTION_ORDER,
+        referenceSets: {
+          ipSetReferences: {
+            EXTERNAL_NET: {
+              referenceArn: `arn:aws:ec2:us-west-2:aws:prefix-list/pl-0068613c321dee54b`,
+            },
+          },
+        },
+      },
+    );
+
+    const actionOrderStatelessRule = new NetFW.StatelessRule({
+      actions: [NetFW.StatelessStandardAction.PASS],
+      destinations: ["10.0.0.0/16"],
+      protocols: [6],
+      sourcePorts: [{ fromPort: 0, toPort: 65535 }],
+      sources: ["0.0.0.0/0"],
+      destinationPorts: [{ fromPort: 443, toPort: 443 }],
+    });
+
+    const actionOrderStatelessRuleGroup = new NetFW.StatelessRuleGroup(
+      this,
+      "ActionOrderStatelessRuleGroup",
+      {
+        ruleGroupName: "ActionOrderStatelessRuleGroup",
+        rules: [{ rule: actionOrderStatelessRule, priority: 10 }],
+      },
+    );
+
+    // Create an ACTION_ORDER policy with no rule groups initially
+    const actionOrderPolicy = new NetFW.FirewallPolicy(
+      this,
+      "ActionOrderPolicy",
+      {
+        firewallPolicyName: "action-order-policy",
+        statelessDefaultActions: [NetFW.StatelessStandardAction.FORWARD],
+        statelessFragmentDefaultActions: [
+          NetFW.StatelessStandardAction.FORWARD,
+        ],
+        ruleOrder: NetFW.StatefulEngineOptionsRuleOrder.ACTION_ORDER,
+      },
+    );
+
+    // Add rule groups after policy construction
+    actionOrderPolicy.addStatefulRuleGroup({
+      ruleGroup: actionOrderStatefulRuleGroup,
+    });
+    actionOrderPolicy.addStatelessRuleGroup({
+      priority: 10,
+      ruleGroup: actionOrderStatelessRuleGroup,
     });
   }
 }

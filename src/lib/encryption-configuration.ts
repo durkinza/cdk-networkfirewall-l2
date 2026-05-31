@@ -6,5 +6,9 @@ export enum EncryptionConfigurationTypes {
 
 export interface EncryptionConfiguration {
   readonly type: EncryptionConfigurationTypes;
-  readonly keyId: string;
+  /**
+   * The ID of the customer managed key.
+   * Required when type is CUSTOMER_KMS, not needed for AWS_OWNED_KMS_KEY.
+   */
+  readonly keyId?: string;
 }

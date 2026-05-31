@@ -46,7 +46,7 @@
       "name": "clean",
       "steps": [
         {
-          "exec": "yarn exec rimraf dist lib coverage test-reports test-reports"
+          "exec": "yarn exec rimraf dist lib coverage test-reports"
         }
       ]
     },
@@ -141,6 +141,14 @@
         {
           "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test projenrc .projenrc.ts",
           "receiveArgs": true
+        }
+      ]
+    },
+    "format": {
+      "name": "format",
+      "steps": [
+        {
+          "exec": "yarn exec prettier -- --write src test docs .projenrc.ts"
         }
       ]
     },

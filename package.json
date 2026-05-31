@@ -16,6 +16,7 @@
     "docgen": "projen docgen",
     "eject": "projen eject",
     "eslint": "projen eslint",
+    "format": "projen format",
     "package": "projen package",
     "package-all": "projen package-all",
     "package:js": "projen package:js",
