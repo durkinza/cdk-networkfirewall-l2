@@ -292,6 +292,24 @@ describe('Testing Logging Features', ()=>{
     }).toThrow('Capacity must be a positive value less than 30,000, got: \'40000\'');
   });
 
+  test('Tags and summaryConfiguration', () => {
+    // WHEN
+    const statelessRuleGroup = new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
+      summaryConfiguration: {
+        ruleOptions: ['MSG'],
+      },
+    });
+    cdk.Tags.of(statelessRuleGroup).add('Environment', 'Testing');
+
+    // THEN
+    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::RuleGroup', {
+      Tags: [{ Key: 'Environment', Value: 'Testing' }],
+      SummaryConfiguration: {
+        RuleOptions: ['MSG'],
+      },
+    });
+  });
+
   test('Can get stateless rule group by name', () => {
     // GIVEN
     const statelessRuleGroup = NetFW.StatelessRuleGroup.fromStatelessRuleGroupName(stack, 'MyImportedStatelessRuleGroup', 'MyStatelessRuleGroup');

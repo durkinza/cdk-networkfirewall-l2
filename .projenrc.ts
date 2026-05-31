@@ -15,6 +15,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
     '@mountainpass/cool-bits-for-projen',
     '@types/jest',
     '@types/node',
+    '@types/filesystem',
     '@typescript-eslint/eslint-plugin',
     '@typescript-eslint/parser',
     'aws-cdk-lib',
@@ -68,7 +69,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
     module: 'durkinza.cdk_networkfirewall_l2',
   },
   repositoryUrl: 'https://github.com/durkinza/cdk-networkfirewall-l2.git',
-  stability: 'experimental',
 });
 project.gitignore.exclude('test/**/*.js');
 project.gitignore.exclude('test/**/*.d.ts');
@@ -76,7 +76,7 @@ project.gitignore.exclude('test/**/*.d.ts');
 new CSpell(project, {
   cSpellOptions: {
     language: 'en-US',
-    ignorePaths: ['./API.md'],
+    ignorePaths: ['./API.md', "./test/integ.*.expected.json"],
     words: [
       'projenrc',
       'ITLS',

@@ -250,7 +250,76 @@ describe('Testing Logging Features', ()=>{
     });
   });
 
-  test('Can get stateless rule group by name', () => {
+  test('Tags, referenceSets, and summaryConfiguration on 5Tuple Group', () => {
+    // WHEN
+    const stateful5TupleRuleGroup = new NetFW.Stateful5TupleRuleGroup(stack, 'MyStateful5TupleRuleGroup', {
+      summaryConfiguration: {
+        ruleOptions: ['MSG'],
+      },
+      referenceSets: {
+        ipSetReferences: {
+          MyIpSet: {
+            referenceArn: 'arn:aws:ec2:us-east-1:123456789012:prefix-list/pl-12345',
+          },
+        },
+      },
+    });
+    cdk.Tags.of(stateful5TupleRuleGroup).add('Environment', 'Testing');
+
+    // THEN
+    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::RuleGroup', {
+      Tags: [{ Key: 'Environment', Value: 'Testing' }],
+      SummaryConfiguration: {
+        RuleOptions: ['MSG'],
+      },
+      RuleGroup: {
+        ReferenceSets: {
+          IPSetReferences: {
+            MyIpSet: {
+              ReferenceArn: 'arn:aws:ec2:us-east-1:123456789012:prefix-list/pl-12345',
+            },
+          },
+        },
+      },
+    });
+  });
+
+  test('Tags and summaryConfiguration on Suricata Rule Group', () => {
+    // WHEN
+    const statefulSuricataRuleGroup = new NetFW.StatefulSuricataRuleGroup(stack, 'MyStatefulSuricataRuleGroup', {
+      summaryConfiguration: {
+        ruleOptions: ['MSG'],
+      },
+    });
+    cdk.Tags.of(statefulSuricataRuleGroup).add('Team', 'Security');
+    // THEN
+    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::RuleGroup', {
+      Tags: [{ Key: 'Team', Value: 'Security' }],
+      SummaryConfiguration: {
+        RuleOptions: ['MSG'],
+      },
+    });
+  });
+
+  test('Tags and summaryConfiguration on Domain List Group', () => {
+    // WHEN
+    const statefulDomainListRuleGroup = new NetFW.StatefulDomainListRuleGroup(stack, 'MyStatefulDomainListRuleGroup', {
+      summaryConfiguration: {
+        ruleOptions: ['MSG'],
+      },
+    });
+    cdk.Tags.of(statefulDomainListRuleGroup).add('App', 'DomainList');
+
+    // THEN
+    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::RuleGroup', {
+      Tags: [{ Key: 'App', Value: 'DomainList' }],
+      SummaryConfiguration: {
+        RuleOptions: ['MSG'],
+      },
+    });
+  });
+
+  test('Can get stateful rule group by name', () => {
     // GIVEN
     const statefulDomainListRuleGroup = NetFW.StatefulDomainListRuleGroup.fromRuleGroupArn(stack, 'MyImportedDomainListRuleGroup', 'arn:aws:networkfirewall:statefulrulegroup');
     const statefulSuricataRuleGroup = NetFW.StatefulSuricataRuleGroup.fromRuleGroupArn(stack, 'MyImportedSuricataRuleGroup', 'arn:aws:networkfirewall:statefulrulegroup');

@@ -2,8 +2,51 @@ import { CfnFirewallPolicy, CfnFirewallPolicyProps } from 'aws-cdk-lib/aws-netwo
 import * as core from 'aws-cdk-lib/core';
 import { Construct } from 'constructs';
 import { StatelessStandardAction, StatefulStrictAction } from './actions';
-import { IStatefulRuleGroup, IStatelessRuleGroup } from './rule-group';
+import { IStatefulRuleGroup, IStatelessRuleGroup} from './rule-group';
 import { ITLSInspectionConfiguration } from './tls-inspection';
+
+/**
+ * Configuration settings for the handling of the stateful rule groups in a firewall policy.
+ * @see https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-networkfirewall-firewallpolicy-statefulengineoptions.html
+ */
+export enum StatefulEngineOptionsRuleOrder {
+  /**
+   * Rules with a pass action are processed first, followed by drop, reject, and alert actions.
+   */
+  ACTION_ORDER = 'DEFAULT_ACTION_ORDER',
+
+  /**
+   * Rule groups are evaluated by order of priority, starting from the lowest number,
+   * and the rules in each rule group are processed in the order in which they're defined.
+   * Recommended Order.
+   */
+  STRICT_ORDER = 'STRICT_ORDER',
+}
+
+/**
+ * Configures how Network Firewall processes traffic when a network connection breaks midstream. Network connections can break due to disruptions in external networks or within the firewall itself.
+ * 
+ * @see https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-networkfirewall-firewallpolicy-statefulengineoptions.html
+ */
+export enum StreamExceptionPolicy {
+
+    /**
+     * Network Firewall fails closed and drops all subsequent traffic going to the firewall. This is the default behavior.
+     */
+    DROP = 'DROP',
+
+    /**
+     * Network Firewall continues to apply rules to the subsequent traffic without context from traffic before the break. 
+     * This impacts the behavior of rules that depend on this context. 
+     * For example, if you have a stateful rule to drop http traffic, Network Firewall won't match the traffic for this rule because the service won't have the context from session initialization defining the application layer protocol as HTTP. However, this behavior is rule dependent—a TCP-layer rule using a flow:stateless rule would still match, as would the aws:drop_strict default action.
+     */
+    CONTINUE = 'CONTINUE',
+
+    /**
+     * Network Firewall fails closed and drops all subsequent traffic going to the firewall. Network Firewall also sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall will have context about the new session and will apply rules to the subsequent traffic.
+     */
+    REJECT = 'REJECT',
+};
 
 /**
  *  Maps a priority to a stateful rule group item
@@ -19,6 +62,19 @@ export interface StatefulRuleGroupList {
    * The stateful rule group
    */
   readonly ruleGroup: IStatefulRuleGroup;
+
+  /**
+   * Whether to enable deep threat inspection for this rule group.
+   * When enabled, AWS Network Firewall analyzes network traffic processed by the rule group to improve threat detection.
+   * @default - undefined
+   */
+  readonly deepThreatInspection?: boolean;
+
+  /**
+   * The action that allows the policy owner to override the behavior of the rule group within a policy.
+   * @default - undefined
+   */
+  readonly override?: CfnFirewallPolicy.StatefulRuleGroupOverrideProperty;
 }
 
 /**
@@ -82,6 +138,19 @@ export interface FirewallPolicyProps {
    */
   readonly firewallPolicyName?: string;
 
+  /** 
+   * Configures the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle.
+   * @default - undefined
+   */
+  readonly flowTimeouts?: CfnFirewallPolicy.FlowTimeoutsProperty;
+
+  /**
+   * How Network Firewall handles stateful rules.
+   * The stateful rule groups that you use in your policy must match the policy's rule order.
+   * @default - Matches the rule order of the first stateful rule group added to the policy, or STRICT_ORDER if no stateful rule groups are added.
+   */
+  readonly ruleOrder?:  StatefulEngineOptionsRuleOrder | string;
+
   /**
    * The actions to take on a packet if it doesn't match any of the stateless rules in the policy.
    */
@@ -100,17 +169,17 @@ export interface FirewallPolicyProps {
   readonly statefulDefaultActions?: (StatefulStrictAction | string)[];
 
   /**
-   * Additional options governing how Network Firewall handles stateful rules.
-   * The stateful rule groups that you use in your policy must have stateful rule options settings that are compatible with these settings
-   * @default - undefined
-   */
-  readonly statefulEngineOptions?: CfnFirewallPolicy.StatefulEngineOptionsProperty;
-
-  /**
    * The stateful rule groups that are used in the policy.
    * @default - undefined
    */
   readonly statefulRuleGroups?: StatefulRuleGroupList[];
+
+  /**
+   * A L1 construct can be passed in for the Engine Options
+   * Overrides other stateful engine options properties if this is set.
+   * @default - undefined
+   */
+  readonly statefulEngineOptions?: CfnFirewallPolicy.StatefulEngineOptionsProperty;
 
   /**
    * The custom action definitions that are available for use in the firewall policy's statelessDefaultActions setting.
@@ -125,12 +194,32 @@ export interface FirewallPolicyProps {
   readonly statelessRuleGroups?: StatelessRuleGroupList[];
 
   /**
+   * Configures how Network Firewall processes traffic when a network connection breaks midstream. Network connections can break due to disruptions in external networks or within the firewall itself.
+   * @default - undefined
+   */
+  readonly streamExceptionPolicy?: StreamExceptionPolicy;
+
+  /**
    * AWS Network Firewall uses a TLS inspection configuration to decrypt traffic.
    * Network Firewall re-encrypts the traffic before sending it to its destination.
    *
    * @default - No TLS Inspection performed.
    */
   readonly tlsInspectionConfiguration?: ITLSInspectionConfiguration;
+
+  /**
+   * When true, prevents TCP and TLS packets from reaching destination servers until
+   * TLS Inspection has evaluated Server Name Indication (SNI) rules.
+   * Requires an associated TLS Inspection configuration.
+   * @default - undefined
+   */
+  readonly enableTlsSessionHolding?: boolean;
+
+  /**
+   * Contains variables that you can use to override default Suricata settings in your firewall policy.
+   * @default - undefined
+   */
+  readonly policyVariables?: CfnFirewallPolicy.PolicyVariablesProperty;
 
   /**
    * The description of the policy.
@@ -227,6 +316,11 @@ export class FirewallPolicy extends FirewallPolicyBase {
   public readonly tags: core.Tag[];
 
   /**
+   * The stateful engine options for the firewall policy.
+   */
+  public readonly statefulEngineOptions?: CfnFirewallPolicy.StatefulEngineOptionsProperty;
+
+  /**
    *
    * @param scope
    * @param id
@@ -246,7 +340,25 @@ export class FirewallPolicy extends FirewallPolicyBase {
     this.tlsInspectionConfiguration = props.tlsInspectionConfiguration;
     this.tags = props.tags || [];
 
+    // Build statefulEngineOptions from convenience props or use L1 override
+    if (props.statefulEngineOptions && (props.ruleOrder || props.streamExceptionPolicy || props.flowTimeouts)) {
+      throw new Error('Cannot specify both statefulEngineOptions and individual ruleOrder/streamExceptionPolicy/flowTimeouts properties. ' +
+        'Use either the L1 statefulEngineOptions or the convenience properties, not both.');
+    }
+    this.statefulEngineOptions = props.statefulEngineOptions ?? {
+      ruleOrder: props.ruleOrder || StatefulEngineOptionsRuleOrder.STRICT_ORDER,
+      streamExceptionPolicy: props.streamExceptionPolicy,
+      flowTimeouts: props.flowTimeouts,
+    };
+
     // Adding Validations
+
+    /**
+     * Validate enableTlsSessionHolding requires a TLS Inspection Configuration
+     */
+    if (props.enableTlsSessionHolding && !props.tlsInspectionConfiguration) {
+      throw new Error('enableTlsSessionHolding requires an associated TLS Inspection configuration');
+    }
 
     /**
      * Validate policyId
@@ -305,6 +417,20 @@ export class FirewallPolicy extends FirewallPolicyBase {
     //this.statelessRuleGroupReferences = this.buildRuleGroupReferences(props.statelessRuleGroups);
     for (const ruleGroup of (props.statelessRuleGroups || [])) this.addStatelessRuleGroup.bind(ruleGroup);
 
+
+    /**
+     * Validate that if the policy uses strict order, all stateful rule groups match the rule order and have a priority set
+     */
+    if (this.statefulEngineOptions?.ruleOrder === StatefulEngineOptionsRuleOrder.STRICT_ORDER) {
+      if (props.statefulRuleGroups !== undefined) {
+        for (const ruleGroup of props.statefulRuleGroups) {
+          if (ruleGroup.priority === undefined) {
+            throw new Error('All stateful rule groups must have a priority set when using STRICT_ORDER engine options');
+          }
+        }
+      }
+    }
+
     /**
      * validate unique stateful group priorities
      */
@@ -313,6 +439,7 @@ export class FirewallPolicy extends FirewallPolicyBase {
     }
     //this.statefulRuleGroupReferences = this.buildRuleGroupReferences(props.statefulRuleGroups);
     for (const ruleGroup of (props.statefulRuleGroups || [])) this.addStatefulRuleGroup.bind(ruleGroup);
+
 
     // Auto define stateless default actions?
     //const statelessDefaultActions = props.statelessDefaultActions || [StatelessStandardAction.DROP];
@@ -335,11 +462,13 @@ export class FirewallPolicy extends FirewallPolicyBase {
       statelessFragmentDefaultActions: this.statelessFragmentDefaultActions,
       // The properties below are optional.
       statefulDefaultActions: this.statefulDefaultActions,
-      statefulEngineOptions: props.statefulEngineOptions,
+      statefulEngineOptions: this.statefulEngineOptions,
       statefulRuleGroupReferences: core.Lazy.any({ produce: () => this.buildStatefulRuleGroupReferences() }),
       statelessCustomActions: props.statelessCustomActions,
       statelessRuleGroupReferences: core.Lazy.any({ produce: () => this.buildStatelessRuleGroupReferences() }),
       tlsInspectionConfigurationArn: props.tlsInspectionConfiguration?.tlsInspectionConfigurationArn,
+      enableTlsSessionHolding: props.enableTlsSessionHolding,
+      policyVariables: props.policyVariables,
     };
 
     const resourceProps:CfnFirewallPolicyProps = {
@@ -374,6 +503,9 @@ export class FirewallPolicy extends FirewallPolicyBase {
    * @param ruleGroup The stateful rule group to add to the policy
    */
   public addStatefulRuleGroup(ruleGroup:StatefulRuleGroupList) {
+    if(this.statefulEngineOptions?.ruleOrder === StatefulEngineOptionsRuleOrder.STRICT_ORDER && ruleGroup.priority === undefined) {
+      throw new Error('All stateful rule groups must have a priority set when using STRICT_ORDER engine options');
+    }
     this.statefulRuleGroups.push(ruleGroup);
   }
 
@@ -401,16 +533,13 @@ export class FirewallPolicy extends FirewallPolicyBase {
     let ruleGroupReferences:CfnFirewallPolicy.StatefulRuleGroupReferenceProperty[] = [];
     let ruleGroup:StatefulRuleGroupList;
     for (ruleGroup of this.statefulRuleGroups) {
-      if (ruleGroup.priority === undefined) {
-        ruleGroupReferences.push({
-          resourceArn: ruleGroup.ruleGroup.ruleGroupArn,
-        });
-      } else {
-        ruleGroupReferences.push({
-          priority: ruleGroup.priority,
-          resourceArn: ruleGroup.ruleGroup.ruleGroupArn,
-        });
-      }
+      const ref:CfnFirewallPolicy.StatefulRuleGroupReferenceProperty = {
+        resourceArn: ruleGroup.ruleGroup.ruleGroupArn,
+        priority: ruleGroup.priority,
+        deepThreatInspection: ruleGroup.deepThreatInspection,
+        override: ruleGroup.override,
+      };
+      ruleGroupReferences.push(ref);
     }
     return ruleGroupReferences;
   }

@@ -41,6 +41,7 @@
     "@commitlint/config-conventional": "^21.0.2",
     "@mountainpass/cool-bits-for-projen": "^0.2.8",
     "@stylistic/eslint-plugin": "^2",
+    "@types/filesystem": "^0.0.36",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.9.1",
     "@typescript-eslint/eslint-plugin": "^8",
@@ -156,7 +157,7 @@
     }
   },
   "types": "lib/index.d.ts",
-  "stability": "experimental",
+  "stability": "stable",
   "jsii": {
     "outdir": "dist",
     "targets": {

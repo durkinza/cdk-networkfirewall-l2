@@ -18,6 +18,10 @@
       "type": "build"
     },
     {
+      "name": "@types/filesystem",
+      "type": "build"
+    },
+    {
       "name": "@types/jest",
       "type": "build"
     },

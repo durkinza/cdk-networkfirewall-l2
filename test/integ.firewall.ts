@@ -59,6 +59,10 @@ class TestStack extends cdk.Stack {
           WEB_PORTS: { definition: ['443', '80'] },
         },
       },
+      summaryConfiguration: {
+        ruleOptions: ['MSG'],
+      },
+      // ruleOrder: NetFW.StatefulRuleOptionsRuleOrder.ACTION_ORDER,
     });
 
     // Setup Stateful Domain list rule & Group
@@ -75,6 +79,7 @@ class TestStack extends cdk.Stack {
     const statefulDomainListRuleGroup = new NetFW.StatefulDomainListRuleGroup(this, 'MyStatefulDomainListRuleGroup', {
       capacity: 100,
       rule: statefulDomainListRule,
+      // ruleOrder: NetFW.StatefulRuleOptionsRuleOrder.ACTION_ORDER,
     });
 
     // Setup Stateful Suricata rule & Group
@@ -90,6 +95,7 @@ class TestStack extends cdk.Stack {
           HTTP_PORTS: { definition: ['80', '8080'] },
         },
       },
+      // ruleOrder: NetFW.StatefulRuleOptionsRuleOrder.ACTION_ORDER,
     });
 
     // Setup Stateless rule & group
@@ -124,14 +130,18 @@ class TestStack extends cdk.Stack {
     const policy = new NetFW.FirewallPolicy(this, 'MyNetworkfirewallPolicy', {
       statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      //ruleOrder: NetFW.StatefulEngineOptionsRuleOrder.ACTION_ORDER,
       statefulRuleGroups: [
         {
+          priority: 10,
           ruleGroup: statefulDomainListRuleGroup,
         },
         {
+          priority: 20,
           ruleGroup: stateful5TupleRuleGroup,
         },
         {
+          priority: 30,
           ruleGroup: statefulSuricataRuleGroup,
         },
       ],
@@ -147,6 +157,7 @@ class TestStack extends cdk.Stack {
       firewallName: 'my-network-firewall',
       vpc: vpc,
       policy: policy,
+      enabledAnalysisTypes: [NetFW.FirewallAnalysisTypes.TLS_SNI, NetFW.FirewallAnalysisTypes.HTTP_HOST],
       // loggingCloudWatchLogGroups: [{
       //   logGroup: cloudWatchLogGroup.logGroupName,
       //   logType: NetFW.LogType.FLOW,
@@ -162,6 +173,11 @@ class TestStack extends cdk.Stack {
           logType: NetFW.LogType.FLOW,
           prefix: 'flow',
         },
+        {
+          bucketName: s3LoggingBucket.bucketName,
+          logType: NetFW.LogType.TLS,
+          prefix: 'tls',
+        },
       ],
       // loggingKinesisDataStreams: [{
       //   deliveryStream: kinesisStream.streamName,
@@ -172,6 +188,7 @@ class TestStack extends cdk.Stack {
 }
 
 const app = new cdk.App();
+cdk.Tags.of(app).add('Project', 'NetworkFirewallL2IntegTest');
 new TestStack(app, 'network-firewall-integ-stack');
 
 app.synth();

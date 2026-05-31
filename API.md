@@ -2786,7 +2786,9 @@ const firewallPolicyProps: FirewallPolicyProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statelessDefaultActions">statelessDefaultActions</a></code> | <code>string[]</code> | The actions to take on a packet if it doesn't match any of the stateless rules in the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statelessFragmentDefaultActions">statelessFragmentDefaultActions</a></code> | <code>string[]</code> | The actions to take on a fragmented packet if it doesn't match any of the stateless rules in the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.description">description</a></code> | <code>string</code> | The description of the policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.enableTlsSessionHolding">enableTlsSessionHolding</a></code> | <code>boolean</code> | When true, prevents TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.firewallPolicyName">firewallPolicyName</a></code> | <code>string</code> | The descriptive name of the firewall policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.policyVariables">policyVariables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.PolicyVariablesProperty</code> | Contains variables that you can use to override default Suricata settings in your firewall policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statefulDefaultActions">statefulDefaultActions</a></code> | <code>string[]</code> | The default actions to take on a packet that doesn't match any stateful rules. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statefulEngineOptions">statefulEngineOptions</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulEngineOptionsProperty</code> | Additional options governing how Network Firewall handles stateful rules. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statefulRuleGroups">statefulRuleGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList">StatefulRuleGroupList</a>[]</code> | The stateful rule groups that are used in the policy. |
@@ -2834,6 +2836,21 @@ The description of the policy.
 
 ---
 
+##### `enableTlsSessionHolding`<sup>Optional</sup> <a name="enableTlsSessionHolding" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.enableTlsSessionHolding"></a>
+
+```typescript
+public readonly enableTlsSessionHolding: boolean;
+```
+
+- *Type:* boolean
+- *Default:* undefined
+
+When true, prevents TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules.
+
+Requires an associated TLS Inspection configuration.
+
+---
+
 ##### `firewallPolicyName`<sup>Optional</sup> <a name="firewallPolicyName" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.firewallPolicyName"></a>
 
 ```typescript
@@ -2846,6 +2863,19 @@ public readonly firewallPolicyName: string;
 The descriptive name of the firewall policy.
 
 You can't change the name of a firewall policy after you create it.
+
+---
+
+##### `policyVariables`<sup>Optional</sup> <a name="policyVariables" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.policyVariables"></a>
+
+```typescript
+public readonly policyVariables: PolicyVariablesProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.PolicyVariablesProperty
+- *Default:* undefined
+
+Contains variables that you can use to override default Suricata settings in your firewall policy.
 
 ---
 
@@ -2964,8 +2994,11 @@ const firewallProps: FirewallProps = { ... }
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.policy">policy</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy">IFirewallPolicy</a></code> | Each firewall requires one firewall policy association, and you can use the same firewall policy for multiple firewalls. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | The unique identifier of the VPC where the firewall is in use. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.availabilityZoneChangeProtection">availabilityZoneChangeProtection</a></code> | <code>boolean</code> | A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.availabilityZoneMappings">availabilityZoneMappings</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewall.AvailabilityZoneMappingProperty[]</code> | The Availability Zones where the firewall endpoints are created for a transit gateway-attached firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.deleteProtection">deleteProtection</a></code> | <code>boolean</code> | A flag indicating whether it is possible to delete the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.description">description</a></code> | <code>string</code> | The description of the Firewall. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.enabledAnalysisTypes">enabledAnalysisTypes</a></code> | <code>string[]</code> | An optional setting indicating the specific traffic analysis types to enable on the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.encryptionConfiguration">encryptionConfiguration</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration">EncryptionConfiguration</a></code> | Not yet supported in Cloudformation at time of writing. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.firewallName">firewallName</a></code> | <code>string</code> | The descriptive name of the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.firewallPolicyChangeProtection">firewallPolicyChangeProtection</a></code> | <code>boolean</code> | A setting indicating whether the firewall is protected against a change to the firewall policy association. |
@@ -2975,6 +3008,7 @@ const firewallProps: FirewallProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.subnetChangeProtection">subnetChangeProtection</a></code> | <code>boolean</code> | A setting indicating whether the firewall is protected against changes to the subnet associations. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.subnetMappings">subnetMappings</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | The public subnets that Network Firewall is using for the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the firewall. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.transitGatewayId">transitGatewayId</a></code> | <code>string</code> | The unique identifier of the transit gateway associated with this firewall. |
 
 ---
 
@@ -3004,6 +3038,36 @@ You can't change the VPC of a firewall after you create the firewall.
 
 ---
 
+##### `availabilityZoneChangeProtection`<sup>Optional</sup> <a name="availabilityZoneChangeProtection" id="@durkinza/cdk-networkfirewall-l2.FirewallProps.property.availabilityZoneChangeProtection"></a>
+
+```typescript
+public readonly availabilityZoneChangeProtection: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+A setting indicating whether the firewall is protected against changes to its Availability Zone configuration.
+
+When set to TRUE, you must first disable this protection before adding or removing Availability Zones.
+
+---
+
+##### `availabilityZoneMappings`<sup>Optional</sup> <a name="availabilityZoneMappings" id="@durkinza/cdk-networkfirewall-l2.FirewallProps.property.availabilityZoneMappings"></a>
+
+```typescript
+public readonly availabilityZoneMappings: AvailabilityZoneMappingProperty[];
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnFirewall.AvailabilityZoneMappingProperty[]
+- *Default:* undefined
+
+The Availability Zones where the firewall endpoints are created for a transit gateway-attached firewall.
+
+Each mapping specifies an Availability Zone where the firewall processes traffic.
+
+---
+
 ##### `deleteProtection`<sup>Optional</sup> <a name="deleteProtection" id="@durkinza/cdk-networkfirewall-l2.FirewallProps.property.deleteProtection"></a>
 
 ```typescript
@@ -3029,6 +3093,19 @@ public readonly description: string;
 - *Default:* undefined
 
 The description of the Firewall.
+
+---
+
+##### `enabledAnalysisTypes`<sup>Optional</sup> <a name="enabledAnalysisTypes" id="@durkinza/cdk-networkfirewall-l2.FirewallProps.property.enabledAnalysisTypes"></a>
+
+```typescript
+public readonly enabledAnalysisTypes: string[];
+```
+
+- *Type:* string[]
+- *Default:* undefined
+
+An optional setting indicating the specific traffic analysis types to enable on the firewall.
 
 ---
 
@@ -3160,6 +3237,21 @@ Tags to be added to the firewall.
 
 ---
 
+##### `transitGatewayId`<sup>Optional</sup> <a name="transitGatewayId" id="@durkinza/cdk-networkfirewall-l2.FirewallProps.property.transitGatewayId"></a>
+
+```typescript
+public readonly transitGatewayId: string;
+```
+
+- *Type:* string
+- *Default:* undefined
+
+The unique identifier of the transit gateway associated with this firewall.
+
+This field is only present for transit gateway-attached firewalls.
+
+---
+
 ### KinesisDataFirehoseLogLocationProps <a name="KinesisDataFirehoseLogLocationProps" id="@durkinza/cdk-networkfirewall-l2.KinesisDataFirehoseLogLocationProps"></a>
 
 Defines a Kinesis Delivery Stream Logging Option.
@@ -3222,6 +3314,7 @@ const loggingConfigurationProps: LoggingConfigurationProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps.property.firewallRef">firewallRef</a></code> | <code>string</code> | The Amazon Resource Name (ARN) of the Firewall that the logging configuration is associated with. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps.property.enableMonitoringDashboard">enableMonitoringDashboard</a></code> | <code>boolean</code> | Whether to enable the detailed firewall monitoring dashboard. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps.property.firewallName">firewallName</a></code> | <code>string</code> | The name of the firewall that the logging configuration is associated with. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps.property.loggingConfigurationName">loggingConfigurationName</a></code> | <code>string</code> | The physical name of this logging configuration. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps.property.loggingLocations">loggingLocations</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.ILogLocation">ILogLocation</a>[]</code> | Defines how AWS Network Firewall performs logging for a Firewall. |
@@ -3239,6 +3332,19 @@ public readonly firewallRef: string;
 The Amazon Resource Name (ARN) of the Firewall that the logging configuration is associated with.
 
 You can't change the firewall specification after you create the logging configuration.
+
+---
+
+##### `enableMonitoringDashboard`<sup>Optional</sup> <a name="enableMonitoringDashboard" id="@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps.property.enableMonitoringDashboard"></a>
+
+```typescript
+public readonly enableMonitoringDashboard: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Whether to enable the detailed firewall monitoring dashboard.
 
 ---
 
@@ -3392,9 +3498,12 @@ const stateful5TupleRuleGroupProps: Stateful5TupleRuleGroupProps = { ... }
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.capacity">capacity</a></code> | <code>number</code> | The maximum operating resources that this rule group can use. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.referenceSets">referenceSets</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty</code> | The reference sets for the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.rules">rules</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRule">Stateful5TupleRule</a>[]</code> | The rule group rules. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
 
 ---
@@ -3425,6 +3534,21 @@ public readonly description: string;
 - *Default:* undefined
 
 Description of the rule group.
+
+---
+
+##### `referenceSets`<sup>Optional</sup> <a name="referenceSets" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.referenceSets"></a>
+
+```typescript
+public readonly referenceSets: ReferenceSetsProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty
+- *Default:* undefined
+
+The reference sets for the stateful rule group.
+
+Allows referencing IP sets managed outside the rule group.
 
 ---
 
@@ -3464,6 +3588,32 @@ public readonly rules: Stateful5TupleRule[];
 - *Default:* undefined
 
 The rule group rules.
+
+---
+
+##### `summaryConfiguration`<sup>Optional</sup> <a name="summaryConfiguration" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.summaryConfiguration"></a>
+
+```typescript
+public readonly summaryConfiguration: SummaryConfigurationProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty
+- *Default:* undefined
+
+A complex type containing the rule option fields for rule summarization.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+- *Default:* No tags applied
+
+Tags to be added to the rule group.
 
 ---
 
@@ -3638,9 +3788,12 @@ const statefulDomainListRuleGroupProps: StatefulDomainListRuleGroupProps = { ...
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.capacity">capacity</a></code> | <code>number</code> | The maximum operating resources that this rule group can use. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.referenceSets">referenceSets</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty</code> | The reference sets for the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.rule">rule</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRule">StatefulDomainListRule</a></code> | The Domain List rule. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
 
 ---
@@ -3671,6 +3824,21 @@ public readonly description: string;
 - *Default:* undefined
 
 Description of the rule group.
+
+---
+
+##### `referenceSets`<sup>Optional</sup> <a name="referenceSets" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.referenceSets"></a>
+
+```typescript
+public readonly referenceSets: ReferenceSetsProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty
+- *Default:* undefined
+
+The reference sets for the stateful rule group.
+
+Allows referencing IP sets managed outside the rule group.
 
 ---
 
@@ -3710,6 +3878,32 @@ public readonly ruleOrder: StatefulRuleOptions;
 - *Default:* STRICT_ORDER
 
 Rule Order.
+
+---
+
+##### `summaryConfiguration`<sup>Optional</sup> <a name="summaryConfiguration" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.summaryConfiguration"></a>
+
+```typescript
+public readonly summaryConfiguration: SummaryConfigurationProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty
+- *Default:* undefined
+
+A complex type containing the rule option fields for rule summarization.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+- *Default:* No tags applied
+
+Tags to be added to the rule group.
 
 ---
 
@@ -3814,6 +4008,8 @@ const statefulRuleGroupList: StatefulRuleGroupList = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList.property.ruleGroup">ruleGroup</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup">IStatefulRuleGroup</a></code> | The stateful rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList.property.deepThreatInspection">deepThreatInspection</a></code> | <code>boolean</code> | Whether to enable deep threat inspection for this rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList.property.override">override</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulRuleGroupOverrideProperty</code> | The action that allows the policy owner to override the behavior of the rule group within a policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList.property.priority">priority</a></code> | <code>number</code> | The priority of the rule group in the policy. |
 
 ---
@@ -3827,6 +4023,34 @@ public readonly ruleGroup: IStatefulRuleGroup;
 - *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup">IStatefulRuleGroup</a>
 
 The stateful rule group.
+
+---
+
+##### `deepThreatInspection`<sup>Optional</sup> <a name="deepThreatInspection" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList.property.deepThreatInspection"></a>
+
+```typescript
+public readonly deepThreatInspection: boolean;
+```
+
+- *Type:* boolean
+- *Default:* undefined
+
+Whether to enable deep threat inspection for this rule group.
+
+When enabled, AWS Network Firewall analyzes network traffic processed by the rule group to improve threat detection.
+
+---
+
+##### `override`<sup>Optional</sup> <a name="override" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList.property.override"></a>
+
+```typescript
+public readonly override: StatefulRuleGroupOverrideProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulRuleGroupOverrideProperty
+- *Default:* undefined
+
+The action that allows the policy owner to override the behavior of the rule group within a policy.
 
 ---
 
@@ -3863,8 +4087,11 @@ const statefulSuricataRuleGroupFromFileProps: StatefulSuricataRuleGroupFromFileP
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.capacity">capacity</a></code> | <code>number</code> | The maximum operating resources that this rule group can use. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.encoding">encoding</a></code> | <code>string</code> | The encoding to use for the file. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.referenceSets">referenceSets</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty</code> | The reference sets for the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
 
 ---
@@ -3923,6 +4150,21 @@ The encoding to use for the file.
 
 ---
 
+##### `referenceSets`<sup>Optional</sup> <a name="referenceSets" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.referenceSets"></a>
+
+```typescript
+public readonly referenceSets: ReferenceSetsProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty
+- *Default:* undefined
+
+The reference sets for the stateful rule group.
+
+Allows referencing IP sets managed outside the rule group.
+
+---
+
 ##### `ruleGroupName`<sup>Optional</sup> <a name="ruleGroupName" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleGroupName"></a>
 
 ```typescript
@@ -3946,6 +4188,32 @@ public readonly ruleOrder: StatefulRuleOptions;
 - *Default:* STRICT_ORDER
 
 Rule Order.
+
+---
+
+##### `summaryConfiguration`<sup>Optional</sup> <a name="summaryConfiguration" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.summaryConfiguration"></a>
+
+```typescript
+public readonly summaryConfiguration: SummaryConfigurationProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty
+- *Default:* undefined
+
+A complex type containing the rule option fields for rule summarization.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+- *Default:* No tags applied
+
+Tags to be added to the rule group.
 
 ---
 
@@ -3980,9 +4248,12 @@ const statefulSuricataRuleGroupProps: StatefulSuricataRuleGroupProps = { ... }
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.capacity">capacity</a></code> | <code>number</code> | The maximum operating resources that this rule group can use. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.referenceSets">referenceSets</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty</code> | The reference sets for the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.rules">rules</a></code> | <code>string</code> | The suricata rules. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
 
 ---
@@ -4013,6 +4284,21 @@ public readonly description: string;
 - *Default:* undefined
 
 Description of the rule group.
+
+---
+
+##### `referenceSets`<sup>Optional</sup> <a name="referenceSets" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.referenceSets"></a>
+
+```typescript
+public readonly referenceSets: ReferenceSetsProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty
+- *Default:* undefined
+
+The reference sets for the stateful rule group.
+
+Allows referencing IP sets managed outside the rule group.
 
 ---
 
@@ -4052,6 +4338,32 @@ public readonly rules: string;
 - *Default:* undefined
 
 The suricata rules.
+
+---
+
+##### `summaryConfiguration`<sup>Optional</sup> <a name="summaryConfiguration" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.summaryConfiguration"></a>
+
+```typescript
+public readonly summaryConfiguration: SummaryConfigurationProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty
+- *Default:* undefined
+
+A complex type containing the rule option fields for rule summarization.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+- *Default:* No tags applied
+
+Tags to be added to the rule group.
 
 ---
 
@@ -4134,6 +4446,8 @@ const statelessRuleGroupProps: StatelessRuleGroupProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateless rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.rules">rules</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleList">StatelessRuleList</a>[]</code> | The rule group rules. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
 
 ---
@@ -4200,6 +4514,32 @@ public readonly rules: StatelessRuleList[];
 - *Default:* undefined
 
 The rule group rules.
+
+---
+
+##### `summaryConfiguration`<sup>Optional</sup> <a name="summaryConfiguration" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.summaryConfiguration"></a>
+
+```typescript
+public readonly summaryConfiguration: SummaryConfigurationProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty
+- *Default:* undefined
+
+A complex type containing the rule option fields for rule summarization.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+- *Default:* No tags applied
+
+Tags to be added to the rule group.
 
 ---
 
@@ -5563,6 +5903,33 @@ The name of the TLS Inspection Configuration.
 ---
 
 
+### FirewallAnalysisTypes <a name="FirewallAnalysisTypes" id="@durkinza/cdk-networkfirewall-l2.FirewallAnalysisTypes"></a>
+
+The traffic analysis types that can be enabled on a firewall.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallAnalysisTypes.TLS_SNI">TLS_SNI</a></code> | TLS Server Name Indication (SNI) analysis. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallAnalysisTypes.HTTP_HOST">HTTP_HOST</a></code> | HTTP Host header analysis. |
+
+---
+
+##### `TLS_SNI` <a name="TLS_SNI" id="@durkinza/cdk-networkfirewall-l2.FirewallAnalysisTypes.TLS_SNI"></a>
+
+TLS Server Name Indication (SNI) analysis.
+
+---
+
+
+##### `HTTP_HOST` <a name="HTTP_HOST" id="@durkinza/cdk-networkfirewall-l2.FirewallAnalysisTypes.HTTP_HOST"></a>
+
+HTTP Host header analysis.
+
+---
+
+
 ### LogDestinationType <a name="LogDestinationType" id="@durkinza/cdk-networkfirewall-l2.LogDestinationType"></a>
 
 The type of storage destination to send these logs to.
@@ -5608,6 +5975,7 @@ The type of log to send.
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LogType.ALERT">ALERT</a></code> | Alert logs report traffic that matches a stateful rule with an action setting that sends an alert log message. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LogType.FLOW">FLOW</a></code> | Flow logs are standard network traffic flow logs. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.LogType.TLS">TLS</a></code> | Logs for events that are related to TLS inspection. |
 
 ---
 
@@ -5621,6 +5989,13 @@ Alert logs report traffic that matches a stateful rule with an action setting th
 ##### `FLOW` <a name="FLOW" id="@durkinza/cdk-networkfirewall-l2.LogType.FLOW"></a>
 
 Flow logs are standard network traffic flow logs.
+
+---
+
+
+##### `TLS` <a name="TLS" id="@durkinza/cdk-networkfirewall-l2.LogType.TLS"></a>
+
+Logs for events that are related to TLS inspection.
 
 ---
 

@@ -54,8 +54,7 @@ An ideal implementation would allow users to create firewall with minimal boiler
 const policy = NetFW.FirewallPolicy.fromFirewallPolicyName(stack, 'MyNetworkFirewallPolicy', 'MyFirewallPolicy');
 new NetFW.Firewall(stack, 'MyNetworkFirewall', {
   vpc: vpc,
-  policy: policy,
-});
+  policy: policy,});
 ```
 Where the firewall would be created in the provided vpc with the given firewall policy applied. 
 
@@ -133,7 +132,7 @@ const statelessRule1 = new NetFW.StatelessRule({
 const statelessRule2 = new NetFW.StatelessRule({
   actions: [NetFW.StatelessStandardAction.DROP],
 });
-new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
+const statelessRuleGroup = new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
   rules: [
     {
       rule: statelessRule1,
@@ -144,7 +143,13 @@ new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
       priority: 20,
     },
   ],
+  tags: [cdk.cfnTagToCloudFormation({ key: 'Environment', value: 'Production' })],
+  summaryConfiguration: {
+    ruleOptions: ['MSG'],
+  },
 });
+
+Tags.of(statelessRuleGroup).add('key', 'value');
 ```
 
 ### Stateful Rule Groups
@@ -156,6 +161,7 @@ It appeared easier to merge the three types in a future revision than to split t
 I opted to match the AWS console, giving each rule group category has it's own class. Stateful rule groups are based on the same abstract class, to reduce duplicate code.
 
 Stateful rule groups can be defined with no actionable rules within them, so the minimal implementation would be the same for all of them.
+Stateful rule groups also support optional `tags`, `referenceSets`, and `summaryConfiguration` properties.
 ```ts
 new NetFW.Stateful5TupleRuleGroup(stack, 'MyStateful5TupleRuleGroup', {
   // Assumes the following
@@ -239,8 +245,9 @@ The `rules` property will be filled in with the contents from the file path, any
 
 Logging can be done using 3 AWS services, Cloud Watch trails, S3 buckets, and Kinesis Data Firehose streams.
 
-The logging locations are configured with a Logging type, either Flow or Alert logs.
+The logging locations are configured with a Logging type. One of Flow, Alert, or TLS logs.
 In the case of Alert logs, it is up to the firewall policy to decide when a log should be generated.
+TLS logs capture events related to TLS inspection.
 
 Logs can be configured to be sent to multiple locations simultaneously.
 
@@ -264,6 +271,11 @@ new NetFW.Firewall(stack, 'MyNetworkFirewall', {
       bucketName: s3LoggingBucket.bucketName,
       logType: NetFW.LogType.FLOW,
       prefix: 'flow',
+    },
+    {
+      bucketName: s3LoggingBucket.bucketName,
+      logType: NetFW.LogType.TLS,
+      prefix: 'tls',
     },
   ],
   loggingKinesisDataStreams: [

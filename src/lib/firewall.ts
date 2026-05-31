@@ -17,6 +17,21 @@ import {
 import { IFirewallPolicy } from './policy';
 
 /**
+ * The traffic analysis types that can be enabled on a firewall.
+ */
+export enum FirewallAnalysisTypes {
+  /**
+   * TLS Server Name Indication (SNI) analysis
+   */
+  TLS_SNI = 'TLS_SNI',
+
+  /**
+   * HTTP Host header analysis
+   */
+  HTTP_HOST = 'HTTP_HOST',
+}
+
+/**
  * Defines a Network Firewall in the stack
  */
 export interface IFirewall extends core.IResource {
@@ -112,6 +127,33 @@ export interface FirewallProps {
    * @default - true
    */
   readonly subnetChangeProtection?: boolean;
+
+  /**
+   * The unique identifier of the transit gateway associated with this firewall.
+   * This field is only present for transit gateway-attached firewalls.
+   * @default - undefined
+   */
+  readonly transitGatewayId?: string;
+
+  /**
+   * A setting indicating whether the firewall is protected against changes to its Availability Zone configuration.
+   * When set to TRUE, you must first disable this protection before adding or removing Availability Zones.
+   * @default - false
+   */
+  readonly availabilityZoneChangeProtection?: boolean;
+
+  /**
+   * The Availability Zones where the firewall endpoints are created for a transit gateway-attached firewall.
+   * Each mapping specifies an Availability Zone where the firewall processes traffic.
+   * @default - undefined
+   */
+  readonly availabilityZoneMappings?: CfnFirewall.AvailabilityZoneMappingProperty[];
+
+  /**
+   * An optional setting indicating the specific traffic analysis types to enable on the firewall.
+   * @default - undefined
+   */
+  readonly enabledAnalysisTypes?: (FirewallAnalysisTypes|string)[];
 
   /**
    * Tags to be added to the firewall.
@@ -294,6 +336,10 @@ export class Firewall extends FirewallBase {
       subnetChangeProtection: props.subnetChangeProtection,
       subnetMappings: subnets,
       tags: props.tags || [],
+      transitGatewayId: props.transitGatewayId,
+      availabilityZoneChangeProtection: props.availabilityZoneChangeProtection,
+      availabilityZoneMappings: props.availabilityZoneMappings,
+      enabledAnalysisTypes: props.enabledAnalysisTypes,
       vpcId: props.vpc.vpcId,
     };
 

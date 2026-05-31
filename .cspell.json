@@ -9,6 +9,7 @@
     "stylistic",
     "eslint-plugin",
     "types",
+    "filesystem",
     "jest",
     "node",
     "typescript-eslint",
@@ -79,6 +80,7 @@
   ],
   "ignorePaths": [
     "./API.md",
+    "./test/integ.*.expected.json",
     ".eslintrc.json",
     ".gitattributes",
     ".github/dependabot.yml",

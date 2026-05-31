@@ -16,6 +16,11 @@ export enum LogType {
    * Flow logs are standard network traffic flow logs.
    */
   FLOW = 'FLOW',
+
+  /**
+   * Logs for events that are related to TLS inspection.
+   */
+  TLS = 'TLS',
 };
 
 /**
@@ -255,6 +260,12 @@ export interface LoggingConfigurationProps {
    * @default - No logging locations are configured, no logs will be sent.
    */
   readonly loggingLocations?: ILogLocation[];
+
+  /**
+   * Whether to enable the detailed firewall monitoring dashboard.
+   * @default - false
+   */
+  readonly enableMonitoringDashboard?: boolean;
 };
 
 /**
@@ -312,6 +323,7 @@ export class LoggingConfiguration extends core.Resource implements ILoggingConfi
       firewallArn: this.firewallRef,
       loggingConfiguration: loggingConfigurationProperty,
       firewallName: props.firewallName,
+      enableMonitoringDashboard: props.enableMonitoringDashboard ?? false,
     };
     const resource:CfnLoggingConfiguration = new CfnLoggingConfiguration(scope, `Cfn${id}`, resourceProps);
 

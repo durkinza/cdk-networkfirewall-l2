@@ -99,6 +99,18 @@ export interface StatelessRuleGroupProps {
    * @default - undefined
    */
   readonly description?: string;
+
+  /**
+   * A complex type containing the rule option fields for rule summarization.
+   * @default - undefined
+   */
+  readonly summaryConfiguration?: CfnRuleGroup.SummaryConfigurationProperty;
+
+  /**
+   * Tags to be added to the rule group.
+   * @default - No tags applied
+   */
+  readonly tags?: core.Tag[];
 }
 
 /**
@@ -224,7 +236,8 @@ export class StatelessRuleGroup extends StatelessRuleGroupBase {
       type: RuleGroupType.STATELESS,
       ruleGroup: resourceRuleGroupProperty,
       description: props.description,
-      //tags
+      summaryConfiguration: props.summaryConfiguration,
+      tags: props.tags,
     };
     const resource:CfnRuleGroup = new CfnRuleGroup(this, id, resourceProps);
     this.ruleGroupId = this.getResourceNameAttribute(resource.ref);
@@ -292,6 +305,7 @@ export interface IStatefulRuleGroup extends core.IResource {
 
 /**
  * Indicates how to manage the order of the rule evaluation for the rule group.
+ * @deprecated - Use StatefulRuleOptionsEvaluationOrder
  */
 export enum StatefulRuleOptions {
   /**
@@ -301,10 +315,21 @@ export enum StatefulRuleOptions {
   ACTION_ORDER='DEFAULT_ACTION_ORDER',
 
   /**
-   * Rules with a pass action are processed first, followed by drop, reject, and alert actions.
-   * @deprecated Please use ACTION_ORDER instead.
+   * With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined.
+   * Recommended Order
    */
-  // DEFAULT_ACTION_ORDER='DEFAULT_ACTION_ORDER',
+  STRICT_ORDER='STRICT_ORDER',
+}
+
+/**
+ * Indicates how to manage the order of the rule evaluation for the rule group.
+ */
+export enum StatefulRuleOptionsRuleOrder {
+  /**
+   * Rules with a pass action are processed first, followed by drop, reject, and alert actions.
+   * This option was previously named Default Acton Order.
+   */
+  ACTION_ORDER='DEFAULT_ACTION_ORDER',
 
   /**
    * With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined.
@@ -340,13 +365,32 @@ interface StatefulRuleGroupProps {
    * Rule Order
    * @default - STRICT_ORDER
    */
-  readonly ruleOrder?: StatefulRuleOptions;
+  readonly ruleOrder?: StatefulRuleOptions|StatefulRuleOptionsRuleOrder;
 
   /**
    * Description of the rule group
    * @default - undefined
    */
   readonly description?: string;
+
+  /**
+   * A complex type containing the rule option fields for rule summarization.
+   * @default - undefined
+   */
+  readonly summaryConfiguration?: CfnRuleGroup.SummaryConfigurationProperty;
+
+  /**
+   * The reference sets for the stateful rule group.
+   * Allows referencing IP sets managed outside the rule group.
+   * @default - undefined
+   */
+  readonly referenceSets?: CfnRuleGroup.ReferenceSetsProperty;
+
+  /**
+   * Tags to be added to the rule group.
+   * @default - No tags applied
+   */
+  readonly tags?: core.Tag[];
 }
 
 /**
@@ -360,7 +404,7 @@ abstract class StatefulRuleGroup extends core.Resource implements IStatefulRuleG
    * @param id
    * @param ruleGroupArn
    */
-  public static fromRuleGroupArn(scope: Construct, id: string, ruleGroupArn: string): IStatefulRuleGroup {
+  public static fromRuleGroupArn(scope: Construct, id: string, ruleGroupArn: string,): IStatefulRuleGroup {
     /**
      *
      */
@@ -476,12 +520,13 @@ export class StatefulSuricataRuleGroup extends StatefulRuleGroup {
     };
 
     const resourceRuleOptions:CfnRuleGroup.StatefulRuleOptionsProperty = {
-      ruleOrder: props.ruleOrder || StatefulRuleOptions.STRICT_ORDER,
+      ruleOrder: props.ruleOrder || StatefulRuleOptionsRuleOrder.STRICT_ORDER,
     };
     const resourceRuleGroupProperty:CfnRuleGroup.RuleGroupProperty = {
       rulesSource: resourceSourceProperty,
       ruleVariables: props.variables || {},
       statefulRuleOptions: resourceRuleOptions,
+      referenceSets: props.referenceSets,
     };
     const resourceProps:CfnRuleGroupProps={
       capacity: props.capacity || 100,
@@ -489,7 +534,8 @@ export class StatefulSuricataRuleGroup extends StatefulRuleGroup {
       type: RuleGroupType.STATEFUL,
       ruleGroup: resourceRuleGroupProperty,
       description: props.description,
-      //tags
+      summaryConfiguration: props.summaryConfiguration,
+      tags: props.tags,
     };
 
     const resource:CfnRuleGroup = new CfnRuleGroup(this, id, resourceProps);
@@ -547,13 +593,14 @@ export class Stateful5TupleRuleGroup extends StatefulRuleGroup {
     };
 
     const resourceRuleOptions:CfnRuleGroup.StatefulRuleOptionsProperty = {
-      ruleOrder: props.ruleOrder || StatefulRuleOptions.STRICT_ORDER,
+      ruleOrder: props.ruleOrder || StatefulRuleOptionsRuleOrder.STRICT_ORDER,
     };
 
     const resourceRuleGroupProperty:CfnRuleGroup.RuleGroupProperty = {
       rulesSource: resourceSourceProperty,
       ruleVariables: props.variables || {},
       statefulRuleOptions: resourceRuleOptions,
+      referenceSets: props.referenceSets,
     };
 
     const resourceProps:CfnRuleGroupProps={
@@ -562,7 +609,8 @@ export class Stateful5TupleRuleGroup extends StatefulRuleGroup {
       type: RuleGroupType.STATEFUL,
       ruleGroup: resourceRuleGroupProperty,
       description: props.description,
-      //tags
+      summaryConfiguration: props.summaryConfiguration,
+      tags: props.tags,
     };
 
     const resource:CfnRuleGroup = new CfnRuleGroup(this, id, resourceProps);
@@ -611,13 +659,14 @@ export class StatefulDomainListRuleGroup extends StatefulRuleGroup {
       {}:{ rulesSourceList: props.rule.resource };
 
     const resourceRuleOptions:CfnRuleGroup.StatefulRuleOptionsProperty = {
-      ruleOrder: props.ruleOrder || StatefulRuleOptions.STRICT_ORDER,
+      ruleOrder: props.ruleOrder || StatefulRuleOptionsRuleOrder.STRICT_ORDER,
     };
 
     const resourceRuleGroupProperty:CfnRuleGroup.RuleGroupProperty = {
       rulesSource: resourceSourceProperty,
       ruleVariables: props.variables || {},
       statefulRuleOptions: resourceRuleOptions,
+      referenceSets: props.referenceSets,
     };
 
     const resourceProps:CfnRuleGroupProps={
@@ -626,7 +675,8 @@ export class StatefulDomainListRuleGroup extends StatefulRuleGroup {
       type: RuleGroupType.STATEFUL,
       ruleGroup: resourceRuleGroupProperty,
       description: props.description,
-      //tags
+      summaryConfiguration: props.summaryConfiguration,
+      tags: props.tags,
     };
 
     const resource:CfnRuleGroup = new CfnRuleGroup(this, id, resourceProps);
