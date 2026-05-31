@@ -703,6 +703,7 @@ The name of the existing firewall policy.
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.statelessFragmentDefaultActions">statelessFragmentDefaultActions</a></code> | <code>string[]</code> | The Default actions for fragment packets that don't match a stateless rule. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.statelessRuleGroups">statelessRuleGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupList">StatelessRuleGroupList</a>[]</code> | The stateless rule groups in this policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.statefulEngineOptions">statefulEngineOptions</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulEngineOptionsProperty</code> | The stateful engine options for the firewall policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.tlsInspectionConfiguration">tlsInspectionConfiguration</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration">ITLSInspectionConfiguration</a></code> | The TLS Inspection Configuration. |
 
 ---
@@ -844,6 +845,18 @@ public readonly tags: Tag[];
 - *Type:* aws-cdk-lib.Tag[]
 
 Tags to be added to the policy.
+
+---
+
+##### `statefulEngineOptions`<sup>Optional</sup> <a name="statefulEngineOptions" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.statefulEngineOptions"></a>
+
+```typescript
+public readonly statefulEngineOptions: StatefulEngineOptionsProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulEngineOptionsProperty
+
+The stateful engine options for the firewall policy.
 
 ---
 
@@ -2788,12 +2801,15 @@ const firewallPolicyProps: FirewallPolicyProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.description">description</a></code> | <code>string</code> | The description of the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.enableTlsSessionHolding">enableTlsSessionHolding</a></code> | <code>boolean</code> | When true, prevents TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.firewallPolicyName">firewallPolicyName</a></code> | <code>string</code> | The descriptive name of the firewall policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.flowTimeouts">flowTimeouts</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.FlowTimeoutsProperty</code> | Configures the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.policyVariables">policyVariables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.PolicyVariablesProperty</code> | Contains variables that you can use to override default Suricata settings in your firewall policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.ruleOrder">ruleOrder</a></code> | <code>string</code> | How Network Firewall handles stateful rules. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statefulDefaultActions">statefulDefaultActions</a></code> | <code>string[]</code> | The default actions to take on a packet that doesn't match any stateful rules. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statefulEngineOptions">statefulEngineOptions</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulEngineOptionsProperty</code> | Additional options governing how Network Firewall handles stateful rules. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statefulEngineOptions">statefulEngineOptions</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulEngineOptionsProperty</code> | A L1 construct can be passed in for the Engine Options Overrides other stateful engine options properties if this is set. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statefulRuleGroups">statefulRuleGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList">StatefulRuleGroupList</a>[]</code> | The stateful rule groups that are used in the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statelessCustomActions">statelessCustomActions</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.CustomActionProperty[]</code> | The custom action definitions that are available for use in the firewall policy's statelessDefaultActions setting. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statelessRuleGroups">statelessRuleGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupList">StatelessRuleGroupList</a>[]</code> | References to the stateless rule groups that are used in the policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.streamExceptionPolicy">streamExceptionPolicy</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy">StreamExceptionPolicy</a></code> | Configures how Network Firewall processes traffic when a network connection breaks midstream. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.tlsInspectionConfiguration">tlsInspectionConfiguration</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration">ITLSInspectionConfiguration</a></code> | AWS Network Firewall uses a TLS inspection configuration to decrypt traffic. |
 
@@ -2866,6 +2882,19 @@ You can't change the name of a firewall policy after you create it.
 
 ---
 
+##### `flowTimeouts`<sup>Optional</sup> <a name="flowTimeouts" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.flowTimeouts"></a>
+
+```typescript
+public readonly flowTimeouts: FlowTimeoutsProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.FlowTimeoutsProperty
+- *Default:* undefined
+
+Configures the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle.
+
+---
+
 ##### `policyVariables`<sup>Optional</sup> <a name="policyVariables" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.policyVariables"></a>
 
 ```typescript
@@ -2876,6 +2905,21 @@ public readonly policyVariables: PolicyVariablesProperty;
 - *Default:* undefined
 
 Contains variables that you can use to override default Suricata settings in your firewall policy.
+
+---
+
+##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.ruleOrder"></a>
+
+```typescript
+public readonly ruleOrder: string;
+```
+
+- *Type:* string
+- *Default:* Matches the rule order of the first stateful rule group added to the policy, or STRICT_ORDER if no stateful rule groups are added.
+
+How Network Firewall handles stateful rules.
+
+The stateful rule groups that you use in your policy must match the policy's rule order.
 
 ---
 
@@ -2903,9 +2947,7 @@ public readonly statefulEngineOptions: StatefulEngineOptionsProperty;
 - *Type:* aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulEngineOptionsProperty
 - *Default:* undefined
 
-Additional options governing how Network Firewall handles stateful rules.
-
-The stateful rule groups that you use in your policy must have stateful rule options settings that are compatible with these settings
+A L1 construct can be passed in for the Engine Options Overrides other stateful engine options properties if this is set.
 
 ---
 
@@ -2945,6 +2987,21 @@ public readonly statelessRuleGroups: StatelessRuleGroupList[];
 - *Default:* undefined
 
 References to the stateless rule groups that are used in the policy.
+
+---
+
+##### `streamExceptionPolicy`<sup>Optional</sup> <a name="streamExceptionPolicy" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.streamExceptionPolicy"></a>
+
+```typescript
+public readonly streamExceptionPolicy: StreamExceptionPolicy;
+```
+
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy">StreamExceptionPolicy</a>
+- *Default:* undefined
+
+Configures how Network Firewall processes traffic when a network connection breaks midstream.
+
+Network connections can break due to disruptions in external networks or within the firewall itself.
 
 ---
 
@@ -3500,7 +3557,7 @@ const stateful5TupleRuleGroupProps: Stateful5TupleRuleGroupProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.referenceSets">referenceSets</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty</code> | The reference sets for the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> \| <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a></code> | Rule Order. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.rules">rules</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRule">Stateful5TupleRule</a>[]</code> | The rule group rules. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
@@ -3568,10 +3625,10 @@ The descriptive name of the stateful rule group.
 ##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.ruleOrder"></a>
 
 ```typescript
-public readonly ruleOrder: StatefulRuleOptions;
+public readonly ruleOrder: StatefulRuleOptions | StatefulRuleOptionsRuleOrder;
 ```
 
-- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> | <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a>
 - *Default:* STRICT_ORDER
 
 Rule Order.
@@ -3791,7 +3848,7 @@ const statefulDomainListRuleGroupProps: StatefulDomainListRuleGroupProps = { ...
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.referenceSets">referenceSets</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty</code> | The reference sets for the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.rule">rule</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRule">StatefulDomainListRule</a></code> | The Domain List rule. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> \| <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a></code> | Rule Order. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
@@ -3871,10 +3928,10 @@ The descriptive name of the stateful rule group.
 ##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.ruleOrder"></a>
 
 ```typescript
-public readonly ruleOrder: StatefulRuleOptions;
+public readonly ruleOrder: StatefulRuleOptions | StatefulRuleOptionsRuleOrder;
 ```
 
-- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> | <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a>
 - *Default:* STRICT_ORDER
 
 Rule Order.
@@ -4089,7 +4146,7 @@ const statefulSuricataRuleGroupFromFileProps: StatefulSuricataRuleGroupFromFileP
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.encoding">encoding</a></code> | <code>string</code> | The encoding to use for the file. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.referenceSets">referenceSets</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty</code> | The reference sets for the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> \| <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a></code> | Rule Order. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
@@ -4181,10 +4238,10 @@ The descriptive name of the stateful rule group.
 ##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleOrder"></a>
 
 ```typescript
-public readonly ruleOrder: StatefulRuleOptions;
+public readonly ruleOrder: StatefulRuleOptions | StatefulRuleOptionsRuleOrder;
 ```
 
-- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> | <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a>
 - *Default:* STRICT_ORDER
 
 Rule Order.
@@ -4250,7 +4307,7 @@ const statefulSuricataRuleGroupProps: StatefulSuricataRuleGroupProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.referenceSets">referenceSets</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty</code> | The reference sets for the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> \| <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a></code> | Rule Order. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.rules">rules</a></code> | <code>string</code> | The suricata rules. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
@@ -4318,10 +4375,10 @@ The descriptive name of the stateful rule group.
 ##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.ruleOrder"></a>
 
 ```typescript
-public readonly ruleOrder: StatefulRuleOptions;
+public readonly ruleOrder: StatefulRuleOptions | StatefulRuleOptionsRuleOrder;
 ```
 
-- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> | <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a>
 - *Default:* STRICT_ORDER
 
 Rule Order.
@@ -6083,6 +6140,37 @@ Allow domain(s) through.
 ---
 
 
+### StatefulEngineOptionsRuleOrder <a name="StatefulEngineOptionsRuleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulEngineOptionsRuleOrder"></a>
+
+Configuration settings for the handling of the stateful rule groups in a firewall policy.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-networkfirewall-firewallpolicy-statefulengineoptions.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-networkfirewall-firewallpolicy-statefulengineoptions.html)
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulEngineOptionsRuleOrder.ACTION_ORDER">ACTION_ORDER</a></code> | Rules with a pass action are processed first, followed by drop, reject, and alert actions. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulEngineOptionsRuleOrder.STRICT_ORDER">STRICT_ORDER</a></code> | Rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined. |
+
+---
+
+##### `ACTION_ORDER` <a name="ACTION_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulEngineOptionsRuleOrder.ACTION_ORDER"></a>
+
+Rules with a pass action are processed first, followed by drop, reject, and alert actions.
+
+---
+
+
+##### `STRICT_ORDER` <a name="STRICT_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulEngineOptionsRuleOrder.STRICT_ORDER"></a>
+
+Rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined.
+
+Recommended Order.
+
+---
+
+
 ### StatefulRuleOptions <a name="StatefulRuleOptions" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions"></a>
 
 Indicates how to manage the order of the rule evaluation for the rule group.
@@ -6096,7 +6184,9 @@ Indicates how to manage the order of the rule evaluation for the rule group.
 
 ---
 
-##### `ACTION_ORDER` <a name="ACTION_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.ACTION_ORDER"></a>
+##### ~~`ACTION_ORDER`~~ <a name="ACTION_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.ACTION_ORDER"></a>
+
+- *Deprecated:* - Use StatefulRuleOptionsRuleOrder
 
 Rules with a pass action are processed first, followed by drop, reject, and alert actions.
 
@@ -6105,7 +6195,40 @@ This option was previously named Default Acton Order.
 ---
 
 
-##### `STRICT_ORDER` <a name="STRICT_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.STRICT_ORDER"></a>
+##### ~~`STRICT_ORDER`~~ <a name="STRICT_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.STRICT_ORDER"></a>
+
+- *Deprecated:* - Use StatefulRuleOptionsRuleOrder
+
+With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined.
+
+Recommended Order
+
+---
+
+
+### StatefulRuleOptionsRuleOrder <a name="StatefulRuleOptionsRuleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder"></a>
+
+Indicates how to manage the order of the rule evaluation for the rule group.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder.ACTION_ORDER">ACTION_ORDER</a></code> | Rules with a pass action are processed first, followed by drop, reject, and alert actions. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder.STRICT_ORDER">STRICT_ORDER</a></code> | With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined. |
+
+---
+
+##### `ACTION_ORDER` <a name="ACTION_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder.ACTION_ORDER"></a>
+
+Rules with a pass action are processed first, followed by drop, reject, and alert actions.
+
+This option was previously named Default Acton Order.
+
+---
+
+
+##### `STRICT_ORDER` <a name="STRICT_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder.STRICT_ORDER"></a>
 
 With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined.
 
@@ -6230,6 +6353,52 @@ Discontinues all inspection of the packet and permits it to go to its intended d
 ##### `DROP` <a name="DROP" id="@durkinza/cdk-networkfirewall-l2.StatelessStandardAction.DROP"></a>
 
 Discontinues all inspection of the packet and blocks it from going to its intended destination.
+
+---
+
+
+### StreamExceptionPolicy <a name="StreamExceptionPolicy" id="@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy"></a>
+
+Configures how Network Firewall processes traffic when a network connection breaks midstream.
+
+Network connections can break due to disruptions in external networks or within the firewall itself.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-networkfirewall-firewallpolicy-statefulengineoptions.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-networkfirewall-firewallpolicy-statefulengineoptions.html)
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy.DROP">DROP</a></code> | Network Firewall fails closed and drops all subsequent traffic going to the firewall. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy.CONTINUE">CONTINUE</a></code> | Network Firewall continues to apply rules to the subsequent traffic without context from traffic before the break. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy.REJECT">REJECT</a></code> | Network Firewall fails closed and drops all subsequent traffic going to the firewall. |
+
+---
+
+##### `DROP` <a name="DROP" id="@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy.DROP"></a>
+
+Network Firewall fails closed and drops all subsequent traffic going to the firewall.
+
+This is the default behavior.
+
+---
+
+
+##### `CONTINUE` <a name="CONTINUE" id="@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy.CONTINUE"></a>
+
+Network Firewall continues to apply rules to the subsequent traffic without context from traffic before the break.
+
+This impacts the behavior of rules that depend on this context.
+For example, if you have a stateful rule to drop http traffic, Network Firewall won't match the traffic for this rule because the service won't have the context from session initialization defining the application layer protocol as HTTP. However, this behavior is rule dependent—a TCP-layer rule using a flow:stateless rule would still match, as would the aws:drop_strict default action.
+
+---
+
+
+##### `REJECT` <a name="REJECT" id="@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy.REJECT"></a>
+
+Network Firewall fails closed and drops all subsequent traffic going to the firewall.
+
+Network Firewall also sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall will have context about the new session and will apply rules to the subsequent traffic.
 
 ---
 

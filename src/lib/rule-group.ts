@@ -341,7 +341,7 @@ export interface IStatefulRuleGroup extends core.IResource {
 
 /**
  * Indicates how to manage the order of the rule evaluation for the rule group.
- * @deprecated - Use StatefulRuleOptionsEvaluationOrder
+ * @deprecated - Use StatefulRuleOptionsRuleOrder
  */
 export enum StatefulRuleOptions {
   /**
