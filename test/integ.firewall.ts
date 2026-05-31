@@ -22,10 +22,14 @@ class TestStack extends cdk.Stack {
     });
 
     // Setting up logging locations
+
+    // Logging can be sent to CloudWatch Logs
     // const cloudWatchLogGroup = new logs.LogGroup(this, 'MyFirewallLogGroup');
 
+    // Logging can be sent to S3 buckets, with optional prefixes for sorting log types.
     const s3LoggingBucket = new s3.Bucket(this, "MyFirewallLogBucket");
 
+    // Logging can be sent to a Kinesis Data Stream for near real-time processing.
     // const kinesisStream = new kinesis.Stream(this, 'MyFirewallStream', {
     //   streamName: 'my-test-stream',
     // });
@@ -65,6 +69,7 @@ class TestStack extends cdk.Stack {
         summaryConfiguration: {
           ruleOptions: ["MSG"],
         },
+        // Rule order defaults to STRICT_ORDER, uncomment below to force ACTION_ORDER
         // ruleOrder: NetFW.StatefulRuleOptionsRuleOrder.ACTION_ORDER,
       },
     );
@@ -86,6 +91,7 @@ class TestStack extends cdk.Stack {
       {
         capacity: 100,
         rule: statefulDomainListRule,
+        // Rule order defaults to STRICT_ORDER, uncomment below to force ACTION_ORDER
         // ruleOrder: NetFW.StatefulRuleOptionsRuleOrder.ACTION_ORDER,
       },
     );
@@ -107,6 +113,7 @@ class TestStack extends cdk.Stack {
             HTTP_PORTS: { definition: ["80", "8080"] },
           },
         },
+        // Rule order defaults to STRICT_ORDER, uncomment below to force ACTION_ORDER
         // ruleOrder: NetFW.StatefulRuleOptionsRuleOrder.ACTION_ORDER,
       },
     );
@@ -145,11 +152,35 @@ class TestStack extends cdk.Stack {
       },
     );
 
+    // TLS Inspection Configuration requires a pre-existing validated ACM certificate or CA ARN.
+    // Replace the placeholder ARN below with a real certificate ARN to test TLS inspection.
+    // const tlsInspectionConfiguration = new NetFW.TLSInspectionConfiguration(
+    //   this, "MyTLSInspectionConfiguration", {
+    //     configurationName: "MyTLSInspectionConfiguration",
+    //     serverCertificateConfigurations: [{
+    //       scopes: [{
+    //         destinationPorts: [{ fromPort: 443, toPort: 443 }],
+    //         destinations: [{ addressDefinition: "0.0.0.0/0" }],
+    //         protocols: [6],
+    //         sourcePorts: [{ fromPort: 0, toPort: 65535 }],
+    //         sources: [{ addressDefinition: "0.0.0.0/0" }],
+    //       }],
+    //       serverCertificates: [{ resourceArn: 'arn:aws:acm:<region>:<account>:certificate/<uuid>' }],
+    //     }],
+    //   },
+    // );
+
     // Finally setup Policy and firewall.
     const policy = new NetFW.FirewallPolicy(this, "MyNetworkfirewallPolicy", {
       statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
-      //ruleOrder: NetFW.StatefulEngineOptionsRuleOrder.ACTION_ORDER,
+
+      // TLS inspection requires a pre-existing validated ACM certificate or CA ARN.
+      // tlsInspectionConfiguration: tlsInspectionConfiguration,
+
+      // Rule order defaults to STRICT_ORDER, uncomment below to force ACTION_ORDER
+      // ruleOrder: NetFW.StatefulEngineOptionsRuleOrder.ACTION_ORDER,
+
       statefulRuleGroups: [
         {
           priority: 10,

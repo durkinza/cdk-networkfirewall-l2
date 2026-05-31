@@ -42,6 +42,7 @@
     "projenrc",
     "ITLS",
     "devdirs",
+    "certificatemanager",
     "applypatch-msg",
     "pre-applypatch",
     "post-applypatch",

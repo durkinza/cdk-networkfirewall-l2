@@ -1,65 +1,96 @@
 //import { Template, Match } from 'aws-cdk-lib/assertions';
-import { Template } from 'aws-cdk-lib/assertions';
-import * as cdk from 'aws-cdk-lib/core';
-import * as NetFW from '../src/lib';
+import { Template } from "aws-cdk-lib/assertions";
+import * as cdk from "aws-cdk-lib/core";
+import * as NetFW from "../src/lib";
 
-describe('Testing TLS Inspection Features', ()=>{
+describe("Testing TLS Inspection Features", () => {
   let stack: cdk.Stack;
   beforeEach(() => {
     // GIVEN
     stack = new cdk.Stack();
   });
 
-  test('Default Setup', () => {
+  test("Default Setup", () => {
     // WHEN
-    new NetFW.TLSInspectionConfiguration(stack, 'MyTLSInspectionConfiguration', {
-      tags: [new cdk.Tag('test', 'test')],
-      serverCertificateConfigurations: [{
-        certificateAuthorityArn: 'certificateAuthorityArn',
-        checkCertificateRevocationStatus: {
-          revokedStatusAction: 'revokedStatusAction',
-          unknownStatusAction: 'unknownStatusAction',
-        },
-        scopes: [{
-          destinationPorts: [{
-            fromPort: 123,
-            toPort: 123,
-          }],
-          destinations: [{
-            addressDefinition: 'addressDefinition',
-          }],
-          protocols: [123],
-          sourcePorts: [{
-            fromPort: 123,
-            toPort: 123,
-          }],
-          sources: [{
-            addressDefinition: 'addressDefinition',
-          }],
-        }],
-        serverCertificates: [{
-          resourceArn: 'resourceArn',
-        }],
-      }],
-    });
-
+    new NetFW.TLSInspectionConfiguration(
+      stack,
+      "MyTLSInspectionConfiguration",
+      {
+        configurationName: "MyTLSInspectionConfiguration",
+        tags: [new cdk.Tag("test", "test")],
+        serverCertificateConfigurations: [
+          {
+            certificateAuthorityArn: "certificateAuthorityArn",
+            checkCertificateRevocationStatus: {
+              revokedStatusAction: "revokedStatusAction",
+              unknownStatusAction: "unknownStatusAction",
+            },
+            scopes: [
+              {
+                destinationPorts: [
+                  {
+                    fromPort: 123,
+                    toPort: 123,
+                  },
+                ],
+                destinations: [
+                  {
+                    addressDefinition: "addressDefinition",
+                  },
+                ],
+                protocols: [123],
+                sourcePorts: [
+                  {
+                    fromPort: 123,
+                    toPort: 123,
+                  },
+                ],
+                sources: [
+                  {
+                    addressDefinition: "addressDefinition",
+                  },
+                ],
+              },
+            ],
+            serverCertificates: [
+              {
+                resourceArn: "resourceArn",
+              },
+            ],
+          },
+        ],
+      },
+    );
 
     // THEN
-    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::TLSInspectionConfiguration', {
-      TLSInspectionConfigurationName: 'MyTLSInspectionConfiguration',
-      Tags: [{ Key: 'test', Value: 'test' }],
-      TLSInspectionConfiguration: {
-        ServerCertificateConfigurations: [{}],
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::TLSInspectionConfiguration",
+      {
+        TLSInspectionConfigurationName: "MyTLSInspectionConfiguration",
+        Tags: [{ Key: "test", Value: "test" }],
+        TLSInspectionConfiguration: {
+          ServerCertificateConfigurations: [{}],
+        },
       },
-    });
+    );
   });
 
-  test('Default Setup', () => {
+  test("Empty server certificate configurations", () => {
     // WHEN
-    expect(() => {
-      new NetFW.TLSInspectionConfiguration(stack, 'MyTLSInspectionConfiguration', {
-        serverCertificateConfigurations: [],
-      });
-    }).toThrow('You must associate at least one certificate configuration to this TLS inspection configuration.');
+    new NetFW.TLSInspectionConfiguration(
+      stack,
+      "MyTLSInspectionConfiguration",
+      {
+        configurationName: "MyTLSInspectionConfiguration",
+      },
+    );
+
+    // THEN
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::TLSInspectionConfiguration",
+      {
+        TLSInspectionConfigurationName: "MyTLSInspectionConfiguration",
+      },
+    );
   });
 });

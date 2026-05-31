@@ -62,10 +62,11 @@ export class NonObtrusiveNetworkFirewallStack extends cdk.Stack {
       // Send all traffic to Stateful rules for inspection
       statelessDefaultActions: [NetFW.StatelessStandardAction.FORWARD],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.FORWARD],
-      // Drop all other traffic that doesn't match the stateful rules
-      statefulDefaultActions: [NetFW.StatefulStandardAction.DROP],
+      // Drop all other established traffic that doesn't match the stateful rules
+      statefulDefaultActions: [NetFW.StatefulStrictAction.DROP_ESTABLISHED],
       statefulRuleGroups: [
         {
+          priority: 10,
           ruleGroup: ruleGroup,
         },
       ],

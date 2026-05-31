@@ -41,8 +41,8 @@ export class NonObtrusiveNetworkFirewallStack extends cdk.Stack {
       // Send all traffic to Stateful rules for inspection
       statelessDefaultActions: [NetFW.StatelessStandardAction.FORWARD],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.FORWARD],
-      // Alert on all traffic from the stateful rules
-      statefulDefaultActions: [NetFW.StatefulStandardAction.ALERT],
+      // Alert on all established traffic from the stateful rules
+      statefulDefaultActions: [NetFW.StatefulStrictAction.ALERT_ESTABLISHED],
     });
     
     new NetFW.Firewall(this, 'networkFirewall', {
