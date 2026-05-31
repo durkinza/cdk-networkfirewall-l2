@@ -1,132 +1,131 @@
-//import { Template, Match } from 'aws-cdk-lib/assertions';
-import { Template } from 'aws-cdk-lib/assertions';
-import * as cdk from 'aws-cdk-lib/core';
-import * as NetFW from '../src/lib';
+import { Template } from "aws-cdk-lib/assertions";
+import * as cdk from "aws-cdk-lib/core";
+import * as NetFW from "../src/lib";
 
-describe('Testing Logging Features', ()=>{
+describe("Testing Logging Features", () => {
   let stack: cdk.Stack;
   beforeEach(() => {
     // GIVEN
     stack = new cdk.Stack();
   });
 
-  test('Default property', () => {
+  test("Default property", () => {
     // WHEN
-    new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup');
+    new NetFW.StatelessRuleGroup(stack, "MyStatelessRuleGroup");
 
     // THEN
-    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::RuleGroup', {
-      Capacity: 0,
-      RuleGroupName: 'MyStatelessRuleGroup',
-      Type: 'STATELESS',
-      RuleGroup: {
-        RulesSource: {
-          StatelessRulesAndCustomActions: {
-            StatelessRules: [],
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::RuleGroup",
+      {
+        Capacity: 0,
+        RuleGroupName: "MyStatelessRuleGroup",
+        Type: "STATELESS",
+        RuleGroup: {
+          RulesSource: {
+            StatelessRulesAndCustomActions: {
+              StatelessRules: [],
+            },
           },
         },
       },
-    });
+    );
   });
 
-  test('Given property', () => {
+  test("Given property", () => {
     // GIVEN
     const statelessRule = new NetFW.StatelessRule({
       actions: [NetFW.StatelessStandardAction.DROP],
     });
 
     // WHEN
-    new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
-      ruleGroupName: 'MyNamedStatelessRuleGroup',
+    new NetFW.StatelessRuleGroup(stack, "MyStatelessRuleGroup", {
+      ruleGroupName: "MyNamedStatelessRuleGroup",
       capacity: 100,
       rules: [{ rule: statelessRule, priority: 10 }],
       customActions: [
         {
           actionDefinition: {
             publishMetricAction: {
-              dimensions: [{
-                value: 'value',
-              }],
+              dimensions: [
+                {
+                  value: "value",
+                },
+              ],
             },
           },
-          actionName: 'actionName',
+          actionName: "actionName",
         },
       ],
       variables: {
         ipSets: {
           ipSetsKey: {
-            definition: ['10.0.0.0/16', '10.10.0.0/16'],
+            definition: ["10.0.0.0/16", "10.10.0.0/16"],
           },
         },
         portSets: {
           portSetsKey: {
-            definition: ['443', '80'],
+            definition: ["443", "80"],
           },
         },
       },
     });
 
     // THEN
-    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::RuleGroup', {
-      Capacity: 100,
-      RuleGroupName: 'MyNamedStatelessRuleGroup',
-      Type: 'STATELESS',
-      RuleGroup: {
-        RuleVariables: {
-          IPSets: {
-            ipSetsKey: {
-              Definition: [
-                '10.0.0.0/16',
-                '10.10.0.0/16',
-              ],
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::RuleGroup",
+      {
+        Capacity: 100,
+        RuleGroupName: "MyNamedStatelessRuleGroup",
+        Type: "STATELESS",
+        RuleGroup: {
+          RuleVariables: {
+            IPSets: {
+              ipSetsKey: {
+                Definition: ["10.0.0.0/16", "10.10.0.0/16"],
+              },
+            },
+            PortSets: {
+              portSetsKey: {
+                Definition: ["443", "80"],
+              },
             },
           },
-          PortSets: {
-            portSetsKey: {
-              Definition: [
-                '443',
-                '80',
+          RulesSource: {
+            StatelessRulesAndCustomActions: {
+              CustomActions: [
+                {
+                  ActionDefinition: {
+                    PublishMetricAction: {
+                      Dimensions: [
+                        {
+                          Value: "value",
+                        },
+                      ],
+                    },
+                  },
+                  ActionName: "actionName",
+                },
+              ],
+              StatelessRules: [
+                {
+                  Priority: 10,
+                  RuleDefinition: {
+                    Actions: ["aws:drop"],
+                    MatchAttributes: {
+                      Destinations: [],
+                      Sources: [],
+                    },
+                  },
+                },
               ],
             },
-          },
-        },
-        RulesSource: {
-          StatelessRulesAndCustomActions: {
-            CustomActions: [
-              {
-                ActionDefinition: {
-                  PublishMetricAction: {
-                    Dimensions: [
-                      {
-                        Value: 'value',
-                      },
-                    ],
-                  },
-                },
-                ActionName: 'actionName',
-              },
-            ],
-            StatelessRules: [
-              {
-                Priority: 10,
-                RuleDefinition: {
-                  Actions: [
-                    'aws:drop',
-                  ],
-                  MatchAttributes: {
-                    Destinations: [],
-                    Sources: [],
-                  },
-                },
-              },
-            ],
           },
         },
       },
-    });
+    );
   });
 
-  test('Verifies rule Priorities', () => {
+  test("Verifies rule Priorities", () => {
     // GIVEN
     const statelessRule1 = new NetFW.StatelessRule({
       actions: [NetFW.StatelessStandardAction.DROP],
@@ -137,7 +136,7 @@ describe('Testing Logging Features', ()=>{
 
     // WHEN
     expect(() => {
-      new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
+      new NetFW.StatelessRuleGroup(stack, "MyStatelessRuleGroup", {
         rules: [
           {
             rule: statelessRule1,
@@ -150,11 +149,11 @@ describe('Testing Logging Features', ()=>{
         ],
       });
 
-    // THEN
-    }).toThrow('Priority must be unique, got duplicate priority: \'10\'');
+      // THEN
+    }).toThrow("Priority must be unique, got duplicate priority: '10'");
   });
 
-  test('Calculate Capacity of rules', () => {
+  test("Calculate Capacity of rules", () => {
     // GIVEN
     const statelessRule1 = new NetFW.StatelessRule({
       actions: [NetFW.StatelessStandardAction.DROP],
@@ -168,48 +167,56 @@ describe('Testing Logging Features', ()=>{
           toPort: 443,
         },
       ],
-      destinations: ['10.0.0.0/16, 10.10.0.0/16'],
-      sourcePorts: [{
-        fromPort: 0,
-        toPort: 65535,
-      }],
-      sources: ['10.0.0.0/16', '10.10.0.0/16'],
+      destinations: ["10.0.0.0/16, 10.10.0.0/16"],
+      sourcePorts: [
+        {
+          fromPort: 0,
+          toPort: 65535,
+        },
+      ],
+      sources: ["10.0.0.0/16", "10.10.0.0/16"],
       protocols: [10, 11],
-      tcpFlags: [{ flags: ['ECE', 'SYN'], masks: ['SYN', 'ECE'] }],
+      tcpFlags: [{ flags: ["ECE", "SYN"], masks: ["SYN", "ECE"] }],
     });
     const statelessRule2 = new NetFW.StatelessRule({
       actions: [NetFW.StatelessStandardAction.DROP],
     });
 
     // WHEN
-    const statelessRuleGroup = new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
-      ruleGroupName: 'MyNamedStatelessRuleGroup',
-      rules: [
-        {
-          rule: statelessRule1,
-          priority: 10,
-        },
-        {
-          rule: statelessRule2,
-          priority: 20,
-        },
-      ],
-    });
+    const statelessRuleGroup = new NetFW.StatelessRuleGroup(
+      stack,
+      "MyStatelessRuleGroup",
+      {
+        ruleGroupName: "MyNamedStatelessRuleGroup",
+        rules: [
+          {
+            rule: statelessRule1,
+            priority: 10,
+          },
+          {
+            rule: statelessRule2,
+            priority: 20,
+          },
+        ],
+      },
+    );
 
     // capacity of statelessRule1(16) + statelessRule2(1) = 17
     expect(statelessRuleGroup.calculateCapacity()).toBe(17);
   });
-  test('Capacity validation', () => {
+  test("Capacity validation", () => {
     // WHEN
     expect(() => {
-      new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
-        ruleGroupName: 'MyNamedStatelessRuleGroup',
+      new NetFW.StatelessRuleGroup(stack, "MyStatelessRuleGroup", {
+        ruleGroupName: "MyNamedStatelessRuleGroup",
         capacity: 30001,
       });
-    }).toThrow('Capacity must be a positive value less than 30,000, got: \'30001\'');
+    }).toThrow(
+      "Capacity must be a positive value less than 30,000, got: '30001'",
+    );
   });
 
-  test('Calculate Capacity validation', () => {
+  test("Calculate Capacity validation", () => {
     // GIVEN
     const statelessRule1 = new NetFW.StatelessRule({
       actions: [NetFW.StatelessStandardAction.DROP],
@@ -225,7 +232,9 @@ describe('Testing Logging Features', ()=>{
         { fromPort: 9, toPort: 9 },
         { fromPort: 10, toPort: 10 },
       ],
-      destinations: ['10.0.0.0/16, 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 10.4.0.0/16, 10.5.0.0/16, 10.6.0.0/16, 10.7.0.0/16, 10.8.0.0/16, 10.9.0.0/16'],
+      destinations: [
+        "10.0.0.0/16, 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 10.4.0.0/16, 10.5.0.0/16, 10.6.0.0/16, 10.7.0.0/16, 10.8.0.0/16, 10.9.0.0/16",
+      ],
       sourcePorts: [
         { fromPort: 1, toPort: 1 },
         { fromPort: 2, toPort: 2 },
@@ -238,9 +247,11 @@ describe('Testing Logging Features', ()=>{
         { fromPort: 9, toPort: 9 },
         { fromPort: 10, toPort: 10 },
       ],
-      sources: ['10.0.0.0/16, 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 10.4.0.0/16, 10.5.0.0/16, 10.6.0.0/16, 10.7.0.0/16, 10.8.0.0/16, 10.9.0.0/16'],
+      sources: [
+        "10.0.0.0/16, 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 10.4.0.0/16, 10.5.0.0/16, 10.6.0.0/16, 10.7.0.0/16, 10.8.0.0/16, 10.9.0.0/16",
+      ],
       protocols: [10, 11],
-      tcpFlags: [{ flags: ['ECE', 'SYN'], masks: ['SYN', 'ECE'] }],
+      tcpFlags: [{ flags: ["ECE", "SYN"], masks: ["SYN", "ECE"] }],
     });
     const statelessRule2 = new NetFW.StatelessRule({
       actions: [NetFW.StatelessStandardAction.DROP],
@@ -256,7 +267,9 @@ describe('Testing Logging Features', ()=>{
         { fromPort: 9, toPort: 9 },
         { fromPort: 10, toPort: 10 },
       ],
-      destinations: ['10.0.0.0/16, 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 10.4.0.0/16, 10.5.0.0/16, 10.6.0.0/16, 10.7.0.0/16, 10.8.0.0/16, 10.9.0.0/16'],
+      destinations: [
+        "10.0.0.0/16, 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 10.4.0.0/16, 10.5.0.0/16, 10.6.0.0/16, 10.7.0.0/16, 10.8.0.0/16, 10.9.0.0/16",
+      ],
       sourcePorts: [
         { fromPort: 1, toPort: 1 },
         { fromPort: 2, toPort: 2 },
@@ -269,15 +282,17 @@ describe('Testing Logging Features', ()=>{
         { fromPort: 9, toPort: 9 },
         { fromPort: 10, toPort: 10 },
       ],
-      sources: ['10.0.0.0/16, 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 10.4.0.0/16, 10.5.0.0/16, 10.6.0.0/16, 10.7.0.0/16, 10.8.0.0/16, 10.9.0.0/16'],
+      sources: [
+        "10.0.0.0/16, 10.1.0.0/16, 10.2.0.0/16, 10.3.0.0/16, 10.4.0.0/16, 10.5.0.0/16, 10.6.0.0/16, 10.7.0.0/16, 10.8.0.0/16, 10.9.0.0/16",
+      ],
       protocols: [10, 11],
-      tcpFlags: [{ flags: ['ECE', 'SYN'], masks: ['SYN', 'ECE'] }],
+      tcpFlags: [{ flags: ["ECE", "SYN"], masks: ["SYN", "ECE"] }],
     });
 
     // WHEN
     expect(() => {
-      new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
-        ruleGroupName: 'MyNamedStatelessRuleGroup',
+      new NetFW.StatelessRuleGroup(stack, "MyStatelessRuleGroup", {
+        ruleGroupName: "MyNamedStatelessRuleGroup",
         rules: [
           {
             rule: statelessRule1,
@@ -289,42 +304,56 @@ describe('Testing Logging Features', ()=>{
           },
         ],
       });
-    }).toThrow('Capacity must be a positive value less than 30,000, got: \'40000\'');
+    }).toThrow(
+      "Capacity must be a positive value less than 30,000, got: '40000'",
+    );
   });
 
-  test('Tags and summaryConfiguration', () => {
+  test("Tags and summaryConfiguration", () => {
     // WHEN
-    const statelessRuleGroup = new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
-      summaryConfiguration: {
-        ruleOptions: ['MSG'],
+    const statelessRuleGroup = new NetFW.StatelessRuleGroup(
+      stack,
+      "MyStatelessRuleGroup",
+      {
+        summaryConfiguration: {
+          ruleOptions: ["MSG"],
+        },
       },
-    });
-    cdk.Tags.of(statelessRuleGroup).add('Environment', 'Testing');
+    );
+    cdk.Tags.of(statelessRuleGroup).add("Environment", "Testing");
 
     // THEN
-    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::RuleGroup', {
-      Tags: [{ Key: 'Environment', Value: 'Testing' }],
-      SummaryConfiguration: {
-        RuleOptions: ['MSG'],
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::RuleGroup",
+      {
+        Tags: [{ Key: "Environment", Value: "Testing" }],
+        SummaryConfiguration: {
+          RuleOptions: ["MSG"],
+        },
       },
-    });
+    );
   });
 
-  test('Can get stateless rule group by name', () => {
+  test("Can get stateless rule group by name", () => {
     // GIVEN
-    const statelessRuleGroup = NetFW.StatelessRuleGroup.fromStatelessRuleGroupName(stack, 'MyImportedStatelessRuleGroup', 'MyStatelessRuleGroup');
+    const statelessRuleGroup =
+      NetFW.StatelessRuleGroup.fromStatelessRuleGroupName(
+        stack,
+        "MyImportedStatelessRuleGroup",
+        "MyStatelessRuleGroup",
+      );
 
     // WHEN
-    new cdk.CfnResource(stack, 'Res', {
-      type: 'Test::Resource',
+    new cdk.CfnResource(stack, "Res", {
+      type: "Test::Resource",
       properties: {
         statelessRuleGroup: statelessRuleGroup.ruleGroupId,
       },
     });
 
     // THEN
-    Template.fromStack(stack).hasResourceProperties('Test::Resource', {
-      statelessRuleGroup: 'MyStatelessRuleGroup',
+    Template.fromStack(stack).hasResourceProperties("Test::Resource", {
+      statelessRuleGroup: "MyStatelessRuleGroup",
     });
   });
 });

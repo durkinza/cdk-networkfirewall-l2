@@ -9,12 +9,11 @@
       "type": "build"
     },
     {
-      "name": "@mountainpass/cool-bits-for-projen",
+      "name": "@eslint/compat",
       "type": "build"
     },
     {
-      "name": "@stylistic/eslint-plugin",
-      "version": "^2",
+      "name": "@mountainpass/cool-bits-for-projen",
       "type": "build"
     },
     {
@@ -53,6 +52,10 @@
       "type": "build"
     },
     {
+      "name": "eslint-config-prettier",
+      "type": "build"
+    },
+    {
       "name": "eslint-import-resolver-node",
       "type": "build"
     },
@@ -62,6 +65,10 @@
     },
     {
       "name": "eslint-plugin-import",
+      "type": "build"
+    },
+    {
+      "name": "eslint-plugin-prettier",
       "type": "build"
     },
     {
@@ -107,6 +114,10 @@
     },
     {
       "name": "npm-check-updates",
+      "type": "build"
+    },
+    {
+      "name": "prettier",
       "type": "build"
     },
     {

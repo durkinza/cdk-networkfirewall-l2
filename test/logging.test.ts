@@ -1,32 +1,32 @@
-import { Template } from 'aws-cdk-lib/assertions';
-import * as ec2 from 'aws-cdk-lib/aws-ec2';
-import * as kinesis from 'aws-cdk-lib/aws-kinesis';
-import * as logs from 'aws-cdk-lib/aws-logs';
-import * as S3 from 'aws-cdk-lib/aws-s3';
-import * as cdk from 'aws-cdk-lib/core';
-import * as NetFW from '../src/lib';
+import { Template } from "aws-cdk-lib/assertions";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import * as kinesis from "aws-cdk-lib/aws-kinesis";
+import * as logs from "aws-cdk-lib/aws-logs";
+import * as S3 from "aws-cdk-lib/aws-s3";
+import * as cdk from "aws-cdk-lib/core";
+import * as NetFW from "../src/lib";
 
-describe('Testing Logging Features', ()=>{
+describe("Testing Logging Features", () => {
   let stack: cdk.Stack;
   let vpc: ec2.Vpc;
   beforeEach(() => {
     // GIVEN
     stack = new cdk.Stack();
-    vpc = new ec2.Vpc(stack, 'MyTestVpc', {
-      ipAddresses: ec2.IpAddresses.cidr('10.0.0.0/16'),
+    vpc = new ec2.Vpc(stack, "MyTestVpc", {
+      ipAddresses: ec2.IpAddresses.cidr("10.0.0.0/16"),
     });
   });
 
-  test('Cloudwatch Logs', () => {
+  test("Cloudwatch Logs", () => {
     // GIVEN
-    const logGroup = new logs.LogGroup(stack, 'MyCustomLogGroup');
+    const logGroup = new logs.LogGroup(stack, "MyCustomLogGroup");
 
     // WHEN
-    const policy = new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy1', {
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy1", {
       statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
     });
-    new NetFW.Firewall(stack, 'MyNetworkFirewall30', {
+    new NetFW.Firewall(stack, "MyNetworkFirewall30", {
       vpc: vpc,
       policy: policy,
       loggingCloudWatchLogGroups: [
@@ -38,59 +38,63 @@ describe('Testing Logging Features', ()=>{
     });
 
     // THEN
-    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::Firewall', {
-      SubnetMappings: [
-        {
-          SubnetId: {
-            Ref: 'MyTestVpcPublicSubnet1SubnetA7B59A2C',
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::Firewall",
+      {
+        SubnetMappings: [
+          {
+            SubnetId: {
+              Ref: "MyTestVpcPublicSubnet1SubnetA7B59A2C",
+            },
           },
-        },
-        {
-          SubnetId: {
-            Ref: 'MyTestVpcPublicSubnet2SubnetBE93625D',
+          {
+            SubnetId: {
+              Ref: "MyTestVpcPublicSubnet2SubnetBE93625D",
+            },
           },
+        ],
+        VpcId: {
+          Ref: "MyTestVpcE144EEF4",
         },
-      ],
-      VpcId: {
-        Ref: 'MyTestVpcE144EEF4',
       },
-    });
+    );
   });
 
-  test('Cloudwatch with bad name throws Error', () => {
+  test("Cloudwatch with bad name throws Error", () => {
     // WHEN
-    const policy = new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy1', {
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy1", {
       statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
     });
 
     // THEN
     expect(() => {
-      new NetFW.Firewall(stack, 'MyNetworkFirewall', {
+      new NetFW.Firewall(stack, "MyNetworkFirewall", {
         vpc: vpc,
         policy: policy,
         loggingCloudWatchLogGroups: [
           {
-            logGroup: 'Test_!test',
+            logGroup: "Test_!test",
             logType: NetFW.LogType.ALERT,
           },
         ],
       });
-    // THEN
-    }).toThrow('Cloudwatch LogGroup must have 1-512 characters of only letters, numbers, hyphens, underscores, and pounds (#). Got: Test_!test');
-
+      // THEN
+    }).toThrow(
+      "Cloudwatch LogGroup must have 1-512 characters of only letters, numbers, hyphens, underscores, and pounds (#). Got: Test_!test",
+    );
   });
 
-  test('S3 Logs', () => {
+  test("S3 Logs", () => {
     // GIVEN
-    const logBucket = new S3.Bucket(stack, 'MyCustomLogBucket');
+    const logBucket = new S3.Bucket(stack, "MyCustomLogBucket");
 
     // WHEN
-    const policy = new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy2', {
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy2", {
       statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
     });
-    new NetFW.Firewall(stack, 'MyNetworkFirewall11', {
+    new NetFW.Firewall(stack, "MyNetworkFirewall11", {
       vpc: vpc,
       policy: policy,
       loggingS3Buckets: [
@@ -102,66 +106,70 @@ describe('Testing Logging Features', ()=>{
     });
 
     // THEN
-    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::Firewall', {
-      SubnetMappings: [
-        {
-          SubnetId: {
-            Ref: 'MyTestVpcPublicSubnet1SubnetA7B59A2C',
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::Firewall",
+      {
+        SubnetMappings: [
+          {
+            SubnetId: {
+              Ref: "MyTestVpcPublicSubnet1SubnetA7B59A2C",
+            },
           },
-        },
-        {
-          SubnetId: {
-            Ref: 'MyTestVpcPublicSubnet2SubnetBE93625D',
+          {
+            SubnetId: {
+              Ref: "MyTestVpcPublicSubnet2SubnetBE93625D",
+            },
           },
+        ],
+        VpcId: {
+          Ref: "MyTestVpcE144EEF4",
         },
-      ],
-      VpcId: {
-        Ref: 'MyTestVpcE144EEF4',
       },
-    });
+    );
   });
 
-  test('S3 Bucket with Bad prefix throws Error', () => {
+  test("S3 Bucket with Bad prefix throws Error", () => {
     // GIVEN
-    const logBucket = new S3.Bucket(stack, 'MyCustomLogBucket');
+    const logBucket = new S3.Bucket(stack, "MyCustomLogBucket");
 
     // WHEN
-    const policy = new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy2', {
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy2", {
       statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
     });
 
     // THEN
     expect(() => {
-      new NetFW.Firewall(stack, 'MyNetworkFirewall11', {
+      new NetFW.Firewall(stack, "MyNetworkFirewall11", {
         vpc: vpc,
         policy: policy,
         loggingS3Buckets: [
           {
-            prefix: '#test&ing',
+            prefix: "#test&ing",
             bucketName: logBucket.bucketName,
             logType: NetFW.LogType.ALERT,
           },
         ],
       });
-    // THEN
-    }).toThrow('Bucket Name prefix must have only letters, numbers, hyphens, dots (.), underscores, parentheses, stars(*), and exclamation points (!). Got: #test&ing');
+      // THEN
+    }).toThrow(
+      "Bucket Name prefix must have only letters, numbers, hyphens, dots (.), underscores, parentheses, stars(*), and exclamation points (!). Got: #test&ing",
+    );
   });
 
-
-  test('Kinesis Data Streams Logs', () => {
+  test("Kinesis Data Streams Logs", () => {
     // GIVEN
-    const stream = new kinesis.Stream(stack, 'MyTestStream', {
-      streamName: 'my-test-stream',
+    const stream = new kinesis.Stream(stack, "MyTestStream", {
+      streamName: "my-test-stream",
     });
 
     // WHEN
-    const policy = new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy3', {
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy3", {
       statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
     });
 
-    new NetFW.Firewall(stack, 'MyNetworkFirewall12', {
+    new NetFW.Firewall(stack, "MyNetworkFirewall12", {
       vpc: vpc,
       policy: policy,
       loggingKinesisDataStreams: [
@@ -173,46 +181,50 @@ describe('Testing Logging Features', ()=>{
     });
 
     // THEN
-    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::Firewall', {
-      SubnetMappings: [
-        {
-          SubnetId: {
-            Ref: 'MyTestVpcPublicSubnet1SubnetA7B59A2C',
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::Firewall",
+      {
+        SubnetMappings: [
+          {
+            SubnetId: {
+              Ref: "MyTestVpcPublicSubnet1SubnetA7B59A2C",
+            },
           },
-        },
-        {
-          SubnetId: {
-            Ref: 'MyTestVpcPublicSubnet2SubnetBE93625D',
+          {
+            SubnetId: {
+              Ref: "MyTestVpcPublicSubnet2SubnetBE93625D",
+            },
           },
+        ],
+        VpcId: {
+          Ref: "MyTestVpcE144EEF4",
         },
-      ],
-      VpcId: {
-        Ref: 'MyTestVpcE144EEF4',
       },
-    });
+    );
   });
 
-
-  test('Kinesis Data Streams with Bad Name throws Error', () => {
+  test("Kinesis Data Streams with Bad Name throws Error", () => {
     // WHEN
-    const policy = new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy3', {
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy3", {
       statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
     });
 
     // THEN
     expect(() => {
-      new NetFW.Firewall(stack, 'MyNetworkFirewall12', {
+      new NetFW.Firewall(stack, "MyNetworkFirewall12", {
         vpc: vpc,
         policy: policy,
         loggingKinesisDataStreams: [
           {
-            deliveryStream: 'test_!test',
+            deliveryStream: "test_!test",
             logType: NetFW.LogType.FLOW,
           },
         ],
       });
-    // THEN
-    }).toThrow('Kinesis deliveryStream must have 1-64 characters of only letters, numbers, hyphens, dots (.), and underscores. Got: test_!test');
+      // THEN
+    }).toThrow(
+      "Kinesis deliveryStream must have 1-64 characters of only letters, numbers, hyphens, dots (.), and underscores. Got: test_!test",
+    );
   });
 });

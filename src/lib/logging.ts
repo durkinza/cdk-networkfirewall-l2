@@ -1,7 +1,10 @@
-import { CfnLoggingConfiguration, CfnLoggingConfigurationProps } from 'aws-cdk-lib/aws-networkfirewall';
-import { Bucket } from 'aws-cdk-lib/aws-s3';
-import * as core from 'aws-cdk-lib/core';
-import { Construct } from 'constructs';
+import {
+  CfnLoggingConfiguration,
+  CfnLoggingConfigurationProps,
+} from "aws-cdk-lib/aws-networkfirewall";
+import { Bucket } from "aws-cdk-lib/aws-s3";
+import * as core from "aws-cdk-lib/core";
+import { Construct } from "constructs";
 
 /**
  * The type of log to send.
@@ -10,18 +13,18 @@ export enum LogType {
   /**
    * Alert logs report traffic that matches a stateful rule with an action setting that sends an alert log message.
    */
-  ALERT = 'ALERT',
+  ALERT = "ALERT",
 
   /**
    * Flow logs are standard network traffic flow logs.
    */
-  FLOW = 'FLOW',
+  FLOW = "FLOW",
 
   /**
    * Logs for events that are related to TLS inspection.
    */
-  TLS = 'TLS',
-};
+  TLS = "TLS",
+}
 
 /**
  * The type of storage destination to send these logs to.
@@ -30,18 +33,18 @@ export enum LogDestinationType {
   /**
    * Store logs to CloudWatch log group.
    */
-  CLOUDWATCH = 'CloudWatchLogs',
+  CLOUDWATCH = "CloudWatchLogs",
 
   /**
    * Store logs to a Kinesis Data Firehose delivery stream.
    */
-  KINESISDATAFIREHOSE = 'KinesisDataFirehose',
+  KINESISDATAFIREHOSE = "KinesisDataFirehose",
 
   /**
    * Store logs to an S3 bucket.
    */
-  S3 = 'S3',
-};
+  S3 = "S3",
+}
 
 /**
  * Defines a Log Location in the Stack.
@@ -60,8 +63,8 @@ export interface ILogLocation {
   /**
    * The named location for the logs, provided in a key:value mapping that is specific to the chosen destination type.
    */
-  readonly logDestination: { [key:string]: string };
-};
+  readonly logDestination: { [key: string]: string };
+}
 
 /**
  * Base Log Location structure.
@@ -71,7 +74,7 @@ export interface LogLocationProps {
    * The type of log to send.
    */
   readonly logType: LogType | string;
-};
+}
 
 /**
  * Base Log Location class
@@ -85,11 +88,11 @@ export abstract class LogLocationBase implements ILogLocation {
    * @param logDestinationType
    * @param props
    */
-  constructor(logDestinationType:LogDestinationType, props:LogLocationProps) {
-    this.logType=props.logType;
+  constructor(logDestinationType: LogDestinationType, props: LogLocationProps) {
+    this.logType = props.logType;
     this.logDestinationType = logDestinationType;
   }
-};
+}
 
 /**
  * Defines a S3 Bucket Logging Option.
@@ -105,7 +108,7 @@ export interface S3LogLocationProps extends LogLocationProps {
    * @default - no prefix is used.
    */
   readonly prefix?: string;
-};
+}
 
 /**
  * Defines a S3 Bucket Logging configuration.
@@ -119,7 +122,7 @@ export class S3LogLocation extends LogLocationBase {
    *
    * @param props
    */
-  constructor(props:S3LogLocationProps) {
+  constructor(props: S3LogLocationProps) {
     super(LogDestinationType.S3, props);
     this.logDestinationType = LogDestinationType.S3;
     this.logType = props.logType;
@@ -128,7 +131,9 @@ export class S3LogLocation extends LogLocationBase {
     Bucket.validateBucketName(props.bucketName);
     if (props.prefix) {
       if (!/^[\w!'()*.-]+$/.test(props.prefix)) {
-        throw new Error(`Bucket Name prefix must have only letters, numbers, hyphens, dots (.), underscores, parentheses, stars(*), and exclamation points (!). Got: ${props.prefix}`);
+        throw new Error(
+          `Bucket Name prefix must have only letters, numbers, hyphens, dots (.), underscores, parentheses, stars(*), and exclamation points (!). Got: ${props.prefix}`,
+        );
       }
       this.logDestination = {
         bucketName: props.bucketName,
@@ -140,7 +145,7 @@ export class S3LogLocation extends LogLocationBase {
       };
     }
   }
-};
+}
 
 /**
  * Defines a Kinesis Delivery Stream Logging Option.
@@ -150,7 +155,7 @@ export interface KinesisDataFirehoseLogLocationProps extends LogLocationProps {
    * The name of the Kinesis Data Firehose delivery stream to send logs to.
    */
   readonly deliveryStream: string;
-};
+}
 
 /**
  * Defines a Kinesis Delivery Stream Logging Configuration.
@@ -164,23 +169,28 @@ export class KinesisDataFirehoseLogLocation extends LogLocationBase {
    *
    * @param props
    */
-  constructor(props:KinesisDataFirehoseLogLocationProps) {
+  constructor(props: KinesisDataFirehoseLogLocationProps) {
     super(LogDestinationType.KINESISDATAFIREHOSE, props);
     this.logDestinationType = LogDestinationType.KINESISDATAFIREHOSE;
     this.logType = props.logType;
 
     // Throws and error if deliveryStream is invalid format.
     // skip validation for late-bound values.
-    if ( !core.Token.isUnresolved(props.deliveryStream) && !/^[\w.-]{1,64}$/.test(props.deliveryStream)) {
+    if (
+      !core.Token.isUnresolved(props.deliveryStream) &&
+      !/^[\w.-]{1,64}$/.test(props.deliveryStream)
+    ) {
       // Throws and error if logGroup is invalid format.
-      throw new Error(`Kinesis deliveryStream must have 1-64 characters of only letters, numbers, hyphens, dots (.), and underscores. Got: ${props.deliveryStream}`);
+      throw new Error(
+        `Kinesis deliveryStream must have 1-64 characters of only letters, numbers, hyphens, dots (.), and underscores. Got: ${props.deliveryStream}`,
+      );
     }
 
     this.logDestination = {
       deliveryStream: props.deliveryStream,
     };
   }
-};
+}
 
 /**
  * Defines a Cloud Watch Log Group Logging Option.
@@ -190,7 +200,7 @@ export interface CloudWatchLogLocationProps extends LogLocationProps {
    * The name of the CloudWatch Log Group to send logs to.
    */
   readonly logGroup: string;
-};
+}
 
 /**
  * Defines a Cloud Watch Log Group Logging Configuration.
@@ -204,22 +214,27 @@ export class CloudWatchLogLocation extends LogLocationBase {
    *
    * @param props
    */
-  constructor(props:CloudWatchLogLocationProps) {
+  constructor(props: CloudWatchLogLocationProps) {
     super(LogDestinationType.CLOUDWATCH, props);
     this.logDestinationType = LogDestinationType.CLOUDWATCH;
     this.logType = props.logType;
 
     // skip validation for late-bound values.
-    if ( !core.Token.isUnresolved(props.logGroup) && !/^[\w#./-]{1,512}$/.test(props.logGroup)) {
+    if (
+      !core.Token.isUnresolved(props.logGroup) &&
+      !/^[\w#./-]{1,512}$/.test(props.logGroup)
+    ) {
       // Throws and error if logGroup is invalid format.
-      throw new Error(`Cloudwatch LogGroup must have 1-512 characters of only letters, numbers, hyphens, underscores, and pounds (#). Got: ${props.logGroup}`);
+      throw new Error(
+        `Cloudwatch LogGroup must have 1-512 characters of only letters, numbers, hyphens, underscores, and pounds (#). Got: ${props.logGroup}`,
+      );
     }
 
     this.logDestination = {
       logGroup: props.logGroup,
     };
   }
-};
+}
 
 /**
  * Defines a Network Firewall Logging Configuration in the stack
@@ -231,7 +246,7 @@ export interface ILoggingConfiguration extends core.IResource {
    * @attribute
    */
   readonly firewallRef: string;
-};
+}
 
 /**
  * The Properties for defining a Logging Configuration
@@ -266,14 +281,16 @@ export interface LoggingConfigurationProps {
    * @default - false
    */
   readonly enableMonitoringDashboard?: boolean;
-};
+}
 
 /**
  * Defines a Logging Configuration in the Stack
  * @resource AWS::NetworkFirewall::LoggingConfiguration
  */
-export class LoggingConfiguration extends core.Resource implements ILoggingConfiguration {
-
+export class LoggingConfiguration
+  extends core.Resource
+  implements ILoggingConfiguration
+{
   /**
    * The associated firewall Arn
    * @attribute
@@ -298,34 +315,45 @@ export class LoggingConfiguration extends core.Resource implements ILoggingConfi
    * @param id
    * @param props
    */
-  constructor(scope:Construct, id: string, props: LoggingConfigurationProps) {
+  constructor(scope: Construct, id: string, props: LoggingConfigurationProps) {
     super(scope, id, {
       physicalName: props.loggingConfigurationName,
     });
 
     // skip validation for late-bound values.
-    if (props.firewallName && !core.Token.isUnresolved(props.firewallName) && !/^[\dA-Za-z-]{1,128}$/.test(props.firewallName)) {
+    if (
+      props.firewallName &&
+      !core.Token.isUnresolved(props.firewallName) &&
+      !/^[\dA-Za-z-]{1,128}$/.test(props.firewallName)
+    ) {
       // Throws and error if logGroup is invalid format.
-      throw new Error(`'FirewallName' must have 1-128 characters of only letters, numbers, and hyphens. Got: ${props.firewallName}`);
+      throw new Error(
+        `'FirewallName' must have 1-128 characters of only letters, numbers, and hyphens. Got: ${props.firewallName}`,
+      );
     }
 
     this.firewallRef = props.firewallRef;
     this.firewallName = props.firewallName;
     this.loggingLocations = props.loggingLocations || [];
 
-    const logDestinationConfigs:CfnLoggingConfiguration.LogDestinationConfigProperty[] =
-    this.iLogLocationsToLogDestinationConfigProperty(this.loggingLocations);
+    const logDestinationConfigs: CfnLoggingConfiguration.LogDestinationConfigProperty[] =
+      this.iLogLocationsToLogDestinationConfigProperty(this.loggingLocations);
 
-    const loggingConfigurationProperty:CfnLoggingConfiguration.LoggingConfigurationProperty = {
-      logDestinationConfigs: logDestinationConfigs,
-    };
-    const resourceProps:CfnLoggingConfigurationProps = {
+    const loggingConfigurationProperty: CfnLoggingConfiguration.LoggingConfigurationProperty =
+      {
+        logDestinationConfigs: logDestinationConfigs,
+      };
+    const resourceProps: CfnLoggingConfigurationProps = {
       firewallArn: this.firewallRef,
       loggingConfiguration: loggingConfigurationProperty,
       firewallName: props.firewallName,
       enableMonitoringDashboard: props.enableMonitoringDashboard ?? false,
     };
-    const resource:CfnLoggingConfiguration = new CfnLoggingConfiguration(scope, `Cfn${id}`, resourceProps);
+    const resource: CfnLoggingConfiguration = new CfnLoggingConfiguration(
+      scope,
+      `Cfn${id}`,
+      resourceProps,
+    );
 
     this.firewallRef = resource.firewallArn;
   }
@@ -335,9 +363,12 @@ export class LoggingConfiguration extends core.Resource implements ILoggingConfi
    * @param logLocations An array of assorted Log Locations
    * @returns Array of LogDestinationConfigProperty objects.
    */
-  public iLogLocationsToLogDestinationConfigProperty(logLocations:ILogLocation[]):CfnLoggingConfiguration.LogDestinationConfigProperty[] {
-    let logDestinationConfigs:CfnLoggingConfiguration.LogDestinationConfigProperty[] = [];
-    let logLocation:ILogLocation;
+  public iLogLocationsToLogDestinationConfigProperty(
+    logLocations: ILogLocation[],
+  ): CfnLoggingConfiguration.LogDestinationConfigProperty[] {
+    let logDestinationConfigs: CfnLoggingConfiguration.LogDestinationConfigProperty[] =
+      [];
+    let logLocation: ILogLocation;
     for (logLocation of logLocations) {
       logDestinationConfigs.push({
         logDestination: logLocation.logDestination,
@@ -347,4 +378,4 @@ export class LoggingConfiguration extends core.Resource implements ILoggingConfi
     }
     return logDestinationConfigs;
   }
-};
+}

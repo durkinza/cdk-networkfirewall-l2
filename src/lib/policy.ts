@@ -1,9 +1,12 @@
-import { CfnFirewallPolicy, CfnFirewallPolicyProps } from 'aws-cdk-lib/aws-networkfirewall';
-import * as core from 'aws-cdk-lib/core';
-import { Construct } from 'constructs';
-import { StatelessStandardAction, StatefulStrictAction } from './actions';
-import { IStatefulRuleGroup, IStatelessRuleGroup} from './rule-group';
-import { ITLSInspectionConfiguration } from './tls-inspection';
+import {
+  CfnFirewallPolicy,
+  CfnFirewallPolicyProps,
+} from "aws-cdk-lib/aws-networkfirewall";
+import * as core from "aws-cdk-lib/core";
+import { Construct } from "constructs";
+import { StatelessStandardAction, StatefulStrictAction } from "./actions";
+import { IStatefulRuleGroup, IStatelessRuleGroup } from "./rule-group";
+import { ITLSInspectionConfiguration } from "./tls-inspection";
 
 /**
  * Configuration settings for the handling of the stateful rule groups in a firewall policy.
@@ -13,40 +16,39 @@ export enum StatefulEngineOptionsRuleOrder {
   /**
    * Rules with a pass action are processed first, followed by drop, reject, and alert actions.
    */
-  ACTION_ORDER = 'DEFAULT_ACTION_ORDER',
+  ACTION_ORDER = "DEFAULT_ACTION_ORDER",
 
   /**
    * Rule groups are evaluated by order of priority, starting from the lowest number,
    * and the rules in each rule group are processed in the order in which they're defined.
    * Recommended Order.
    */
-  STRICT_ORDER = 'STRICT_ORDER',
+  STRICT_ORDER = "STRICT_ORDER",
 }
 
 /**
  * Configures how Network Firewall processes traffic when a network connection breaks midstream. Network connections can break due to disruptions in external networks or within the firewall itself.
- * 
+ *
  * @see https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-networkfirewall-firewallpolicy-statefulengineoptions.html
  */
 export enum StreamExceptionPolicy {
+  /**
+   * Network Firewall fails closed and drops all subsequent traffic going to the firewall. This is the default behavior.
+   */
+  DROP = "DROP",
 
-    /**
-     * Network Firewall fails closed and drops all subsequent traffic going to the firewall. This is the default behavior.
-     */
-    DROP = 'DROP',
+  /**
+   * Network Firewall continues to apply rules to the subsequent traffic without context from traffic before the break.
+   * This impacts the behavior of rules that depend on this context.
+   * For example, if you have a stateful rule to drop http traffic, Network Firewall won't match the traffic for this rule because the service won't have the context from session initialization defining the application layer protocol as HTTP. However, this behavior is rule dependent—a TCP-layer rule using a flow:stateless rule would still match, as would the aws:drop_strict default action.
+   */
+  CONTINUE = "CONTINUE",
 
-    /**
-     * Network Firewall continues to apply rules to the subsequent traffic without context from traffic before the break. 
-     * This impacts the behavior of rules that depend on this context. 
-     * For example, if you have a stateful rule to drop http traffic, Network Firewall won't match the traffic for this rule because the service won't have the context from session initialization defining the application layer protocol as HTTP. However, this behavior is rule dependent—a TCP-layer rule using a flow:stateless rule would still match, as would the aws:drop_strict default action.
-     */
-    CONTINUE = 'CONTINUE',
-
-    /**
-     * Network Firewall fails closed and drops all subsequent traffic going to the firewall. Network Firewall also sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall will have context about the new session and will apply rules to the subsequent traffic.
-     */
-    REJECT = 'REJECT',
-};
+  /**
+   * Network Firewall fails closed and drops all subsequent traffic going to the firewall. Network Firewall also sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall will have context about the new session and will apply rules to the subsequent traffic.
+   */
+  REJECT = "REJECT",
+}
 
 /**
  *  Maps a priority to a stateful rule group item
@@ -107,13 +109,15 @@ export interface IFirewallPolicy extends core.IResource {
    * @attribute
    */
   readonly firewallPolicyId: string;
-
 }
 
 /**
  *
  */
-abstract class FirewallPolicyBase extends core.Resource implements IFirewallPolicy {
+abstract class FirewallPolicyBase
+  extends core.Resource
+  implements IFirewallPolicy
+{
   /**
    * The Arn of the policy.
    * @attribute
@@ -138,7 +142,7 @@ export interface FirewallPolicyProps {
    */
   readonly firewallPolicyName?: string;
 
-  /** 
+  /**
    * Configures the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle.
    * @default - undefined
    */
@@ -149,7 +153,7 @@ export interface FirewallPolicyProps {
    * The stateful rule groups that you use in your policy must match the policy's rule order.
    * @default - Matches the rule order of the first stateful rule group added to the policy, or STRICT_ORDER if no stateful rule groups are added.
    */
-  readonly ruleOrder?:  StatefulEngineOptionsRuleOrder | string;
+  readonly ruleOrder?: StatefulEngineOptionsRuleOrder | string;
 
   /**
    * The actions to take on a packet if it doesn't match any of the stateless rules in the policy.
@@ -159,7 +163,10 @@ export interface FirewallPolicyProps {
   /**
    * The actions to take on a fragmented packet if it doesn't match any of the stateless rules in the policy.
    */
-  readonly statelessFragmentDefaultActions: (StatelessStandardAction | string)[];
+  readonly statelessFragmentDefaultActions: (
+    | StatelessStandardAction
+    | string
+  )[];
 
   /**
    * The default actions to take on a packet that doesn't match any stateful rules.
@@ -245,15 +252,19 @@ export class FirewallPolicy extends FirewallPolicyBase {
    * @param id
    * @param firewallPolicyName The name of the existing firewall policy
    */
-  public static fromFirewallPolicyName(scope: Construct, id:string, firewallPolicyName: string): IFirewallPolicy {
+  public static fromFirewallPolicyName(
+    scope: Construct,
+    id: string,
+    firewallPolicyName: string,
+  ): IFirewallPolicy {
     /**
      * An ADHOC class for an imported firewall policy.
      */
     class Import extends FirewallPolicyBase {
       public readonly firewallPolicyId = firewallPolicyName;
       public readonly firewallPolicyArn = core.Stack.of(scope).formatArn({
-        service: 'network-firewall',
-        resource: 'firewall-policy',
+        service: "network-firewall",
+        resource: "firewall-policy",
         resourceName: firewallPolicyName,
       });
     }
@@ -266,12 +277,19 @@ export class FirewallPolicy extends FirewallPolicyBase {
    * @param id
    * @param firewallPolicyArn the ARN of the existing firewall policy
    */
-  public static fromFirewallPolicyArn(scope: Construct, id:string, firewallPolicyArn: string): IFirewallPolicy {
+  public static fromFirewallPolicyArn(
+    scope: Construct,
+    id: string,
+    firewallPolicyArn: string,
+  ): IFirewallPolicy {
     /**
      * An ADHOC class for an imported firewall policy.
      */
     class Import extends FirewallPolicyBase {
-      public readonly firewallPolicyId = core.Fn.select(1, core.Fn.split('/', firewallPolicyArn));
+      public readonly firewallPolicyId = core.Fn.select(
+        1,
+        core.Fn.split("/", firewallPolicyArn),
+      );
       public readonly firewallPolicyArn = firewallPolicyArn;
     }
     return new Import(scope, id);
@@ -326,13 +344,14 @@ export class FirewallPolicy extends FirewallPolicyBase {
    * @param id
    * @param props
    */
-  constructor(scope:Construct, id:string, props: FirewallPolicyProps) {
+  constructor(scope: Construct, id: string, props: FirewallPolicyProps) {
     super(scope, id, {
       physicalName: props.firewallPolicyName,
     });
 
     this.statelessDefaultActions = props.statelessDefaultActions || [];
-    this.statelessFragmentDefaultActions = props.statelessFragmentDefaultActions || [];
+    this.statelessFragmentDefaultActions =
+      props.statelessFragmentDefaultActions || [];
     this.statefulDefaultActions = props.statefulDefaultActions || [];
 
     this.statelessRuleGroups = props.statelessRuleGroups || [];
@@ -341,9 +360,14 @@ export class FirewallPolicy extends FirewallPolicyBase {
     this.tags = props.tags || [];
 
     // Build statefulEngineOptions from convenience props or use L1 override
-    if (props.statefulEngineOptions && (props.ruleOrder || props.streamExceptionPolicy || props.flowTimeouts)) {
-      throw new Error('Cannot specify both statefulEngineOptions and individual ruleOrder/streamExceptionPolicy/flowTimeouts properties. ' +
-        'Use either the L1 statefulEngineOptions or the convenience properties, not both.');
+    if (
+      props.statefulEngineOptions &&
+      (props.ruleOrder || props.streamExceptionPolicy || props.flowTimeouts)
+    ) {
+      throw new Error(
+        "Cannot specify both statefulEngineOptions and individual ruleOrder/streamExceptionPolicy/flowTimeouts properties. " +
+          "Use either the L1 statefulEngineOptions or the convenience properties, not both.",
+      );
     }
     this.statefulEngineOptions = props.statefulEngineOptions ?? {
       ruleOrder: props.ruleOrder || StatefulEngineOptionsRuleOrder.STRICT_ORDER,
@@ -357,7 +381,9 @@ export class FirewallPolicy extends FirewallPolicyBase {
      * Validate enableTlsSessionHolding requires a TLS Inspection Configuration
      */
     if (props.enableTlsSessionHolding && !props.tlsInspectionConfiguration) {
-      throw new Error('enableTlsSessionHolding requires an associated TLS Inspection configuration');
+      throw new Error(
+        "enableTlsSessionHolding requires an associated TLS Inspection configuration",
+      );
     }
 
     /**
@@ -367,8 +393,10 @@ export class FirewallPolicy extends FirewallPolicyBase {
       if (/^[\dA-Za-z-]+$/.test(props.firewallPolicyName)) {
         this.firewallPolicyId = props.firewallPolicyName;
       } else {
-        throw new Error('firewallPolicyName must contain only letters, numbers, and dashes, ' +
-		  `got: '${props.firewallPolicyName}'`);
+        throw new Error(
+          "firewallPolicyName must contain only letters, numbers, and dashes, " +
+            `got: '${props.firewallPolicyName}'`,
+        );
       }
     }
 
@@ -377,10 +405,17 @@ export class FirewallPolicy extends FirewallPolicyBase {
      */
     if (props.statelessDefaultActions !== undefined) {
       // Ensure only one standard action is provided.
-      if (this.validateOnlyOne(StatelessStandardAction, props.statelessDefaultActions)) {
+      if (
+        this.validateOnlyOne(
+          StatelessStandardAction,
+          props.statelessDefaultActions,
+        )
+      ) {
         this.statelessDefaultActions = props.statelessDefaultActions;
       } else {
-        throw new Error('Only one standard action can be provided for the StatelessDefaultAction, all other actions must be custom');
+        throw new Error(
+          "Only one standard action can be provided for the StatelessDefaultAction, all other actions must be custom",
+        );
       }
     }
 
@@ -389,10 +424,18 @@ export class FirewallPolicy extends FirewallPolicyBase {
      */
     if (props.statelessFragmentDefaultActions !== undefined) {
       // Ensure only one standard action is provided.
-      if (this.validateOnlyOne(StatelessStandardAction, props.statelessFragmentDefaultActions)) {
-        this.statelessFragmentDefaultActions = props.statelessFragmentDefaultActions;
+      if (
+        this.validateOnlyOne(
+          StatelessStandardAction,
+          props.statelessFragmentDefaultActions,
+        )
+      ) {
+        this.statelessFragmentDefaultActions =
+          props.statelessFragmentDefaultActions;
       } else {
-        throw new Error('Only one standard action can be provided for the StatelessFragmentDefaultAction, all other actions must be custom');
+        throw new Error(
+          "Only one standard action can be provided for the StatelessFragmentDefaultAction, all other actions must be custom",
+        );
       }
     }
 
@@ -401,31 +444,46 @@ export class FirewallPolicy extends FirewallPolicyBase {
      */
     if (props.statefulDefaultActions !== undefined) {
       // Ensure only one standard action is provided.
-      if (this.validateOnlyOne(StatefulStrictAction, props.statefulDefaultActions)) {
+      if (
+        this.validateOnlyOne(StatefulStrictAction, props.statefulDefaultActions)
+      ) {
         this.statefulDefaultActions = props.statefulDefaultActions;
       } else {
-        throw new Error('Only one strict action can be provided for the StatefulDefaultAction, all other actions must be custom');
+        throw new Error(
+          "Only one strict action can be provided for the StatefulDefaultAction, all other actions must be custom",
+        );
       }
     }
 
     /**
      * validate unique stateless group priorities
      */
-    if (props.statelessRuleGroups !== undefined && !this.validateUniquePriority(props.statelessRuleGroups)) {
-      throw new Error('Priority must be unique, received duplicate priority on stateless group');
+    if (
+      props.statelessRuleGroups !== undefined &&
+      !this.validateUniquePriority(props.statelessRuleGroups)
+    ) {
+      throw new Error(
+        "Priority must be unique, received duplicate priority on stateless group",
+      );
     }
     //this.statelessRuleGroupReferences = this.buildRuleGroupReferences(props.statelessRuleGroups);
-    for (const ruleGroup of (props.statelessRuleGroups || [])) this.addStatelessRuleGroup.bind(ruleGroup);
-
+    for (const ruleGroup of props.statelessRuleGroups || []) {
+      this.addStatelessRuleGroup.bind(ruleGroup);
+    }
 
     /**
      * Validate that if the policy uses strict order, all stateful rule groups match the rule order and have a priority set
      */
-    if (this.statefulEngineOptions?.ruleOrder === StatefulEngineOptionsRuleOrder.STRICT_ORDER) {
+    if (
+      this.statefulEngineOptions?.ruleOrder ===
+      StatefulEngineOptionsRuleOrder.STRICT_ORDER
+    ) {
       if (props.statefulRuleGroups !== undefined) {
         for (const ruleGroup of props.statefulRuleGroups) {
           if (ruleGroup.priority === undefined) {
-            throw new Error('All stateful rule groups must have a priority set when using STRICT_ORDER engine options');
+            throw new Error(
+              "All stateful rule groups must have a priority set when using STRICT_ORDER engine options",
+            );
           }
         }
       }
@@ -434,12 +492,18 @@ export class FirewallPolicy extends FirewallPolicyBase {
     /**
      * validate unique stateful group priorities
      */
-    if (props.statefulRuleGroups !== undefined && !this.validateUniquePriority(props.statefulRuleGroups)) {
-      throw new Error('Priority must be unique, received duplicate priority on stateful group');
+    if (
+      props.statefulRuleGroups !== undefined &&
+      !this.validateUniquePriority(props.statefulRuleGroups)
+    ) {
+      throw new Error(
+        "Priority must be unique, received duplicate priority on stateful group",
+      );
     }
     //this.statefulRuleGroupReferences = this.buildRuleGroupReferences(props.statefulRuleGroups);
-    for (const ruleGroup of (props.statefulRuleGroups || [])) this.addStatefulRuleGroup.bind(ruleGroup);
-
+    for (const ruleGroup of props.statefulRuleGroups || []) {
+      this.addStatefulRuleGroup.bind(ruleGroup);
+    }
 
     // Auto define stateless default actions?
     //const statelessDefaultActions = props.statelessDefaultActions || [StatelessStandardAction.DROP];
@@ -457,44 +521,55 @@ export class FirewallPolicy extends FirewallPolicyBase {
     // Auto define stateful rule group?
     //const statefulRuleGroup = props.statefulRuleGroups || [new StatefulRuleGroup5Tuple(priority=10,...)];
 
-    const resourcePolicyProperty:CfnFirewallPolicy.FirewallPolicyProperty = {
+    const resourcePolicyProperty: CfnFirewallPolicy.FirewallPolicyProperty = {
       statelessDefaultActions: this.statelessDefaultActions,
       statelessFragmentDefaultActions: this.statelessFragmentDefaultActions,
       // The properties below are optional.
       statefulDefaultActions: this.statefulDefaultActions,
       statefulEngineOptions: this.statefulEngineOptions,
-      statefulRuleGroupReferences: core.Lazy.any({ produce: () => this.buildStatefulRuleGroupReferences() }),
+      statefulRuleGroupReferences: core.Lazy.any({
+        produce: () => this.buildStatefulRuleGroupReferences(),
+      }),
       statelessCustomActions: props.statelessCustomActions,
-      statelessRuleGroupReferences: core.Lazy.any({ produce: () => this.buildStatelessRuleGroupReferences() }),
-      tlsInspectionConfigurationArn: props.tlsInspectionConfiguration?.tlsInspectionConfigurationArn,
+      statelessRuleGroupReferences: core.Lazy.any({
+        produce: () => this.buildStatelessRuleGroupReferences(),
+      }),
+      tlsInspectionConfigurationArn:
+        props.tlsInspectionConfiguration?.tlsInspectionConfigurationArn,
       enableTlsSessionHolding: props.enableTlsSessionHolding,
       policyVariables: props.policyVariables,
     };
 
-    const resourceProps:CfnFirewallPolicyProps = {
+    const resourceProps: CfnFirewallPolicyProps = {
       firewallPolicy: resourcePolicyProperty,
       firewallPolicyName: props.firewallPolicyName || id,
       description: props.description,
       tags: props.tags,
     };
 
-    const resource:CfnFirewallPolicy = new CfnFirewallPolicy(this, props.firewallPolicyName || id, resourceProps);
+    const resource: CfnFirewallPolicy = new CfnFirewallPolicy(
+      this,
+      props.firewallPolicyName || id,
+      resourceProps,
+    );
 
     this.firewallPolicyId = this.getResourceNameAttribute(resource.ref);
 
-    this.firewallPolicyArn = this.getResourceArnAttribute(resource.attrFirewallPolicyArn, {
-      service: 'network-firewall',
-      resource: 'firewall-policy',
-      resourceName: this.firewallPolicyId,
-    });
-
+    this.firewallPolicyArn = this.getResourceArnAttribute(
+      resource.attrFirewallPolicyArn,
+      {
+        service: "network-firewall",
+        resource: "firewall-policy",
+        resourceName: this.firewallPolicyId,
+      },
+    );
   }
 
   /**
    * Add a stateless rule group to the policy
    * @param ruleGroup The stateless rule group to add to the policy
    */
-  public addStatelessRuleGroup(ruleGroup:StatelessRuleGroupList) {
+  public addStatelessRuleGroup(ruleGroup: StatelessRuleGroupList) {
     this.statelessRuleGroups.push(ruleGroup);
   }
 
@@ -502,9 +577,15 @@ export class FirewallPolicy extends FirewallPolicyBase {
    * Add a stateful rule group to the policy
    * @param ruleGroup The stateful rule group to add to the policy
    */
-  public addStatefulRuleGroup(ruleGroup:StatefulRuleGroupList) {
-    if(this.statefulEngineOptions?.ruleOrder === StatefulEngineOptionsRuleOrder.STRICT_ORDER && ruleGroup.priority === undefined) {
-      throw new Error('All stateful rule groups must have a priority set when using STRICT_ORDER engine options');
+  public addStatefulRuleGroup(ruleGroup: StatefulRuleGroupList) {
+    if (
+      this.statefulEngineOptions?.ruleOrder ===
+        StatefulEngineOptionsRuleOrder.STRICT_ORDER &&
+      ruleGroup.priority === undefined
+    ) {
+      throw new Error(
+        "All stateful rule groups must have a priority set when using STRICT_ORDER engine options",
+      );
     }
     this.statefulRuleGroups.push(ruleGroup);
   }
@@ -513,9 +594,10 @@ export class FirewallPolicy extends FirewallPolicyBase {
    * Builds the stateless rule group list object from current state
    * uses this.buildRuleGroupReferences
    */
-  private buildStatelessRuleGroupReferences():CfnFirewallPolicy.StatelessRuleGroupReferenceProperty[] {
-    let ruleGroupReferences:CfnFirewallPolicy.StatelessRuleGroupReferenceProperty[] = [];
-    let ruleGroup:StatelessRuleGroupList;
+  private buildStatelessRuleGroupReferences(): CfnFirewallPolicy.StatelessRuleGroupReferenceProperty[] {
+    let ruleGroupReferences: CfnFirewallPolicy.StatelessRuleGroupReferenceProperty[] =
+      [];
+    let ruleGroup: StatelessRuleGroupList;
     for (ruleGroup of this.statelessRuleGroups) {
       ruleGroupReferences.push({
         priority: ruleGroup.priority,
@@ -529,11 +611,12 @@ export class FirewallPolicy extends FirewallPolicyBase {
    * Builds the stateful rule group list object from current state
    * uses this.buildRuleGroupReferences
    */
-  private buildStatefulRuleGroupReferences():CfnFirewallPolicy.StatefulRuleGroupReferenceProperty[] {
-    let ruleGroupReferences:CfnFirewallPolicy.StatefulRuleGroupReferenceProperty[] = [];
-    let ruleGroup:StatefulRuleGroupList;
+  private buildStatefulRuleGroupReferences(): CfnFirewallPolicy.StatefulRuleGroupReferenceProperty[] {
+    let ruleGroupReferences: CfnFirewallPolicy.StatefulRuleGroupReferenceProperty[] =
+      [];
+    let ruleGroup: StatefulRuleGroupList;
     for (ruleGroup of this.statefulRuleGroups) {
-      const ref:CfnFirewallPolicy.StatefulRuleGroupReferenceProperty = {
+      const ref: CfnFirewallPolicy.StatefulRuleGroupReferenceProperty = {
         resourceArn: ruleGroup.ruleGroup.ruleGroupArn,
         priority: ruleGroup.priority,
         deepThreatInspection: ruleGroup.deepThreatInspection,
@@ -563,9 +646,9 @@ export class FirewallPolicy extends FirewallPolicyBase {
    * To validate a set of rule groups to ensure they have unique priorities
    * @param ruleGroups
    */
-  private validateUniquePriority(ruleGroups:any):boolean {
-    let priorities:(number|undefined)[] = [];
-    let ruleGroup:StatefulRuleGroupList;
+  private validateUniquePriority(ruleGroups: any): boolean {
+    let priorities: (number | undefined)[] = [];
+    let ruleGroup: StatefulRuleGroupList;
     for (ruleGroup of ruleGroups) {
       // priorities are only required when using strict order evaluation.
       // Don't check undefined priorities, as the priority can be
@@ -586,9 +669,9 @@ export class FirewallPolicy extends FirewallPolicyBase {
    * @param enumeration
    * @param values
    */
-  private validateOnlyOne(enumeration:any, values:string[]):boolean {
-    let oneFound:boolean = false;
-    let value:string;
+  private validateOnlyOne(enumeration: any, values: string[]): boolean {
+    let oneFound: boolean = false;
+    let value: string;
     for (value of values) {
       if (Object.values<string>(enumeration).includes(value)) {
         if (oneFound) {

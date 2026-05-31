@@ -1,146 +1,186 @@
-import { Template } from 'aws-cdk-lib/assertions';
-import * as ec2 from 'aws-cdk-lib/aws-ec2';
-import * as cdk from 'aws-cdk-lib/core';
-import * as NetFW from '../src/lib';
+import { Template } from "aws-cdk-lib/assertions";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import * as cdk from "aws-cdk-lib/core";
+import * as NetFW from "../src/lib";
 
-describe('Testing Logging Features', ()=>{
+describe("Testing Logging Features", () => {
   let stack: cdk.Stack;
   beforeEach(() => {
     // GIVEN
     stack = new cdk.Stack();
   });
 
-  test('Default property', () => {
+  test("Default property", () => {
     // WHEN
-    new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy', {
+    new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
       statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
     });
     // THEN
-    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::FirewallPolicy', {
-      FirewallPolicy: {
-        StatefulRuleGroupReferences: [],
-        StatelessDefaultActions: [
-          'aws:drop',
-        ],
-        StatelessFragmentDefaultActions: [
-          'aws:drop',
-        ],
-        StatelessRuleGroupReferences: [],
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::FirewallPolicy",
+      {
+        FirewallPolicy: {
+          StatefulRuleGroupReferences: [],
+          StatelessDefaultActions: ["aws:drop"],
+          StatelessFragmentDefaultActions: ["aws:drop"],
+          StatelessRuleGroupReferences: [],
+        },
+        FirewallPolicyName: "MyNetworkFirewallPolicy",
       },
-      FirewallPolicyName: 'MyNetworkFirewallPolicy',
-    });
+    );
   });
 
-  test('Can get firewall policy name', () => {
+  test("Can get firewall policy name", () => {
     // GIVEN
-    const policy = new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy', {
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
       statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
     });
     // WHEN
-    new cdk.CfnResource(stack, 'Res', {
-      type: 'Test::Resource',
+    new cdk.CfnResource(stack, "Res", {
+      type: "Test::Resource",
       properties: {
         FirewallPolicyName: policy.firewallPolicyId,
       },
     });
 
     // THEN
-    Template.fromStack(stack).hasResourceProperties('Test::Resource', {
+    Template.fromStack(stack).hasResourceProperties("Test::Resource", {
       FirewallPolicyName: {
-        Ref: 'MyNetworkFirewallPolicy645720A6',
+        Ref: "MyNetworkFirewallPolicy645720A6",
       },
     });
   });
 
-  test('Can get firewall policy by name', () => {
+  test("Can get firewall policy by name", () => {
     // GIVEN
-    const policy = NetFW.FirewallPolicy.fromFirewallPolicyName(stack, 'MyNetworkFirewallPolicy', 'MyFirewallPolicy');
+    const policy = NetFW.FirewallPolicy.fromFirewallPolicyName(
+      stack,
+      "MyNetworkFirewallPolicy",
+      "MyFirewallPolicy",
+    );
     // WHEN
-    new cdk.CfnResource(stack, 'Res', {
-      type: 'Test::Resource',
+    new cdk.CfnResource(stack, "Res", {
+      type: "Test::Resource",
       properties: {
         FirewallPolicyName: policy.firewallPolicyId,
       },
     });
 
     // THEN
-    Template.fromStack(stack).hasResourceProperties('Test::Resource', {
-      FirewallPolicyName: 'MyFirewallPolicy',
+    Template.fromStack(stack).hasResourceProperties("Test::Resource", {
+      FirewallPolicyName: "MyFirewallPolicy",
     });
   });
 
-  test('Throws error when policy name is invalid', () => {
+  test("Throws error when policy name is invalid", () => {
     // WHEN
     expect(() => {
-      new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy', {
-        firewallPolicyName: 'MyFirewallPolicy%3',
+      new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+        firewallPolicyName: "MyFirewallPolicy%3",
         statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
         statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
       });
       // THEN
-    }).toThrow('firewallPolicyName must contain only letters, numbers, and dashes, got: \'MyFirewallPolicy%3\'');
+    }).toThrow(
+      "firewallPolicyName must contain only letters, numbers, and dashes, got: 'MyFirewallPolicy%3'",
+    );
   });
 
-  test('Stateless default actions must only have one non-custom action', () => {
+  test("Stateless default actions must only have one non-custom action", () => {
     // WHEN
     expect(() => {
-      new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy', {
-        firewallPolicyName: 'MyFirewallPolicy',
-        statelessDefaultActions: [NetFW.StatelessStandardAction.DROP, NetFW.StatelessStandardAction.PASS],
+      new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+        firewallPolicyName: "MyFirewallPolicy",
+        statelessDefaultActions: [
+          NetFW.StatelessStandardAction.DROP,
+          NetFW.StatelessStandardAction.PASS,
+        ],
         statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
       });
       // THEN
-    }).toThrow('Only one standard action can be provided for the StatelessDefaultAction, all other actions must be custom');
+    }).toThrow(
+      "Only one standard action can be provided for the StatelessDefaultAction, all other actions must be custom",
+    );
   });
 
-  test('Stateless Fragment default actions must only have one non-custom action', () => {
+  test("Stateless Fragment default actions must only have one non-custom action", () => {
     // WHEN
     expect(() => {
-      new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy', {
-        firewallPolicyName: 'MyFirewallPolicy',
+      new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+        firewallPolicyName: "MyFirewallPolicy",
         statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
-        statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP, NetFW.StatelessStandardAction.PASS],
+        statelessFragmentDefaultActions: [
+          NetFW.StatelessStandardAction.DROP,
+          NetFW.StatelessStandardAction.PASS,
+        ],
       });
       // THEN
-    }).toThrow('Only one standard action can be provided for the StatelessFragmentDefaultAction, all other actions must be custom');
+    }).toThrow(
+      "Only one standard action can be provided for the StatelessFragmentDefaultAction, all other actions must be custom",
+    );
   });
 
-  test('Stateful strict actions must only have one non-custom action', () => {
+  test("Stateful strict actions must only have one non-custom action", () => {
     // WHEN
     expect(() => {
-      new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy', {
-        firewallPolicyName: 'MyFirewallPolicy',
+      new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+        firewallPolicyName: "MyFirewallPolicy",
         statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
         statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
-        statefulDefaultActions: [NetFW.StatefulStrictAction.DROP_STRICT, NetFW.StatefulStrictAction.ALERT_STRICT],
+        statefulDefaultActions: [
+          NetFW.StatefulStrictAction.DROP_STRICT,
+          NetFW.StatefulStrictAction.ALERT_STRICT,
+        ],
       });
       // THEN
-    }).toThrow('Only one strict action can be provided for the StatefulDefaultAction, all other actions must be custom');
+    }).toThrow(
+      "Only one strict action can be provided for the StatefulDefaultAction, all other actions must be custom",
+    );
   });
 
-  test('Multiple custom default actions can be supplied', () => {
+  test("Multiple custom default actions can be supplied", () => {
     // WHEN
-    new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy', {
-      firewallPolicyName: 'MyFirewallPolicy',
-      statelessDefaultActions: [NetFW.StatelessStandardAction.DROP, 'custom-1', 'custom-2'],
-      statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP, 'custom-1', 'custom-2'],
-      statefulDefaultActions: [NetFW.StatefulStrictAction.DROP_STRICT, 'custom-1', 'custom-2'],
+    new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+      firewallPolicyName: "MyFirewallPolicy",
+      statelessDefaultActions: [
+        NetFW.StatelessStandardAction.DROP,
+        "custom-1",
+        "custom-2",
+      ],
+      statelessFragmentDefaultActions: [
+        NetFW.StatelessStandardAction.DROP,
+        "custom-1",
+        "custom-2",
+      ],
+      statefulDefaultActions: [
+        NetFW.StatefulStrictAction.DROP_STRICT,
+        "custom-1",
+        "custom-2",
+      ],
     });
-  // THEN
+    // THEN
   });
 
-  test('verifies unique group priority on stateless rule groups', () => {
+  test("verifies unique group priority on stateless rule groups", () => {
     // GIVEN
-    const statelessRuleGroup1 = new NetFW.StatelessRuleGroup(stack, 'StatelessRuleGroup1', {
-      rules: [],
-    });
-    const statelessRuleGroup2 = new NetFW.StatelessRuleGroup(stack, 'StatelessRuleGroup2', {
-      rules: [],
-    });
+    const statelessRuleGroup1 = new NetFW.StatelessRuleGroup(
+      stack,
+      "StatelessRuleGroup1",
+      {
+        rules: [],
+      },
+    );
+    const statelessRuleGroup2 = new NetFW.StatelessRuleGroup(
+      stack,
+      "StatelessRuleGroup2",
+      {
+        rules: [],
+      },
+    );
 
-    const statelessRuleGroupList:NetFW.StatelessRuleGroupList[] = [
+    const statelessRuleGroupList: NetFW.StatelessRuleGroupList[] = [
       {
         priority: 10,
         ruleGroup: statelessRuleGroup1,
@@ -152,25 +192,35 @@ describe('Testing Logging Features', ()=>{
     ];
 
     expect(() => {
-      new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy', {
+      new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
         statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
         statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
         statelessRuleGroups: statelessRuleGroupList,
       });
       // THEN
-    }).toThrow('Priority must be unique, received duplicate priority on stateless group');
+    }).toThrow(
+      "Priority must be unique, received duplicate priority on stateless group",
+    );
   });
 
-  test('verifies unique group priority on stateful groups', () => {
+  test("verifies unique group priority on stateful groups", () => {
     // GIVEN
-    const statefulRuleGroup1 = new NetFW.StatefulSuricataRuleGroup(stack, 'StatefulRuleGroup1', {
-      rules: '',
-    });
-    const statefulRuleGroup2 = new NetFW.StatefulSuricataRuleGroup(stack, 'StatefulRuleGroup2', {
-      rules: '',
-    });
+    const statefulRuleGroup1 = new NetFW.StatefulSuricataRuleGroup(
+      stack,
+      "StatefulRuleGroup1",
+      {
+        rules: "",
+      },
+    );
+    const statefulRuleGroup2 = new NetFW.StatefulSuricataRuleGroup(
+      stack,
+      "StatefulRuleGroup2",
+      {
+        rules: "",
+      },
+    );
 
-    const statefulRuleGroupList:NetFW.StatefulRuleGroupList[] = [
+    const statefulRuleGroupList: NetFW.StatefulRuleGroupList[] = [
       {
         priority: 10,
         ruleGroup: statefulRuleGroup1,
@@ -182,19 +232,21 @@ describe('Testing Logging Features', ()=>{
     ];
 
     expect(() => {
-      new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy', {
+      new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
         statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
         statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
         statefulRuleGroups: statefulRuleGroupList,
       });
       // THEN
-    }).toThrow('Priority must be unique, received duplicate priority on stateful group');
+    }).toThrow(
+      "Priority must be unique, received duplicate priority on stateful group",
+    );
   });
 
-  test('Can add new groups to policy', () => {
+  test("Can add new groups to policy", () => {
     // GIVEN
-    const vpc = new ec2.Vpc(stack, 'MyVpc', {
-      ipAddresses: ec2.IpAddresses.cidr('10.0.0.0/16'),
+    const vpc = new ec2.Vpc(stack, "MyVpc", {
+      ipAddresses: ec2.IpAddresses.cidr("10.0.0.0/16"),
     });
     // create some rules
     const statelessRule1 = new NetFW.StatelessRule({
@@ -205,32 +257,48 @@ describe('Testing Logging Features', ()=>{
     });
     const statefulRule2 = new NetFW.StatefulDomainListRule({
       type: NetFW.StatefulDomainListType.ALLOWLIST,
-      targets: ['example.com'],
+      targets: ["example.com"],
       targetTypes: [NetFW.StatefulDomainListTargetType.HTTP_HOST],
     });
 
     // create some rule groups
-    const statelessRuleGroup1 = new NetFW.StatelessRuleGroup(stack, 'StatelessRuleGroup1', {
-      rules: [{ rule: statelessRule1, priority: 10 }],
-    });
-    const statefulRuleGroup1 = new NetFW.Stateful5TupleRuleGroup(stack, 'StatefulRuleGroup1', {
-      rules: [statefulRule1],
-    });
-    const statefulRuleGroup2 = new NetFW.StatefulDomainListRuleGroup(stack, 'StatefulRuleGroup2', {
-      rule: statefulRule2,
-    });
-    const statefulRuleGroup3 = new NetFW.StatefulSuricataRuleGroup(stack, 'StatefulRuleGroup3', {
-      rules: '',
-    });
+    const statelessRuleGroup1 = new NetFW.StatelessRuleGroup(
+      stack,
+      "StatelessRuleGroup1",
+      {
+        rules: [{ rule: statelessRule1, priority: 10 }],
+      },
+    );
+    const statefulRuleGroup1 = new NetFW.Stateful5TupleRuleGroup(
+      stack,
+      "StatefulRuleGroup1",
+      {
+        rules: [statefulRule1],
+      },
+    );
+    const statefulRuleGroup2 = new NetFW.StatefulDomainListRuleGroup(
+      stack,
+      "StatefulRuleGroup2",
+      {
+        rule: statefulRule2,
+      },
+    );
+    const statefulRuleGroup3 = new NetFW.StatefulSuricataRuleGroup(
+      stack,
+      "StatefulRuleGroup3",
+      {
+        rules: "",
+      },
+    );
 
     // For stateless rule groups, we must set them into a list
-    const statelessRuleGroupList:NetFW.StatelessRuleGroupList[] = [
+    const statelessRuleGroupList: NetFW.StatelessRuleGroupList[] = [
       {
         priority: 10,
         ruleGroup: statelessRuleGroup1,
       },
     ];
-    const statefulRuleGroupList:NetFW.StatefulRuleGroupList[] = [
+    const statefulRuleGroupList: NetFW.StatefulRuleGroupList[] = [
       {
         priority: 10,
         ruleGroup: statefulRuleGroup1,
@@ -246,68 +314,55 @@ describe('Testing Logging Features', ()=>{
     ];
 
     // WHEN
-    const policy = new NetFW.FirewallPolicy(stack, 'MyNetworkFirewallPolicy', {
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
       statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
       statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
       statelessRuleGroups: statelessRuleGroupList,
       statefulRuleGroups: statefulRuleGroupList,
     });
-    new NetFW.Firewall(stack, 'MyNetworkFirewall', {
+    new NetFW.Firewall(stack, "MyNetworkFirewall", {
       vpc: vpc,
       policy: policy,
     });
 
     // THEN
-    Template.fromStack(stack).hasResourceProperties('AWS::NetworkFirewall::FirewallPolicy', {
-      FirewallPolicyName: 'MyNetworkFirewallPolicy',
-      FirewallPolicy: {
-        StatefulRuleGroupReferences: [
-          {
-            Priority: 10,
-            ResourceArn: {
-              'Fn::GetAtt': [
-                'StatefulRuleGroup185567ABC',
-                'RuleGroupArn',
-              ],
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::FirewallPolicy",
+      {
+        FirewallPolicyName: "MyNetworkFirewallPolicy",
+        FirewallPolicy: {
+          StatefulRuleGroupReferences: [
+            {
+              Priority: 10,
+              ResourceArn: {
+                "Fn::GetAtt": ["StatefulRuleGroup185567ABC", "RuleGroupArn"],
+              },
             },
-          },
-          {
-            Priority: 20,
-            ResourceArn: {
-              'Fn::GetAtt': [
-                'StatefulRuleGroup2A56B8650',
-                'RuleGroupArn',
-              ],
+            {
+              Priority: 20,
+              ResourceArn: {
+                "Fn::GetAtt": ["StatefulRuleGroup2A56B8650", "RuleGroupArn"],
+              },
             },
-          },
-          {
-            Priority: 30,
-            ResourceArn: {
-              'Fn::GetAtt': [
-                'StatefulRuleGroup30566741A',
-                'RuleGroupArn',
-              ],
+            {
+              Priority: 30,
+              ResourceArn: {
+                "Fn::GetAtt": ["StatefulRuleGroup30566741A", "RuleGroupArn"],
+              },
             },
-          },
-        ],
-        StatelessDefaultActions: [
-          'aws:drop',
-        ],
-        StatelessFragmentDefaultActions: [
-          'aws:drop',
-        ],
-        StatelessRuleGroupReferences: [
-          {
-            Priority: 10,
-            ResourceArn: {
-              'Fn::GetAtt': [
-                'StatelessRuleGroup170E51540',
-                'RuleGroupArn',
-              ],
+          ],
+          StatelessDefaultActions: ["aws:drop"],
+          StatelessFragmentDefaultActions: ["aws:drop"],
+          StatelessRuleGroupReferences: [
+            {
+              Priority: 10,
+              ResourceArn: {
+                "Fn::GetAtt": ["StatelessRuleGroup170E51540", "RuleGroupArn"],
+              },
             },
-          },
-        ],
+          ],
+        },
       },
-    });
+    );
   });
 });
