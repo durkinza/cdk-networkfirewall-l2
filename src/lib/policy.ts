@@ -151,7 +151,7 @@ export interface FirewallPolicyProps {
   /**
    * How Network Firewall handles stateful rules.
    * The stateful rule groups that you use in your policy must match the policy's rule order.
-   * @default - Matches the rule order of the first stateful rule group added to the policy, or STRICT_ORDER if no stateful rule groups are added.
+   * @default StatefulEngineOptionsRuleOrder.STRICT_ORDER
    */
   readonly ruleOrder?: StatefulEngineOptionsRuleOrder | string;
 

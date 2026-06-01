@@ -21,7 +21,7 @@ The goal of these constructs is to provide a way to decouple the creation of fir
 
 
 ### Quick Start Examples
-For new environments a recommended example can be found on the [standard example here.](docs/example-standard.md)
+For new environments a recommended example can be found on the [outbound-only example here.](docs/example-only-outbound.md)
 
 If you're adding a firewall to an existing environment that does not have an expectation of normal traffic, try the  [non-obtrusive approach here](docs/example-non-obtrusive.md).  
 This example passively monitors packets to build a baseline of "normal" traffic that can then be used as a reference to build appropriate firewall rules. 
@@ -127,6 +127,8 @@ new NetFW.StatelessRule({
 
 Assigning stateless rules to a stateless rule-group requires a priority mapping, similar to the way a rule-group requires a priority map when assigned to a policy.
 ```ts
+import * as cdk from 'aws-cdk-lib';
+
 const statelessRule1 = new NetFW.StatelessRule({
   actions: [NetFW.StatelessStandardAction.DROP],
 });
