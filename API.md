@@ -47,6 +47,7 @@ new Firewall(scope: Construct, id: string, props: FirewallProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.addLoggingConfigurations">addLoggingConfigurations</a></code> | Add a Logging Configuration to the Firewall. |
 
@@ -59,6 +60,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.Firewall.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.Firewall.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.Firewall.applyRemovalPolicy"></a>
 
@@ -118,7 +138,7 @@ An array of Log Locations.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.Firewall.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.Firewall.isConstruct"></a>
 
 ```typescript
 import { Firewall } from '@durkinza/cdk-networkfirewall-l2'
@@ -127,6 +147,20 @@ Firewall.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.Firewall.isConstruct.parameter.x"></a>
 
@@ -229,7 +263,7 @@ Reference an existing Network Firewall, defined outside of the CDK code, by name
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.property.endpointIds">endpointIds</a></code> | <code>string[]</code> | The unique IDs of the firewall endpoints for all of the subnets that you attached to the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Firewall.property.firewallArn">firewallArn</a></code> | <code>string</code> | The Arn of the Firewall. |
@@ -260,16 +294,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -429,6 +464,7 @@ new FirewallPolicy(scope: Construct, id: string, props: FirewallPolicyProps)
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.addStatefulRuleGroup">addStatefulRuleGroup</a></code> | Add a stateful rule group to the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.addStatelessRuleGroup">addStatelessRuleGroup</a></code> | Add a stateless rule group to the policy. |
@@ -442,6 +478,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.applyRemovalPolicy"></a>
 
@@ -509,7 +564,7 @@ The stateless rule group to add to the policy.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.isConstruct"></a>
 
 ```typescript
 import { FirewallPolicy } from '@durkinza/cdk-networkfirewall-l2'
@@ -518,6 +573,20 @@ FirewallPolicy.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.isConstruct.parameter.x"></a>
 
@@ -624,7 +693,7 @@ The name of the existing firewall policy.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.firewallPolicyArn">firewallPolicyArn</a></code> | <code>string</code> | The Arn of the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.firewallPolicyId">firewallPolicyId</a></code> | <code>string</code> | The physical name of the firewall policy. |
@@ -634,6 +703,7 @@ The name of the existing firewall policy.
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.statelessFragmentDefaultActions">statelessFragmentDefaultActions</a></code> | <code>string[]</code> | The Default actions for fragment packets that don't match a stateless rule. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.statelessRuleGroups">statelessRuleGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupList">StatelessRuleGroupList</a>[]</code> | The stateless rule groups in this policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.statefulEngineOptions">statefulEngineOptions</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulEngineOptionsProperty</code> | The stateful engine options for the firewall policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.tlsInspectionConfiguration">tlsInspectionConfiguration</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration">ITLSInspectionConfiguration</a></code> | The TLS Inspection Configuration. |
 
 ---
@@ -656,16 +726,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -777,6 +848,18 @@ Tags to be added to the policy.
 
 ---
 
+##### `statefulEngineOptions`<sup>Optional</sup> <a name="statefulEngineOptions" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.statefulEngineOptions"></a>
+
+```typescript
+public readonly statefulEngineOptions: StatefulEngineOptionsProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulEngineOptionsProperty
+
+The stateful engine options for the firewall policy.
+
+---
+
 ##### `tlsInspectionConfiguration`<sup>Optional</sup> <a name="tlsInspectionConfiguration" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicy.property.tlsInspectionConfiguration"></a>
 
 ```typescript
@@ -835,6 +918,7 @@ new LoggingConfiguration(scope: Construct, id: string, props: LoggingConfigurati
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.iLogLocationsToLogDestinationConfigProperty">iLogLocationsToLogDestinationConfigProperty</a></code> | Convert ILogLocation array to L1 LogDestinationConfigProperty array. |
 
@@ -847,6 +931,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.applyRemovalPolicy"></a>
 
@@ -896,7 +999,7 @@ An array of assorted Log Locations.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.isConstruct"></a>
 
 ```typescript
 import { LoggingConfiguration } from '@durkinza/cdk-networkfirewall-l2'
@@ -905,6 +1008,20 @@ LoggingConfiguration.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.isConstruct.parameter.x"></a>
 
@@ -951,7 +1068,7 @@ Check whether the given construct is a Resource.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.property.firewallRef">firewallRef</a></code> | <code>string</code> | The associated firewall Arn. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfiguration.property.firewallName">firewallName</a></code> | <code>string</code> | The associated firewall Name. |
@@ -977,16 +1094,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -1084,6 +1202,7 @@ new Stateful5TupleRuleGroup(scope: Construct, id: string, props?: Stateful5Tuple
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 
 ---
@@ -1095,6 +1214,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.applyRemovalPolicy"></a>
 
@@ -1129,7 +1267,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.isConstruct"></a>
 
 ```typescript
 import { Stateful5TupleRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
@@ -1138,6 +1276,20 @@ Stateful5TupleRuleGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.isConstruct.parameter.x"></a>
 
@@ -1212,10 +1364,11 @@ Reference existing Rule Group.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.ruleOrder">ruleOrder</a></code> | <code>string</code> | The rule order for this stateful rule group. |
 
 ---
 
@@ -1237,16 +1390,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -1283,6 +1437,18 @@ public readonly ruleGroupId: string;
 - *Type:* string
 
 the physical name of the rule group.
+
+---
+
+##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.ruleOrder"></a>
+
+```typescript
+public readonly ruleOrder: string;
+```
+
+- *Type:* string
+
+The rule order for this stateful rule group.
 
 ---
 
@@ -1332,6 +1498,7 @@ new StatefulDomainListRuleGroup(scope: Construct, id: string, props?: StatefulDo
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 
 ---
@@ -1343,6 +1510,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.applyRemovalPolicy"></a>
 
@@ -1377,7 +1563,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.isConstruct"></a>
 
 ```typescript
 import { StatefulDomainListRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
@@ -1386,6 +1572,20 @@ StatefulDomainListRuleGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.isConstruct.parameter.x"></a>
 
@@ -1460,10 +1660,11 @@ Reference existing Rule Group.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.ruleOrder">ruleOrder</a></code> | <code>string</code> | The rule order for this stateful rule group. |
 
 ---
 
@@ -1485,16 +1686,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -1531,6 +1733,18 @@ public readonly ruleGroupId: string;
 - *Type:* string
 
 the physical name of the rule group.
+
+---
+
+##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.ruleOrder"></a>
+
+```typescript
+public readonly ruleOrder: string;
+```
+
+- *Type:* string
+
+The rule order for this stateful rule group.
 
 ---
 
@@ -1580,6 +1794,7 @@ new StatefulSuricataRuleGroup(scope: Construct, id: string, props?: StatefulSuri
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 
 ---
@@ -1591,6 +1806,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.applyRemovalPolicy"></a>
 
@@ -1626,7 +1860,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isConstruct"></a>
 
 ```typescript
 import { StatefulSuricataRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
@@ -1635,6 +1869,20 @@ StatefulSuricataRuleGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.isConstruct.parameter.x"></a>
 
@@ -1737,10 +1985,11 @@ Reference existing Rule Group.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.ruleOrder">ruleOrder</a></code> | <code>string</code> | The rule order for this stateful rule group. |
 
 ---
 
@@ -1762,16 +2011,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -1808,6 +2058,18 @@ public readonly ruleGroupId: string;
 - *Type:* string
 
 the physical name of the rule group.
+
+---
+
+##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.ruleOrder"></a>
+
+```typescript
+public readonly ruleOrder: string;
+```
+
+- *Type:* string
+
+The rule order for this stateful rule group.
 
 ---
 
@@ -1857,6 +2119,7 @@ new StatelessRuleGroup(scope: Construct, id: string, props?: StatelessRuleGroupP
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.calculateCapacity">calculateCapacity</a></code> | Calculates the expected capacity required for all applied stateful rules. |
 
@@ -1869,6 +2132,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.applyRemovalPolicy"></a>
 
@@ -1912,7 +2194,7 @@ Calculates the expected capacity required for all applied stateful rules.
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.isConstruct"></a>
 
 ```typescript
 import { StatelessRuleGroup } from '@durkinza/cdk-networkfirewall-l2'
@@ -1921,6 +2203,20 @@ StatelessRuleGroup.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.isConstruct.parameter.x"></a>
 
@@ -2023,7 +2319,7 @@ Reference existing Rule Group by Name.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
@@ -2048,16 +2344,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -2143,6 +2440,7 @@ new TLSInspectionConfiguration(scope: Construct, id: string, props: TLSInspectio
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.with">with</a></code> | Applies one or more mixins to this construct. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.applyRemovalPolicy">applyRemovalPolicy</a></code> | Apply the given removal policy to this resource. |
 
 ---
@@ -2154,6 +2452,25 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `with` <a name="with" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.with"></a>
+
+```typescript
+public with(mixins: ...IMixin[]): IConstruct
+```
+
+Applies one or more mixins to this construct.
+
+Mixins are applied in order. The list of constructs is captured at the
+start of the call, so constructs added by a mixin will not be visited.
+Use multiple `with()` calls if subsequent mixins should apply to added
+constructs.
+
+###### `mixins`<sup>Required</sup> <a name="mixins" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.with.parameter.mixins"></a>
+
+- *Type:* ...constructs.IMixin[]
+
+---
 
 ##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.applyRemovalPolicy"></a>
 
@@ -2189,7 +2506,7 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isConstruct"></a>
+##### `isConstruct` <a name="isConstruct" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isConstruct"></a>
 
 ```typescript
 import { TLSInspectionConfiguration } from '@durkinza/cdk-networkfirewall-l2'
@@ -2198,6 +2515,20 @@ TLSInspectionConfiguration.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
+
+Use this method instead of `instanceof` to properly detect `Construct`
+instances, even when the construct library is symlinked.
+
+Explanation: in JavaScript, multiple copies of the `constructs` library on
+disk are seen as independent, completely different libraries. As a
+consequence, the class `Construct` in each copy of the `constructs` library
+is seen as a different class, and an instance of one class will not test as
+`instanceof` the other class. `npm install` will not create installations
+like this, but users may manually symlink construct libraries together or
+use a monorepo tool: in those cases, multiple copies of the `constructs`
+library can be accidentally installed, and `instanceof` will behave
+unpredictably. It is safest to avoid using `instanceof`, and using
+this type-testing method instead.
 
 ###### `x`<sup>Required</sup> <a name="x" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.isConstruct.parameter.x"></a>
 
@@ -2300,7 +2631,7 @@ Reference an existing TLS Inspection Configuration, defined outside of the CDK c
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.tlsInspectionConfigurationArn">tlsInspectionConfigurationArn</a></code> | <code>string</code> | The Arn of the TLS Inspection Configuration. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfiguration.property.tlsInspectionConfigurationId">tlsInspectionConfigurationId</a></code> | <code>string</code> | The physical name of the TLS Inspection Configuration. |
@@ -2327,16 +2658,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -2467,12 +2799,17 @@ const firewallPolicyProps: FirewallPolicyProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statelessDefaultActions">statelessDefaultActions</a></code> | <code>string[]</code> | The actions to take on a packet if it doesn't match any of the stateless rules in the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statelessFragmentDefaultActions">statelessFragmentDefaultActions</a></code> | <code>string[]</code> | The actions to take on a fragmented packet if it doesn't match any of the stateless rules in the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.description">description</a></code> | <code>string</code> | The description of the policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.enableTlsSessionHolding">enableTlsSessionHolding</a></code> | <code>boolean</code> | When true, prevents TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.firewallPolicyName">firewallPolicyName</a></code> | <code>string</code> | The descriptive name of the firewall policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.flowTimeouts">flowTimeouts</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.FlowTimeoutsProperty</code> | Configures the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.policyVariables">policyVariables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.PolicyVariablesProperty</code> | Contains variables that you can use to override default Suricata settings in your firewall policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.ruleOrder">ruleOrder</a></code> | <code>string</code> | How Network Firewall handles stateful rules. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statefulDefaultActions">statefulDefaultActions</a></code> | <code>string[]</code> | The default actions to take on a packet that doesn't match any stateful rules. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statefulEngineOptions">statefulEngineOptions</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulEngineOptionsProperty</code> | Additional options governing how Network Firewall handles stateful rules. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statefulEngineOptions">statefulEngineOptions</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulEngineOptionsProperty</code> | A L1 construct can be passed in for the Engine Options Overrides other stateful engine options properties if this is set. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statefulRuleGroups">statefulRuleGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList">StatefulRuleGroupList</a>[]</code> | The stateful rule groups that are used in the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statelessCustomActions">statelessCustomActions</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.CustomActionProperty[]</code> | The custom action definitions that are available for use in the firewall policy's statelessDefaultActions setting. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.statelessRuleGroups">statelessRuleGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupList">StatelessRuleGroupList</a>[]</code> | References to the stateless rule groups that are used in the policy. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.streamExceptionPolicy">streamExceptionPolicy</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy">StreamExceptionPolicy</a></code> | Configures how Network Firewall processes traffic when a network connection breaks midstream. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.tlsInspectionConfiguration">tlsInspectionConfiguration</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration">ITLSInspectionConfiguration</a></code> | AWS Network Firewall uses a TLS inspection configuration to decrypt traffic. |
 
@@ -2515,6 +2852,21 @@ The description of the policy.
 
 ---
 
+##### `enableTlsSessionHolding`<sup>Optional</sup> <a name="enableTlsSessionHolding" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.enableTlsSessionHolding"></a>
+
+```typescript
+public readonly enableTlsSessionHolding: boolean;
+```
+
+- *Type:* boolean
+- *Default:* undefined
+
+When true, prevents TCP and TLS packets from reaching destination servers until TLS Inspection has evaluated Server Name Indication (SNI) rules.
+
+Requires an associated TLS Inspection configuration.
+
+---
+
 ##### `firewallPolicyName`<sup>Optional</sup> <a name="firewallPolicyName" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.firewallPolicyName"></a>
 
 ```typescript
@@ -2527,6 +2879,47 @@ public readonly firewallPolicyName: string;
 The descriptive name of the firewall policy.
 
 You can't change the name of a firewall policy after you create it.
+
+---
+
+##### `flowTimeouts`<sup>Optional</sup> <a name="flowTimeouts" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.flowTimeouts"></a>
+
+```typescript
+public readonly flowTimeouts: FlowTimeoutsProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.FlowTimeoutsProperty
+- *Default:* undefined
+
+Configures the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle.
+
+---
+
+##### `policyVariables`<sup>Optional</sup> <a name="policyVariables" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.policyVariables"></a>
+
+```typescript
+public readonly policyVariables: PolicyVariablesProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.PolicyVariablesProperty
+- *Default:* undefined
+
+Contains variables that you can use to override default Suricata settings in your firewall policy.
+
+---
+
+##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.ruleOrder"></a>
+
+```typescript
+public readonly ruleOrder: string;
+```
+
+- *Type:* string
+- *Default:* Matches the rule order of the first stateful rule group added to the policy, or STRICT_ORDER if no stateful rule groups are added.
+
+How Network Firewall handles stateful rules.
+
+The stateful rule groups that you use in your policy must match the policy's rule order.
 
 ---
 
@@ -2554,9 +2947,7 @@ public readonly statefulEngineOptions: StatefulEngineOptionsProperty;
 - *Type:* aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulEngineOptionsProperty
 - *Default:* undefined
 
-Additional options governing how Network Firewall handles stateful rules.
-
-The stateful rule groups that you use in your policy must have stateful rule options settings that are compatible with these settings
+A L1 construct can be passed in for the Engine Options Overrides other stateful engine options properties if this is set.
 
 ---
 
@@ -2596,6 +2987,21 @@ public readonly statelessRuleGroups: StatelessRuleGroupList[];
 - *Default:* undefined
 
 References to the stateless rule groups that are used in the policy.
+
+---
+
+##### `streamExceptionPolicy`<sup>Optional</sup> <a name="streamExceptionPolicy" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps.property.streamExceptionPolicy"></a>
+
+```typescript
+public readonly streamExceptionPolicy: StreamExceptionPolicy;
+```
+
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy">StreamExceptionPolicy</a>
+- *Default:* undefined
+
+Configures how Network Firewall processes traffic when a network connection breaks midstream.
+
+Network connections can break due to disruptions in external networks or within the firewall itself.
 
 ---
 
@@ -2645,8 +3051,11 @@ const firewallProps: FirewallProps = { ... }
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.policy">policy</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy">IFirewallPolicy</a></code> | Each firewall requires one firewall policy association, and you can use the same firewall policy for multiple firewalls. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.vpc">vpc</a></code> | <code>aws-cdk-lib.aws_ec2.IVpc</code> | The unique identifier of the VPC where the firewall is in use. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.availabilityZoneChangeProtection">availabilityZoneChangeProtection</a></code> | <code>boolean</code> | A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.availabilityZoneMappings">availabilityZoneMappings</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewall.AvailabilityZoneMappingProperty[]</code> | The Availability Zones where the firewall endpoints are created for a transit gateway-attached firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.deleteProtection">deleteProtection</a></code> | <code>boolean</code> | A flag indicating whether it is possible to delete the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.description">description</a></code> | <code>string</code> | The description of the Firewall. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.enabledAnalysisTypes">enabledAnalysisTypes</a></code> | <code>string[]</code> | An optional setting indicating the specific traffic analysis types to enable on the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.firewallName">firewallName</a></code> | <code>string</code> | The descriptive name of the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.firewallPolicyChangeProtection">firewallPolicyChangeProtection</a></code> | <code>boolean</code> | A setting indicating whether the firewall is protected against a change to the firewall policy association. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.loggingCloudWatchLogGroups">loggingCloudWatchLogGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.CloudWatchLogLocationProps">CloudWatchLogLocationProps</a>[]</code> | A list of CloudWatch LogGroups to send logs to. |
@@ -2655,6 +3064,7 @@ const firewallProps: FirewallProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.subnetChangeProtection">subnetChangeProtection</a></code> | <code>boolean</code> | A setting indicating whether the firewall is protected against changes to the subnet associations. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.subnetMappings">subnetMappings</a></code> | <code>aws-cdk-lib.aws_ec2.SubnetSelection</code> | The public subnets that Network Firewall is using for the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the firewall. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.transitGatewayId">transitGatewayId</a></code> | <code>string</code> | The unique identifier of the transit gateway associated with this firewall. |
 
 ---
 
@@ -2684,6 +3094,36 @@ You can't change the VPC of a firewall after you create the firewall.
 
 ---
 
+##### `availabilityZoneChangeProtection`<sup>Optional</sup> <a name="availabilityZoneChangeProtection" id="@durkinza/cdk-networkfirewall-l2.FirewallProps.property.availabilityZoneChangeProtection"></a>
+
+```typescript
+public readonly availabilityZoneChangeProtection: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+A setting indicating whether the firewall is protected against changes to its Availability Zone configuration.
+
+When set to TRUE, you must first disable this protection before adding or removing Availability Zones.
+
+---
+
+##### `availabilityZoneMappings`<sup>Optional</sup> <a name="availabilityZoneMappings" id="@durkinza/cdk-networkfirewall-l2.FirewallProps.property.availabilityZoneMappings"></a>
+
+```typescript
+public readonly availabilityZoneMappings: AvailabilityZoneMappingProperty[];
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnFirewall.AvailabilityZoneMappingProperty[]
+- *Default:* undefined
+
+The Availability Zones where the firewall endpoints are created for a transit gateway-attached firewall.
+
+Each mapping specifies an Availability Zone where the firewall processes traffic.
+
+---
+
 ##### `deleteProtection`<sup>Optional</sup> <a name="deleteProtection" id="@durkinza/cdk-networkfirewall-l2.FirewallProps.property.deleteProtection"></a>
 
 ```typescript
@@ -2709,6 +3149,19 @@ public readonly description: string;
 - *Default:* undefined
 
 The description of the Firewall.
+
+---
+
+##### `enabledAnalysisTypes`<sup>Optional</sup> <a name="enabledAnalysisTypes" id="@durkinza/cdk-networkfirewall-l2.FirewallProps.property.enabledAnalysisTypes"></a>
+
+```typescript
+public readonly enabledAnalysisTypes: string[];
+```
+
+- *Type:* string[]
+- *Default:* undefined
+
+An optional setting indicating the specific traffic analysis types to enable on the firewall.
 
 ---
 
@@ -2824,6 +3277,21 @@ Tags to be added to the firewall.
 
 ---
 
+##### `transitGatewayId`<sup>Optional</sup> <a name="transitGatewayId" id="@durkinza/cdk-networkfirewall-l2.FirewallProps.property.transitGatewayId"></a>
+
+```typescript
+public readonly transitGatewayId: string;
+```
+
+- *Type:* string
+- *Default:* undefined
+
+The unique identifier of the transit gateway associated with this firewall.
+
+This field is only present for transit gateway-attached firewalls.
+
+---
+
 ### KinesisDataFirehoseLogLocationProps <a name="KinesisDataFirehoseLogLocationProps" id="@durkinza/cdk-networkfirewall-l2.KinesisDataFirehoseLogLocationProps"></a>
 
 Defines a Kinesis Delivery Stream Logging Option.
@@ -2886,6 +3354,7 @@ const loggingConfigurationProps: LoggingConfigurationProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps.property.firewallRef">firewallRef</a></code> | <code>string</code> | The Amazon Resource Name (ARN) of the Firewall that the logging configuration is associated with. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps.property.enableMonitoringDashboard">enableMonitoringDashboard</a></code> | <code>boolean</code> | Whether to enable the detailed firewall monitoring dashboard. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps.property.firewallName">firewallName</a></code> | <code>string</code> | The name of the firewall that the logging configuration is associated with. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps.property.loggingConfigurationName">loggingConfigurationName</a></code> | <code>string</code> | The physical name of this logging configuration. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps.property.loggingLocations">loggingLocations</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.ILogLocation">ILogLocation</a>[]</code> | Defines how AWS Network Firewall performs logging for a Firewall. |
@@ -2903,6 +3372,19 @@ public readonly firewallRef: string;
 The Amazon Resource Name (ARN) of the Firewall that the logging configuration is associated with.
 
 You can't change the firewall specification after you create the logging configuration.
+
+---
+
+##### `enableMonitoringDashboard`<sup>Optional</sup> <a name="enableMonitoringDashboard" id="@durkinza/cdk-networkfirewall-l2.LoggingConfigurationProps.property.enableMonitoringDashboard"></a>
+
+```typescript
+public readonly enableMonitoringDashboard: boolean;
+```
+
+- *Type:* boolean
+- *Default:* false
+
+Whether to enable the detailed firewall monitoring dashboard.
 
 ---
 
@@ -3056,9 +3538,12 @@ const stateful5TupleRuleGroupProps: Stateful5TupleRuleGroupProps = { ... }
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.capacity">capacity</a></code> | <code>number</code> | The maximum operating resources that this rule group can use. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.referenceSets">referenceSets</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty</code> | The reference sets for the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> \| <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a></code> | Rule Order. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.rules">rules</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRule">Stateful5TupleRule</a>[]</code> | The rule group rules. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
 
 ---
@@ -3092,6 +3577,21 @@ Description of the rule group.
 
 ---
 
+##### `referenceSets`<sup>Optional</sup> <a name="referenceSets" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.referenceSets"></a>
+
+```typescript
+public readonly referenceSets: ReferenceSetsProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty
+- *Default:* undefined
+
+The reference sets for the stateful rule group.
+
+Allows referencing IP sets managed outside the rule group.
+
+---
+
 ##### `ruleGroupName`<sup>Optional</sup> <a name="ruleGroupName" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.ruleGroupName"></a>
 
 ```typescript
@@ -3108,10 +3608,10 @@ The descriptive name of the stateful rule group.
 ##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.ruleOrder"></a>
 
 ```typescript
-public readonly ruleOrder: StatefulRuleOptions;
+public readonly ruleOrder: StatefulRuleOptions | StatefulRuleOptionsRuleOrder;
 ```
 
-- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> | <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a>
 - *Default:* STRICT_ORDER
 
 Rule Order.
@@ -3128,6 +3628,32 @@ public readonly rules: Stateful5TupleRule[];
 - *Default:* undefined
 
 The rule group rules.
+
+---
+
+##### `summaryConfiguration`<sup>Optional</sup> <a name="summaryConfiguration" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.summaryConfiguration"></a>
+
+```typescript
+public readonly summaryConfiguration: SummaryConfigurationProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty
+- *Default:* undefined
+
+A complex type containing the rule option fields for rule summarization.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroupProps.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+- *Default:* No tags applied
+
+Tags to be added to the rule group.
 
 ---
 
@@ -3302,9 +3828,12 @@ const statefulDomainListRuleGroupProps: StatefulDomainListRuleGroupProps = { ...
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.capacity">capacity</a></code> | <code>number</code> | The maximum operating resources that this rule group can use. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.referenceSets">referenceSets</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty</code> | The reference sets for the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.rule">rule</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRule">StatefulDomainListRule</a></code> | The Domain List rule. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> \| <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
 
 ---
@@ -3338,6 +3867,21 @@ Description of the rule group.
 
 ---
 
+##### `referenceSets`<sup>Optional</sup> <a name="referenceSets" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.referenceSets"></a>
+
+```typescript
+public readonly referenceSets: ReferenceSetsProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty
+- *Default:* undefined
+
+The reference sets for the stateful rule group.
+
+Allows referencing IP sets managed outside the rule group.
+
+---
+
 ##### `rule`<sup>Optional</sup> <a name="rule" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.rule"></a>
 
 ```typescript
@@ -3367,13 +3911,39 @@ The descriptive name of the stateful rule group.
 ##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.ruleOrder"></a>
 
 ```typescript
-public readonly ruleOrder: StatefulRuleOptions;
+public readonly ruleOrder: StatefulRuleOptions | StatefulRuleOptionsRuleOrder;
 ```
 
-- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> | <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a>
 - *Default:* STRICT_ORDER
 
 Rule Order.
+
+---
+
+##### `summaryConfiguration`<sup>Optional</sup> <a name="summaryConfiguration" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.summaryConfiguration"></a>
+
+```typescript
+public readonly summaryConfiguration: SummaryConfigurationProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty
+- *Default:* undefined
+
+A complex type containing the rule option fields for rule summarization.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroupProps.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+- *Default:* No tags applied
+
+Tags to be added to the rule group.
 
 ---
 
@@ -3478,6 +4048,8 @@ const statefulRuleGroupList: StatefulRuleGroupList = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList.property.ruleGroup">ruleGroup</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup">IStatefulRuleGroup</a></code> | The stateful rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList.property.deepThreatInspection">deepThreatInspection</a></code> | <code>boolean</code> | Whether to enable deep threat inspection for this rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList.property.override">override</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulRuleGroupOverrideProperty</code> | The action that allows the policy owner to override the behavior of the rule group within a policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList.property.priority">priority</a></code> | <code>number</code> | The priority of the rule group in the policy. |
 
 ---
@@ -3491,6 +4063,34 @@ public readonly ruleGroup: IStatefulRuleGroup;
 - *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup">IStatefulRuleGroup</a>
 
 The stateful rule group.
+
+---
+
+##### `deepThreatInspection`<sup>Optional</sup> <a name="deepThreatInspection" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList.property.deepThreatInspection"></a>
+
+```typescript
+public readonly deepThreatInspection: boolean;
+```
+
+- *Type:* boolean
+- *Default:* undefined
+
+Whether to enable deep threat inspection for this rule group.
+
+When enabled, AWS Network Firewall analyzes network traffic processed by the rule group to improve threat detection.
+
+---
+
+##### `override`<sup>Optional</sup> <a name="override" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleGroupList.property.override"></a>
+
+```typescript
+public readonly override: StatefulRuleGroupOverrideProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnFirewallPolicy.StatefulRuleGroupOverrideProperty
+- *Default:* undefined
+
+The action that allows the policy owner to override the behavior of the rule group within a policy.
 
 ---
 
@@ -3527,8 +4127,11 @@ const statefulSuricataRuleGroupFromFileProps: StatefulSuricataRuleGroupFromFileP
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.capacity">capacity</a></code> | <code>number</code> | The maximum operating resources that this rule group can use. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.encoding">encoding</a></code> | <code>string</code> | The encoding to use for the file. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.referenceSets">referenceSets</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty</code> | The reference sets for the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> \| <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
 
 ---
@@ -3587,6 +4190,21 @@ The encoding to use for the file.
 
 ---
 
+##### `referenceSets`<sup>Optional</sup> <a name="referenceSets" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.referenceSets"></a>
+
+```typescript
+public readonly referenceSets: ReferenceSetsProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty
+- *Default:* undefined
+
+The reference sets for the stateful rule group.
+
+Allows referencing IP sets managed outside the rule group.
+
+---
+
 ##### `ruleGroupName`<sup>Optional</sup> <a name="ruleGroupName" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleGroupName"></a>
 
 ```typescript
@@ -3603,13 +4221,39 @@ The descriptive name of the stateful rule group.
 ##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.ruleOrder"></a>
 
 ```typescript
-public readonly ruleOrder: StatefulRuleOptions;
+public readonly ruleOrder: StatefulRuleOptions | StatefulRuleOptionsRuleOrder;
 ```
 
-- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> | <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a>
 - *Default:* STRICT_ORDER
 
 Rule Order.
+
+---
+
+##### `summaryConfiguration`<sup>Optional</sup> <a name="summaryConfiguration" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.summaryConfiguration"></a>
+
+```typescript
+public readonly summaryConfiguration: SummaryConfigurationProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty
+- *Default:* undefined
+
+A complex type containing the rule option fields for rule summarization.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupFromFileProps.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+- *Default:* No tags applied
+
+Tags to be added to the rule group.
 
 ---
 
@@ -3644,9 +4288,12 @@ const statefulSuricataRuleGroupProps: StatefulSuricataRuleGroupProps = { ... }
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.capacity">capacity</a></code> | <code>number</code> | The maximum operating resources that this rule group can use. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.referenceSets">referenceSets</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty</code> | The reference sets for the stateful rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateful rule group. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a></code> | Rule Order. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.ruleOrder">ruleOrder</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> \| <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a></code> | Rule Order. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.rules">rules</a></code> | <code>string</code> | The suricata rules. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
 
 ---
@@ -3680,6 +4327,21 @@ Description of the rule group.
 
 ---
 
+##### `referenceSets`<sup>Optional</sup> <a name="referenceSets" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.referenceSets"></a>
+
+```typescript
+public readonly referenceSets: ReferenceSetsProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.ReferenceSetsProperty
+- *Default:* undefined
+
+The reference sets for the stateful rule group.
+
+Allows referencing IP sets managed outside the rule group.
+
+---
+
 ##### `ruleGroupName`<sup>Optional</sup> <a name="ruleGroupName" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.ruleGroupName"></a>
 
 ```typescript
@@ -3696,10 +4358,10 @@ The descriptive name of the stateful rule group.
 ##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.ruleOrder"></a>
 
 ```typescript
-public readonly ruleOrder: StatefulRuleOptions;
+public readonly ruleOrder: StatefulRuleOptions | StatefulRuleOptionsRuleOrder;
 ```
 
-- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a>
+- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions">StatefulRuleOptions</a> | <a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder">StatefulRuleOptionsRuleOrder</a>
 - *Default:* STRICT_ORDER
 
 Rule Order.
@@ -3716,6 +4378,32 @@ public readonly rules: string;
 - *Default:* undefined
 
 The suricata rules.
+
+---
+
+##### `summaryConfiguration`<sup>Optional</sup> <a name="summaryConfiguration" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.summaryConfiguration"></a>
+
+```typescript
+public readonly summaryConfiguration: SummaryConfigurationProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty
+- *Default:* undefined
+
+A complex type containing the rule option fields for rule summarization.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroupProps.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+- *Default:* No tags applied
+
+Tags to be added to the rule group.
 
 ---
 
@@ -3798,6 +4486,8 @@ const statelessRuleGroupProps: StatelessRuleGroupProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.description">description</a></code> | <code>string</code> | Description of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.ruleGroupName">ruleGroupName</a></code> | <code>string</code> | The descriptive name of the stateless rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.rules">rules</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleList">StatelessRuleList</a>[]</code> | The rule group rules. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.summaryConfiguration">summaryConfiguration</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty</code> | A complex type containing the rule option fields for rule summarization. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.variables">variables</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.RuleVariablesProperty</code> | Settings that are available for use in the rules. |
 
 ---
@@ -3864,6 +4554,32 @@ public readonly rules: StatelessRuleList[];
 - *Default:* undefined
 
 The rule group rules.
+
+---
+
+##### `summaryConfiguration`<sup>Optional</sup> <a name="summaryConfiguration" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.summaryConfiguration"></a>
+
+```typescript
+public readonly summaryConfiguration: SummaryConfigurationProperty;
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnRuleGroup.SummaryConfigurationProperty
+- *Default:* undefined
+
+A complex type containing the rule option fields for rule summarization.
+
+---
+
+##### `tags`<sup>Optional</sup> <a name="tags" id="@durkinza/cdk-networkfirewall-l2.StatelessRuleGroupProps.property.tags"></a>
+
+```typescript
+public readonly tags: Tag[];
+```
+
+- *Type:* aws-cdk-lib.Tag[]
+- *Default:* No tags applied
+
+Tags to be added to the rule group.
 
 ---
 
@@ -4062,33 +4778,20 @@ const tLSInspectionConfigurationProps: TLSInspectionConfigurationProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.serverCertificateConfigurations">serverCertificateConfigurations</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnTLSInspectionConfiguration.ServerCertificateConfigurationProperty[]</code> | The TLS Server Certificate Configuration Property. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.configurationName">configurationName</a></code> | <code>string</code> | The descriptive name of the TLS inspection configuration. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.description">description</a></code> | <code>string</code> | The Description of the TLS Inspection Configuration. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.serverCertificateConfigurations">serverCertificateConfigurations</a></code> | <code>aws-cdk-lib.aws_networkfirewall.CfnTLSInspectionConfiguration.ServerCertificateConfigurationProperty[]</code> | The TLS Server Certificate Configuration Property. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.tags">tags</a></code> | <code>aws-cdk-lib.Tag[]</code> | Tags to be added to the configuration. |
 
 ---
 
-##### `serverCertificateConfigurations`<sup>Required</sup> <a name="serverCertificateConfigurations" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.serverCertificateConfigurations"></a>
-
-```typescript
-public readonly serverCertificateConfigurations: ServerCertificateConfigurationProperty[];
-```
-
-- *Type:* aws-cdk-lib.aws_networkfirewall.CfnTLSInspectionConfiguration.ServerCertificateConfigurationProperty[]
-
-The TLS Server Certificate Configuration Property.
-
----
-
-##### `configurationName`<sup>Optional</sup> <a name="configurationName" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.configurationName"></a>
+##### `configurationName`<sup>Required</sup> <a name="configurationName" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.configurationName"></a>
 
 ```typescript
 public readonly configurationName: string;
 ```
 
 - *Type:* string
-- *Default:* CloudFormation-generated name
 
 The descriptive name of the TLS inspection configuration.
 
@@ -4106,6 +4809,18 @@ public readonly description: string;
 - *Default:* No Description
 
 The Description of the TLS Inspection Configuration.
+
+---
+
+##### `serverCertificateConfigurations`<sup>Optional</sup> <a name="serverCertificateConfigurations" id="@durkinza/cdk-networkfirewall-l2.TLSInspectionConfigurationProps.property.serverCertificateConfigurations"></a>
+
+```typescript
+public readonly serverCertificateConfigurations: ServerCertificateConfigurationProperty[];
+```
+
+- *Type:* aws-cdk-lib.aws_networkfirewall.CfnTLSInspectionConfiguration.ServerCertificateConfigurationProperty[]
+
+The TLS Server Certificate Configuration Property.
 
 ---
 
@@ -4626,7 +5341,7 @@ Defines a Network Firewall in the stack.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewall.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewall.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewall.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewall.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewall.property.firewallArn">firewallArn</a></code> | <code>string</code> | The Arn of the Firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewall.property.firewallId">firewallId</a></code> | <code>string</code> | The physical name of the Firewall. |
@@ -4651,16 +5366,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -4714,7 +5430,7 @@ Defines a Network Firewall Policy in the stack.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy.property.firewallPolicyArn">firewallPolicyArn</a></code> | <code>string</code> | The Arn of the policy. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IFirewallPolicy.property.firewallPolicyId">firewallPolicyId</a></code> | <code>string</code> | The physical name of the firewall policy. |
@@ -4739,16 +5455,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -4802,7 +5519,7 @@ Defines a Network Firewall Logging Configuration in the stack.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ILoggingConfiguration.property.firewallRef">firewallRef</a></code> | <code>string</code> | The Amazon Resource Name (ARN) of the Firewall that the logging configuration is associated with. |
 
@@ -4826,16 +5543,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -4940,10 +5658,11 @@ The Interface that represents a Stateful Rule Group.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.ruleOrder">ruleOrder</a></code> | <code>string</code> | The rule order of the stateful rule group. |
 
 ---
 
@@ -4965,16 +5684,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -5014,6 +5734,19 @@ the physical name of the rule group.
 
 ---
 
+##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.ruleOrder"></a>
+
+```typescript
+public readonly ruleOrder: string;
+```
+
+- *Type:* string
+- *Default:* undefined (unknown, e.g. for imported rule groups)
+
+The rule order of the stateful rule group.
+
+---
+
 ### IStatelessRule <a name="IStatelessRule" id="@durkinza/cdk-networkfirewall-l2.IStatelessRule"></a>
 
 - *Implemented By:* <a href="#@durkinza/cdk-networkfirewall-l2.StatelessRule">StatelessRule</a>, <a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRule">IStatelessRule</a>
@@ -5036,7 +5769,7 @@ Defines a Stateless rule Group in the stack.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatelessRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
@@ -5061,16 +5794,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -5124,7 +5858,7 @@ Defines a TLS Inspection Configuration Resource in the stack.
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.ResourceEnvironment</code> | The environment this resource belongs to. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.env">env</a></code> | <code>aws-cdk-lib.interfaces.ResourceEnvironment</code> | The environment this resource belongs to. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.tlsInspectionConfigurationArn">tlsInspectionConfigurationArn</a></code> | <code>string</code> | The Arn of the TLS Inspection Configuration. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.ITLSInspectionConfiguration.property.tlsInspectionConfigurationId">tlsInspectionConfigurationId</a></code> | <code>string</code> | The name of the TLS Inspection Configuration. |
@@ -5149,16 +5883,17 @@ The tree node.
 public readonly env: ResourceEnvironment;
 ```
 
-- *Type:* aws-cdk-lib.ResourceEnvironment
+- *Type:* aws-cdk-lib.interfaces.ResourceEnvironment
 
 The environment this resource belongs to.
 
-For resources that are created and managed by the CDK
-(generally, those created by creating new class instances like Role, Bucket, etc.),
-this is always the same as the environment of the stack they belong to;
-however, for imported resources
-(those obtained from static methods like fromRoleArn, fromBucketName, etc.),
-that might be different than the stack they were imported into.
+For resources that are created and managed in a Stack (those created by
+creating new class instances like `new Role()`, `new Bucket()`, etc.), this
+is always the same as the environment of the stack they belong to.
+
+For referenced resources (those obtained from referencing methods like
+`Role.fromRoleArn()`, `Bucket.fromBucketName()`, etc.), they might be
+different than the stack they were imported into.
 
 ---
 
@@ -5199,6 +5934,33 @@ The name of the TLS Inspection Configuration.
 ---
 
 ## Enums <a name="Enums" id="Enums"></a>
+
+### FirewallAnalysisTypes <a name="FirewallAnalysisTypes" id="@durkinza/cdk-networkfirewall-l2.FirewallAnalysisTypes"></a>
+
+The traffic analysis types that can be enabled on a firewall.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallAnalysisTypes.TLS_SNI">TLS_SNI</a></code> | TLS Server Name Indication (SNI) analysis. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallAnalysisTypes.HTTP_HOST">HTTP_HOST</a></code> | HTTP Host header analysis. |
+
+---
+
+##### `TLS_SNI` <a name="TLS_SNI" id="@durkinza/cdk-networkfirewall-l2.FirewallAnalysisTypes.TLS_SNI"></a>
+
+TLS Server Name Indication (SNI) analysis.
+
+---
+
+
+##### `HTTP_HOST` <a name="HTTP_HOST" id="@durkinza/cdk-networkfirewall-l2.FirewallAnalysisTypes.HTTP_HOST"></a>
+
+HTTP Host header analysis.
+
+---
+
 
 ### LogDestinationType <a name="LogDestinationType" id="@durkinza/cdk-networkfirewall-l2.LogDestinationType"></a>
 
@@ -5245,6 +6007,7 @@ The type of log to send.
 | --- | --- |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LogType.ALERT">ALERT</a></code> | Alert logs report traffic that matches a stateful rule with an action setting that sends an alert log message. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.LogType.FLOW">FLOW</a></code> | Flow logs are standard network traffic flow logs. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.LogType.TLS">TLS</a></code> | Logs for events that are related to TLS inspection. |
 
 ---
 
@@ -5258,6 +6021,13 @@ Alert logs report traffic that matches a stateful rule with an action setting th
 ##### `FLOW` <a name="FLOW" id="@durkinza/cdk-networkfirewall-l2.LogType.FLOW"></a>
 
 Flow logs are standard network traffic flow logs.
+
+---
+
+
+##### `TLS` <a name="TLS" id="@durkinza/cdk-networkfirewall-l2.LogType.TLS"></a>
+
+Logs for events that are related to TLS inspection.
 
 ---
 
@@ -5345,6 +6115,37 @@ Allow domain(s) through.
 ---
 
 
+### StatefulEngineOptionsRuleOrder <a name="StatefulEngineOptionsRuleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulEngineOptionsRuleOrder"></a>
+
+Configuration settings for the handling of the stateful rule groups in a firewall policy.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-networkfirewall-firewallpolicy-statefulengineoptions.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-networkfirewall-firewallpolicy-statefulengineoptions.html)
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulEngineOptionsRuleOrder.ACTION_ORDER">ACTION_ORDER</a></code> | Rules with a pass action are processed first, followed by drop, reject, and alert actions. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulEngineOptionsRuleOrder.STRICT_ORDER">STRICT_ORDER</a></code> | Rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined. |
+
+---
+
+##### `ACTION_ORDER` <a name="ACTION_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulEngineOptionsRuleOrder.ACTION_ORDER"></a>
+
+Rules with a pass action are processed first, followed by drop, reject, and alert actions.
+
+---
+
+
+##### `STRICT_ORDER` <a name="STRICT_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulEngineOptionsRuleOrder.STRICT_ORDER"></a>
+
+Rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined.
+
+Recommended Order.
+
+---
+
+
 ### StatefulRuleOptions <a name="StatefulRuleOptions" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions"></a>
 
 Indicates how to manage the order of the rule evaluation for the rule group.
@@ -5358,7 +6159,9 @@ Indicates how to manage the order of the rule evaluation for the rule group.
 
 ---
 
-##### `ACTION_ORDER` <a name="ACTION_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.ACTION_ORDER"></a>
+##### ~~`ACTION_ORDER`~~ <a name="ACTION_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.ACTION_ORDER"></a>
+
+- *Deprecated:* - Use StatefulRuleOptionsRuleOrder
 
 Rules with a pass action are processed first, followed by drop, reject, and alert actions.
 
@@ -5367,7 +6170,40 @@ This option was previously named Default Acton Order.
 ---
 
 
-##### `STRICT_ORDER` <a name="STRICT_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.STRICT_ORDER"></a>
+##### ~~`STRICT_ORDER`~~ <a name="STRICT_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptions.STRICT_ORDER"></a>
+
+- *Deprecated:* - Use StatefulRuleOptionsRuleOrder
+
+With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined.
+
+Recommended Order
+
+---
+
+
+### StatefulRuleOptionsRuleOrder <a name="StatefulRuleOptionsRuleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder"></a>
+
+Indicates how to manage the order of the rule evaluation for the rule group.
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder.ACTION_ORDER">ACTION_ORDER</a></code> | Rules with a pass action are processed first, followed by drop, reject, and alert actions. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder.STRICT_ORDER">STRICT_ORDER</a></code> | With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined. |
+
+---
+
+##### `ACTION_ORDER` <a name="ACTION_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder.ACTION_ORDER"></a>
+
+Rules with a pass action are processed first, followed by drop, reject, and alert actions.
+
+This option was previously named Default Acton Order.
+
+---
+
+
+##### `STRICT_ORDER` <a name="STRICT_ORDER" id="@durkinza/cdk-networkfirewall-l2.StatefulRuleOptionsRuleOrder.STRICT_ORDER"></a>
 
 With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order in which they're defined.
 
@@ -5492,6 +6328,52 @@ Discontinues all inspection of the packet and permits it to go to its intended d
 ##### `DROP` <a name="DROP" id="@durkinza/cdk-networkfirewall-l2.StatelessStandardAction.DROP"></a>
 
 Discontinues all inspection of the packet and blocks it from going to its intended destination.
+
+---
+
+
+### StreamExceptionPolicy <a name="StreamExceptionPolicy" id="@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy"></a>
+
+Configures how Network Firewall processes traffic when a network connection breaks midstream.
+
+Network connections can break due to disruptions in external networks or within the firewall itself.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-networkfirewall-firewallpolicy-statefulengineoptions.html](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-networkfirewall-firewallpolicy-statefulengineoptions.html)
+
+#### Members <a name="Members" id="Members"></a>
+
+| **Name** | **Description** |
+| --- | --- |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy.DROP">DROP</a></code> | Network Firewall fails closed and drops all subsequent traffic going to the firewall. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy.CONTINUE">CONTINUE</a></code> | Network Firewall continues to apply rules to the subsequent traffic without context from traffic before the break. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy.REJECT">REJECT</a></code> | Network Firewall fails closed and drops all subsequent traffic going to the firewall. |
+
+---
+
+##### `DROP` <a name="DROP" id="@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy.DROP"></a>
+
+Network Firewall fails closed and drops all subsequent traffic going to the firewall.
+
+This is the default behavior.
+
+---
+
+
+##### `CONTINUE` <a name="CONTINUE" id="@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy.CONTINUE"></a>
+
+Network Firewall continues to apply rules to the subsequent traffic without context from traffic before the break.
+
+This impacts the behavior of rules that depend on this context.
+For example, if you have a stateful rule to drop http traffic, Network Firewall won't match the traffic for this rule because the service won't have the context from session initialization defining the application layer protocol as HTTP. However, this behavior is rule dependent—a TCP-layer rule using a flow:stateless rule would still match, as would the aws:drop_strict default action.
+
+---
+
+
+##### `REJECT` <a name="REJECT" id="@durkinza/cdk-networkfirewall-l2.StreamExceptionPolicy.REJECT"></a>
+
+Network Firewall fails closed and drops all subsequent traffic going to the firewall.
+
+Network Firewall also sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall will have context about the new session and will apply rules to the subsequent traffic.
 
 ---
 

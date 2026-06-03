@@ -1,6 +1,6 @@
-import * as NetFW from '../src/lib';
+import * as NetFW from "../src/lib";
 
-test('Default properties', () => {
+test("Default properties", () => {
   // WHEN
   const statelessrule = new NetFW.StatelessRule({
     actions: [NetFW.StatelessStandardAction.DROP],
@@ -16,15 +16,15 @@ test('Default properties', () => {
       sources: [],
       tcpFlags: undefined,
     },
-    actions: ['aws:drop'],
+    actions: ["aws:drop"],
   });
   expect(statelessrule.calculateCapacity()).toBe(1);
 });
 
-test('Given properties', () => {
+test("Given properties", () => {
   // WHEN
   const statelessrule = new NetFW.StatelessRule({
-    actions: [NetFW.StatelessStandardAction.DROP, 'customAction'],
+    actions: [NetFW.StatelessStandardAction.DROP, "customAction"],
     destinationPorts: [
       {
         fromPort: 80,
@@ -35,14 +35,16 @@ test('Given properties', () => {
         toPort: 443,
       },
     ],
-    destinations: ['10.0.0.0/16, 10.10.0.0/16'],
-    sourcePorts: [{
-      fromPort: 0,
-      toPort: 65535,
-    }],
-    sources: ['10.0.0.0/16', '10.10.0.0/16'],
+    destinations: ["10.0.0.0/16, 10.10.0.0/16"],
+    sourcePorts: [
+      {
+        fromPort: 0,
+        toPort: 65535,
+      },
+    ],
+    sources: ["10.0.0.0/16", "10.10.0.0/16"],
     protocols: [10, 11],
-    tcpFlags: [{ flags: ['ECE', 'SYN'], masks: ['SYN', 'ECE'] }],
+    tcpFlags: [{ flags: ["ECE", "SYN"], masks: ["SYN", "ECE"] }],
   });
 
   // THEN
@@ -58,21 +60,21 @@ test('Given properties', () => {
           toPort: 443,
         },
       ],
-      destinations: [
-        { addressDefinition: '10.0.0.0/16, 10.10.0.0/16' },
+      destinations: [{ addressDefinition: "10.0.0.0/16, 10.10.0.0/16" }],
+      sourcePorts: [
+        {
+          fromPort: 0,
+          toPort: 65535,
+        },
       ],
-      sourcePorts: [{
-        fromPort: 0,
-        toPort: 65535,
-      }],
       sources: [
-        { addressDefinition: '10.0.0.0/16' },
-        { addressDefinition: '10.10.0.0/16' },
+        { addressDefinition: "10.0.0.0/16" },
+        { addressDefinition: "10.10.0.0/16" },
       ],
       protocols: [10, 11],
-      tcpFlags: [{ flags: ['ECE', 'SYN'], masks: ['SYN', 'ECE'] }],
+      tcpFlags: [{ flags: ["ECE", "SYN"], masks: ["SYN", "ECE"] }],
     },
-    actions: ['aws:drop', 'customAction'],
+    actions: ["aws:drop", "customAction"],
   });
 
   expect(statelessrule.calculateCapacity()).toBe(16);

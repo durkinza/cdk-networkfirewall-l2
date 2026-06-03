@@ -21,7 +21,7 @@ The goal of these constructs is to provide a way to decouple the creation of fir
 
 
 ### Quick Start Examples
-For new environments an example that matches the default Security Group rules [can be found here.](docs/example-only-outbound.md)
+For new environments a recommended example can be found on the [outbound-only example here.](docs/example-only-outbound.md)
 
 If you're adding a firewall to an existing environment that does not have an expectation of normal traffic, try the  [non-obtrusive approach here](docs/example-non-obtrusive.md).  
 This example passively monitors packets to build a baseline of "normal" traffic that can then be used as a reference to build appropriate firewall rules. 
@@ -127,13 +127,15 @@ new NetFW.StatelessRule({
 
 Assigning stateless rules to a stateless rule-group requires a priority mapping, similar to the way a rule-group requires a priority map when assigned to a policy.
 ```ts
+import * as cdk from 'aws-cdk-lib';
+
 const statelessRule1 = new NetFW.StatelessRule({
   actions: [NetFW.StatelessStandardAction.DROP],
 });
 const statelessRule2 = new NetFW.StatelessRule({
   actions: [NetFW.StatelessStandardAction.DROP],
 });
-new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
+const statelessRuleGroup = new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
   rules: [
     {
       rule: statelessRule1,
@@ -144,7 +146,13 @@ new NetFW.StatelessRuleGroup(stack, 'MyStatelessRuleGroup', {
       priority: 20,
     },
   ],
+  tags: [new cdk.Tag('Environment', 'Production')],
+  summaryConfiguration: {
+    ruleOptions: ['MSG'],
+  },
 });
+
+cdk.Tags.of(statelessRuleGroup).add('key', 'value');
 ```
 
 ### Stateful Rule Groups
@@ -156,6 +164,7 @@ It appeared easier to merge the three types in a future revision than to split t
 I opted to match the AWS console, giving each rule group category has it's own class. Stateful rule groups are based on the same abstract class, to reduce duplicate code.
 
 Stateful rule groups can be defined with no actionable rules within them, so the minimal implementation would be the same for all of them.
+Stateful rule groups also support optional `tags`, `referenceSets`, and `summaryConfiguration` properties.
 ```ts
 new NetFW.Stateful5TupleRuleGroup(stack, 'MyStateful5TupleRuleGroup', {
   // Assumes the following
@@ -239,8 +248,9 @@ The `rules` property will be filled in with the contents from the file path, any
 
 Logging can be done using 3 AWS services, Cloud Watch trails, S3 buckets, and Kinesis Data Firehose streams.
 
-The logging locations are configured with a Logging type, either Flow or Alert logs.
+The logging locations are configured with a Logging type. One of Flow, Alert, or TLS logs.
 In the case of Alert logs, it is up to the firewall policy to decide when a log should be generated.
+TLS logs capture events related to TLS inspection.
 
 Logs can be configured to be sent to multiple locations simultaneously.
 
@@ -264,6 +274,11 @@ new NetFW.Firewall(stack, 'MyNetworkFirewall', {
       bucketName: s3LoggingBucket.bucketName,
       logType: NetFW.LogType.FLOW,
       prefix: 'flow',
+    },
+    {
+      bucketName: s3LoggingBucket.bucketName,
+      logType: NetFW.LogType.TLS,
+      prefix: 'tls',
     },
   ],
   loggingKinesisDataStreams: [

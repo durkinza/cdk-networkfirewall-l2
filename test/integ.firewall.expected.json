@@ -11,18 +11,29 @@
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
         ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/Resource"
       }
     },
     "MyTestVpcPublicSubnet1SubnetA7B59A2C": {
       "Type": "AWS::EC2::Subnet",
       "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
         },
-        "AvailabilityZone": "test-region-1a",
-        "CidrBlock": "10.0.0.0/19",
+        "CidrBlock": "10.0.0.0/18",
         "MapPublicIpOnLaunch": true,
         "Tags": [
           {
@@ -36,22 +47,39 @@
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc/PublicSubnet1"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
-        ]
+        ],
+        "VpcId": {
+          "Ref": "MyTestVpcE144EEF4"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet1/Subnet"
       }
     },
     "MyTestVpcPublicSubnet1RouteTable88486E9C": {
       "Type": "AWS::EC2::RouteTable",
       "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
-        },
         "Tags": [
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc/PublicSubnet1"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
-        ]
+        ],
+        "VpcId": {
+          "Ref": "MyTestVpcE144EEF4"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet1/RouteTable"
       }
     },
     "MyTestVpcPublicSubnet1RouteTableAssociation0AD850A1": {
@@ -63,22 +91,26 @@
         "SubnetId": {
           "Ref": "MyTestVpcPublicSubnet1SubnetA7B59A2C"
         }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet1/RouteTableAssociation"
       }
     },
     "MyTestVpcPublicSubnet1DefaultRoute22B6A79B": {
       "Type": "AWS::EC2::Route",
       "Properties": {
-        "RouteTableId": {
-          "Ref": "MyTestVpcPublicSubnet1RouteTable88486E9C"
-        },
         "DestinationCidrBlock": "0.0.0.0/0",
         "GatewayId": {
           "Ref": "MyTestVpcIGW872B5B74"
+        },
+        "RouteTableId": {
+          "Ref": "MyTestVpcPublicSubnet1RouteTable88486E9C"
         }
       },
-      "DependsOn": [
-        "MyTestVpcVPCGWFCF9AAB8"
-      ]
+      "DependsOn": ["MyTestVpcVPCGWFCF9AAB8"],
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet1/DefaultRoute"
+      }
     },
     "MyTestVpcPublicSubnet1EIPE6793D52": {
       "Type": "AWS::EC2::EIP",
@@ -88,38 +120,57 @@
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc/PublicSubnet1"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
         ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet1/EIP"
       }
     },
     "MyTestVpcPublicSubnet1NATGateway8326446C": {
       "Type": "AWS::EC2::NatGateway",
       "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": ["MyTestVpcPublicSubnet1EIPE6793D52", "AllocationId"]
+        },
         "SubnetId": {
           "Ref": "MyTestVpcPublicSubnet1SubnetA7B59A2C"
-        },
-        "AllocationId": {
-          "Fn::GetAtt": [
-            "MyTestVpcPublicSubnet1EIPE6793D52",
-            "AllocationId"
-          ]
         },
         "Tags": [
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc/PublicSubnet1"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
         ]
+      },
+      "DependsOn": [
+        "MyTestVpcPublicSubnet1DefaultRoute22B6A79B",
+        "MyTestVpcPublicSubnet1RouteTableAssociation0AD850A1"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet1/NATGateway"
       }
     },
     "MyTestVpcPublicSubnet2SubnetBE93625D": {
       "Type": "AWS::EC2::Subnet",
       "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
         },
-        "AvailabilityZone": "test-region-1b",
-        "CidrBlock": "10.0.32.0/19",
+        "CidrBlock": "10.0.64.0/18",
         "MapPublicIpOnLaunch": true,
         "Tags": [
           {
@@ -133,22 +184,39 @@
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc/PublicSubnet2"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
-        ]
+        ],
+        "VpcId": {
+          "Ref": "MyTestVpcE144EEF4"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet2/Subnet"
       }
     },
     "MyTestVpcPublicSubnet2RouteTableE0D83E2C": {
       "Type": "AWS::EC2::RouteTable",
       "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
-        },
         "Tags": [
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc/PublicSubnet2"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
-        ]
+        ],
+        "VpcId": {
+          "Ref": "MyTestVpcE144EEF4"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet2/RouteTable"
       }
     },
     "MyTestVpcPublicSubnet2RouteTableAssociationD187587B": {
@@ -160,22 +228,26 @@
         "SubnetId": {
           "Ref": "MyTestVpcPublicSubnet2SubnetBE93625D"
         }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet2/RouteTableAssociation"
       }
     },
     "MyTestVpcPublicSubnet2DefaultRoute25480A68": {
       "Type": "AWS::EC2::Route",
       "Properties": {
-        "RouteTableId": {
-          "Ref": "MyTestVpcPublicSubnet2RouteTableE0D83E2C"
-        },
         "DestinationCidrBlock": "0.0.0.0/0",
         "GatewayId": {
           "Ref": "MyTestVpcIGW872B5B74"
+        },
+        "RouteTableId": {
+          "Ref": "MyTestVpcPublicSubnet2RouteTableE0D83E2C"
         }
       },
-      "DependsOn": [
-        "MyTestVpcVPCGWFCF9AAB8"
-      ]
+      "DependsOn": ["MyTestVpcVPCGWFCF9AAB8"],
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet2/DefaultRoute"
+      }
     },
     "MyTestVpcPublicSubnet2EIP46C9597E": {
       "Type": "AWS::EC2::EIP",
@@ -185,135 +257,57 @@
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc/PublicSubnet2"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
         ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet2/EIP"
       }
     },
     "MyTestVpcPublicSubnet2NATGateway7DE3C708": {
       "Type": "AWS::EC2::NatGateway",
       "Properties": {
+        "AllocationId": {
+          "Fn::GetAtt": ["MyTestVpcPublicSubnet2EIP46C9597E", "AllocationId"]
+        },
         "SubnetId": {
           "Ref": "MyTestVpcPublicSubnet2SubnetBE93625D"
-        },
-        "AllocationId": {
-          "Fn::GetAtt": [
-            "MyTestVpcPublicSubnet2EIP46C9597E",
-            "AllocationId"
-          ]
         },
         "Tags": [
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc/PublicSubnet2"
-          }
-        ]
-      }
-    },
-    "MyTestVpcPublicSubnet3Subnet49AF0D64": {
-      "Type": "AWS::EC2::Subnet",
-      "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
-        },
-        "AvailabilityZone": "test-region-1c",
-        "CidrBlock": "10.0.64.0/19",
-        "MapPublicIpOnLaunch": true,
-        "Tags": [
-          {
-            "Key": "aws-cdk:subnet-name",
-            "Value": "Public"
           },
           {
-            "Key": "aws-cdk:subnet-type",
-            "Value": "Public"
-          },
-          {
-            "Key": "Name",
-            "Value": "network-firewall-integ-stack/MyTestVpc/PublicSubnet3"
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
         ]
-      }
-    },
-    "MyTestVpcPublicSubnet3RouteTable39003F52": {
-      "Type": "AWS::EC2::RouteTable",
-      "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
-        },
-        "Tags": [
-          {
-            "Key": "Name",
-            "Value": "network-firewall-integ-stack/MyTestVpc/PublicSubnet3"
-          }
-        ]
-      }
-    },
-    "MyTestVpcPublicSubnet3RouteTableAssociation9756BEA4": {
-      "Type": "AWS::EC2::SubnetRouteTableAssociation",
-      "Properties": {
-        "RouteTableId": {
-          "Ref": "MyTestVpcPublicSubnet3RouteTable39003F52"
-        },
-        "SubnetId": {
-          "Ref": "MyTestVpcPublicSubnet3Subnet49AF0D64"
-        }
-      }
-    },
-    "MyTestVpcPublicSubnet3DefaultRoute73A40A51": {
-      "Type": "AWS::EC2::Route",
-      "Properties": {
-        "RouteTableId": {
-          "Ref": "MyTestVpcPublicSubnet3RouteTable39003F52"
-        },
-        "DestinationCidrBlock": "0.0.0.0/0",
-        "GatewayId": {
-          "Ref": "MyTestVpcIGW872B5B74"
-        }
       },
       "DependsOn": [
-        "MyTestVpcVPCGWFCF9AAB8"
-      ]
-    },
-    "MyTestVpcPublicSubnet3EIP73522D84": {
-      "Type": "AWS::EC2::EIP",
-      "Properties": {
-        "Domain": "vpc",
-        "Tags": [
-          {
-            "Key": "Name",
-            "Value": "network-firewall-integ-stack/MyTestVpc/PublicSubnet3"
-          }
-        ]
-      }
-    },
-    "MyTestVpcPublicSubnet3NATGatewayD59F042A": {
-      "Type": "AWS::EC2::NatGateway",
-      "Properties": {
-        "SubnetId": {
-          "Ref": "MyTestVpcPublicSubnet3Subnet49AF0D64"
-        },
-        "AllocationId": {
-          "Fn::GetAtt": [
-            "MyTestVpcPublicSubnet3EIP73522D84",
-            "AllocationId"
-          ]
-        },
-        "Tags": [
-          {
-            "Key": "Name",
-            "Value": "network-firewall-integ-stack/MyTestVpc/PublicSubnet3"
-          }
-        ]
+        "MyTestVpcPublicSubnet2DefaultRoute25480A68",
+        "MyTestVpcPublicSubnet2RouteTableAssociationD187587B"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PublicSubnet2/NATGateway"
       }
     },
     "MyTestVpcPrivateSubnet1SubnetB29DFA33": {
       "Type": "AWS::EC2::Subnet",
       "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
         },
-        "AvailabilityZone": "test-region-1a",
-        "CidrBlock": "10.0.96.0/19",
+        "CidrBlock": "10.0.128.0/18",
         "MapPublicIpOnLaunch": false,
         "Tags": [
           {
@@ -327,22 +321,39 @@
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet1"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
-        ]
+        ],
+        "VpcId": {
+          "Ref": "MyTestVpcE144EEF4"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet1/Subnet"
       }
     },
     "MyTestVpcPrivateSubnet1RouteTableCAB302BE": {
       "Type": "AWS::EC2::RouteTable",
       "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
-        },
         "Tags": [
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet1"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
-        ]
+        ],
+        "VpcId": {
+          "Ref": "MyTestVpcE144EEF4"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet1/RouteTable"
       }
     },
     "MyTestVpcPrivateSubnet1RouteTableAssociation13FF36EA": {
@@ -354,28 +365,38 @@
         "SubnetId": {
           "Ref": "MyTestVpcPrivateSubnet1SubnetB29DFA33"
         }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet1/RouteTableAssociation"
       }
     },
     "MyTestVpcPrivateSubnet1DefaultRoute65831044": {
       "Type": "AWS::EC2::Route",
       "Properties": {
-        "RouteTableId": {
-          "Ref": "MyTestVpcPrivateSubnet1RouteTableCAB302BE"
-        },
         "DestinationCidrBlock": "0.0.0.0/0",
         "NatGatewayId": {
           "Ref": "MyTestVpcPublicSubnet1NATGateway8326446C"
+        },
+        "RouteTableId": {
+          "Ref": "MyTestVpcPrivateSubnet1RouteTableCAB302BE"
         }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet1/DefaultRoute"
       }
     },
     "MyTestVpcPrivateSubnet2Subnet2D9A0D84": {
       "Type": "AWS::EC2::Subnet",
       "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
         },
-        "AvailabilityZone": "test-region-1b",
-        "CidrBlock": "10.0.128.0/19",
+        "CidrBlock": "10.0.192.0/18",
         "MapPublicIpOnLaunch": false,
         "Tags": [
           {
@@ -389,22 +410,39 @@
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet2"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
-        ]
+        ],
+        "VpcId": {
+          "Ref": "MyTestVpcE144EEF4"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet2/Subnet"
       }
     },
     "MyTestVpcPrivateSubnet2RouteTableC6EC54E3": {
       "Type": "AWS::EC2::RouteTable",
       "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
-        },
         "Tags": [
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet2"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
-        ]
+        ],
+        "VpcId": {
+          "Ref": "MyTestVpcE144EEF4"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet2/RouteTable"
       }
     },
     "MyTestVpcPrivateSubnet2RouteTableAssociation64764335": {
@@ -416,80 +454,24 @@
         "SubnetId": {
           "Ref": "MyTestVpcPrivateSubnet2Subnet2D9A0D84"
         }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet2/RouteTableAssociation"
       }
     },
     "MyTestVpcPrivateSubnet2DefaultRoute184FEACC": {
       "Type": "AWS::EC2::Route",
       "Properties": {
-        "RouteTableId": {
-          "Ref": "MyTestVpcPrivateSubnet2RouteTableC6EC54E3"
-        },
         "DestinationCidrBlock": "0.0.0.0/0",
         "NatGatewayId": {
           "Ref": "MyTestVpcPublicSubnet2NATGateway7DE3C708"
-        }
-      }
-    },
-    "MyTestVpcPrivateSubnet3Subnet0EA0DCFF": {
-      "Type": "AWS::EC2::Subnet",
-      "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
         },
-        "AvailabilityZone": "test-region-1c",
-        "CidrBlock": "10.0.160.0/19",
-        "MapPublicIpOnLaunch": false,
-        "Tags": [
-          {
-            "Key": "aws-cdk:subnet-name",
-            "Value": "Private"
-          },
-          {
-            "Key": "aws-cdk:subnet-type",
-            "Value": "Private"
-          },
-          {
-            "Key": "Name",
-            "Value": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet3"
-          }
-        ]
-      }
-    },
-    "MyTestVpcPrivateSubnet3RouteTable1F9FBF8B": {
-      "Type": "AWS::EC2::RouteTable",
-      "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
-        },
-        "Tags": [
-          {
-            "Key": "Name",
-            "Value": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet3"
-          }
-        ]
-      }
-    },
-    "MyTestVpcPrivateSubnet3RouteTableAssociationB496B2EB": {
-      "Type": "AWS::EC2::SubnetRouteTableAssociation",
-      "Properties": {
         "RouteTableId": {
-          "Ref": "MyTestVpcPrivateSubnet3RouteTable1F9FBF8B"
-        },
-        "SubnetId": {
-          "Ref": "MyTestVpcPrivateSubnet3Subnet0EA0DCFF"
+          "Ref": "MyTestVpcPrivateSubnet2RouteTableC6EC54E3"
         }
-      }
-    },
-    "MyTestVpcPrivateSubnet3DefaultRouteE05CC7AE": {
-      "Type": "AWS::EC2::Route",
-      "Properties": {
-        "RouteTableId": {
-          "Ref": "MyTestVpcPrivateSubnet3RouteTable1F9FBF8B"
-        },
-        "DestinationCidrBlock": "0.0.0.0/0",
-        "NatGatewayId": {
-          "Ref": "MyTestVpcPublicSubnet3NATGatewayD59F042A"
-        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/PrivateSubnet2/DefaultRoute"
       }
     },
     "MyTestVpcIGW872B5B74": {
@@ -499,43 +481,61 @@
           {
             "Key": "Name",
             "Value": "network-firewall-integ-stack/MyTestVpc"
+          },
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
         ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/IGW"
       }
     },
     "MyTestVpcVPCGWFCF9AAB8": {
       "Type": "AWS::EC2::VPCGatewayAttachment",
       "Properties": {
-        "VpcId": {
-          "Ref": "MyTestVpcE144EEF4"
-        },
         "InternetGatewayId": {
           "Ref": "MyTestVpcIGW872B5B74"
+        },
+        "VpcId": {
+          "Ref": "MyTestVpcE144EEF4"
         }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyTestVpc/VPCGW"
+      }
+    },
+    "MyFirewallLogBucket1D27D527": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
+          }
+        ]
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyFirewallLogBucket/Resource"
       }
     },
     "MyStateful5TupleRuleGroupE35C4D46": {
       "Type": "AWS::NetworkFirewall::RuleGroup",
       "Properties": {
         "Capacity": 100,
-        "RuleGroupName": "MyStateful5TupleRuleGroup",
-        "Type": "STATEFUL",
         "RuleGroup": {
           "RuleVariables": {
             "IPSets": {
               "HOME_NET": {
-                "Definition": [
-                  "10.0.0.0/16",
-                  "10.10.0.0/16"
-                ]
+                "Definition": ["10.0.0.0/16", "10.10.0.0/16"]
               }
             },
             "PortSets": {
               "WEB_PORTS": {
-                "Definition": [
-                  "443",
-                  "80"
-                ]
+                "Definition": ["443", "80"]
               }
             }
           },
@@ -554,9 +554,7 @@
                 "RuleOptions": [
                   {
                     "Keyword": "sid",
-                    "Settings": [
-                      "1234"
-                    ]
+                    "Settings": ["1234"]
                   }
                 ]
               }
@@ -565,57 +563,67 @@
           "StatefulRuleOptions": {
             "RuleOrder": "STRICT_ORDER"
           }
-        }
+        },
+        "RuleGroupName": "MyStateful5TupleRuleGroup",
+        "SummaryConfiguration": {
+          "RuleOptions": ["MSG"]
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
+          }
+        ],
+        "Type": "STATEFUL"
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyStateful5TupleRuleGroup/MyStateful5TupleRuleGroup"
       }
     },
     "MyStatefulDomainListRuleGroup481BB765": {
       "Type": "AWS::NetworkFirewall::RuleGroup",
       "Properties": {
         "Capacity": 100,
-        "RuleGroupName": "MyStatefulDomainListRuleGroup",
-        "Type": "STATEFUL",
         "RuleGroup": {
           "RuleVariables": {},
           "RulesSource": {
             "RulesSourceList": {
               "GeneratedRulesType": "DENYLIST",
-              "TargetTypes": [
-                "TLS_SNI",
-                "HTTP_HOST"
-              ],
-              "Targets": [
-                ".example.com",
-                "www.example.org"
-              ]
+              "TargetTypes": ["TLS_SNI", "HTTP_HOST"],
+              "Targets": [".example.com", "www.example.org"]
             }
           },
           "StatefulRuleOptions": {
             "RuleOrder": "STRICT_ORDER"
           }
-        }
+        },
+        "RuleGroupName": "MyStatefulDomainListRuleGroup",
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
+          }
+        ],
+        "Type": "STATEFUL"
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyStatefulDomainListRuleGroup/MyStatefulDomainListRuleGroup"
       }
     },
     "MyStatefulSuricataRuleGroupA19EA3D1": {
       "Type": "AWS::NetworkFirewall::RuleGroup",
       "Properties": {
         "Capacity": 100,
-        "RuleGroupName": "MyStatefulSuricataRuleGroup",
-        "Type": "STATEFUL",
         "RuleGroup": {
           "RuleVariables": {
             "IPSets": {
               "HTTP_SERVERS": {
-                "Definition": [
-                  "10.0.0.0/16"
-                ]
+                "Definition": ["10.0.0.0/16"]
               }
             },
             "PortSets": {
               "HTTP_PORTS": {
-                "Definition": [
-                  "80",
-                  "8080"
-                ]
+                "Definition": ["80", "8080"]
               }
             }
           },
@@ -625,15 +633,24 @@
           "StatefulRuleOptions": {
             "RuleOrder": "STRICT_ORDER"
           }
-        }
+        },
+        "RuleGroupName": "MyStatefulSuricataRuleGroup",
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
+          }
+        ],
+        "Type": "STATEFUL"
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyStatefulSuricataRuleGroup/MyStatefulSuricataRuleGroup"
       }
     },
     "MyStatelessRuleGroup6BC16E93": {
       "Type": "AWS::NetworkFirewall::RuleGroup",
       "Properties": {
         "Capacity": 4,
-        "RuleGroupName": "MyStatelessRuleGroup",
-        "Type": "STATELESS",
         "RuleGroup": {
           "RulesSource": {
             "StatelessRulesAndCustomActions": {
@@ -641,9 +658,7 @@
                 {
                   "Priority": 10,
                   "RuleDefinition": {
-                    "Actions": [
-                      "aws:drop"
-                    ],
+                    "Actions": ["aws:drop"],
                     "MatchAttributes": {
                       "DestinationPorts": [
                         {
@@ -660,9 +675,7 @@
                           "AddressDefinition": "10.0.0.0/16"
                         }
                       ],
-                      "Protocols": [
-                        6
-                      ],
+                      "Protocols": [6],
                       "SourcePorts": [
                         {
                           "FromPort": 0,
@@ -683,7 +696,18 @@
               ]
             }
           }
-        }
+        },
+        "RuleGroupName": "MyStatelessRuleGroup",
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
+          }
+        ],
+        "Type": "STATELESS"
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyStatelessRuleGroup/MyStatelessRuleGroup"
       }
     },
     "MyNetworkfirewallPolicy783DD745": {
@@ -691,8 +715,12 @@
       "Properties": {
         "FirewallPolicy": {
           "StatefulDefaultActions": [],
+          "StatefulEngineOptions": {
+            "RuleOrder": "STRICT_ORDER"
+          },
           "StatefulRuleGroupReferences": [
             {
+              "Priority": 10,
               "ResourceArn": {
                 "Fn::GetAtt": [
                   "MyStatefulDomainListRuleGroup481BB765",
@@ -701,6 +729,7 @@
               }
             },
             {
+              "Priority": 20,
               "ResourceArn": {
                 "Fn::GetAtt": [
                   "MyStateful5TupleRuleGroupE35C4D46",
@@ -709,6 +738,7 @@
               }
             },
             {
+              "Priority": 30,
               "ResourceArn": {
                 "Fn::GetAtt": [
                   "MyStatefulSuricataRuleGroupA19EA3D1",
@@ -717,36 +747,36 @@
               }
             }
           ],
-          "StatelessDefaultActions": [
-            "aws:drop"
-          ],
-          "StatelessFragmentDefaultActions": [
-            "aws:drop"
-          ],
+          "StatelessDefaultActions": ["aws:drop"],
+          "StatelessFragmentDefaultActions": ["aws:drop"],
           "StatelessRuleGroupReferences": [
             {
               "Priority": 10,
               "ResourceArn": {
-                "Fn::GetAtt": [
-                  "MyStatelessRuleGroup6BC16E93",
-                  "RuleGroupArn"
-                ]
+                "Fn::GetAtt": ["MyStatelessRuleGroup6BC16E93", "RuleGroupArn"]
               }
             }
           ]
         },
-        "FirewallPolicyName": "MyNetworkfirewallPolicy"
+        "FirewallPolicyName": "MyNetworkfirewallPolicy",
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/MyNetworkfirewallPolicy/MyNetworkfirewallPolicy"
       }
     },
     "networkFirewallFD69C121": {
       "Type": "AWS::NetworkFirewall::Firewall",
       "Properties": {
+        "EnabledAnalysisTypes": ["TLS_SNI", "HTTP_HOST"],
         "FirewallName": "my-network-firewall",
         "FirewallPolicyArn": {
-          "Fn::GetAtt": [
-            "MyNetworkfirewallPolicy783DD745",
-            "FirewallPolicyArn"
-          ]
+          "Fn::GetAtt": ["MyNetworkfirewallPolicy783DD745", "FirewallPolicyArn"]
         },
         "SubnetMappings": [
           {
@@ -758,17 +788,372 @@
             "SubnetId": {
               "Ref": "MyTestVpcPublicSubnet2SubnetBE93625D"
             }
-          },
+          }
+        ],
+        "Tags": [
           {
-            "SubnetId": {
-              "Ref": "MyTestVpcPublicSubnet3Subnet49AF0D64"
-            }
+            "Key": "Project",
+            "Value": "NetworkFirewallL2IntegTest"
           }
         ],
         "VpcId": {
           "Ref": "MyTestVpcE144EEF4"
         }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/networkFirewall/networkFirewall"
       }
+    },
+    "networkFirewallnetworkFirewallloggingS3BucketsCfnnetworkFirewallloggingS3Buckets873C8F03": {
+      "Type": "AWS::NetworkFirewall::LoggingConfiguration",
+      "Properties": {
+        "EnableMonitoringDashboard": false,
+        "FirewallArn": {
+          "Fn::GetAtt": ["networkFirewallFD69C121", "FirewallArn"]
+        },
+        "FirewallName": "my-network-firewall",
+        "LoggingConfiguration": {
+          "LogDestinationConfigs": [
+            {
+              "LogDestination": {
+                "bucketName": {
+                  "Ref": "MyFirewallLogBucket1D27D527"
+                },
+                "prefix": "alerts"
+              },
+              "LogDestinationType": "S3",
+              "LogType": "ALERT"
+            },
+            {
+              "LogDestination": {
+                "bucketName": {
+                  "Ref": "MyFirewallLogBucket1D27D527"
+                },
+                "prefix": "flow"
+              },
+              "LogDestinationType": "S3",
+              "LogType": "FLOW"
+            },
+            {
+              "LogDestination": {
+                "bucketName": {
+                  "Ref": "MyFirewallLogBucket1D27D527"
+                },
+                "prefix": "tls"
+              },
+              "LogDestinationType": "S3",
+              "LogType": "TLS"
+            }
+          ]
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/networkFirewall/networkFirewall-logging-S3Buckets/CfnnetworkFirewall-logging-S3Buckets"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/02P3W7CMAyFn4X7NGPd0K5ZtSGkaarKxO3kBrczDQ5KHCpU9d2nrIjuyp+Pj/9yna9e9HIBfcjMocss1XrYCZhOQR++BzS5HvZno4qG92WhylhbMrtYM0rSZqpcFPyC2uKsz9o6BGcIhBzfzQnetmUKnyAbEOzhqkpPFxCcB29Z0DPeDdMlt2wtAubnhCyjCk96eI2mm9omGhWj9M53DXnswVo9pPXR4sa7eE7G91uldJbM9b+S+MO1LXFbOG6ojf7vg3FUFQYXvcFRsTugPoaHS/6sH1d6uTgGosxHFjqhrqb4Cxj5VWdnAQAA"
+      },
+      "Metadata": {
+        "aws:cdk:path": "network-firewall-integ-stack/CDKMetadata/Default"
+      },
+      "Condition": "CDKMetadataAvailable"
+    }
+  },
+  "Conditions": {
+    "CDKMetadataAvailable": {
+      "Fn::Or": [
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "af-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-3"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-south-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-3"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-4"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ca-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ca-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-northwest-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-central-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-south-2"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-3"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "il-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "me-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "me-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "sa-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-1"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Equals": [
+            {
+              "Ref": "AWS::Region"
+            },
+            "us-west-2"
+          ]
+        }
+      ]
+    }
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Type": "AWS::SSM::Parameter::Value<String>",
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+    }
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  ["1", "2", "3", "4", "5"],
+                  {
+                    "Ref": "BootstrapVersion"
+                  }
+                ]
+              }
+            ]
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+        }
+      ]
     }
   }
 }

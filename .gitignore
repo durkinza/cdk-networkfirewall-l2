@@ -40,6 +40,8 @@ junit.xml
 !/.mergify.yml
 !/.github/dependabot.yml
 !/.github/pull_request_template.md
+!/.prettierignore
+!/.prettierrc.json
 !/test/
 !/tsconfig.dev.json
 !/src/
@@ -51,6 +53,7 @@ tsconfig.json
 !/API.md
 test/**/*.js
 test/**/*.d.ts
+cdk.out
 !/.projenrc.ts
 !/.cspell.json
 !/.husky/pre-commit

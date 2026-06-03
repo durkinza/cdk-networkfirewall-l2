@@ -1,7 +1,8 @@
-import * as ec2 from 'aws-cdk-lib/aws-ec2';
-import { CfnFirewall, CfnFirewallProps } from 'aws-cdk-lib/aws-networkfirewall';
-import * as core from 'aws-cdk-lib/core';
-import { Construct } from 'constructs';
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import { CfnFirewall, CfnFirewallProps } from "aws-cdk-lib/aws-networkfirewall";
+import * as core from "aws-cdk-lib/core";
+import { Construct } from "constructs";
+//import { EncryptionConfiguration } from "./encryption-configuration";
 import {
   ILogLocation,
   S3LogLocationProps,
@@ -12,13 +13,28 @@ import {
   CloudWatchLogLocation,
   LoggingConfiguration,
   ILoggingConfiguration,
-} from './logging';
-import { IFirewallPolicy } from './policy';
+} from "./logging";
+import { IFirewallPolicy } from "./policy";
+
+/**
+ * The traffic analysis types that can be enabled on a firewall.
+ */
+export enum FirewallAnalysisTypes {
+  /**
+   * TLS Server Name Indication (SNI) analysis
+   */
+  TLS_SNI = "TLS_SNI",
+
+  /**
+   * HTTP Host header analysis
+   */
+  HTTP_HOST = "HTTP_HOST",
+}
 
 /**
  * Defines a Network Firewall in the stack
  */
-export interface IFirewall extends core.IResource{
+export interface IFirewall extends core.IResource {
   /**
    * The Arn of the Firewall.
    * @attribute
@@ -91,6 +107,14 @@ export interface FirewallProps {
   readonly deleteProtection?: boolean;
 
   /**
+   * Not yet supported in CDK L1 at time of writing.
+   * You can use a customer managed key in AWS Key Management Service (KMS) to encrypt your data at rest.
+   * If you don’t configure a customer managed key, Network Firewall encrypts your data using an AWS managed key.
+   * @default - AWS managed key is used
+   */
+  //readonly encryptionConfiguration?: EncryptionConfiguration;
+
+  /**
    * A setting indicating whether the firewall is protected against a change to the firewall policy association.
    * Use this setting to protect against accidentally modifying the firewall policy for a firewall that is in use.
    * @default - true
@@ -103,6 +127,33 @@ export interface FirewallProps {
    * @default - true
    */
   readonly subnetChangeProtection?: boolean;
+
+  /**
+   * The unique identifier of the transit gateway associated with this firewall.
+   * This field is only present for transit gateway-attached firewalls.
+   * @default - undefined
+   */
+  readonly transitGatewayId?: string;
+
+  /**
+   * A setting indicating whether the firewall is protected against changes to its Availability Zone configuration.
+   * When set to TRUE, you must first disable this protection before adding or removing Availability Zones.
+   * @default - false
+   */
+  readonly availabilityZoneChangeProtection?: boolean;
+
+  /**
+   * The Availability Zones where the firewall endpoints are created for a transit gateway-attached firewall.
+   * Each mapping specifies an Availability Zone where the firewall processes traffic.
+   * @default - undefined
+   */
+  readonly availabilityZoneMappings?: CfnFirewall.AvailabilityZoneMappingProperty[];
+
+  /**
+   * An optional setting indicating the specific traffic analysis types to enable on the firewall.
+   * @default - undefined
+   */
+  readonly enabledAnalysisTypes?: (FirewallAnalysisTypes | string)[];
 
   /**
    * Tags to be added to the firewall.
@@ -134,7 +185,6 @@ export interface FirewallProps {
  * @resource AWS::NetworkFirewall::Firewall
  */
 export class Firewall extends FirewallBase {
-
   /**
    * Reference an existing Network Firewall,
    * defined outside of the CDK code, by name.
@@ -142,9 +192,15 @@ export class Firewall extends FirewallBase {
    * @param id
    * @param firewallName
    */
-  public static fromFirewallName(scope: Construct, id: string, firewallName: string): IFirewall {
+  public static fromFirewallName(
+    scope: Construct,
+    id: string,
+    firewallName: string,
+  ): IFirewall {
     if (core.Token.isUnresolved(firewallName)) {
-      throw new Error('All arguments to Firewall.fromFirewallName must be concrete (no Tokens)');
+      throw new Error(
+        "All arguments to Firewall.fromFirewallName must be concrete (no Tokens)",
+      );
     }
 
     /**
@@ -153,12 +209,11 @@ export class Firewall extends FirewallBase {
     class Import extends FirewallBase {
       public readonly firewallId = firewallName;
       // Since we have the name, we can generate the ARN,
-      public readonly firewallArn = core.Stack.of(scope)
-        .formatArn({
-          service: 'network-firewall',
-          resource: 'firewall',
-          resourceName: firewallName,
-        });
+      public readonly firewallArn = core.Stack.of(scope).formatArn({
+        service: "network-firewall",
+        resource: "firewall",
+        resourceName: firewallName,
+      });
       //public readonly endpointIds = [''];
     }
     return new Import(scope, id);
@@ -171,15 +226,24 @@ export class Firewall extends FirewallBase {
    * @param id
    * @param firewallArn
    */
-  public static fromFirewallArn(scope: Construct, id: string, firewallArn: string): IFirewall {
+  public static fromFirewallArn(
+    scope: Construct,
+    id: string,
+    firewallArn: string,
+  ): IFirewall {
     if (core.Token.isUnresolved(firewallArn)) {
-      throw new Error('All arguments to Firewall.fromFirewallArn must be concrete (no Tokens)');
+      throw new Error(
+        "All arguments to Firewall.fromFirewallArn must be concrete (no Tokens)",
+      );
     }
     /**
      * An ADHOC class for the imported Firewall.
      */
     class Import extends FirewallBase {
-      public readonly firewallId = core.Fn.select(1, core.Fn.split('/', firewallArn));
+      public readonly firewallId = core.Fn.select(
+        1,
+        core.Fn.split("/", firewallArn),
+      );
       public readonly firewallArn = firewallArn;
       //public readonly endpointIds = [''];
     }
@@ -240,7 +304,7 @@ export class Firewall extends FirewallBase {
    * @param id
    * @param props
    */
-  constructor(scope:Construct, id: string, props: FirewallProps) {
+  constructor(scope: Construct, id: string, props: FirewallProps) {
     super(scope, id, {
       physicalName: props.firewallName,
     });
@@ -250,10 +314,14 @@ export class Firewall extends FirewallBase {
     /*
      * Validate firewallName
      */
-    if (props.firewallName !== undefined &&
-				!/^[\dA-Za-z-]{1,128}$/.test(props.firewallName)) {
-      throw new Error('firewallName must be non-empty and contain only letters, numbers, and dashes, ' +
-				`got: '${props.firewallName}'`);
+    if (
+      props.firewallName !== undefined &&
+      !/^[\dA-Za-z-]{1,128}$/.test(props.firewallName)
+    ) {
+      throw new Error(
+        "firewallName must be non-empty and contain only letters, numbers, and dashes, " +
+          `got: '${props.firewallName}'`,
+      );
     }
 
     // Auto define new policy?
@@ -265,9 +333,9 @@ export class Firewall extends FirewallBase {
     //		);
 
     // Auto pick subnetMappings from VPC if not provided
-    let subnets:CfnFirewall.SubnetMappingProperty[]=[];
+    let subnets: CfnFirewall.SubnetMappingProperty[] = [];
     if (props.subnetMappings === undefined) {
-      let subnetMapping:ec2.SubnetSelection = props.vpc.selectSubnets({
+      let subnetMapping: ec2.SubnetSelection = props.vpc.selectSubnets({
         subnetType: ec2.SubnetType.PUBLIC,
       });
       subnets = this.castSubnetMapping(subnetMapping);
@@ -275,25 +343,29 @@ export class Firewall extends FirewallBase {
       subnets = this.castSubnetMapping(props.subnetMappings);
     }
 
-    const resourceProps:CfnFirewallProps = {
+    const resourceProps: CfnFirewallProps = {
       deleteProtection: props.deleteProtection,
       description: props.description,
       // encryptionConfiguration: props.encryptionConfiguration, // Not supported by cloudformation yet.
-      firewallName: props.firewallName||id,
+      firewallName: props.firewallName || id,
       firewallPolicyArn: props.policy.firewallPolicyArn,
       firewallPolicyChangeProtection: props.firewallPolicyChangeProtection,
       subnetChangeProtection: props.subnetChangeProtection,
       subnetMappings: subnets,
       tags: props.tags || [],
+      transitGatewayId: props.transitGatewayId,
+      availabilityZoneChangeProtection: props.availabilityZoneChangeProtection,
+      availabilityZoneMappings: props.availabilityZoneMappings,
+      enabledAnalysisTypes: props.enabledAnalysisTypes,
       vpcId: props.vpc.vpcId,
     };
 
-    const resource:CfnFirewall = new CfnFirewall(this, id, resourceProps);
+    const resource: CfnFirewall = new CfnFirewall(this, id, resourceProps);
 
     this.firewallId = this.getResourceNameAttribute(resource.ref);
     this.firewallArn = this.getResourceArnAttribute(resource.attrFirewallArn, {
-      service: 'network-firewall',
-      resource: 'firewall',
+      service: "network-firewall",
+      resource: "firewall",
       resourceName: this.firewallId,
     });
 
@@ -309,35 +381,51 @@ export class Firewall extends FirewallBase {
 
     if (props.loggingCloudWatchLogGroups) {
       let cloudWatchLogGroups: ILogLocation[] = [];
-      let cloudWatchLogGroup:CloudWatchLogLocationProps;
+      let cloudWatchLogGroup: CloudWatchLogLocationProps;
       for (cloudWatchLogGroup of props.loggingCloudWatchLogGroups) {
-        const logLocation:ILogLocation = new CloudWatchLogLocation(cloudWatchLogGroup);
+        const logLocation: ILogLocation = new CloudWatchLogLocation(
+          cloudWatchLogGroup,
+        );
         cloudWatchLogGroups.push(logLocation);
         // logLocations.push(logLocation);
       }
-      this.loggingConfigurations.push(this.addLoggingConfigurations(`${id}-logging-CloudWatch`, cloudWatchLogGroups));
+      this.loggingConfigurations.push(
+        this.addLoggingConfigurations(
+          `${id}-logging-CloudWatch`,
+          cloudWatchLogGroups,
+        ),
+      );
     }
 
     if (props.loggingS3Buckets) {
       let s3LogGroups: ILogLocation[] = [];
-      let s3LogGroup:S3LogLocationProps;
+      let s3LogGroup: S3LogLocationProps;
       for (s3LogGroup of props.loggingS3Buckets) {
-        const logLocation:ILogLocation = new S3LogLocation(s3LogGroup);
+        const logLocation: ILogLocation = new S3LogLocation(s3LogGroup);
         s3LogGroups.push(logLocation);
         // logLocations.push(logLocation);
       }
-      this.loggingConfigurations.push(this.addLoggingConfigurations(`${id}-logging-S3Buckets`, s3LogGroups));
+      this.loggingConfigurations.push(
+        this.addLoggingConfigurations(`${id}-logging-S3Buckets`, s3LogGroups),
+      );
     }
 
     if (props.loggingKinesisDataStreams) {
       let kinesisLogGroups: ILogLocation[] = [];
       let kinesisLogGroup: KinesisDataFirehoseLogLocationProps;
       for (kinesisLogGroup of props.loggingKinesisDataStreams) {
-        const logLocation:ILogLocation = new KinesisDataFirehoseLogLocation(kinesisLogGroup);
+        const logLocation: ILogLocation = new KinesisDataFirehoseLogLocation(
+          kinesisLogGroup,
+        );
         kinesisLogGroups.push(logLocation);
         // logLocations.push(logLocation);
       }
-      this.loggingConfigurations.push(this.addLoggingConfigurations(`${id}-logging-KinesisDataFirehose`, kinesisLogGroups));
+      this.loggingConfigurations.push(
+        this.addLoggingConfigurations(
+          `${id}-logging-KinesisDataFirehose`,
+          kinesisLogGroups,
+        ),
+      );
     }
     // if (logLocations.length > 0) {
     //   this.loggingConfigurations.push(this.addLoggingConfigurations(`${id}-firewall-logging`, logLocations));
@@ -350,7 +438,10 @@ export class Firewall extends FirewallBase {
    * @param logLocations An array of Log Locations.
    * @returns A LoggingConfiguration Resource.
    */
-  public addLoggingConfigurations(configurationName: string, logLocations: ILogLocation[]) {
+  public addLoggingConfigurations(
+    configurationName: string,
+    logLocations: ILogLocation[],
+  ) {
     return new LoggingConfiguration(this, configurationName, {
       firewallRef: this.firewallArn,
       firewallName: this.physicalName,
@@ -363,10 +454,15 @@ export class Firewall extends FirewallBase {
    * Cast SubnetSelection to a list of subnetMappingProperty
    * @param subnetSelection
    */
-  private castSubnetMapping(subnetSelection:ec2.SubnetSelection|undefined):CfnFirewall.SubnetMappingProperty[] {
-    let subnets:CfnFirewall.SubnetMappingProperty[]=[];
-    let subnet:ec2.ISubnet;
-    if (subnetSelection !== undefined && subnetSelection.subnets !== undefined) {
+  private castSubnetMapping(
+    subnetSelection: ec2.SubnetSelection | undefined,
+  ): CfnFirewall.SubnetMappingProperty[] {
+    let subnets: CfnFirewall.SubnetMappingProperty[] = [];
+    let subnet: ec2.ISubnet;
+    if (
+      subnetSelection !== undefined &&
+      subnetSelection.subnets !== undefined
+    ) {
       for (subnet of subnetSelection.subnets) {
         subnets.push({
           subnetId: subnet.subnetId,
