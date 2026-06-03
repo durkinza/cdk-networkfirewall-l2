@@ -151,7 +151,7 @@ export interface FirewallPolicyProps {
   /**
    * How Network Firewall handles stateful rules.
    * The stateful rule groups that you use in your policy must match the policy's rule order.
-   * @default StatefulEngineOptionsRuleOrder.STRICT_ORDER
+   * @default - Matches the rule order of the first stateful rule group added to the policy, or STRICT_ORDER if no stateful rule groups are added.
    */
   readonly ruleOrder?: StatefulEngineOptionsRuleOrder | string;
 
@@ -339,6 +339,18 @@ export class FirewallPolicy extends FirewallPolicyBase {
   public readonly statefulEngineOptions?: CfnFirewallPolicy.StatefulEngineOptionsProperty;
 
   /**
+   * Whether the user explicitly set a ruleOrder.
+   * When false, the ruleOrder will be inferred from the first stateful rule group added.
+   */
+  private readonly explicitRuleOrder: boolean;
+
+  /**
+   * The resolved ruleOrder for the policy.
+   * Starts as the user-provided value or undefined (to be inferred later).
+   */
+  private resolvedRuleOrder?: string;
+
+  /**
    *
    * @param scope
    * @param id
@@ -369,11 +381,23 @@ export class FirewallPolicy extends FirewallPolicyBase {
           "Use either the L1 statefulEngineOptions or the convenience properties, not both.",
       );
     }
-    this.statefulEngineOptions = props.statefulEngineOptions ?? {
-      ruleOrder: props.ruleOrder || StatefulEngineOptionsRuleOrder.STRICT_ORDER,
-      streamExceptionPolicy: props.streamExceptionPolicy,
-      flowTimeouts: props.flowTimeouts,
-    };
+
+    // Track whether the user explicitly set a ruleOrder
+    this.explicitRuleOrder = !!(props.statefulEngineOptions || props.ruleOrder);
+
+    if (props.statefulEngineOptions) {
+      this.statefulEngineOptions = props.statefulEngineOptions;
+      this.resolvedRuleOrder = props.statefulEngineOptions.ruleOrder;
+    } else {
+      // If the user explicitly set a ruleOrder, use it immediately.
+      // Otherwise, resolvedRuleOrder stays undefined until the first rule group is added.
+      this.resolvedRuleOrder = props.ruleOrder;
+      this.statefulEngineOptions = {
+        ruleOrder: props.ruleOrder,
+        streamExceptionPolicy: props.streamExceptionPolicy,
+        flowTimeouts: props.flowTimeouts,
+      };
+    }
 
     // Adding Validations
 
@@ -490,7 +514,9 @@ export class FirewallPolicy extends FirewallPolicyBase {
       statelessFragmentDefaultActions: this.statelessFragmentDefaultActions,
       // The properties below are optional.
       statefulDefaultActions: this.statefulDefaultActions,
-      statefulEngineOptions: this.statefulEngineOptions,
+      statefulEngineOptions: core.Lazy.any({
+        produce: () => this.buildStatefulEngineOptions(),
+      }),
       statefulRuleGroupReferences: core.Lazy.any({
         produce: () => this.buildStatefulRuleGroupReferences(),
       }),
@@ -551,8 +577,24 @@ export class FirewallPolicy extends FirewallPolicyBase {
    * @param ruleGroup The stateful rule group to add to the policy
    */
   public addStatefulRuleGroup(ruleGroup: StatefulRuleGroupList) {
+    // If no explicit ruleOrder was set and this is the first rule group,
+    // infer the ruleOrder from the rule group's ruleOrder.
+    if (!this.explicitRuleOrder && this.statefulRuleGroups.length === 0) {
+      if (ruleGroup.ruleGroup.ruleOrder) {
+        this.resolvedRuleOrder = ruleGroup.ruleGroup.ruleOrder;
+      }
+    }
+
+    // Validate that the rule group's ruleOrder matches the policy's effective ruleOrder
     if (
-      this.statefulEngineOptions?.ruleOrder ===
+      ruleGroup.ruleGroup.ruleOrder &&
+      ruleGroup.ruleGroup.ruleOrder !== this.getEffectiveRuleOrder()
+    ) {
+      throw new Error(`Stateful rule group does not match policy rule order.`);
+    }
+
+    if (
+      this.getEffectiveRuleOrder() ===
         StatefulEngineOptionsRuleOrder.STRICT_ORDER &&
       ruleGroup.priority === undefined
     ) {
@@ -570,6 +612,27 @@ export class FirewallPolicy extends FirewallPolicyBase {
       );
     }
     this.statefulRuleGroups.push(ruleGroup);
+  }
+
+  /**
+   * Returns the effective rule order, resolving the lazy default.
+   * If the user did not explicitly set a ruleOrder and no rule group has been added yet,
+   * defaults to STRICT_ORDER.
+   */
+  private getEffectiveRuleOrder(): string {
+    return (
+      this.resolvedRuleOrder || StatefulEngineOptionsRuleOrder.STRICT_ORDER
+    );
+  }
+
+  /**
+   * Builds the statefulEngineOptions at synthesis time, resolving the ruleOrder.
+   */
+  private buildStatefulEngineOptions(): CfnFirewallPolicy.StatefulEngineOptionsProperty {
+    return {
+      ...this.statefulEngineOptions,
+      ruleOrder: this.getEffectiveRuleOrder(),
+    };
   }
 
   /**

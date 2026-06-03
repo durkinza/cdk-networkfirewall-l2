@@ -1368,6 +1368,7 @@ Reference existing Rule Group.
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.ruleOrder">ruleOrder</a></code> | <code>string</code> | The rule order for this stateful rule group. |
 
 ---
 
@@ -1436,6 +1437,18 @@ public readonly ruleGroupId: string;
 - *Type:* string
 
 the physical name of the rule group.
+
+---
+
+##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.Stateful5TupleRuleGroup.property.ruleOrder"></a>
+
+```typescript
+public readonly ruleOrder: string;
+```
+
+- *Type:* string
+
+The rule order for this stateful rule group.
 
 ---
 
@@ -1651,6 +1664,7 @@ Reference existing Rule Group.
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.ruleOrder">ruleOrder</a></code> | <code>string</code> | The rule order for this stateful rule group. |
 
 ---
 
@@ -1719,6 +1733,18 @@ public readonly ruleGroupId: string;
 - *Type:* string
 
 the physical name of the rule group.
+
+---
+
+##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulDomainListRuleGroup.property.ruleOrder"></a>
+
+```typescript
+public readonly ruleOrder: string;
+```
+
+- *Type:* string
+
+The rule order for this stateful rule group.
 
 ---
 
@@ -1963,6 +1989,7 @@ Reference existing Rule Group.
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.ruleOrder">ruleOrder</a></code> | <code>string</code> | The rule order for this stateful rule group. |
 
 ---
 
@@ -2031,6 +2058,18 @@ public readonly ruleGroupId: string;
 - *Type:* string
 
 the physical name of the rule group.
+
+---
+
+##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.StatefulSuricataRuleGroup.property.ruleOrder"></a>
+
+```typescript
+public readonly ruleOrder: string;
+```
+
+- *Type:* string
+
+The rule order for this stateful rule group.
 
 ---
 
@@ -5683,6 +5722,7 @@ The Interface that represents a Stateful Rule Group.
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this resource is defined. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.ruleGroupArn">ruleGroupArn</a></code> | <code>string</code> | The Arn of the rule group. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.ruleGroupId">ruleGroupId</a></code> | <code>string</code> | the physical name of the rule group. |
+| <code><a href="#@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.ruleOrder">ruleOrder</a></code> | <code>string</code> | The rule order of the stateful rule group. |
 
 ---
 
@@ -5751,6 +5791,19 @@ public readonly ruleGroupId: string;
 - *Type:* string
 
 the physical name of the rule group.
+
+---
+
+##### `ruleOrder`<sup>Optional</sup> <a name="ruleOrder" id="@durkinza/cdk-networkfirewall-l2.IStatefulRuleGroup.property.ruleOrder"></a>
+
+```typescript
+public readonly ruleOrder: string;
+```
+
+- *Type:* string
+- *Default:* undefined (unknown, e.g. for imported rule groups)
+
+The rule order of the stateful rule group.
 
 ---
 

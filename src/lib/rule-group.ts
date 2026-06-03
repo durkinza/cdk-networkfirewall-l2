@@ -337,6 +337,12 @@ export interface IStatefulRuleGroup extends core.IResource {
    * @attribute
    */
   readonly ruleGroupId: string;
+
+  /**
+   * The rule order of the stateful rule group.
+   * @default - undefined (unknown, e.g. for imported rule groups)
+   */
+  readonly ruleOrder?: string;
 }
 
 /**
@@ -464,6 +470,11 @@ abstract class StatefulRuleGroup
   public abstract readonly ruleGroupId: string;
 
   /**
+   * The rule order for this stateful rule group.
+   */
+  public readonly ruleOrder?: string;
+
+  /**
    *
    * @param scope
    * @param id
@@ -476,6 +487,9 @@ abstract class StatefulRuleGroup
     super(scope, id, {
       physicalName: props.ruleGroupName,
     });
+
+    this.ruleOrder =
+      props.ruleOrder || StatefulRuleOptionsRuleOrder.STRICT_ORDER;
 
     /**
      * Validating Capacity

@@ -628,4 +628,75 @@ describe("Testing Logging Features", () => {
       },
     );
   });
+
+  test("Adding stateful rule groups with mismatched ruleOrder throws", () => {
+    // GIVEN
+    const strictGroup = new NetFW.StatefulSuricataRuleGroup(
+      stack,
+      "StrictRuleGroup",
+      {
+        rules: "",
+        ruleOrder: NetFW.StatefulRuleOptionsRuleOrder.STRICT_ORDER,
+      },
+    );
+    const actionOrderGroup = new NetFW.StatefulSuricataRuleGroup(
+      stack,
+      "ActionOrderRuleGroup",
+      {
+        rules: "",
+        ruleOrder: NetFW.StatefulRuleOptionsRuleOrder.ACTION_ORDER,
+      },
+    );
+
+    // WHEN - policy infers STRICT_ORDER from the first rule group
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+      statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+    });
+    policy.addStatefulRuleGroup({
+      priority: 10,
+      ruleGroup: strictGroup,
+    });
+
+    // THEN - adding an ACTION_ORDER group should throw
+    expect(() => {
+      policy.addStatefulRuleGroup({
+        priority: 20,
+        ruleGroup: actionOrderGroup,
+      });
+    }).toThrow(/does not match policy rule order/);
+  });
+
+  test("Policy infers ruleOrder from first stateful rule group", () => {
+    // GIVEN
+    const actionOrderGroup = new NetFW.StatefulSuricataRuleGroup(
+      stack,
+      "ActionOrderRuleGroup",
+      {
+        rules: "",
+        ruleOrder: NetFW.StatefulRuleOptionsRuleOrder.ACTION_ORDER,
+      },
+    );
+
+    // WHEN - no explicit ruleOrder, should infer ACTION_ORDER from the first group
+    const policy = new NetFW.FirewallPolicy(stack, "MyNetworkFirewallPolicy", {
+      statelessDefaultActions: [NetFW.StatelessStandardAction.DROP],
+      statelessFragmentDefaultActions: [NetFW.StatelessStandardAction.DROP],
+    });
+    policy.addStatefulRuleGroup({
+      ruleGroup: actionOrderGroup,
+    });
+
+    // THEN
+    Template.fromStack(stack).hasResourceProperties(
+      "AWS::NetworkFirewall::FirewallPolicy",
+      {
+        FirewallPolicy: {
+          StatefulEngineOptions: {
+            RuleOrder: "DEFAULT_ACTION_ORDER",
+          },
+        },
+      },
+    );
+  });
 });
