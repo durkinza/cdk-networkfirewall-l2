@@ -2,7 +2,7 @@ import { Template } from "aws-cdk-lib/assertions";
 import * as cdk from "aws-cdk-lib/core";
 import * as NetFW from "../src/lib";
 
-describe("Testing Logging Features", () => {
+describe("Testing Stateful Rule Group Features", () => {
   let stack: cdk.Stack;
   beforeEach(() => {
     // GIVEN

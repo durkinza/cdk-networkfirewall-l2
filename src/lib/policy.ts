@@ -629,9 +629,22 @@ export class FirewallPolicy extends FirewallPolicyBase {
    * Builds the statefulEngineOptions at synthesis time, resolving the ruleOrder.
    */
   private buildStatefulEngineOptions(): CfnFirewallPolicy.StatefulEngineOptionsProperty {
+    const effectiveRuleOrder = this.getEffectiveRuleOrder();
+
+    // statefulDefaultActions is only valid with STRICT_ORDER
+    if (
+      this.statefulDefaultActions.length > 0 &&
+      effectiveRuleOrder !== StatefulEngineOptionsRuleOrder.STRICT_ORDER
+    ) {
+      throw new Error(
+        "statefulDefaultActions can only be used with STRICT_ORDER rule order, " +
+          `but the effective rule order is '${effectiveRuleOrder}'`,
+      );
+    }
+
     return {
       ...this.statefulEngineOptions,
-      ruleOrder: this.getEffectiveRuleOrder(),
+      ruleOrder: effectiveRuleOrder,
     };
   }
 
