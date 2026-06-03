@@ -19,6 +19,8 @@
     "format": "projen format",
     "package": "projen package",
     "package-all": "projen package-all",
+    "package:dotnet": "projen package:dotnet",
+    "package:go": "projen package:go",
     "package:js": "projen package:js",
     "package:python": "projen package:python",
     "post-compile": "projen post-compile",
@@ -168,6 +170,13 @@
       "python": {
         "distName": "durkinza.cdk-networkfirewall-l2",
         "module": "durkinza.cdk_networkfirewall_l2"
+      },
+      "dotnet": {
+        "namespace": "Durkinza",
+        "packageId": "CdkNetworkFirewallL2"
+      },
+      "go": {
+        "moduleName": "github.com/durkinza/cdk-networkfirewall-l2"
       }
     },
     "tsc": {

@@ -86,9 +86,19 @@ const project = new awscdk.AwsCdkConstructLibrary({
     "@durkinza/cdk-networkfirewall-l2" /* The "name" in package.json. */,
   peerDeps: ["aws-cdk-lib"],
   projenrcTs: true,
+  npmTrustedPublishing: true,
   publishToPypi: {
     distName: "durkinza.cdk-networkfirewall-l2",
     module: "durkinza.cdk_networkfirewall_l2",
+    trustedPublishing: true,
+  },
+  publishToNuget: {
+    trustedPublishing: true,
+    dotNetNamespace: "Durkinza",
+    packageId: "CdkNetworkFirewallL2",
+  },
+  publishToGo: {
+    moduleName: "github.com/durkinza/cdk-networkfirewall-l2",
   },
   repositoryUrl: "https://github.com/durkinza/cdk-networkfirewall-l2.git",
   eslintOptions: {
