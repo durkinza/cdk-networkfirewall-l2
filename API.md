@@ -2780,49 +2780,6 @@ The name of the CloudWatch Log Group to send logs to.
 
 ---
 
-### EncryptionConfiguration <a name="EncryptionConfiguration" id="@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration"></a>
-
-#### Initializer <a name="Initializer" id="@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration.Initializer"></a>
-
-```typescript
-import { EncryptionConfiguration } from '@durkinza/cdk-networkfirewall-l2'
-
-const encryptionConfiguration: EncryptionConfiguration = { ... }
-```
-
-#### Properties <a name="Properties" id="Properties"></a>
-
-| **Name** | **Type** | **Description** |
-| --- | --- | --- |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration.property.type">type</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfigurationTypes">EncryptionConfigurationTypes</a></code> | *No description.* |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration.property.keyId">keyId</a></code> | <code>string</code> | The ID of the customer managed key. |
-
----
-
-##### `type`<sup>Required</sup> <a name="type" id="@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration.property.type"></a>
-
-```typescript
-public readonly type: EncryptionConfigurationTypes;
-```
-
-- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfigurationTypes">EncryptionConfigurationTypes</a>
-
----
-
-##### `keyId`<sup>Optional</sup> <a name="keyId" id="@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration.property.keyId"></a>
-
-```typescript
-public readonly keyId: string;
-```
-
-- *Type:* string
-
-The ID of the customer managed key.
-
-Required when type is CUSTOMER_KMS, not needed for AWS_OWNED_KMS_KEY.
-
----
-
 ### FirewallPolicyProps <a name="FirewallPolicyProps" id="@durkinza/cdk-networkfirewall-l2.FirewallPolicyProps"></a>
 
 The Properties for defining a Firewall policy.
@@ -3099,7 +3056,6 @@ const firewallProps: FirewallProps = { ... }
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.deleteProtection">deleteProtection</a></code> | <code>boolean</code> | A flag indicating whether it is possible to delete the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.description">description</a></code> | <code>string</code> | The description of the Firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.enabledAnalysisTypes">enabledAnalysisTypes</a></code> | <code>string[]</code> | An optional setting indicating the specific traffic analysis types to enable on the firewall. |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.encryptionConfiguration">encryptionConfiguration</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration">EncryptionConfiguration</a></code> | Not yet supported in Cloudformation at time of writing. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.firewallName">firewallName</a></code> | <code>string</code> | The descriptive name of the firewall. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.firewallPolicyChangeProtection">firewallPolicyChangeProtection</a></code> | <code>boolean</code> | A setting indicating whether the firewall is protected against a change to the firewall policy association. |
 | <code><a href="#@durkinza/cdk-networkfirewall-l2.FirewallProps.property.loggingCloudWatchLogGroups">loggingCloudWatchLogGroups</a></code> | <code><a href="#@durkinza/cdk-networkfirewall-l2.CloudWatchLogLocationProps">CloudWatchLogLocationProps</a>[]</code> | A list of CloudWatch LogGroups to send logs to. |
@@ -3206,22 +3162,6 @@ public readonly enabledAnalysisTypes: string[];
 - *Default:* undefined
 
 An optional setting indicating the specific traffic analysis types to enable on the firewall.
-
----
-
-##### `encryptionConfiguration`<sup>Optional</sup> <a name="encryptionConfiguration" id="@durkinza/cdk-networkfirewall-l2.FirewallProps.property.encryptionConfiguration"></a>
-
-```typescript
-public readonly encryptionConfiguration: EncryptionConfiguration;
-```
-
-- *Type:* <a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfiguration">EncryptionConfiguration</a>
-- *Default:* AWS managed key is used
-
-Not yet supported in Cloudformation at time of writing.
-
-You can use a customer managed key in AWS Key Management Service (KMS) to encrypt your data at rest.
-If you don’t configure a customer managed key, Network Firewall encrypts your data using an AWS managed key.
 
 ---
 
@@ -5994,27 +5934,6 @@ The name of the TLS Inspection Configuration.
 ---
 
 ## Enums <a name="Enums" id="Enums"></a>
-
-### EncryptionConfigurationTypes <a name="EncryptionConfigurationTypes" id="@durkinza/cdk-networkfirewall-l2.EncryptionConfigurationTypes"></a>
-
-#### Members <a name="Members" id="Members"></a>
-
-| **Name** | **Description** |
-| --- | --- |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfigurationTypes.CUSTOMER_KMS">CUSTOMER_KMS</a></code> | *No description.* |
-| <code><a href="#@durkinza/cdk-networkfirewall-l2.EncryptionConfigurationTypes.AWS_OWNED_KMS_KEY">AWS_OWNED_KMS_KEY</a></code> | *No description.* |
-
----
-
-##### `CUSTOMER_KMS` <a name="CUSTOMER_KMS" id="@durkinza/cdk-networkfirewall-l2.EncryptionConfigurationTypes.CUSTOMER_KMS"></a>
-
----
-
-
-##### `AWS_OWNED_KMS_KEY` <a name="AWS_OWNED_KMS_KEY" id="@durkinza/cdk-networkfirewall-l2.EncryptionConfigurationTypes.AWS_OWNED_KMS_KEY"></a>
-
----
-
 
 ### FirewallAnalysisTypes <a name="FirewallAnalysisTypes" id="@durkinza/cdk-networkfirewall-l2.FirewallAnalysisTypes"></a>
 

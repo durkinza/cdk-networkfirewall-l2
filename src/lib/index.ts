@@ -5,4 +5,6 @@ export * from "./rule";
 export * from "./actions";
 export * from "./logging";
 export * from "./tls-inspection";
-export * from "./encryption-configuration";
+
+// Encryption Configurations not yet supported in CDK L1 at time of writing.
+//export * from "./encryption-configuration";

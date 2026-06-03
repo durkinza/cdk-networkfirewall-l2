@@ -1,3 +1,4 @@
+// Not yet supported in CDK L1 at time of writing.
 // Ref: https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_EncryptionConfiguration.html
 export enum EncryptionConfigurationTypes {
   CUSTOMER_KMS = "CUSTOMER_KMS",
